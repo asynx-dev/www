@@ -1,0 +1,11 @@
+/site
+
+# Ref: https://github.com/github/gitignore/blob/master/Global/VisualStudioCode.gitignore
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+# cSpell.json, Code cSpell eklentisi tarafindan kullaniliyor.
+!.vscode/cSpell.json 
+*.code-workspace
