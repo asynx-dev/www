@@ -3,6 +3,9 @@ language: python
 jobs:
   include:
     - name: test_deploy
+      install:
+      - echo "install"
+      script:
       - mkdir site
       - echo "hello asynx.dev" > ./site/index.html
       - touch ./site/.nojekyll
