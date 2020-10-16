@@ -1,32 +1,34 @@
 language: python
-
 jobs:
   include:
-    - name: fast_deploy
-      install:
-      - pip3 install -r requirements.txt
-      script:
-      - mkdocs build --clean --strict --verbose --config-file mkdocs-fast.yml
-      - touch ./site/.nojekyll
-      - cp CNAME ./site
-      - date -Iseconds >> ./site/build.info.txt
-      - mkdocs --version >> ./site/build.info.txt
-      - git log -1 --oneline >> ./site/build.info.txt
-      deploy:
-        provider: pages
-        local_dir: site
-        skip_cleanup: true
-        deployment_file: true
-        verbose: true
-        github_token: $GITHUB_TOKEN
-
-    - name: production_tests
-      install:
-      - pip3 install -r requirements.txt
-      script:
-      - mkdocs build --clean --strict --verbose --config-file mkdocs-full.yml
-      - touch ./site/.nojekyll
-      - cp CNAME ./site
-      - date -Iseconds >> ./site/build.info.txt
-      - chmod +x ./test/main-simple.sh
-      - ./test/main-simple.sh
+  - name: fast_deploy
+    install:
+    - pip3 install -r requirements.txt
+    script:
+    - mkdocs build --clean --strict --verbose --config-file mkdocs-fast.yml
+    - touch ./site/.nojekyll
+    - cp CNAME ./site
+    - date -Iseconds >> ./site/build.info.txt
+    - mkdocs --version >> ./site/build.info.txt
+    - git log -1 --oneline >> ./site/build.info.txt
+    deploy:
+      provider: pages
+      local_dir: site
+      skip_cleanup: true
+      deployment_file: true
+      verbose: true
+      github_token: "$GITHUB_TOKEN"
+  - name: production_tests
+    install:
+    - pip3 install -r requirements.txt
+    script:
+    - mkdocs build --clean --strict --verbose --config-file mkdocs-full.yml
+    - touch ./site/.nojekyll
+    - cp CNAME ./site
+    - date -Iseconds >> ./site/build.info.txt
+    - chmod +x ./test/main-simple.sh
+    - "./test/main-simple.sh"
+notifications:
+  slack:
+    rooms:
+      secure: lHTziNKvRiyGVx5nz/XJRYgFhcySE0AvCAQploivvGt0GFzkiVurK+0bI7O4RtHQxXXxOf/0slcrIH7iH70O1l4K3RcbKHKBqDSiId5bom7vb2AW6NZjFhel5txNqNYhMUeWlH7KVzwPCQC6oApsMoYk5gmjpLh3f95av9H+dNLebVVItXcLtcsgGUy9ogC7xCtpmIhd2XNH+F8Y6BLPWR5osZsAyYP1Gml7nMOih7rnLBlCzDGJq8trIkwP+TRiQCOMh119rNbtBFE13TolDQoZhOEzP6dKeFq0jxExIiN+99MclGz8G8kaJu0UPZ9AO/CeGGVgtu0NNT/c15sxvkxF16GxTg73sIPJ9Ipn8InhmuOSCULFcICgohIPtJPJLQ2G4MFdraneVT6vg7y21ZGHKIA8f22yK3VqgXKel8mZZPQlL7AR0rzlt2rcFWgQY2R7JN+hFhn1yP2SYjT0TcZjbROlIdrt1599uCnR3QHR7Nt9FIQap9iRszyuSfGl8F3yaxO9my2fKHpyLUu1RYHYpQSUc1HOC7pOouguA6rNfHFQiTNwKK4GuRZa2ppOg2kg85H0uh1wjKyjfmtR5Gf+x2DmmcXwhpUcdjQud5gYqTN3cIGsWSw1Uh8ofrIV4oJy+QvKHiSKQVic+rX1mRMD5uEQ3VbXZX445Fxvi/o=
