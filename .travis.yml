@@ -2,15 +2,15 @@ language: python
 
 jobs:
   include:
-    - name: test_deploy
+    - name: fast_deploy
       install:
-      - echo "install"
+      - pip3 install -r requirements.txt
       script:
-      - mkdir site
-      - echo "hello asynx.dev" > ./site/index.html
+      - mkdocs build --clean --strict --verbose --config-file mkdocs-fast.yml
       - touch ./site/.nojekyll
       - cp CNAME ./site
       - date -Iseconds >> ./site/build.info.txt
+      - mkdocs --version >> ./site/build.info.txt
       - git log -1 --oneline >> ./site/build.info.txt
       deploy:
         provider: pages
@@ -19,3 +19,14 @@ jobs:
         deployment_file: true
         verbose: true
         github_token: $GITHUB_TOKEN
+
+    - name: production_tests
+      install:
+      - pip3 install -r requirements.txt
+      script:
+      - mkdocs build --clean --strict --verbose --config-file mkdocs-production.yml
+      - touch ./site/.nojekyll
+      - cp CNAME ./site
+      - date -Iseconds >> ./site/build.info.txt
+      - chmod +x ./test/main-simple.sh
+      - ./test/main-simple.sh

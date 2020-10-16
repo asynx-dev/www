@@ -1,0 +1,43 @@
+copyright: ""
+site_author: asynx.dev
+# site_description: asynx.dev !! Not used to use custom meta description code.
+site_name: asynx.dev
+site_url: https://asynx.dev/
+
+markdown_extensions:
+  - admonition
+  - codehilite:
+      guess_lang: false
+      linenums: true
+  - footnotes
+  - meta
+  - toc:
+      permalink: true
+
+
+plugins:
+  - bibtex:
+      bib_file: "ref/refs.bib"
+      cite_style: "pandoc"
+  - git-revision-date
+  - htmlproofer
+  - search
+
+
+theme:
+  name: material
+  language: en
+  palette:
+    scheme: preference
+    primary: indigo
+    accent: deep orange
+  font:
+    text: Nunito
+    code: Space Mono
+  favicon: img/favicon.ico
+  logo: img/asynx_icon.png
+  custom_dir: material-theme-overrides
+
+nav:
+  - Home: index.md
+  - Misc.: misc/index.md
