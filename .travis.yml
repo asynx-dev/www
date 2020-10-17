@@ -25,9 +25,6 @@ jobs:
     - pip3 install -r requirements.txt
     script:
     - mkdocs build --clean --strict --verbose --config-file mkdocs-merge.yml
-    - touch ./site/.nojekyll
-    - cp CNAME ./site
-    - date -Iseconds >> ./site/build.info.txt
     - chmod +x ./test/main-simple.sh
     - "./test/main-simple.sh"
 #notifications:
