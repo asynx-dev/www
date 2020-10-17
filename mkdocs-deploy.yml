@@ -31,8 +31,8 @@ theme:
     primary: indigo
     accent: deep orange
   font:
-    text: Nunito
-    code: Space Mono
+    text: Open Sans
+    code: Source Code Pro
   favicon: img/favicon.ico
   logo: img/asynx_icon.png
   custom_dir: material-theme-overrides
