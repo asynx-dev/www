@@ -1,3 +1,23 @@
+# We have 2 build steps, one for deployment and one for before merging PRs.
+#
+# By using 'if's, deploy build only runs on master branch and when the request
+# isn't a PR. This runs if a maintainer accepts a PR and it is used to deploy
+# the site to public
+#
+# merge build runs for PRs on master branch. This runs when a developer opens
+# a PR. This runs operate on the code as if the PR is merged.
+#
+# It is assumed that the master branch is protected and no one can push directly.
+# All changes on the master branch should be done with PRs. Thus, for each change
+# it is guaranteed that tests run before deploying to public. We don't have
+# separate "branch" and "PR run" for each PR, we enable only "PR run".
+#
+# To understand how the mechanism works, please check:
+#
+# https://stackoverflow.com/a/47706402/1766391
+# https://docs.travis-ci.com/user/conditional-builds-stages-jobs/#Conditional-Builds
+# https://docs.travis-ci.com/user/conditions-v1
+
 language: python
 jobs:
   include:
