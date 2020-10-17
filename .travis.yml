@@ -1,3 +1,23 @@
+# We have 2 build steps, one for deployment and one for before merging PRs.
+#
+# By using 'if's, deploy build only runs on master branch and when the request
+# isn't a PR. This runs if a maintainer accepts a PR and it is used to deploy
+# the site to public
+#
+# merge build runs for PRs on master branch. This runs when a developer opens
+# a PR. This runs operate on the code as if the PR is merged.
+#
+# It is assumed that the master branch is protected and no one can push directly.
+# All changes on the master branch should be done with PRs. Thus, for each change
+# it is guaranteed that tests run before deploying to public. We don't have
+# separate "branch" and "PR run" for each PR, we enable only "PR run".
+#
+# To understand how the mechanism works, please check:
+#
+# https://stackoverflow.com/a/47706402/1766391
+# https://docs.travis-ci.com/user/conditional-builds-stages-jobs/#Conditional-Builds
+# https://docs.travis-ci.com/user/conditions-v1
+
 language: python
 jobs:
   include:
@@ -16,6 +36,8 @@ jobs:
       provider: pages
       local_dir: site
       skip_cleanup: true
+      keep_history: false
+      cleanup: false
       deployment_file: true
       verbose: true
       github_token: "$GITHUB_TOKEN"
@@ -25,12 +47,9 @@ jobs:
     - pip3 install -r requirements.txt
     script:
     - mkdocs build --clean --strict --verbose --config-file mkdocs-merge.yml
-    - touch ./site/.nojekyll
-    - cp CNAME ./site
-    - date -Iseconds >> ./site/build.info.txt
     - chmod +x ./test/main-simple.sh
     - "./test/main-simple.sh"
-notifications:
-  slack:
-    rooms:
-      secure: PhFjXRhv3cxu4jOF3pow7XJ/VEsvdNy24Ewe7mpSy0+ooxggaKvlgBs5qNhqA+HJhBbLGYqrV5pg5UKci0zLlIdNMxibdiSsppNnn7AQ8jbz6Giz+7UQsHr9FywM50noMPoZ/2KxAT79aPaZsxtXYCdUDNne0wh0E2FX6ic5FRgobDblbW7nipH5SqL7Fc2bi8tBGhC66naIW/3vMlaMBJYqpWsKdhu5jB05rHkgFT7Md+kua8NYVi/JyvX6wK0Yr4prv5Tu5j3elB741mvZXdJjaXFttetVQqGArvz6W9Swh217fyljrtG2wVf8tX+RdPP7KqXPteO9mL24msSmkW5kQv6zCRC0Pa7gO9z2GLu3QRsMeSfaSAzJwxHPvg12YQRPnKjLxVXlVYnxEvb8oMbif6KWTITCy6X37NgVzVp1z7UPATYCTWGUn+Z6cEzm11ppn7WQGss5PcujwkY+fmAO5c/C8WXwDyi3KqxAxNGN2fQj3r//SK3lafeX7PgmDrFQW9GGiLVid78xFBsgprPsQJwdEPUePI9LYk6m99qfetZ0Bq0QLovyQyJrXPGyE4WpHT+YqjZfZq61HTW/tlSfjvythZa4kaz1CNLup/hvq+whqjOVWH0oe9vSRAnm+x3iDK6zmEBYl4oESUTrL+Tek3lceIDqUgst8mUD0AE=
+#notifications:
+#  slack:
+#    rooms:
+#      secure: PhFjXRhv3cxu4jOF3pow7XJ/VEsvdNy24Ewe7mpSy0+ooxggaKvlgBs5qNhqA+HJhBbLGYqrV5pg5UKci0zLlIdNMxibdiSsppNnn7AQ8jbz6Giz+7UQsHr9FywM50noMPoZ/2KxAT79aPaZsxtXYCdUDNne0wh0E2FX6ic5FRgobDblbW7nipH5SqL7Fc2bi8tBGhC66naIW/3vMlaMBJYqpWsKdhu5jB05rHkgFT7Md+kua8NYVi/JyvX6wK0Yr4prv5Tu5j3elB741mvZXdJjaXFttetVQqGArvz6W9Swh217fyljrtG2wVf8tX+RdPP7KqXPteO9mL24msSmkW5kQv6zCRC0Pa7gO9z2GLu3QRsMeSfaSAzJwxHPvg12YQRPnKjLxVXlVYnxEvb8oMbif6KWTITCy6X37NgVzVp1z7UPATYCTWGUn+Z6cEzm11ppn7WQGss5PcujwkY+fmAO5c/C8WXwDyi3KqxAxNGN2fQj3r//SK3lafeX7PgmDrFQW9GGiLVid78xFBsgprPsQJwdEPUePI9LYk6m99qfetZ0Bq0QLovyQyJrXPGyE4WpHT+YqjZfZq61HTW/tlSfjvythZa4kaz1CNLup/hvq+whqjOVWH0oe9vSRAnm+x3iDK6zmEBYl4oESUTrL+Tek3lceIDqUgst8mUD0AE=
