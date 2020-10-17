@@ -4,3 +4,5 @@ mkdocs-git-revision-date-plugin
 mkdocs-htmlproofer-plugin
 mkdocs-bibtex
 mkdocs-git-authors-plugin
+
+pytest

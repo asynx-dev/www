@@ -27,6 +27,7 @@ jobs:
     - pip3 install -r requirements.txt
     script:
     - mkdocs build --clean --config-file mkdocs-deploy.yml
+    - pytest -q test/test_ga.py
     - touch ./site/.nojekyll
     - cp CNAME ./site
     - date -Iseconds >> ./site/build.info.txt
@@ -47,8 +48,7 @@ jobs:
     - pip3 install -r requirements.txt
     script:
     - mkdocs build --clean --strict --verbose --config-file mkdocs-merge.yml
-    - chmod +x ./test/main-simple.sh
-    - "./test/main-simple.sh"
+    - pytest -q test/test_ga.py
 notifications:
   slack:
     rooms:
