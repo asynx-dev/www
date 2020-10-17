@@ -3,6 +3,8 @@ site_author: asynx.dev
 # site_description: asynx.dev !! Not used to use custom meta description code.
 site_name: asynx.dev
 site_url: https://asynx.dev/
+repo_url: https://github.com/asynx-dev/www
+edit_uri: ""
 
 google_analytics:
   - UA-180670653-1

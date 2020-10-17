@@ -9,3 +9,5 @@
 # cSpell.json, Code cSpell eklentisi tarafindan kullaniliyor.
 !.vscode/cSpell.json 
 *.code-workspace
+
+.pytest_cache

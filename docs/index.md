@@ -1,5 +1,6 @@
 ---
-summary: asynx.dev
+description: asynx.dev
+date: 2020-10-16
 ---
 
 # asynx.dev
