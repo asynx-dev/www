@@ -49,7 +49,7 @@ jobs:
     - mkdocs build --clean --strict --verbose --config-file mkdocs-merge.yml
     - chmod +x ./test/main-simple.sh
     - "./test/main-simple.sh"
-#notifications:
-#  slack:
-#    rooms:
-#      secure: PhFjXRhv3cxu4jOF3pow7XJ/VEsvdNy24Ewe7mpSy0+ooxggaKvlgBs5qNhqA+HJhBbLGYqrV5pg5UKci0zLlIdNMxibdiSsppNnn7AQ8jbz6Giz+7UQsHr9FywM50noMPoZ/2KxAT79aPaZsxtXYCdUDNne0wh0E2FX6ic5FRgobDblbW7nipH5SqL7Fc2bi8tBGhC66naIW/3vMlaMBJYqpWsKdhu5jB05rHkgFT7Md+kua8NYVi/JyvX6wK0Yr4prv5Tu5j3elB741mvZXdJjaXFttetVQqGArvz6W9Swh217fyljrtG2wVf8tX+RdPP7KqXPteO9mL24msSmkW5kQv6zCRC0Pa7gO9z2GLu3QRsMeSfaSAzJwxHPvg12YQRPnKjLxVXlVYnxEvb8oMbif6KWTITCy6X37NgVzVp1z7UPATYCTWGUn+Z6cEzm11ppn7WQGss5PcujwkY+fmAO5c/C8WXwDyi3KqxAxNGN2fQj3r//SK3lafeX7PgmDrFQW9GGiLVid78xFBsgprPsQJwdEPUePI9LYk6m99qfetZ0Bq0QLovyQyJrXPGyE4WpHT+YqjZfZq61HTW/tlSfjvythZa4kaz1CNLup/hvq+whqjOVWH0oe9vSRAnm+x3iDK6zmEBYl4oESUTrL+Tek3lceIDqUgst8mUD0AE=
+notifications:
+  slack:
+    rooms:
+      secure: fNuQ8q7R/iK3dKPzrhBH47u7JEpqRZUO+JE/8lK2JfwlNPKU9v8cdFTjP/csKnrzkXRVLgeditJ2woMb4Yb/abWPlqeG6UCavq4IaCnTjTw2wGYel6k9y68BZnZhW9ypgmrI9egVIDWfwRoh/8QwkCGWMG+ufxrXzd//T+H8TPkeuLgLb6A3hjceHnsTJRMTOsJJYsyAbOaHhQD++KPzIinZOh+jYu96NBk5bCAnESyV/MPofb3ZS2V3YNxFygaWI1Oeox/u/I+UzZ3JcqBenXF0GdquyH0tYB34COqsRZhd+sVM7fmJQZ+ylgpZmRFoy5YbBBkEDGzEShcp+Xet5ar093rRQhVO2rk/cwnlS4/AuS/P2CY8v5yqYDhEpgjFZEEIRZ6rAkwz7D8MKbemvPSb82tisObwYKl8eoz6CvmCkWnylshBKxcmdcsSJoQau1TlkpNfxjbSOr4r/TJZbmokorvPoF4eIMQmRJjq2H/q8SIV4H8z1hhXKCfrzgN4v37AwnaEiST6vrRbw0X0yOVl8YZrNKPM60RdEr65oZfvrO5eW1Qy1DqY6TJSBgscGKd1Y9lLweL1rb57/X4Oy/JuxYGvuAiRqTCz5C73UPeK5TIEfuYkwWqefcmzwH5yQ5FiRfTtuf0F7BfmZCBQt9+n8I4bnb4sESIOhdXZeac=
