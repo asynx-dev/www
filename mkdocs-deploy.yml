@@ -4,6 +4,10 @@ site_author: asynx.dev
 site_name: asynx.dev
 site_url: https://asynx.dev/
 
+google_analytics:
+  - UA-180670653-1
+  - auto
+
 markdown_extensions:
   - admonition
   - codehilite:
