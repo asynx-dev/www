@@ -1,11 +1,11 @@
 language: python
 jobs:
   include:
-  - name: fast_deploy
+  - name: deploy_build
     install:
     - pip3 install -r requirements.txt
     script:
-    - mkdocs build --clean --strict --verbose --config-file mkdocs-fast.yml
+    - mkdocs build --clean --config-file mkdocs-deploy.yml
     - touch ./site/.nojekyll
     - cp CNAME ./site
     - date -Iseconds >> ./site/build.info.txt
@@ -18,11 +18,11 @@ jobs:
       deployment_file: true
       verbose: true
       github_token: "$GITHUB_TOKEN"
-  - name: production_tests
+  - name: merge_build
     install:
     - pip3 install -r requirements.txt
     script:
-    - mkdocs build --clean --strict --verbose --config-file mkdocs-full.yml
+    - mkdocs build --clean --strict --verbose --config-file mkdocs-merge.yml
     - touch ./site/.nojekyll
     - cp CNAME ./site
     - date -Iseconds >> ./site/build.info.txt
