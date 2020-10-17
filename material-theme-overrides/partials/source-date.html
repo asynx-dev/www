@@ -1,0 +1,21 @@
+<hr />
+<div class="md-source-date">
+  <small>
+
+    This page was
+    {% if page and page.meta.date %}
+      published on {{ page.meta.date }},
+    {% endif %}
+    <!-- mkdocs-git-revision-date-localized-plugin -->
+    {% if page.meta.git_revision_date_localized %}
+      last updated on {{ page.meta.git_revision_date_localized }},
+    <!-- mkdocs-git-revision-date-plugin -->
+    {% elif page.meta.revision_date %}
+      last updated on {{ page.meta.revision_date }},
+    {% endif %}
+    {% if git_page_authors %}
+      with contributions from {{ git_page_authors }}
+    {% endif %}
+    
+  </small>
+</div>

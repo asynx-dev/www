@@ -21,6 +21,10 @@ plugins:
   - bibtex:
       bib_file: "ref/refs.bib"
       cite_style: "pandoc"
+  - git-authors:
+      show_contribution: true
+      show_line_count: false
+      count_empty_lines: false
   - git-revision-date
   - search
 
