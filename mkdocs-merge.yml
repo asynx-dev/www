@@ -6,6 +6,10 @@ site_url: https://asynx.dev/
 repo_url: https://github.com/asynx-dev/www
 edit_uri: ""
 
+google_analytics:
+  - UA-180670653-1
+  - auto
+
 markdown_extensions:
   - admonition
   - codehilite:
