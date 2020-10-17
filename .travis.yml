@@ -2,6 +2,7 @@ language: python
 jobs:
   include:
   - name: deploy_build
+    if: (branch=master) AND (type IN (push, api, cron))
     install:
     - pip3 install -r requirements.txt
     script:
@@ -19,6 +20,7 @@ jobs:
       verbose: true
       github_token: "$GITHUB_TOKEN"
   - name: merge_build
+    if: (branch=master) AND (type IN (pull_request))
     install:
     - pip3 install -r requirements.txt
     script:
