@@ -41,7 +41,7 @@ theme:
     text: Open Sans
     code: Source Code Pro
   favicon: img/favicon.ico
-  logo: img/asynx_icon.png
+  logo: img/asynx_logo_icon_white.png
   custom_dir: material-theme-overrides
 
 nav:
