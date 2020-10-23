@@ -18,10 +18,11 @@
 # https://docs.travis-ci.com/user/conditional-builds-stages-jobs/#Conditional-Builds
 # https://docs.travis-ci.com/user/conditions-v1
 
-language: python
+
 jobs:
   include:
   - name: deploy_build
+    language: python
     if: (branch=master) AND (type IN (push, api, cron))
     install:
     - pip3 install -r requirements.txt
@@ -43,12 +44,22 @@ jobs:
       verbose: true
       github_token: "$GITHUB_TOKEN"
   - name: merge_build
+    language: python
     if: (branch=master) AND (type IN (pull_request))
     install:
     - pip3 install -r requirements.txt
     script:
     - mkdocs build --clean --strict --verbose --config-file mkdocs-merge.yml
     - pytest -q test/test_ga.py
+  - name: markdown_lint
+    language: node_js
+    if: (branch=master) AND (type IN (pull_request))
+    node_js:
+    - node
+    before_script:
+    - npm install -g markdownlint-cli
+    script:
+    - markdownlint ./docs
 notifications:
   slack:
     rooms:
