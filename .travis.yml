@@ -54,6 +54,8 @@ jobs:
   - name: markdown_lint
     language: node_js
     if: (branch=master) AND (type IN (pull_request))
+    node_js:
+    - node
     before_script:
     - npm install -g markdownlint-cli
     script:
