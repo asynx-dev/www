@@ -24,3 +24,8 @@
 	<meta name="msapplication-config" content="{{ 'img/browserconfig.xml' | url }}">
 	<!-- ****** faviconit.com favicons ****** -->
 {% endblock %}
+
+{% block announce %}
+        {% include "partials/announce_public.html" %}
+        {% include "partials/announce_private_reserved.html" %}
+{% endblock %}
