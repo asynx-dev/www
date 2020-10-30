@@ -5,6 +5,7 @@ site_name: asynx.dev
 site_url: http://localhost:8000/
 repo_url: https://github.com/asynx-dev/www
 edit_uri: ""
+use_directory_urls: false
 
 markdown_extensions:
   - admonition
