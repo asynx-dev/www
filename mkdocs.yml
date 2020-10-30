@@ -5,6 +5,7 @@ site_name: asynx.dev
 site_url: http://localhost:8000/
 repo_url: https://github.com/asynx-dev/www
 edit_uri: ""
+use_directory_urls: false
 
 markdown_extensions:
   - admonition
@@ -42,6 +43,15 @@ theme:
   favicon: img/favicon.ico
   logo: img/asynx_logo_icon_white.png
   custom_dir: material-theme-overrides
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/asynx-dev/
+      name: Our Github Page
+    - icon: fontawesome/brands/twitter
+      link: http://twitter.com/asynxdev
+      name: Our Twitter Profile
 
 nav:
   - Home: index.md
