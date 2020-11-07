@@ -1,6 +1,7 @@
 copyright: ""
-site_author: asynx.dev
+site_author: asynx.dev Team
 # site_description: asynx.dev !! Not used to use custom meta description code.
+copyright: "Copyright &copy; 2020 asynx.dev Team<br/>License: <a href='https://creativecommons.org/licenses/by/4.0/'>CC BY 4.0</a>"
 site_name: asynx.dev
 site_url: https://asynx.dev/
 repo_url: https://github.com/asynx-dev/www
@@ -55,4 +56,6 @@ extra:
 
 nav:
   - Home: index.md
+  - About: about.md
+  - Contact: contact.md
   - Misc.: misc/index.md
