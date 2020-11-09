@@ -1,0 +1,18 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+mkdocs = "*"
+mkdocs-material = "*"
+mkdocs-git-revision-date-plugin = "*"
+mkdocs-htmlproofer-plugin = "*"
+mkdocs-bibtex = "*"
+mkdocs-git-authors-plugin = "*"
+pytest = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.9"
