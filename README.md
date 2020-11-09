@@ -2,6 +2,10 @@
 
 [https://asynx.dev](https://asynx.dev)
 
+## Building
+
+Site is built with `mkdocs`.
+
 ## License
 
 [![GitHub License](https://img.shields.io/github/license/asynx-dev/www.svg?style=flat)](https://creativecommons.org/licenses/by/4.0/)
