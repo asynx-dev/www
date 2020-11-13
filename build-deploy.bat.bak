@@ -1,0 +1,10 @@
+rem This script build the site for publishing.
+
+pipenv install
+pipenv run mkdocs build --clean --config-file mkdocs-deploy.yml
+type NUL > site\.nojekyll
+copy CNAME site\
+echo  %date%-%time%>>site\build.info.txt
+pipenv run mkdocs --version>>site\build.info.txt
+git log -1 --oneline>>site\build.info.txt
+pipenv --rm
