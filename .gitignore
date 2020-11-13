@@ -11,3 +11,5 @@
 *.code-workspace
 
 .pytest_cache
+
+Pipfile.lock

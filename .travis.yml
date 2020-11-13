@@ -25,15 +25,10 @@ jobs:
     language: python
     if: (branch=master) AND (type IN (push, api, cron))
     install:
-    - pip3 install -r requirements.txt
+    - pip3 install pipenv
     script:
-    - mkdocs build --clean --config-file mkdocs-deploy.yml
-    - pytest -q test/test_ga.py
-    - touch ./site/.nojekyll
-    - cp CNAME ./site
-    - date -Iseconds >> ./site/build.info.txt
-    - mkdocs --version >> ./site/build.info.txt
-    - git log -1 --oneline >> ./site/build.info.txt
+    - python3 build-deploy.py
+    - python3 test.py pytest
     deploy:
       provider: pages
       local_dir: site
@@ -47,10 +42,10 @@ jobs:
     language: python
     if: (branch=master) AND (type IN (pull_request))
     install:
-    - pip3 install -r requirements.txt
+    - pip3 install pipenv
     script:
-    - mkdocs build --clean --strict --verbose --config-file mkdocs-merge.yml
-    - pytest -q test/test_ga.py
+    - python3 build-merge.py
+    - python3 test.py pytest
   - name: markdown_lint
     language: node_js
     if: (branch=master) AND (type IN (pull_request))
@@ -59,7 +54,7 @@ jobs:
     before_script:
     - npm install -g markdownlint-cli
     script:
-    - markdownlint ./docs
+    - markdownlint docs
 notifications:
   slack:
     rooms:
