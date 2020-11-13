@@ -6,6 +6,7 @@ import os
 from pathlib import Path
 from shutil import copyfile
 import subprocess
+from subprocess import PIPE
 import datetime
 
 subprocess.run(["pipenv", "install"])
@@ -16,7 +17,7 @@ copyfile(os.path.join(os.path.dirname(__file__), 'CNAME'), os.path.join(os.path.
 
 with open(os.path.join(os.path.dirname(__file__), 'site', 'build.info.txt'), 'a') as f:
     f.write(datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S")+' UTC\n')
-    f.write(subprocess.run(["pipenv", "run", "mkdocs", "--version"], capture_output=True, text=True).stdout)
-    f.write(subprocess.run(["git", "log", "-1", "--oneline"], capture_output=True, text=True).stdout)
+    f.write(subprocess.run(["pipenv", "run", "mkdocs", "--version"], stdout=PIPE, stderr=PIPE, text=True).stdout)
+    f.write(subprocess.run(["git", "log", "-1", "--oneline"], stdout=PIPE, stderr=PIPE, text=True).stdout)
 
 #subprocess.run(["pipenv", "--rm"])
