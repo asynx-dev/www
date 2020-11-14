@@ -29,6 +29,10 @@ plugins:
       count_empty_lines: false
   - git-revision-date
   - search
+  - mkdocs-simple-hooks:
+      hooks:
+        on_page_markdown: "hooks.onpagemarkdown:onpagemarkdown"
+
 
 
 theme:
