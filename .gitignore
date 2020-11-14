@@ -2,13 +2,16 @@
 
 # Ref: https://github.com/github/gitignore/blob/master/Global/VisualStudioCode.gitignore
 .vscode/*
-!.vscode/settings.json
+!.vscode/settings.json.recommended
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
 # cSpell.json, Code cSpell eklentisi tarafindan kullaniliyor.
-!.vscode/cSpell.json 
+# !.vscode/cSpell.json
 *.code-workspace
+
+# Local History for Visual Studio Code
+.history/
 
 .pytest_cache
 
