@@ -10,6 +10,7 @@ mkdocs-git-revision-date-plugin = "*"
 mkdocs-htmlproofer-plugin = "*"
 mkdocs-bibtex = "*"
 mkdocs-git-authors-plugin = "*"
+mkdocs-simple-hooks = "*"
 pytest = "*"
 
 [dev-packages]

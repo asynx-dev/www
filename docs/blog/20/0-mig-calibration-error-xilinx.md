@@ -2,6 +2,7 @@
 description: MIG "init_calib_complete" signal does not go high during simulation
 author: Yunus Esergün
 date: 2020-10-21
+axlang: en
 ---
 # MIG "init_calib_complete" signal does not go high
 
