@@ -57,6 +57,13 @@ extra:
 
 nav:
   - Home: index.md
-  - About: about.md
+  - Blog: blog/index.md
+  - Projects: project/index.md
+  - About Us: about.md
   - Contact: contact.md
-  - Misc.: misc/index.md
+  - Miscellaneous: misc/index.md
+  - '[TR]':
+    - Ana Sayfa: index-tr.md
+    - Projeler: project/index-tr.md
+    - Hakkımızda: about-tr.md
+    - İletişim: contact-tr.md
