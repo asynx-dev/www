@@ -1,12 +1,19 @@
 ---
-description: asynx.dev
+description: asynx.dev Home Page
 date: 2020-10-16
 ---
 
-# asynx.dev
+# Home
+
+!!! info
+    Türkçe için lütfen [tıklayınız.](index-tr.md)
 
 ![asynx.dev logo](img/asynx_logo_800_trans.png)
 
-[MIG Calibration Error Solution](MIG_calibration_error/MIG.md)
+**Hi! We are the asynx.dev Team**
 
-Home page
+We publish our [blog posts](blog/index.md), talk about [our
+projects](project/index.md) on this site. You can get more information about us
+from [this page](about.md) and [contact us](contact.md) if you needed.
+
+English `[EN]` and Turkish `[TR]` contents are mixed on this site.
