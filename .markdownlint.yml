@@ -1,0 +1,15 @@
+{
+  "default": true,
+  "MD013": true,
+  "MD014": false,
+  "MD024": {
+    "siblings_only": true # Allowed for non-sibling headings. See: https://github.com/DavidAnson/markdownlint/blob/master/doc/Rules.md#md024
+  },
+  "MD026": {
+    "punctuation": ".,;:" # Allow ! and ?
+  },
+  "MD033": {
+    "allowed_elements": ["iframe", "pre"] # For YouTube videos. See: https://github.com/DavidAnson/markdownlint/blob/2d8122a3bec9d33c55da5620d07901842fb9c92d/test/inline_html-allowed_elements.json
+  },
+  "MD036":false
+}
