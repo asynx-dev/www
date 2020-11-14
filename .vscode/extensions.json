@@ -1,0 +1,22 @@
+{
+    // See http://go.microsoft.com/fwlink/?LinkId=827846
+    // for the documentation about the extensions.json format
+    "recommendations": [
+        // Similar (same) markdownlint used in CI
+        "DavidAnson.vscode-markdownlint",
+        // Use to cut lines at 80 if needed
+        "stkb.rewrap",
+        // Spell checker
+        "streetsidesoftware.code-spell-checker",
+        // Spell checker Turkish pack
+        "streetsidesoftware.code-spell-checker-turkish",
+        // Markdown preview
+        "yzhang.markdown-all-in-one",
+        // For git
+        "eamodio.gitlens",
+        // Easy indentation
+        "oderwat.indent-rainbow",
+        // Bracket pairing
+        "coenraads.bracket-pair-colorizer-2"
+    ]
+}
