@@ -9,8 +9,8 @@ import subprocess
 from subprocess import PIPE
 import datetime
 
-subprocess.run(["pipenv", "install"])
-subprocess.run(["pipenv", "run", "mkdocs", "build", "--clean", "--config-file", "mkdocs-deploy.yml"])
+subprocess.run(["pipenv", "install"], check=True)
+subprocess.run(["pipenv", "run", "mkdocs", "build", "--clean", "--config-file", "mkdocs-deploy.yml"], check=True)
 
 Path(os.path.join(os.path.dirname(__file__), 'site', '.nojekyll')).touch()
 copyfile(os.path.join(os.path.dirname(__file__), 'CNAME'), os.path.join(os.path.dirname(__file__), 'site', 'CNAME'))

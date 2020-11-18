@@ -9,4 +9,4 @@ disqus: ''
 - ![Build Status](https://travis-ci.com/asynx-dev/www.svg?branch=master "Build Status")
 - ![Repo Size](https://img.shields.io/github/repo-size/asynx-dev/www "Repo Size")
 - ![Repo License](https://img.shields.io/github/license/asynx-dev/www "Repo License")
-- [Deployment Info](/build.info.txt)
+- [Deployment Info](../build.info.txt)
