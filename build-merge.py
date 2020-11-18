@@ -5,4 +5,4 @@
 import subprocess
 
 subprocess.run(["pipenv", "install"])
-subprocess.run(["pipenv", "run", "mkdocs", "build", "--clean", "--strict", "--verbose", "--config-file", "mkdocs-merge.yml"])
+subprocess.run(["pipenv", "run", "mkdocs", "build", "--clean", "--strict", "--verbose", "--config-file", "mkdocs-merge.yml"], check=True)

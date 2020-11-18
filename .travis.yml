@@ -58,7 +58,7 @@ jobs:
     before_script:
     - npm install -g markdownlint-cli
     script:
-    - markdownlint docs
+    - markdownlint ./ docs
 notifications:
   slack:
     rooms:
