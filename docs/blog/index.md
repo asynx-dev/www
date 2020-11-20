@@ -6,3 +6,4 @@ things or news that are interesting to us, etc.
 ## 2020
 
 * [MIG "init_calib_complete" signal does not go high](20/0-mig-calibration-error-xilinx.md)
+* [Use pip and pipenv with self signed SSL certificates](20/1-using-pip-and-pipenv-with-self-signed-certificates.md)
