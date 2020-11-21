@@ -21,6 +21,12 @@ markdown_extensions:
   - meta
   - toc:
       permalink: true
+
+plugins:
+  - bibtex:
+      bib_file: "ref/refs.bib"
+      cite_style: "pandoc"
+  - git-revision-date
   - search
   - mkdocs-simple-hooks:
       hooks:
@@ -29,16 +35,6 @@ markdown_extensions:
         on_config: "hooks.axmkdocs:onconfig"
         on_files: "hooks.axmkdocs:onfiles"
         on_nav: "hooks.axmkdocs:onnav"
-
-
-
-plugins:
-  - bibtex:
-      bib_file: "ref/refs.bib"
-      cite_style: "pandoc"
-  - git-revision-date
-  - search
-
 
 theme:
   name: material
