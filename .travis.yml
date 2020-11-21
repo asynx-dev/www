@@ -25,9 +25,9 @@ jobs:
     language: python
     python:
       - "3.6"
-    if: (branch=master) AND (type IN (push, api, cron))
+    if: (branch=master) AND (type IN (push, api))
     install:
-    - pip3 install pipenv
+    - python3 -m pip install pipenv
     script:
     - python3 build-deploy.py
     - python3 test.py pytest
@@ -40,19 +40,33 @@ jobs:
       deployment_file: true
       verbose: true
       github_token: "$GITHUB_TOKEN"
+  - name: cron_build
+    language: python
+    python:
+      - "3.6"
+      - "3.7"
+      - "3.8"
+      - "3.9"
+      - "nightly"
+    if: (branch=master) AND (type IN (cron))
+    install:
+    - python3 -m pip install pipenv
+    script:
+    - python3 build-cron.py
+    - python3 test.py pytest
   - name: merge_build
     language: python
     python:
       - "3.6"
     if: (branch=master) AND (type IN (pull_request))
     install:
-    - pip3 install pipenv
+    - python3 -m pip install pipenv
     script:
     - python3 build-merge.py
     - python3 test.py pytest
   - name: markdown_lint
     language: node_js
-    if: (branch=master) AND (type IN (pull_request))
+    if: (branch=master) AND (type IN (pull_request, cron))
     node_js:
     - node
     before_script:

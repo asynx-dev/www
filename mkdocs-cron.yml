@@ -27,6 +27,7 @@ plugins:
       bib_file: "ref/refs.bib"
       cite_style: "pandoc"
   - git-revision-date
+  - htmlproofer
   - search
   - mkdocs-simple-hooks:
       hooks:
