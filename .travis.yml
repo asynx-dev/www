@@ -18,13 +18,13 @@
 # https://docs.travis-ci.com/user/conditional-builds-stages-jobs/#Conditional-Builds
 # https://docs.travis-ci.com/user/conditions-v1
 
+# TODO Switch to proper build matrix syntax
 
 jobs:
   include:
   - name: deploy_build
     language: python
-    python:
-      - "3.6"
+    python: "3.6"
     if: (branch=master) AND (type IN (push, api))
     install:
     - python3 -m pip install pipenv
@@ -40,14 +40,45 @@ jobs:
       deployment_file: true
       verbose: true
       github_token: "$GITHUB_TOKEN"
-  - name: cron_build
+  - name: cron_build_36
     language: python
-    python:
-      - "3.6"
-      - "3.7"
-      - "3.8"
-      - "3.9"
-      - "nightly"
+    python: "3.6"
+    if: (branch=master) AND (type IN (cron))
+    install:
+    - python3 -m pip install pipenv
+    script:
+    - python3 build-cron.py
+    - python3 test.py pytest
+  - name: cron_build_37
+    language: python
+    python: "3.7"
+    if: (branch=master) AND (type IN (cron))
+    install:
+    - python3 -m pip install pipenv
+    script:
+    - python3 build-cron.py
+    - python3 test.py pytest
+  - name: cron_build_38
+    language: python
+    python: "3.8"
+    if: (branch=master) AND (type IN (cron))
+    install:
+    - python3 -m pip install pipenv
+    script:
+    - python3 build-cron.py
+    - python3 test.py pytest
+  - name: cron_build_39
+    language: python
+    python: "3.9"
+    if: (branch=master) AND (type IN (cron))
+    install:
+    - python3 -m pip install pipenv
+    script:
+    - python3 build-cron.py
+    - python3 test.py pytest
+  - name: cron_build_nightly
+    language: python
+    python: "nightly"
     if: (branch=master) AND (type IN (cron))
     install:
     - python3 -m pip install pipenv
@@ -56,8 +87,7 @@ jobs:
     - python3 test.py pytest
   - name: merge_build
     language: python
-    python:
-      - "3.6"
+    python: "3.6"
     if: (branch=master) AND (type IN (pull_request))
     install:
     - python3 -m pip install pipenv
@@ -66,9 +96,8 @@ jobs:
     - python3 test.py pytest
   - name: markdown_lint
     language: node_js
+    node_js: node
     if: (branch=master) AND (type IN (pull_request, cron))
-    node_js:
-    - node
     before_script:
     - npm install -g markdownlint-cli
     script:
