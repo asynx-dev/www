@@ -28,6 +28,16 @@ or `[^iki]` to avoid confusion because this format is used by the plugin.
 
 ## Plugins
 
+### mkdocs-asynx-plugin
+
+!!! Warning
+    Functions of this plugin is called by `mkdocs-simple-hooks` and it is under
+    development.
+
+#### List All Blog Posts
+
+{{{{ axmk_all_blog_posts }}}}
+
 ### disqus
 
 Check bottom of the page. Disqus form should appear.

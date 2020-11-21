@@ -22,7 +22,6 @@ markdown_extensions:
   - toc:
       permalink: true
 
-
 plugins:
   - bibtex:
       bib_file: "ref/refs.bib"
@@ -30,7 +29,13 @@ plugins:
   - git-revision-date
   - htmlproofer
   - search
-
+  - mkdocs-simple-hooks:
+      hooks:
+        on_page_markdown: "hooks.axmkdocs:onpagemarkdown"
+        on_pre_page: "hooks.axmkdocs:onprepage"
+        on_config: "hooks.axmkdocs:onconfig"
+        on_files: "hooks.axmkdocs:onfiles"
+        on_nav: "hooks.axmkdocs:onnav"
 
 theme:
   name: material
