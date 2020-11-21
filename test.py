@@ -28,7 +28,8 @@ if args.test == "all" or args.test == "pytest":
 
 if args.test == "all" or args.test == "markdownlint":
     print("Running markdownlint...")
-    subprocess.run(["markdownlint ./ docs"], shell=True, check=True)
+    subprocess.run(["markdownlint", "./"], shell=True, check=True)
+    subprocess.run(["markdownlint", "docs"], shell=True, check=True)
     print("Done with markdownlint")
 
 print("All finished")
