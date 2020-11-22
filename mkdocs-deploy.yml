@@ -58,6 +58,7 @@ extra:
     - icon: fontawesome/brands/twitter
       link: http://twitter.com/asynxdev
       name: Our Twitter Profile
+  disqus: asynxdev
 
 nav:
   - Home: index.md

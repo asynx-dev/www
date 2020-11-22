@@ -1,3 +1,6 @@
+---
+disqus: ''
+---
 # Blog
 
 Here we list our blog posts. We blog about problems and solutions that we found,

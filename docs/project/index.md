@@ -1,6 +1,7 @@
 ---
 date: 2020-11-14
 description: Projects of asynx.dev Team
+disqus: ''
 ---
 
 # Projects
