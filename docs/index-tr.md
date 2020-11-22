@@ -1,6 +1,7 @@
 ---
 description: asynx.dev Ana Sayfa
 date: 2020-11-14
+disqus: ''
 ---
 
 # Ana Sayfa
