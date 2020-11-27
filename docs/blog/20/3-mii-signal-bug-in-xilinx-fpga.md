@@ -229,7 +229,6 @@ Finally, for this bug, I have posted a detailed question on
 [Xilinx Forum](https://forums.xilinx.com/t5/Ethernet/MII-Signals-Problem-on-ILA/m-p/1126290#M28573)
 but Xilinx employees do not really give attention to the **bug**. That is why
 there is no solution for this problem.
-<!--markdownlint-enable MD034-->
 
 [^1f]: [https://en.wikipedia.org/wiki/Ethernet_frame](https://en.wikipedia.org/wiki/Ethernet_frame)
 [^2f]: [https://en.wikipedia.org/wiki/Media-independent_interface](https://en.wikipedia.org/wiki/Media-independent_interface)
