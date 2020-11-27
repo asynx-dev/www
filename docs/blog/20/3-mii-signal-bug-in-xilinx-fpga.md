@@ -29,7 +29,7 @@ Ethernet frames consist of `Preamble`, `Start of Frame Delimiter`,
 protocol Ethernet packets and **Layer 1 Ethernet packet** which is important for
 the architecture that I built is shown below [^1f]:
 
-```Text
+```text
  0                   1                   2                   3  
  0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
 +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
