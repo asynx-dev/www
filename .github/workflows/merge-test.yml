@@ -2,7 +2,7 @@ name: merge-test
 on:
   pull_request:
     branches:
-      - main
+      - master
 jobs:
 
   markdown-lint:
