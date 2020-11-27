@@ -6,4 +6,4 @@
 import subprocess
 
 subprocess.run(["pipenv", "install"])
-subprocess.run(["pipenv", "run", "mkdocs", "build", "--clean", "--strict", "--verbose", "--config-file", "mkdocs-cron.yml"], check=True)
+subprocess.run(["pipenv", "run", "mkdocs", "build", "--clean", "--strict", "--verbose", "--config-file", "mkdocs-full.yml"], check=True)
