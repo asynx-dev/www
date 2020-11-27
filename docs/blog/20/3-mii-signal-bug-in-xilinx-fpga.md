@@ -225,7 +225,6 @@ a new one has started but they are not two seperate packets according to my CRC
 calculations. Because they unite a packet, `TX_EN` should not be disasserted
 even for a single clock cycle.
 
-<!--markdownlint-disable MD034-->
 Finally, for this bug, I have posted a detailed question on [Xilinx Forum]
 (https://forums.xilinx.com/t5/Ethernet/MII-Signals-Problem-on-ILA/m-p/1126290#M28573)
 but Xilinx employees do not really give attention to the **bug**. That is why
