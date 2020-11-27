@@ -163,7 +163,7 @@ below [^2f]:
 Finally, after some general information, it is time to explain the architecture
 that is built.
 
-## **ACRHITECTURE**
+## Architecture
 
 In fact, the architecture is very easy to construct and run. Below, the block
 design is shown:
