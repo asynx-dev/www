@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - master
+  schedule:
+    # UTC Time
+    - cron: "0 15 * * *"
 
 jobs:
 

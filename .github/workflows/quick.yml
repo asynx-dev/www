@@ -3,7 +3,7 @@ name: quick-check
 on:
   push:
     branches:
-      - !master
+      - '!master'
 
 jobs:
 
