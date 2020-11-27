@@ -1,5 +1,5 @@
 ---
-description: "MII TX_EN signal goes low just for a clock cycle, which is a bug for MII specifications"
+description: "MII TX_EN signal goes low just for a clock cycle, which is a bug for MII specifications. This blog give some information and shows how the bug is created"
 author: "Yunus Esergün"
 date: 2020-11-27
 axlang: "en"
