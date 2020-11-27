@@ -126,7 +126,7 @@ duration list can be found below [^3f]:
 The summary of Ethernet packet concept is referred above. So as to close to the
 main problem, we should comprehend MII concept as well.
 
-### MII SIGNALS
+### MII signals
 
 **Standard MII** signals transfer specified Ethernet frame using
 **4-bit (nibbles)** with full-duplex way. However, by the time, different MII
