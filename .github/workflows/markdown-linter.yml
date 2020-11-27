@@ -1,7 +1,14 @@
 name: markdown-linter
-on: [push]
+on:
+  push:
+    branches:
+      # All branches
+      - **
+  pull_request:
+    branches:
+      - main
 jobs:
-  check-bats-version:
+  check-all-md-files:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
