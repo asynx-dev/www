@@ -1,34 +1,22 @@
-name: merge-test
+name: deploy
 
 on:
-  pull_request:
+  push:
     branches:
       - master
 
 jobs:
 
-  merge-markdown-lint:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-node@v1
-    - name: Install markdownlint-cli
-      run: |
-        npm install -g markdownlint-cli
-    - name: Lint root directory
-      run: |
-        markdownlint ./
-    - name: Lint docs directory
-      run: |
-        markdownlint docs
-
-  merge-mkdocs-build:
+  deploy-mkdocs-build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
         python-version: ['3.6']
     steps:
     - uses: actions/checkout@v2
+      with:
+        persist-credentials: false
+        fetch-depth: '0'
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v2
       with:
@@ -41,7 +29,15 @@ jobs:
         python -m pip install pipenv
     - name: Install mkdocs and build the site
       run: |
-        ./build-merge.py
+        ./build-deploy.py
     - name: Test
       run: |
         ./test.py pytest
+
+    - name: Deploy 🚀
+        uses: JamesIves/github-pages-deploy-action
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: gh-pages # The branch the action should deploy to.
+          FOLDER: site # The folder the action should deploy.
+          CLEAN: true # Automatically remove deleted files from the deploy branch
