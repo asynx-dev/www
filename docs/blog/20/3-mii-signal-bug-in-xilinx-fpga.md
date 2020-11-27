@@ -192,7 +192,7 @@ have started to observe MII signals and comprehend how they are sent via ILA.
 However, in some packets, I have found a **bug** that is explained in the next
 part.
 
-## **THE BUG**
+## The bug
 
 According to MII Protocol Specification, during `TX_EN` signal assertion,
 receiver side takes the nibbles (for standard MII). When `TX_EN` signal goes
