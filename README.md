@@ -2,6 +2,8 @@
 
 [https://asynx.dev](https://asynx.dev)
 
+![full-check](https://github.com/asynx-dev/www/workflows/full-check/badge.svg)
+
 ## Building
 
 Site is built with `mkdocs`.
