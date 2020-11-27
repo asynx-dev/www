@@ -1,5 +1,5 @@
 ---
-description: "MII Signal Bug In Xilinx FPGA"
+description: "MII TX_EN signal goes low just for a clock cycle, which is a bug for MII specifications"
 author: "Yunus Esergün"
 date: 2020-11-27
 axlang: "en"
@@ -226,7 +226,7 @@ calculations. Because they unite a packet, `TX_EN` should not be disasserted
 even for a single clock cycle.
 
 Finally, for this bug, I have posted a detailed question on
-[Xilinx Forum](https://forums.xilinx.com/t5/Ethernet/MII-Signals-Problem-on-ILA/m-p/1126290#M28573)
+[Xilinx Forum](https://forums.xilinx.com/t5/Ethernet/MII-Signals-Problem-on-ILA/m-p/1126290)
 but Xilinx employees do not really give attention to the **bug**. That is why
 there is no solution for this problem.
 
