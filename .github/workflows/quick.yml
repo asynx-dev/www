@@ -2,8 +2,8 @@ name: quick-check
 
 on:
   push:
-    branches:
-      - '!master'
+    branches-ignore:
+      - master
 
 jobs:
 
