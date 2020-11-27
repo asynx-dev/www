@@ -5,7 +5,7 @@ date: 2020-11-27
 axlang: "en"
 ---
 
-# **MII SIGNAL BUG IN XILINX FPGA**
+# MII signal bug in Xilinx FPGA
 
 The main goal of this article to give the general information about
 **Ethernet packets** and **MII** concept, and demonstrate a bug that I have
