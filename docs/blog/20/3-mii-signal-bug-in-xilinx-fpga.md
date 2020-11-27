@@ -12,7 +12,7 @@ The main goal of this article to give the general information about
 recently faced while working on **MII signals** in Vivado, with the architecture
 that I build.
 
-## **GENERAL INFORMATION**
+## General information
 
 The **MII (Media-Independent Interface)** was defined as a standard interface
 which connects **MAC** and **PHY** to each other. This interface is standardized
