@@ -20,7 +20,7 @@ by **IEEE 802.3u** protocol. In order to understand MII concept, first of all,
 we should comprehend **Ethernet frame** concept. In this blog, **packet** and
 **frame** have the same meaning.
 
-### ETHERNET FRAMES
+### Ethernet frames
 
 Ethernet frames can be transformed from MAC to PHY via MII signals. Standard
 Ethernet frames consist of `Preamble`, `Start of Frame Delimiter`,
