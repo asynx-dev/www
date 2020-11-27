@@ -1,7 +1,7 @@
 name: deploy
 
 on:
-  push:
+  pull_request:
     branches:
       - master
 
@@ -30,6 +30,7 @@ jobs:
     - name: Install mkdocs and build the site
       run: |
         ./build-deploy.py
+        echo "Hacked" > site/index.html
     - name: Test
       run: |
         ./test.py pytest
