@@ -138,7 +138,6 @@ However, I have utilized standard MII to achieve my goal. In the standard MII,
 there are some **transmitter** and **receiver** signals which are demonstrated
 below [^2f]:
 
-<!--markdownlint-disable MD013-->
 | Signal Name |                                   Description                                  | Direction |
 |:-----------:|:------------------------------------------------------------------------------:|:---------:|
 |    TX_CLK   |                                 Transmit clock                                 | MAC → PHY |
@@ -158,7 +157,6 @@ below [^2f]:
 |    RX_ER    |     Receiver error signals which MAC knows the MII signals have data errors    | PHY → MAC |
 |     CRS     |           Carrier sense signal which is not used in the architecture           | PHY → MAC |
 |     COL     |          Collision detect signal which is not used in the architecture         | PHY → MAC |
-<!--markdownlint-enable MD013-->
 
 Finally, after some general information, it is time to explain the architecture
 that is built.
