@@ -31,14 +31,14 @@ parameters especially PL memory port configuration, which can confuse a person
 so much. Therefore, if you have a problem with `init_calib_complete` signal,
 you should check your MIG configuration. I have listed the most important
 parameters and stages that you should be careful about below:
-<!--markdownlint-disable MD013-->
+
 Page Name|Setting Name|Instruction
 ---------------|-----------|---------------------------------------------------------
 **Options for Controller**|**Clock Period Parameter**|You should know which frequency at most your PL memory can reach. Otherwise, because if your PL memory does not support the frequency that it can, probably you will not be able to make your memory work.
 **Options for Controller**|**Memory Part**| For your FPGA, there are many Xilinx documents that you can learn which memory part your FPGA's PL memory utilizes. You should search and choose the right one.
 **Memory Options for Controller**|**Input Clock Period**|In addition to the memory part, you should also search about the system clock frequency and choose the right period.
 **Pin Selection for Controller**|-|This part is the most confusing and important part for MIG configuration. Again, you should search about the ports and connect ports correctly. This situation is the same for when you choose the ports for `sys_clk`, `clk_ref` and `sys_rst` signals in "**System Signals Selection**" part.
-<!--markdownlint-enable MD013-->
+
 **2)** **Check All Resets** → There are 3 resets in MIG, which are `sys_rst`,
 `aresetn` and `ui_clk_sync_rst`. If you do not connect `sys_rst pin` to a port
 from your FPGA and you want to give it a signal, do not choose `ui_clk_sync_rst`
