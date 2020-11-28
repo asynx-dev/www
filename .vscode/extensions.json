@@ -17,6 +17,8 @@
         // Easy indentation
         "oderwat.indent-rainbow",
         // Bracket pairing
-        "coenraads.bracket-pair-colorizer-2"
+        "coenraads.bracket-pair-colorizer-2",
+        // .editorconfig
+        "EditorConfig.EditorConfig"
     ]
 }
