@@ -1,5 +1,5 @@
 ---
-description: "MII TX_EN signal goes low just for a clock cycle, which is a bug for MII specifications. This blog give some information and shows how the bug is created"
+description: "MII TX_EN signal goes low just for a clock cycle, which is a bug for MII specifications. This blog post gives some information and shows how the bug is created"
 author: "Yunus Esergün"
 date: 2020-11-27
 axlang: "en"
@@ -17,7 +17,7 @@ that I build.
 The **MII (Media-Independent Interface)** was defined as a standard interface
 which connects **MAC** and **PHY** to each other. This interface is standardized
 by **IEEE 802.3u** protocol. In order to understand MII concept, first of all,
-we should comprehend **Ethernet frame** concept. In this blog, **packet** and
+we should comprehend **Ethernet frame** concept. In this blog post, **packet** and
 **frame** have the same meaning.
 
 ### Ethernet frames
@@ -183,7 +183,7 @@ Mbits/s, 25 MHz clock is generated via `ZYNQ Block` and connected to
 `ENET0_GMII_TX_CLK`. Other **TX signals**** are connected to `ILA Block` to make
 some chipscope tests.
 
-Moreover, I have utilized **Linux Driver** for setupping transmission with
+Moreover, I have utilized **Linux Driver** to set up transmission with
 **ZYNQ GEM**. In a more understandable language, I have used Linux Driver so
 that **ARM side** can generate Ethernet packets and send them via MII interface.
 
@@ -222,7 +222,7 @@ comprehend the problem more easily:
 As can be inferred from the pictures, somewhere in the middle of the entire MII
 packet, `TX_EN` goes low. We can say that a packet transmission has finished and
 a new one has started but they are not two seperate packets according to my CRC
-calculations. Because they unite a packet, `TX_EN` should not be disasserted
+calculations. Because they unite a packet, `TX_EN` should not be deasserted
 even for a single clock cycle.
 
 Finally, for this bug, I have posted a detailed question on
