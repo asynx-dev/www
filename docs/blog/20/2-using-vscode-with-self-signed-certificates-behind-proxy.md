@@ -10,7 +10,7 @@ description: How to work with VS Code behind proxy with self signed SSL certific
 
 Similar to the case I mentioned in [my previous post](1-using-pip-and-pipenv-with-self-signed-certificates.md),
 you may want to use VS Code behind a proxy which also signs SSL traffic with a
-self signed certficate. In that case, Internet related features of the VS Code
+self signed certificate. In that case, Internet related features of the VS Code
 like Extensions Marketplace won't work.
 
 ## Solution
