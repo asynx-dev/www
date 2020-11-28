@@ -1,7 +1,6 @@
 {
     "cSpell.language": "en,tr",
     "cSpell.logLevel": "Information",
-    "files.eol": "\n",
     "editor.rulers": [
     80
     ]
