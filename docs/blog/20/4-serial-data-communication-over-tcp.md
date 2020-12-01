@@ -2,6 +2,7 @@
 date: 2020-11-29
 author: Anıl TIRLIOĞLU
 description: Serial data communication over TCP with socat.
+axlang: "en"
 ---
 
 # Serial data communication over TCP
@@ -28,7 +29,7 @@ What is your story ?
 
 Google search for "serial over TCP solutions" lists plenty of commercial
 applications. Some of them may provide extensively capable solutions and worth
-to give money but anyway in most cases socat will do the job. I will not discuss
+to give money but anyway in most cases **socat** will do the job. I will not discuss
 these applications any further but you can check out this link[^2f].
 
 ## socat
@@ -50,7 +51,7 @@ Windows 7 or Ubuntu 16.04. Machine 2 is Virtual PC running on VirtualBox 6.1
 within the same local area network with HostPC. Connection diagram is shown
 below.
 
-![Placeholder](img-4/Diagram.png)
+![socat diagram](img/4-Diagram.png)
 
 ## Step by step serial data forwarding over ethernet
 
@@ -60,7 +61,7 @@ below.
 
 Install socat with `apt` or `apt-get` package manager.
 
-```bash
+```console
 $ sudo apt install socat
 ```
 
@@ -72,14 +73,14 @@ socat.exe to PATH.
 
 The folder structure is shown below.
 
-![Placeholder](img-4/Screenshot3.png)
+![socat windows folder](img/4-Screenshot3.png)
 
 ### 2. Learn IP address of Machine 1
 
 It is required to know Machine 1 ip address to start TCP connection. Simply use
 `ifconfig` or `ipconfig` on command line to learn ip address in the network.
 
-```bash
+```console
 $ ifconfig
 <iface_name>    Link encap:Ethernet  HWaddr <HWaddr>  
                 inet addr:<ip address>  Bcast:<Bcast>  Mask:<Mask>
@@ -91,15 +92,15 @@ $ ifconfig
                 RX bytes:<num> (<num> MB)  TX bytes:<num> (<num> MB)
 ```
 
-In this case `<ip address>` of machine 1 is `192.168.10.200`.
+In this tutorial `<ip address>` of machine 1 is `192.168.10.200`.
 
 ### 3. Create virtual serial port to forward and listen on machine 1
 
-Start listening on TCP port of your choice in this case it is port 6665.
+Start listening on TCP port of your choice for this tutorial it is port 6665.
 
 On Ubuntu:
 
-```bash
+```console
 $ socat -d -d pty,raw,echo=0 TCP4-LISTEN:6665
 2020/11/29 15:39:49 socat[29476] N PTY is /dev/pts/6
 2020/11/29 15:39:49 socat[29476] N listening on AF=2 0.0.0.0:6665
@@ -114,20 +115,19 @@ virtual serial port number can differ for your case.
 
 If you are on Windows OS, run the command below within socat.exe folder.
 
-```bash
-$ .\socat.exe -d -d -d TCP4-LISTEN:6665,reuseaddr /dev/com<number>
+```powershell
+> .\socat.exe -d -d -d TCP4-LISTEN:6665,reuseaddr /dev/com<number>
 ```
 
-!!! Info On Windows COMPORTs can be addressed with  `/dev/com<number>` similar
-to Ubuntu. For example, `/dev/com1` and `/dev/com3` for physical serial
-interfaces.
+!!! Info 
+    On Windows COMPORTs can be addressed with  `/dev/com<number>` similar to Ubuntu. For example, `/dev/com1` and `/dev/com3` for physical serial interfaces.
 
 ### 4. Create virtual serial port to forward on machine 2
 
 Start TCP connection from machine 2 to machine 1 with the IP and port of machine
 1.
 
-```bash
+```console
 $ socat -d -d TCP4:192.168.10.200:6665 pty,raw,echo=0
 2020/11/29 15:40:48 socat[14626] N opening connection to AF=2 192.168.10.200:6665
 2020/11/29 15:40:48 socat[14626] N successfully connected from local address AF=2 10.0.2.15:48544
@@ -146,33 +146,27 @@ use serial port terminal application of your choice. In the example below
 
 On machine 1, type:
 
-```bash
+```console
 $ screen /dev/pts/18 115200
 ```
 
 On machine 2, type:
 
-```bash
+```console
 $ screen /dev/pts/6 115200
 ```
 
-!!! Info You won't need to open serial port with an application like `screen`
-for physical serial interfaces.
+!!! Info 
+    You won't need to open serial port with an application like `screen` for physical serial interfaces.
 
 ### 6. Start Sending Bytes
 
 Just type something on your keyboard and see if you can send messages between
 machine 1 and machine 2.
 
-![Placeholder](img-4/Screenshot1.png){:
-style="height:98px;width:222px"}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Placeholder](img-4/Screenshot2.png){:
-style="float:left; padding-right:100px"}
+![Machine 1 console](img/4-Screenshot1.png)&emsp;&emsp;&emsp;&emsp;![Machine 2 console](img/4-Screenshot2.png)
 
-[^1f]:
-https://medium.com/@karthiks1701/virtual-serial-ports-hack-for-communication-between-local-scripts-883fda0f60f4
-[^2f]:
-https://www.virtual-serial-port.org/article/best-serial-over-ethernet-tools/
-[^3f]:
-https://linux.die.net/man/1/socat
-[^4f]:
-https://sourceforge.net/projects/unix-utils/files/socat/1.7.3.2/
+[^1f]:https://medium.com/@karthiks1701/virtual-serial-ports-hack-for-communication-between-local-scripts-883fda0f60f4
+[^2f]:https://www.virtual-serial-port.org/article/best-serial-over-ethernet-tools/
+[^3f]:https://linux.die.net/man/1/socat
+[^4f]:https://sourceforge.net/projects/unix-utils/files/socat/1.7.3.2/
