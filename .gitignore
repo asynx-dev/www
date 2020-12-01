@@ -16,3 +16,8 @@
 .pytest_cache
 
 Pipfile.lock
+
+# See: https://github.com/asynx-dev/www/issues/78
+# https://stackoverflow.com/a/2545710
+
+**/__pycache__/
