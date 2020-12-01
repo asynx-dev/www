@@ -119,9 +119,9 @@ If you are on Windows OS, run the command below within socat.exe folder.
 > .\socat.exe -d -d -d TCP4-LISTEN:6665,reuseaddr /dev/com<number>
 ```
 
-!!! Info 
-    On Windows COMPORTs can be addressed with  `/dev/com<number>` similar to Ubuntu. For example,
-    `/dev/com1` and `/dev/com3` for physical serial interfaces.
+!!! Info
+    On Windows COMPORTs can be addressed with  `/dev/com<number>` similar to Ubuntu. 
+    For example, `/dev/com1` and `/dev/com3` for physical serial interfaces.
 
 ### 4. Create virtual serial port to forward on machine 2
 
@@ -158,7 +158,8 @@ $ screen /dev/pts/6 115200
 ```
 
 !!! Info
-    You won't need to open serial port with an application like `screen` for physical serial interfaces.
+    You won't need to open serial port with an application like `screen` 
+    for physical serial interfaces.
 
 ### 6. Start Sending Bytes
 
