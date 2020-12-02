@@ -94,7 +94,7 @@ $ ifconfig
 
 In this tutorial `<ip address>` of machine 1 is `192.168.10.200`.
 
-### 3. Create virtual serial port to forward and listen on machine 1
+### 3. Create virtual serial port to forward and listen on Machine 1
 
 Start listening on TCP port of your choice for this tutorial it is port 6665.
 
@@ -106,12 +106,13 @@ $ socat -d -d pty,raw,echo=0 TCP4-LISTEN:6665
 2020/11/29 15:39:49 socat[29476] N listening on AF=2 0.0.0.0:6665
 ```
 
-!!! Info Just use `/dev/ttyS<num>` or `/dev/ttyUSB<num>` for physical serial
+!!! Info
+    Just use `/dev/ttyS<num>` or `/dev/ttyUSB<num>` for physical serial
     ports instead of `pty`. As an example `/dev/ttyS0` or `/dev/ttyUSB1`.
 
 Machine 1 will listen for TCP connections and forward communication to/from
 virtual port it is just created in this case `/dev/pts/6`. Note that created
-virtual serial port number can differ for your case.
+virtual serial port number can differ in your case.
 
 If you are on Windows OS, run the command below within socat.exe folder.
 
@@ -123,9 +124,9 @@ If you are on Windows OS, run the command below within socat.exe folder.
     On Windows COMPORTs can be addressed with  `/dev/com<number>` similar
     to Ubuntu. For example, `/dev/com1` and `/dev/com3` for physical serial interfaces.
 
-### 4. Create virtual serial port to forward on machine 2
+### 4. Create virtual serial port to forward on Machine 2
 
-Start TCP connection from machine 2 to machine 1 with the IP and port of machine
+Start TCP connection from Machine 2 to Machine 1 with the IP and port of machine
 1.
 
 ```console
@@ -145,13 +146,13 @@ Start a new terminal window and open virtual serial ports just created. You can
 use serial port terminal application of your choice. In the example below
 `screen` is used.
 
-On machine 1, type:
+On Machine 1, type:
 
 ```console
 $ screen /dev/pts/18 115200
 ```
 
-On machine 2, type:
+On Machine 2, type:
 
 ```console
 $ screen /dev/pts/6 115200
