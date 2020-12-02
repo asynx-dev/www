@@ -149,13 +149,13 @@ use serial port terminal application of your choice. In the example below
 On Machine 1, type:
 
 ```console
-$ screen /dev/pts/18 115200
+$ screen /dev/pts/6 115200
 ```
 
 On Machine 2, type:
 
 ```console
-$ screen /dev/pts/6 115200
+$ screen /dev/pts/18 115200
 ```
 
 !!! Info
