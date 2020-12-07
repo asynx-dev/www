@@ -276,9 +276,31 @@ $ export XILINX_VITIS=/mnt
 $ ./app.exe
 ```
 
-<!--TODO: put screenshot-->
+![hw](img/5-hw.png)
 
 ## Modifications on host.cpp
+
+```c++
+// ------------------------------------------------------------------------------------
+// Step 4: Check Results and Release Allocated Resources
+// ------------------------------------------------------------------------------------
+    bool match = true;
+    int miss_counter = 0;
+    for (int i = 0 ; i < DATA_SIZE ; i++){
+        int expected = in1[i]+in2[i];
+        if (out[i] != expected){
+            std::cout << "Error: Result mismatch" << std::endl;
+            std::cout << "i = " << i << " CPU result = " << expected << " Device result = " << out[i] << std::endl;
+            match = false;
+            miss_counter++;
+            //break;
+        }
+        std::cout << "i = " << i << " CPU result = " << expected << " Device result = " << out[i] << std::endl;
+    }
+    std::cout << miss_counter << " results mismatched" << std::endl;
+```
+
+![after_change](img/5-after_change.png)
 
 <!---Refs --->
 [^1f]:https://github.com/Xilinx/Vitis-Tutorials/tree/master/Getting_Started/Vitis
