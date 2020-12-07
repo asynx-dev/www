@@ -11,26 +11,46 @@ This tutorial will include beginner friendly steps to run your first accelerator
 on FPGA. We all know, sometimes it is just hard to get start learning things from
 vendor documentations. This tutorial will be more beneficial when used in
 conjunction with the official Xilinx tutorial[^1f] published on github. Note that
-Xilinx tutorial targets Zynq Ultrascale+ ZCU102 and Alveo U200 boards.
+Xilinx tutorial targets Zynq Ultrascale+ ZCU102 and Alveo U200 boards for
+embedded flow and PCIe attached flow respectively.
+
+There are two different device definitions in Xilinx. One is **embedded
+devices**[^3f],  other one is **data center accelerator cards**[^4f]. Embedded
+device can work standalone. It hosts CPU and FPGA. On the other hand, data
+center accelerator cards needs to be attached to PC through PCIe interface. CPU
+on your host PC will manage these FPGA cards. This tutorial will cover embedded
+device flow with a Zynq 7000 series FPGA board.
 
 Unlike Xilinx tutorial on github, this tutorial targets ZC706[^2f] evaluation
 board which hosts Zynq 7000 Series SOC. This requires some changes on tutorial source
 files provided by Xilinx.
 
-<!--TODO: Mention Embedded Flow and PCIe Flow-->
+Some essential terms could be helpful to know before starting to Vitis
+acceleration flow.
+
+| Term               | Description |
+| ------------------ | ----------- |
+| Host               | CPU that runs main function, handles management and other possible sequential tasks, functions etc. |
+| Device             | FPGA or board that accelerates functions which are called from host, mostly used in OpenCL definitions for GPU and FPGA                   |
+| Kernel             | Region on FPGA that runs functions implemented for FPGA programmable logic, it is also called computing unit                      |
+| Accelerator        | Used interchangeably with kernel and device, in general it provides offloading of CPU                         |
 
 ## Vector Add Example
 
-<!--TODO: Mention what is this example about-->
+The example we will run in this tutorial is a vector addition example. Two
+vectors that are build up with 4096 random numbers will be summed up on both
+host which is Zynq Cortex A9 CPU and in vector_add kernel which is programmed to
+Zynq programmable logic. Results from device and from host will be then compared
+within host. Success and fail result will be returned on terminal screen of host.
 
 ## Required Tools and Files
 
 ### 0. GNU/Linux Operating System
 
-This tutorial uses Ubuntu. Vitis documentation[^3f] lists the
+This tutorial uses Ubuntu. Vitis documentation[^5f] lists the
 supported OSes as shown below.
 
-![Vitis_Download](img/5-Vitis_OS_Requirements)
+![Vitis_Download](img/5-Vitis_OS_Requirements.png)
 
 You can view your Ubuntu version on console with `cat /etc/os-release`. I prefer
 to use Ubuntu 16.04. Note that Ubuntu version 16.04.7 is not among supported OSes.
@@ -237,7 +257,12 @@ After making sure it is the SD card you want to use, format and copy SD card ima
 ```console
 $ dd if=/dev/mmcblk0 of=./package/sd_card.img
 ```
-<!--TODO: put screenshot, how sd card will look-->
+
+After these operations, remove and insert SD card to your PC, you should see
+two partitions. One for root file system in ext4 format and the other one has
+`BOOT.bin`, `app.exe` and other stuff.
+
+![5-sd_card](img/5-sd_card.png)
 
 Insert SD card to ZC706, power on the board and wait until it boots. Execute
 commands below on ZC706 petalinux terminal screen.
@@ -258,4 +283,6 @@ $ ./app.exe
 <!---Refs --->
 [^1f]:https://github.com/Xilinx/Vitis-Tutorials/tree/master/Getting_Started/Vitis
 [^2f]:https://www.xilinx.com/products/boards-and-kits/ek-z7-zc706-g.html#overview
-[^3f]:https://www.xilinx.com/support/documentation/sw_manuals/xilinx2020_1/ug1400-vitis-embedded.pdf
+[^3f]:https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/embedded-platforms.html
+[^4f]:https://www.xilinx.com/products/boards-and-kits/alveo.html
+[^5f]:https://www.xilinx.com/support/documentation/sw_manuals/xilinx2020_1/ug1400-vitis-embedded.pdf
