@@ -38,7 +38,7 @@ acceleration flow.
 ## Vector Add Example
 
 The example we will run in this tutorial is a vector addition example. Two
-vectors that are build up with 4096 random numbers will be summed up on both
+vectors that are build up with 4096 random numbers will be  vector summed on both
 host which is Zynq Cortex A9 CPU and in vector_add kernel which is programmed to
 Zynq programmable logic. Results from device and from host will be then compared
 within host. Success and fail result will be returned on terminal screen of host.
@@ -50,7 +50,7 @@ within host. Success and fail result will be returned on terminal screen of host
 This tutorial uses Ubuntu. Vitis documentation[^5f] lists the
 supported OSes as shown below.
 
-![Vitis_Download](img/5-Vitis_OS_Requirements.png)
+![vitis_os_req](img/5-vitis_os_req.png)
 
 You can view your Ubuntu version on console with `cat /etc/os-release`. I prefer
 to use Ubuntu 16.04. Note that Ubuntu version 16.04.7 is not among supported OSes.
@@ -95,7 +95,7 @@ Go Xilinx download page <https://www.xilinx.com/support/download.html>
 
 I prefer downloading **Linux Self Extracting Web Installer**.
 
-![Vitis_Download](img/5-Vitis_Download.png)
+![Vitis_Download](img/5-vitis_download.png)
 
 Make the bin file executable ```$ chmod +x Xilinx_Unified_2020.1_0602_1208_Lin64.bin```
 and run the installer ```$ ./Xilinx_Unified_2020.1_0602_1208_Lin64.bin```.
@@ -108,7 +108,7 @@ xilinx tools should be under `/opt/tools/Xilinx/` directory.
 Go Xilinx download page <https://www.xilinx.com/support/download.html> and open
 `Vitis Embedded Platforms` tab.
 
-![XRT_Download](img/5-XRT_Download.png)
+![XRT_Download](img/5-xrt_download.png)
 
 Download `XRT 2020.1` and install XRT with double click to `.deb` file or run
 the installation command ```$ sudo apt install <filename>.deb```. Now, you should
@@ -119,7 +119,7 @@ see `/opt/xilinx/xrt/` directory created and **XRT** is installed.
 Go Xilinx download page <https://www.xilinx.com/support/download.html> and open
 `Vitis Embedded Platforms` tab again.
 
-![Platform_Download](img/5-Platform_Download.png)
+![Platform_Download](img/5-platform_download.png)
 
 Download ZC706 base platform zip file. Extract the zip file to location `/opt/xilinx/platforms/`.
 Now, you should have file `xilinx_zc706_base_202010_1` under this directory.
@@ -129,7 +129,7 @@ Now, you should have file `xilinx_zc706_base_202010_1` under this directory.
 We will use prebuilt kernel and rootfs for simplicity. Go Xilinx download page
 <https://www.xilinx.com/support/download.html> and open `Petalinux` tab.
 
-![Common_Download](img/5-Zynq_Common_Download.png)
+![Common_Download](img/5-zynq_common_download.png)
 
 Download `ZYNQ Common Image` and extract it to `/opt/tools/Xilinx/xilinx-zynq-common-v2020.1/`.
 Run ```sh sdk.sh``` script again in this folder. This script should create **sysroot**
