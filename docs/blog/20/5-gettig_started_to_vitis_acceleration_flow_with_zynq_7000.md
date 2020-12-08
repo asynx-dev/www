@@ -7,33 +7,44 @@ axlang: "en"
 
 # Getting Started to Vitis Acceleration Flow with Zynq 7000
 
-This tutorial will include beginner friendly steps to run your first accelerator
-on FPGA. We all know, sometimes it is just hard to get start learning things from
-vendor documentations. This tutorial will be more beneficial when used in
-conjunction with the official Xilinx tutorial[^1f] published on github. Note that
-Xilinx tutorial targets Zynq Ultrascale+ ZCU102 and Alveo U200 boards for
-embedded flow and PCIe attached flow respectively.
+We all know, sometimes it is just hard to get start learning things from
+vendor documentations. This tutorial will follow beginner friendly steps to run
+your first accelerator on an FPGA.
+
+!!! Info
+    This tutorial will be more beneficial when used in
+    conjunction with the official Xilinx tutorial[^1f] published on github.
 
 There are two different device definitions in Xilinx. One is **embedded
-devices**[^3f],  other one is **data center accelerator cards**[^4f]. Embedded
+devices**[^2f],  other one is **data center accelerator cards**[^3f]. Embedded
 device can work standalone. It hosts CPU and FPGA. On the other hand, data
 center accelerator cards needs to be attached to PC through PCIe interface. CPU
 on your host PC will manage these FPGA cards. This tutorial will cover embedded
-device flow with a Zynq 7000 series FPGA board.
+device flow with a Zynq 7000 series FPGA board ZC706.
 
-Unlike Xilinx tutorial on github, this tutorial targets ZC706[^2f] evaluation
-board which hosts Zynq 7000 Series SOC. This requires some changes on tutorial source
-files provided by Xilinx.
+!!! Info
+    Note that Xilinx tutorial targets Zynq Ultrascale+ ZCU102 and Alveo U200
+    boards for embedded flow and PCIe attached flow respectively. We will follow
+    embedded flow with ZC706[^4f].
+
+ZC706 board XC7Z045 FFG900 Zynq SoC chip. XC7Z045 is a midrange powerful 7
+series FPGA. Resource capacity is pretty enough to hands on tests with accelerators.
+
+| Resouce            | Quantity             |
+| ------------------ | -----------          |
+| Logic Cells        | 350                  |
+| Block RAM (Mb)     | 19.1                 |
+| DSP Slices         | 900                  |
 
 Some essential terms could be helpful to know before starting to Vitis
 acceleration flow.
 
-| Term               | Description |
-| ------------------ | ----------- |
-| Host               | CPU that runs main function, handles management and other possible sequential tasks, functions etc. |
-| Device             | FPGA or board that accelerates functions which are called from host, mostly used in OpenCL definitions for GPU and FPGA                   |
-| Kernel             | Region on FPGA that runs functions implemented for FPGA programmable logic, it is also called computing unit                      |
-| Accelerator        | Used interchangeably with kernel and device, in general it provides offloading of CPU                         |
+| Term               | Description                                                                                                                  |
+| ------------------ | -----------                                                                                                                  |
+| Host               | CPU that runs main function, handles management and other possible sequential tasks, functions etc.                          |
+| Device             | FPGA or board that accelerates functions which are called from host, mostly used in OpenCL definitions for GPU and FPGA      |
+| Kernel             | Region on FPGA that runs functions implemented for FPGA programmable logic, it is also called computing unit                 |
+| Accelerator        | Used interchangeably with kernel and device, in general it provides offloading of CPU                                        |
 
 ## Vector Add Example
 
@@ -41,14 +52,14 @@ The example we will run in this tutorial is a vector addition example. Two
 vectors that are build up with 4096 random numbers will be  vector summed on both
 host which is Zynq Cortex A9 CPU and in vector_add kernel which is programmed to
 Zynq programmable logic. Results from device and from host will be then compared
-within host. Success and fail result will be returned on terminal screen of host.
+within host. Success and fail status will be returned on terminal screen of host.
 
 ## Required Tools and Files
 
 ### 0. GNU/Linux Operating System
 
-This tutorial uses Ubuntu. Vitis documentation[^5f] lists the
-supported OSes as shown below.
+This tutorial will be on Ubuntu operating system. Vitis documentation[^5f] lists
+the supported other OSes as shown below.
 
 ![vitis_os_req](img/5-vitis_os_req.png)
 
@@ -80,8 +91,8 @@ to  `16.04.6`.
 $ sudo gedit /etc/os-release
 ```
 
-Make sure that you have required software packages or run the command below to
-install them.
+Now, make sure also that you have required software packages or run the command below
+to install them.
 
 ```console
 $ sudo add-apt-repository ppa:xorg-edgers/ppa sudo apt-get updatesudo apt-get install libgl1-mesa-glxsudo apt-get install libgl1-mesa-drisudo apt-get install libgl1-mesa-devsudo add-apt-repository --remove ppa:xorg-edgers/ppasudo apt install net-toolssudo apt-get install -y unzipsudo apt install gccsudo apt install g++sudo apt install pythonln -s /usr/bin/python2 /usr/bin/python
@@ -100,7 +111,7 @@ I prefer downloading **Linux Self Extracting Web Installer**.
 Make the bin file executable ```$ chmod +x Xilinx_Unified_2020.1_0602_1208_Lin64.bin```
 and run the installer ```$ ./Xilinx_Unified_2020.1_0602_1208_Lin64.bin```.
 
-Follow the installation defaults. After the installation Vivado, Vitis and other
+Follow the installation defaults. After the installation; Vivado, Vitis and other
 xilinx tools should be under `/opt/tools/Xilinx/` directory.
 
 ### 2. Xilinx Runtime(XRT)
@@ -147,8 +158,8 @@ In your home directory create `projects` folder to download tutorial files there
 
 ## Setting Environmental Variables
 
-We Vitis environmental setting to be able to use required tools and scripts. Run
-the commands below.
+We need to configure Vitis environmental settings to be able to use required
+tools and scripts. Run the commands below.
 
 ```console
 $ source /opt/tools/Xilinx/Vitis/2020.1/settings64.sh
@@ -175,14 +186,15 @@ These steps are similar to steps mentioned in Xilinx tutorial embedded flow.
 
 ### 1. Software Emulation
 
-Hardware accelerator code(`Vitis-Tutorials/Getting_Started/Vitis/example/src/vadd.cpp`)
-and host code(`Vitis-Tutorials/Getting_Started/Vitis/example/src/host.cpp`) is
-compiled for only Zynq Cortex ARM A9 processor. Emulation will run on QEMU virtualizing
-Zynq on your Ubuntu. This simulation will provide fast error detection for syntax
-and behavioral errors.
+Software emulation will run on QEMU virtualizing Zynq on your Ubuntu. This simulation
+will provide fast error detection for syntax and behavioral errors. Hardware
+accelerator code(`Vitis-Tutorials/Getting_Started/Vitis/example/src/vadd.cpp`)
+and host code(`Vitis-Tutorials/Getting_Started/Vitis/example/src/host.cpp`) will
+be compiled for only Zynq Cortex ARM A9 processor.
 
-Under `Vitis-Tutorials/Getting_Started/Vitis/example/zc706/sw_emu/`, you
-will find `build_and_run.sh` run this script ```$ sh build_and_run.sh```.
+Under the directory
+`Vitis-Tutorials/Getting_Started/Vitis/example/zc706/sw_emu/`,
+you should find `build_and_run.sh`, run this script ```$ sh build_and_run.sh```.
 
 After QEMU boots run the commands below.
 
@@ -205,13 +217,15 @@ $ ./app.exe
 
 ### 2. Hardware Emulation
 
-Hardware accelerator code and host code is compiled for Zynq programmable logic
-side and Zynq Cortex ARM A9 processor respectively. Emulation will run on QEMU which
-is virtualizing Zynq on your Ubuntu. This simulation will take long but will provide
-cycle accurate performance and profiling without needing to real physical hardware.
+This simulation will take long but will provide cycle accurate performance and
+profiling without needing to real physical hardware. Hardware accelerator code
+and host code is compiled for Zynq programmable logic side and Zynq ARM Cortex
+A9 processor respectively. Emulation will run on QEMU which is virtualizing Zynq
+on your Ubuntu.
 
-Under `Vitis-Tutorials/Getting_Started/Vitis/example/zc706/hw_emu/`, you
-will find `build_and_run.sh` run this script ```$ sh build_and_run.sh```. After
+Under the directory
+`Vitis-Tutorials/Getting_Started/Vitis/example/zc706/hw_emu/`,
+you will find `build_and_run.sh`, run this script ```$ sh build_and_run.sh```. After
 QEMU booted, execute commands below on terminal screen.
 
 ```console
@@ -228,11 +242,12 @@ $ ./app.exe
 
 ## Running Accelerator on ZC706
 
-Under `Vitis-Tutorials/Getting_Started/Vitis/example/zc706/hw_emu/`, you
-will find `build.sh` run this script ```$ sh build.sh```. This may take time to finish.
-`package` folder should be created by the script. ZC706 will boot from SD card in
-this tutorial. Switch SW11 on ZC706 board should look like below image for boot mode
-SD.
+Under the directory
+`Vitis-Tutorials/Getting_Started/Vitis/example/zc706/hw_emu/`,
+you will find `build.sh` run this script ```$ sh build.sh```. This may take time
+to finish. `package` folder should be created by the script. ZC706 will boot
+from SD card in this tutorial. Switch SW11 on ZC706 board should look like below
+image for boot mode SD card.
 
 ![zc706_sw11](img/5-zc706_sw11.png)
 
@@ -259,8 +274,8 @@ $ dd if=/dev/mmcblk0 of=./package/sd_card.img
 ```
 
 After these operations, remove and insert SD card to your PC, you should see
-two partitions. One for root file system in ext4 format and the other one has
-`BOOT.bin`, `app.exe` and other stuff.
+two partitions. One for root file system in ext4 format and the other one that includes
+`BOOT.bin`, `app.exe` and other related stuff.
 
 ![5-sd_card](img/5-sd_card.png)
 
@@ -279,6 +294,9 @@ $ ./app.exe
 ![hw](img/5-hw.png)
 
 ## Modifications on host.cpp
+
+I recommend you to change sections below in your `host.cpp` file for better
+understanding of vector addition example.
 
 ```c++
 // ------------------------------------------------------------------------------------
@@ -300,11 +318,34 @@ $ ./app.exe
     std::cout << miss_counter << " results mismatched" << std::endl;
 ```
 
+You will not need to run scripts every time since you only changed `host.cpp`.
+Compile the `app.exe` again with the command below inside `hw` folder.
+
+```console
+$ arm-linux-gnueabihf-g++ -Wall -g -std=c++11 ../../src/host.cpp -o app.exe -I${SYSROOT}/usr/include/xrt -L${SYSROOT}/usr/lib -lOpenCL -lpthread -lrt -lstdc++ --sysroot=${SYSROOT}
+```
+
+Copy `app.exe` to SD card attached to your board, with ssh from your PC.
+
+```console
+$ scp app.exe  root@<board_ip_address>:/mnt
+```
+
+You can run `app.exe` from board's console again.
+
+```console
+$ ./app.exe
+```
+
+!!! Warning
+    Your board should have an IP address and should be connected to your PC
+    over ethernet for ssh connection.
+
 ![after_change](img/5-after_change.png)
 
 <!---Refs --->
 [^1f]:https://github.com/Xilinx/Vitis-Tutorials/tree/master/Getting_Started/Vitis
-[^2f]:https://www.xilinx.com/products/boards-and-kits/ek-z7-zc706-g.html#overview
-[^3f]:https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/embedded-platforms.html
-[^4f]:https://www.xilinx.com/products/boards-and-kits/alveo.html
+[^2f]:https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/embedded-platforms.html
+[^3f]:https://www.xilinx.com/products/boards-and-kits/alveo.html
+[^4f]:https://www.xilinx.com/products/boards-and-kits/ek-z7-zc706-g.html#overview
 [^5f]:https://www.xilinx.com/support/documentation/sw_manuals/xilinx2020_1/ug1400-vitis-embedded.pdf
