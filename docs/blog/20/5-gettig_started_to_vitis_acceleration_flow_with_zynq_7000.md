@@ -7,7 +7,7 @@ axlang: "en"
 
 # Getting Started to Vitis Acceleration Flow with Zynq 7000
 
-We all know, sometimes it is just hard to get start learning things from
+We all know, sometimes it is just hard to get started learning things from
 vendor documentations. This tutorial will follow beginner friendly steps to run
 your first accelerator on an FPGA.
 
@@ -17,22 +17,22 @@ your first accelerator on an FPGA.
 
 There are two different device definitions in Xilinx. One is **embedded
 devices**[^2f],  other one is **data center accelerator cards**[^3f]. Embedded
-device can work standalone. It hosts CPU and FPGA. On the other hand, data
-center accelerator cards needs to be attached to PC through PCIe interface. CPU
+device can work standalone. It contains CPU and FPGA. On the other hand, data
+center accelerator cards need to be attached to PC through PCIe interface. CPU
 on your host PC will manage these FPGA cards. This tutorial will cover embedded
 device flow with a Zynq 7000 series FPGA board ZC706.
 
 !!! info
     Note that Xilinx tutorial targets Zynq Ultrascale+ ZCU102 and Alveo U200
-    boards for embedded flow and PCIe attached flow respectively. We will follow
+    boards for embedded flow and PCIe attached flow, respectively. We will follow
     embedded flow with ZC706[^4f].
 
-ZC706 board XC7Z045 FFG900 Zynq SoC chip. XC7Z045 is a midrange powerful 7
-series FPGA. Resource capacity is pretty enough to hands on tests with accelerators.
+ZC706 board has XC7Z045 FFG900 Zynq SoC on it. XC7Z045 is a midrange powerful 7
+series FPGA. Resource capacity is pretty enough to do hands on tests with accelerators.
 
 | Resouce            | Quantity             |
 | ------------------ | -----------          |
-| Logic Cells        | 350                  |
+| Logic Cells (K)    | 350                  |
 | Block RAM (Mb)     | 19.1                 |
 | DSP Slices         | 900                  |
 
@@ -49,10 +49,10 @@ acceleration flow.
 ## Vector Add Example
 
 The example we will run in this tutorial is a vector addition example. Two
-vectors that are build up with 4096 random numbers will be  vector summed on both
-host which is Zynq Cortex A9 CPU and in vector_add kernel which is programmed to
-Zynq programmable logic. Results from device and from host will be then compared
-within host. Success and fail status will be returned on terminal screen of host.
+vectors that are filled with 4096 random numbers will be vector summed on both
+host which is Zynq Cortex A9 CPU and in `vector_add` kernel which is programmed in
+Zynq programmable logic. Results from the device and from the host will be then compared
+on the host. Success and fail status will be returned on terminal screen of host.
 
 ## Required Tools and Files
 
@@ -95,14 +95,24 @@ Now, make sure also that you have required software packages or run the command 
 to install them.
 
 ```console
-$ sudo add-apt-repository ppa:xorg-edgers/ppa sudo apt-get updatesudo apt-get install libgl1-mesa-glxsudo apt-get install libgl1-mesa-drisudo apt-get install libgl1-mesa-devsudo add-apt-repository --remove ppa:xorg-edgers/ppasudo apt install net-toolssudo apt-get install -y unzipsudo apt install gccsudo apt install g++sudo apt install pythonln -s /usr/bin/python2 /usr/bin/python
+$ sudo add-apt-repository ppa:xorg-edgers/ppa 
+$ sudo apt-get update
+$ sudo apt-get install libgl1-mesa-glx
+$ sudo apt-get install libgl1-mesa-dri
+$ sudo apt-get install libgl1-mesa-dev
+$ sudo add-apt-repository --remove ppa:xorg-edgers/ppa
+$ sudo apt install net-toolss
+$ sudo apt-get install -y unzip
+$ sudo apt install gcc
+$ sudo apt install g++
+$ sudo apt install python
 ```
 
 You can now run the installer in the following step.
 
 ### 1. Vitis
 
-Go Xilinx download page <https://www.xilinx.com/support/download.html>
+Go to Xilinx download page <https://www.xilinx.com/support/download.html>
 
 I prefer downloading **Linux Self Extracting Web Installer**.
 
@@ -112,11 +122,11 @@ Make the bin file executable `$ chmod +x Xilinx_Unified_2020.1_0602_1208_Lin64.b
 and run the installer `$ ./Xilinx_Unified_2020.1_0602_1208_Lin64.bin`.
 
 Follow the installation defaults. After the installation; Vivado, Vitis and other
-xilinx tools should be under `/opt/tools/Xilinx/` directory.
+Xilinx tools should be under `/opt/tools/Xilinx/` directory.
 
-### 2. Xilinx Runtime(XRT)
+### 2. Xilinx Runtime (XRT)
 
-Go Xilinx download page <https://www.xilinx.com/support/download.html> and open
+Go to the Xilinx download page <https://www.xilinx.com/support/download.html> and open
 `Vitis Embedded Platforms` tab.
 
 ![XRT_Download](img/5-xrt_download.png)
@@ -186,10 +196,10 @@ These steps are similar to steps mentioned in Xilinx tutorial embedded flow.
 
 ### 1. Software Emulation
 
-Software emulation will run on QEMU virtualizing Zynq on your Ubuntu. This simulation
+Software emulation will run on QEMU virtualizing Zynq on your Ubuntu. This emulation
 will provide fast error detection for syntax and behavioral errors. Hardware
-accelerator code(`Vitis-Tutorials/Getting_Started/Vitis/example/src/vadd.cpp`)
-and host code(`Vitis-Tutorials/Getting_Started/Vitis/example/src/host.cpp`) will
+accelerator code (`Vitis-Tutorials/Getting_Started/Vitis/example/src/vadd.cpp`)
+and host code (`Vitis-Tutorials/Getting_Started/Vitis/example/src/host.cpp`) will
 be compiled for only Zynq Cortex ARM A9 processor.
 
 Under the directory
@@ -220,7 +230,7 @@ $ ./app.exe
 This simulation will take long but will provide cycle accurate performance and
 profiling without needing to real physical hardware. Hardware accelerator code
 and host code is compiled for Zynq programmable logic side and Zynq ARM Cortex
-A9 processor respectively. Emulation will run on QEMU which is virtualizing Zynq
+A9 processor, respectively. Emulation will run on QEMU which is emulating Zynq
 on your Ubuntu.
 
 Under the directory
@@ -270,7 +280,7 @@ After making sure it is the SD card you want to use, format and copy SD card ima
 ***sd_card.img*** created with `build.sh` script. Write it to your SD card.
 
 ```console
-$ dd if=/dev/mmcblk0 of=./package/sd_card.img
+$ dd of=/dev/mmcblk0 if=./package/sd_card.img
 ```
 
 After these operations, remove and insert SD card to your PC, you should see
