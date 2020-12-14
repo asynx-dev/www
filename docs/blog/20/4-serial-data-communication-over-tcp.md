@@ -15,7 +15,7 @@ serial over ethernet.
 Two applications on different PCs talk over serial ports as if applications
 directly connected through serial ports. This could be sensible if you are
 testing your application before directly interfacing with the real serial
-device. Check this link[^1f] to see similar use case within same PC.  
+device. Check this link[^1f] to see similar use case within same PC.
 
 In my case this is very handy since I have an evaluation board Xilinx ZC706 on
 remote workstation. It needs at least serial connection and JTAG connection for
@@ -82,7 +82,7 @@ It is required to know Machine 1 ip address to start TCP connection. Simply use
 
 ```console
 $ ifconfig
-<iface_name>    Link encap:Ethernet  HWaddr <HWaddr>  
+<iface_name>    Link encap:Ethernet  HWaddr <HWaddr>
                 inet addr:<ip address>  Bcast:<Bcast>  Mask:<Mask>
                 inet6 addr: <inet6 addr> Scope:Link
                 UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
@@ -169,7 +169,7 @@ machine 1 and machine 2.
 
 ![Machine 1 console](img/4-Screenshot1.png)&emsp;&emsp;&emsp;&emsp;![Machine 2 console](img/4-Screenshot2.png)
 
-[^1f]:https://medium.com/@karthiks1701/virtual-serial-ports-hack-for-communication-between-local-scripts-883fda0f60f4
-[^2f]:https://www.virtual-serial-port.org/article/best-serial-over-ethernet-tools/
-[^3f]:https://linux.die.net/man/1/socat
-[^4f]:https://sourceforge.net/projects/unix-utils/files/socat/1.7.3.2/
+[^1f]: <https://medium.com/@karthiks1701/virtual-serial-ports-hack-for-communication-between-local-scripts-883fda0f60f4>
+[^2f]: <https://www.virtual-serial-port.org/article/best-serial-over-ethernet-tools/>
+[^3f]: <https://linux.die.net/man/1/socat>
+[^4f]: <https://sourceforge.net/projects/unix-utils/files/socat/1.7.3.2/>

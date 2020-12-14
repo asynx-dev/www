@@ -75,4 +75,4 @@ values. (You don't need to disable `Http: Proxy Strict SSL`.)
 Without using GUI, in `settings.json` set
 `"http.proxy":"http://<ip.addr>:<port>"`
 
-[^1f]: https://github.com/microsoft/vscode/issues/84845#issuecomment-558952807
+[^1f]: <https://github.com/microsoft/vscode/issues/84845#issuecomment-558952807>
