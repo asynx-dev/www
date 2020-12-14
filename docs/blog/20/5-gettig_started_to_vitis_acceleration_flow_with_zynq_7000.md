@@ -11,7 +11,7 @@ We all know, sometimes it is just hard to get start learning things from
 vendor documentations. This tutorial will follow beginner friendly steps to run
 your first accelerator on an FPGA.
 
-!!! Info
+!!! info
     This tutorial will be more beneficial when used in
     conjunction with the official Xilinx tutorial[^1f] published on github.
 
@@ -22,7 +22,7 @@ center accelerator cards needs to be attached to PC through PCIe interface. CPU
 on your host PC will manage these FPGA cards. This tutorial will cover embedded
 device flow with a Zynq 7000 series FPGA board ZC706.
 
-!!! Info
+!!! info
     Note that Xilinx tutorial targets Zynq Ultrascale+ ZCU102 and Alveo U200
     boards for embedded flow and PCIe attached flow respectively. We will follow
     embedded flow with ZC706[^4f].
@@ -108,8 +108,8 @@ I prefer downloading **Linux Self Extracting Web Installer**.
 
 ![Vitis_Download](img/5-vitis_download.png)
 
-Make the bin file executable ```$ chmod +x Xilinx_Unified_2020.1_0602_1208_Lin64.bin```
-and run the installer ```$ ./Xilinx_Unified_2020.1_0602_1208_Lin64.bin```.
+Make the bin file executable `$ chmod +x Xilinx_Unified_2020.1_0602_1208_Lin64.bin`
+and run the installer `$ ./Xilinx_Unified_2020.1_0602_1208_Lin64.bin`.
 
 Follow the installation defaults. After the installation; Vivado, Vitis and other
 xilinx tools should be under `/opt/tools/Xilinx/` directory.
@@ -122,7 +122,7 @@ Go Xilinx download page <https://www.xilinx.com/support/download.html> and open
 ![XRT_Download](img/5-xrt_download.png)
 
 Download `XRT 2020.1` and install XRT with double click to `.deb` file or run
-the installation command ```$ sudo apt install <filename>.deb```. Now, you should
+the installation command `$ sudo apt install <filename>.deb`. Now, you should
 see `/opt/xilinx/xrt/` directory created and **XRT** is installed.
 
 ### 3. Embedded Platform Files for ZC706
@@ -143,16 +143,16 @@ We will use prebuilt kernel and rootfs for simplicity. Go Xilinx download page
 ![Common_Download](img/5-zynq_common_download.png)
 
 Download `ZYNQ Common Image` and extract it to `/opt/tools/Xilinx/xilinx-zynq-common-v2020.1/`.
-Run ```sh sdk.sh``` script again in this folder. This script should create **sysroot**
+Run `sh sdk.sh` script again in this folder. This script should create **sysroot**
 under `/opt/petalinux/2020.1/`.
 
 ### 5. Tutorial Files
 
 In your home directory create `projects` folder to download tutorial files there.
 
-* Within `projects`, clone tutorial files from github repository ```$ git clone https://github.com/aniltirli/Vitis-Tutorials.git```
+* Within `projects`, clone tutorial files from github repository `$ git clone https://github.com/aniltirli/Vitis-Tutorials.git`
 
-* Checkout to branch patch-1 ```$ git checkout patch-1```
+* Checkout to branch patch-1 `$ git checkout patch-1`
 
 * Tutorial files should reside under `Vitis-Tutorials/Getting_Started/Vitis/example/zc706`.
 
@@ -175,10 +175,10 @@ $ export SYSROOT=/opt/petalinux/2020.1/sysroots/cortexa9t2hf-neon-xilinx-linux-g
 $ source /opt/petalinux/2020.1/environment-setup-cortexa9t2hf-neon-xilinx-linux-gnueabi
 ```
 
-!!! Tip
+!!! tip
     Commands above lasts only for a console session. Create script file
     `vitis_settings.sh` and copy commands above there. Whenever you need to set
-    environment for Vitis acceleration flow you can run this script ```$ sh vitis_settings.sh```.
+    environment for Vitis acceleration flow you can run this script `$ sh vitis_settings.sh`.
 
 ## Running Emulations
 
@@ -194,7 +194,7 @@ be compiled for only Zynq Cortex ARM A9 processor.
 
 Under the directory
 `Vitis-Tutorials/Getting_Started/Vitis/example/zc706/sw_emu/`,
-you should find `build_and_run.sh`, run this script ```$ sh build_and_run.sh```.
+you should find `build_and_run.sh`, run this script `$ sh build_and_run.sh`.
 
 After QEMU boots run the commands below.
 
@@ -210,10 +210,10 @@ $ ./app.exe
 
 ![sw_emu](img/5-sw_emu.png)
 
-!!! Warning
+!!! warning
     If you get `ERROR: parted command not exist` error, add location of parted
-    to PATH export ```$ export PATH=$PATH:/sbin``` or install parted
-    ```$ sudo apt install parted```.
+    to PATH export `$ export PATH=$PATH:/sbin` or install parted
+    `$ sudo apt install parted`.
 
 ### 2. Hardware Emulation
 
@@ -225,7 +225,7 @@ on your Ubuntu.
 
 Under the directory
 `Vitis-Tutorials/Getting_Started/Vitis/example/zc706/hw_emu/`,
-you will find `build_and_run.sh`, run this script ```$ sh build_and_run.sh```. After
+you will find `build_and_run.sh`, run this script `$ sh build_and_run.sh`. After
 QEMU booted, execute commands below on terminal screen.
 
 ```console
@@ -244,7 +244,7 @@ $ ./app.exe
 
 Under the directory
 `Vitis-Tutorials/Getting_Started/Vitis/example/zc706/hw_emu/`,
-you will find `build.sh` run this script ```$ sh build.sh```. This may take time
+you will find `build.sh` run this script `$ sh build.sh`. This may take time
 to finish. `package` folder should be created by the script. ZC706 will boot
 from SD card in this tutorial. Switch SW11 on ZC706 board should look like below
 image for boot mode SD card.
@@ -337,15 +337,15 @@ You can run `app.exe` from board's console again.
 $ ./app.exe
 ```
 
-!!! Warning
+!!! warning
     Your board should have an IP address and should be connected to your PC
     over ethernet for ssh connection.
 
 ![after_change](img/5-after_change.png)
 
 <!---Refs --->
-[^1f]:https://github.com/Xilinx/Vitis-Tutorials/tree/master/Getting_Started/Vitis
-[^2f]:https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/embedded-platforms.html
-[^3f]:https://www.xilinx.com/products/boards-and-kits/alveo.html
-[^4f]:https://www.xilinx.com/products/boards-and-kits/ek-z7-zc706-g.html#overview
-[^5f]:https://www.xilinx.com/support/documentation/sw_manuals/xilinx2020_1/ug1400-vitis-embedded.pdf
+[^1f]: <https://github.com/Xilinx/Vitis-Tutorials/tree/master/Getting_Started/Vitis>
+[^2f]: <https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/embedded-platforms.html>
+[^3f]: <https://www.xilinx.com/products/boards-and-kits/alveo.html>
+[^4f]: <https://www.xilinx.com/products/boards-and-kits/ek-z7-zc706-g.html#overview>
+[^5f]: <https://www.xilinx.com/support/documentation/sw_manuals/xilinx2020_1/ug1400-vitis-embedded.pdf>
