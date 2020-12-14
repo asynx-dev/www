@@ -95,7 +95,7 @@ Now, make sure also that you have required software packages or run the command 
 to install them.
 
 ```console
-$ sudo add-apt-repository ppa:xorg-edgers/ppa 
+$ sudo add-apt-repository ppa:xorg-edgers/ppa
 $ sudo apt-get update
 $ sudo apt-get install libgl1-mesa-glx
 $ sudo apt-get install libgl1-mesa-dri
@@ -126,8 +126,8 @@ Xilinx tools should be under `/opt/tools/Xilinx/` directory.
 
 ### 2. Xilinx Runtime (XRT)
 
-Go to the Xilinx download page <https://www.xilinx.com/support/download.html> and open
-`Vitis Embedded Platforms` tab.
+Go to the Xilinx download page <https://www.xilinx.com/support/download.html> and
+open `Vitis Embedded Platforms` tab.
 
 ![XRT_Download](img/5-xrt_download.png)
 
