@@ -2,7 +2,7 @@ copyright: ""
 site_author: asynx.dev Team
 # site_description: asynx.dev !! Not used to use custom meta description code.
 copyright: "Copyright &copy; 2020 asynx.dev Team<br/>License: <a href='https://creativecommons.org/licenses/by/4.0/'>CC BY 4.0</a>"
-site_name: asynx.dev
+site_name: asynx.dev - 💙 electronics
 site_url: http://localhost:8000/
 repo_url: https://github.com/asynx-dev/www
 edit_uri: ""
@@ -61,6 +61,27 @@ extra:
     - icon: fontawesome/brands/twitter
       link: http://twitter.com/asynxdev
       name: Our Twitter Profile
+    - icon: fontawesome/brands/linkedin
+      link: https://www.linkedin.com/groups/12487093/
+      name: Our LinkedIn Group
+    - icon: fontawesome/solid/envelope
+      link: 'https://asynx.dev/#e-mail'
+      name: Subscribe to mail announcements
+    - icon: fontawesome/brands/facebook
+      link: https://www.facebook.com/asynxdev/
+      name: Our Facebook Page (Announcements)
+    - icon: fontawesome/brands/facebook-square
+      link: https://www.facebook.com/groups/1651267295055664
+      name: Our Facebook Group (Discussions)
+    - icon: fontawesome/brands/instagram
+      link: https://www.instagram.com/asynxdev
+      name: Our Instagram Profile
+    - icon: fontawesome/brands/medium
+      link: https://medium.com/asynxdev
+      name: Our Medium Publications
+    - icon: fontawesome/brands/gitlab
+      link: https://gitlab.com/groups/asynx-dev
+      name: Our Gitlab Page
 
 nav:
   - Home: index.md
