@@ -11,19 +11,28 @@ disqus: ''
 
 ![asynx.dev logo](img/asynx_logo_800_trans.png)
 
-**Hi! We are the asynx.dev Team**
+**💙 electronics**
 
 We publish our [blog posts](blog/index.md), talk about [our
 projects](project/index.md) on this site. You can get more information about us
 from [this page](about.md) and [contact us](contact.md) if you needed.
 
-English `[EN]` and Turkish `[TR]` contents are mixed on this site.
+English `(en)` and Turkish `(tr)` contents are mixed on this site.
 
 ## Get Updates
 
+### Platforms
+
+* [Twitter](http://twitter.com/asynxdev)
+* [LinkedIn](https://www.linkedin.com/groups/12487093/)
+* [Facebook Page (Announcements)](https://www.facebook.com/asynxdev/)
+* [Facebook Group (Discussions)](https://www.facebook.com/groups/1651267295055664)
+* [Instagram](https://www.instagram.com/asynxdev)
+* [Medium](https://medium.com/asynxdev)
+
 ### E-Mail
 
-Sign up our **monthly** e-mail newsletter.
+Sign up our **weekly** e-mail newsletter. (You can opt out anytime.)
 <!--markdownlint-disable MD033 MD013-->
 <form method="post" action="https://sendfox.com/form/36wnp9/1jxx0e" class="sendfox-form" id="1jxx0e" data-async="true" data-recaptcha="true">
 <p><input type="email" placeholder="Email" name="email" required style="box-sizing: border-box; border: 1px solid;"/></p>
