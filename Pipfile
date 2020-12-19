@@ -5,6 +5,7 @@ name = "pypi"
 
 [packages]
 mkdocs = "*"
+mkdocs-asynx = "*"
 mkdocs-material = "*"
 mkdocs-git-revision-date-plugin = "*"
 mkdocs-htmlproofer-plugin = "*"
