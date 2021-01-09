@@ -74,6 +74,9 @@ extra:
     - icon: fontawesome/brands/instagram
       link: https://www.instagram.com/asynxdev
       name: Our Instagram Profile
+    - icon: fontawesome/brands/youtube
+      link: https://www.youtube.com/channel/UCnrcDuwD0ZBagabbzc_iEoA
+      name: Our YouTube Channel
     - icon: fontawesome/brands/medium
       link: https://medium.com/asynxdev
       name: Our Medium Publications
