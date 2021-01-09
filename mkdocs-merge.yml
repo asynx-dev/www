@@ -54,22 +54,22 @@ theme:
 extra:
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/asynx-dev/
+      link: https://github.com/asynx-dev
       name: Our Github Page
     - icon: fontawesome/brands/twitter
       link: http://twitter.com/asynxdev
       name: Our Twitter Profile
     - icon: fontawesome/brands/linkedin
-      link: https://www.linkedin.com/groups/12487093/
+      link: https://www.linkedin.com/groups/12487093
       name: Our LinkedIn Group
     - icon: fontawesome/solid/envelope
       link: 'https://asynx.dev/#e-mail'
       name: Subscribe to mail announcements
     - icon: fontawesome/brands/facebook
-      link: https://www.facebook.com/asynxdev/
+      link: https://www.facebook.com/asynxdev
       name: Our Facebook Page (Announcements)
     - icon: fontawesome/brands/facebook-square
-      link: https://www.facebook.com/groups/1651267295055664
+      link: https://www.facebook.com/groups/asynxdev
       name: Our Facebook Group (Discussions)
     - icon: fontawesome/brands/instagram
       link: https://www.instagram.com/asynxdev
