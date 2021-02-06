@@ -17,6 +17,9 @@
   # Allowed for non-sibling headings. See: https://github.com/DavidAnson/markdownlint/blob/master/doc/Rules.md#md024
   "MD024": { "siblings_only": true },
 
+  # MD025 - Allow multiple h1 headers (used for Jekyll)
+  "MD025": false,
+
   # Allow ! and ?
   "MD026": { "punctuation": ".,;:" },
 
