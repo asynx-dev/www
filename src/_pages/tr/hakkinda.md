@@ -1,5 +1,5 @@
 ---
-title: Hakkımızda
+title: "Hakkımızda ❓"
 excerpt: asynx.dev ve Takım hakkında
 permalink: /tr/hakkinda/
 date: 2020-11-14

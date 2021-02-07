@@ -1,5 +1,5 @@
 ---
-title: Bülten
+title: "Bülten 📮"
 excerpt: Güncellemelerden e-posta ile haberdar olun
 layout: collection
 permalink: /tr/bulten/

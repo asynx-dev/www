@@ -1,5 +1,5 @@
 ---
-title: Projects
+title: "Projects ⚙️"
 excerpt: Projects of asynx.dev Team
 permalink: /projects/
 date: 2020-11-14

@@ -1,11 +1,27 @@
-yesergun:
-  name: "Yunus Esergün"
-
-ayazar:
-  name: "Alper Yazar"
+# See: https://mmistakes.github.io/minimal-mistakes/docs/configuration/#site-author
 
 atirlioglu:
   name: "Anıl Tırlıoğlu"
+  avatar: /assets/images/bio/atirlioglu.png
+
+ayazar:
+  name: "Alper Yazar"
+  bio: "PhD candidate and electronics engineer"
+  avatar: /assets/images/bio/ayazar.png
+  links:
+    - label: "Website"
+      icon: "fas fa-fw fa-link"
+      url: "https://www.alperyazar.com"
+    - label: "Twitter"
+      icon: "fab fa-fw fa-twitter-square"
+      url: "https://twitter.com/alper_yazar"
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/alperyazar"
 
 ax:
   name: "asynx.dev Team"
+
+yesergun:
+  name: "Yunus Esergün"
+  avatar: /assets/images/bio/yesergun.png

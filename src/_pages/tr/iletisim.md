@@ -1,5 +1,5 @@
 ---
-title: Bize ulaşın
+title: "Bize Ulaşın 📞"
 permalink: /tr/iletisim/
 date: 2020-11-14
 header:

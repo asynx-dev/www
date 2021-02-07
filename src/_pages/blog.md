@@ -1,5 +1,5 @@
 ---
-title: "Blog"
+title: "Blog 📝"
 excerpt: Tips, tutorials, guides from asynx.dev Team
 layout: posts
 permalink: /blog/

@@ -1,5 +1,5 @@
 ---
-title: Newsletter
+title: "Newsletter 📮"
 excerpt: Get updates via email
 layout: collection
 permalink: /newsletter/

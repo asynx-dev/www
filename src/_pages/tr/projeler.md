@@ -1,5 +1,5 @@
 ---
-title: Projeler
+title: "Projeler ⚙️"
 excerpt: asynx.dev Takımı'nın projeleri
 permalink: /tr/projeler/
 date: 2020-11-14

@@ -1,5 +1,5 @@
 ---
-title: Contact us
+title: "Contact us 📞"
 permalink: /contact/
 date: 2020-11-07
 header:
