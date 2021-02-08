@@ -10,3 +10,6 @@ comments:
   provider: "disqus"
   disqus:
     shortname: "asynxdev"
+
+url: "https://asynx.dev"
+baseurl: "/"
