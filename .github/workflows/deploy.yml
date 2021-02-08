@@ -53,9 +53,12 @@ jobs:
     - name: Install Python dependencies
       run: |
         pipenv update
+# --lsi may fail in some cases
+# see: https://github.com/jekyll/classifier-reborn/issues/64
     - name: Build the site
       run: |
-        bundle exec jekyll build --config _config.yml,_config-deploy.yml --lsi
+        bundle exec jekyll build --config _config.yml,_config-deploy.yml --lsi ||
+        bundle exec jekyll build --config _config.yml,_config-deploy.yml
     - name: Create build-info
       run: |
         pipenv run python utils.py build-info
