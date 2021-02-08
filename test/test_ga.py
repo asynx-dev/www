@@ -20,4 +20,4 @@ def check_GA(relfile, code):
         return False
 
 def test_answer():
-    assert check_GA('../site/index.html','UA-180670653-1') == True
+    assert check_GA('../_site/index.html','UA-180670653-1') == True
