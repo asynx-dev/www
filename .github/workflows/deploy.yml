@@ -6,7 +6,7 @@ on:
       - master
   schedule:
     # UTC Time
-    - cron: "0 15 * * *"
+    - cron: "0 6 * * 6"
 
 jobs:
 
@@ -27,25 +27,38 @@ jobs:
       uses: actions/setup-python@v2
       with:
         python-version: ${{ matrix.python-version }}
-    - name: Set up Ruby
+    - name: Set up Ruby ${{ matrix.ruby-version }}
       uses: ruby/setup-ruby@v1
       with:
         ruby-version: ${{ matrix.ruby-version }}
+        bundler-cache: true
     - name: Upgrade pip
       run: |
         python -m pip install --upgrade pip
     - name: Install pipenv
       run: |
         python -m pip install pipenv
-    - name: Install Ruby dependencies
-      run: |
-        bundle update
+# no need to install bundle with bundler-cache: true
+#    - name: Install Ruby dependencies
+#      run: |
+#        bundle update
+# See: https://github.com/actions/cache/blob/main/examples.md#python---pipenv
+    - name: Cache Pipfile files if possible
+      uses: actions/cache@v2
+      with:
+        path: ~/.local/share/virtualenvs
+        key: ${{ runner.os }}-pipenv-${{ hashFiles('Pipfile.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-pipenv-
     - name: Install Python dependencies
       run: |
         pipenv update
     - name: Build the site
       run: |
         bundle exec jekyll build --config _config.yml,_config-deploy.yml --lsi
+    - name: Create build-info
+      run: |
+        pipenv run python utils.py build-info
 
     - name: Deploy 🚀
       uses: JamesIves/github-pages-deploy-action@3.7.1
