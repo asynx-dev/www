@@ -1,67 +1,26 @@
-# Welcome to Jekyll!
-#
-# This config file is meant for settings that affect your whole blog, values
-# which you are expected to set up once and rarely edit after that. If you find
-# yourself editing this file very often, consider using Jekyll's data files
-# feature for the data you need to update frequently.
-#
-# For technical reasons, this file is *NOT* reloaded automatically when you use
-# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
-#
-# If you need help with YAML syntax, here are some quick references for you:
-# https://learn-the-web.algonquindesign.ca/topics/markdown-yaml-cheat-sheet/#yaml
-# https://learnxinyminutes.com/docs/yaml/
-#
-# Site settings
-# These are used to personalize your new site. If you look in the HTML files,
-# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
-# You can create any custom variable you would like, and they will be accessible
-# in the templates via {{ site.myvariable }}.
+# Main settings for asynx.dev
 
 title: asynx.dev
 name: asynx.dev Team
 description: >- # this means to ignore newlines until "baseurl:"
   💙 electronics
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
-twitter_username: asynxdev
-github_username:  asynx-dev
+baseurl: ""
+url: ""
 
-# Build settings
 theme: minimal-mistakes-jekyll
+minimal_mistakes_skin: default
+source: src
+timezone: Europe/Istanbul
+search: true
+
 plugins:
   - jekyll-feed
   - jekyll-last-modified-at
   - jekyll-archives
-# Exclude from processing.
-# The following items will not be processed, by default.
-# Any item listed under the `exclude:` key here will be automatically added to
-# the internal "default list".
-#
-# Excluded items can be processed by explicitly listing the directories or
-# their entries' file path in the `include:` list.
-#
-# exclude:
-#   - .sass-cache/
-#   - .jekyll-cache/
-#   - gemfiles/
-#   - Gemfile
-#   - Gemfile.lock
-#   - node_modules/
-#   - vendor/bundle/
-#   - vendor/cache/
-#   - vendor/gems/
-#   - vendor/ruby/
 
-include: ["_pages"]
+include:
+  - _pages
 
-source: src
-timezone: Europe/Istanbul
-
-search: true
-logo: /assets/images/android-chrome-192x192.png
-
-minimal_mistakes_skin: default
 
 defaults:
   # _posts
@@ -97,8 +56,6 @@ defaults:
       toc: false
       author: false
 
-
-
 category_archive:
   type: jekyll-archives
   path: /blog/categories/
@@ -120,7 +77,6 @@ collections:
   newsletter:
     output: true
     permalink: /:collection/:path:output_ext
-
 
 footer:
   links:
@@ -154,3 +110,8 @@ footer:
 #    - label: "Facebook (Group)"
 #      icon: "fab fa-fw fa-facebook-square"
 #      url: "https://www.facebook.com/groups/asynxdev"
+
+logo: /assets/images/android-chrome-192x192.png
+
+twitter_username: asynxdev
+github_username:  asynx-dev

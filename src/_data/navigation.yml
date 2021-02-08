@@ -1,13 +1,13 @@
 main:
-  - title: "Blog 📝"
+  - title: "Blog"
     url: /blog/
-  - title: "Projects ⚙️"
+  - title: "Projects"
     url: /projects/
-  - title: "About ❓"
+  - title: "About"
     url: /about/
-  - title: "Contact 📞"
+  - title: "Contact"
     url: /contact/
-  - title: "Newsletter 📮"
+  - title: "Newsletter"
     url: /newsletter/
   - title: "(🇬🇧)"
     url: /
