@@ -1,0 +1,12 @@
+# Additional settings only for deployment
+
+analytics:
+  provider: "google-gtag"
+  google:
+    tracking_id: "UA-180670653-1"
+    anonymize_ip: false # default
+
+comments:
+  provider: "disqus"
+  disqus:
+    shortname: "asynxdev"

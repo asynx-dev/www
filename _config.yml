@@ -1,0 +1,117 @@
+# Main settings for asynx.dev
+
+title: asynx.dev
+name: asynx.dev Team
+description: >- # this means to ignore newlines until "baseurl:"
+  💙 electronics
+baseurl: ""
+url: ""
+
+theme: minimal-mistakes-jekyll
+minimal_mistakes_skin: default
+source: src
+timezone: Europe/Istanbul
+search: true
+
+plugins:
+  - jekyll-feed
+  - jekyll-last-modified-at
+  - jekyll-archives
+
+include:
+  - _pages
+
+
+defaults:
+  # _posts
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: single
+      author_profile: true
+      read_time: true
+      comments: true
+      share: true
+      related: true
+      toc: true
+      toc_sticky: true
+      show_date: true
+      permalink: /blog/:year/:month/:slug:output_ext
+  # _pages
+  - scope:
+      path: ""
+      type: pages
+    values:
+      layout: single
+      author_profile: false
+  # _newsletter
+  - scope:
+      path: ""
+      type: newsletter
+    values:
+      layout: single
+      author_profile: false
+      share: true
+      toc: false
+      author: false
+
+category_archive:
+  type: jekyll-archives
+  path: /blog/categories/
+tag_archive:
+  type: jekyll-archives
+  path: /blog/tags/
+jekyll-archives:
+  enabled:
+    - categories
+    - tags
+  layouts:
+    category: archive-taxonomy
+    tag: archive-taxonomy
+  permalinks:
+    category: /blog/categories/:name/
+    tag: /blog/tags/:name/
+
+collections:
+  newsletter:
+    output: true
+    permalink: /:collection/:path:output_ext
+
+footer:
+  links:
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/asynx-dev"
+    - label: "Twitter"
+      icon: "fab fa-fw fa-twitter-square"
+      url: "https://twitter.com/asynxdev"
+    - label: "LinkedIn"
+      icon: "fab fa-fw fa-linkedin"
+      url: "https://www.linkedin.com/groups/12487093"
+    - label: "Newsletter"
+      icon: "fas fa-envelope"
+      url: "/newsletter/"
+    - label: "Facebook"
+      icon: "fab fa-fw fa-facebook"
+      url: "https://www.facebook.com/asynxdev"
+    - label: "Instagram"
+      icon: "fab fa-fw fa-instagram"
+      url: "https://www.instagram.com/asynxdev"
+#    - label: "YouTube"
+#      icon: "fab fa-fw fa-youtube"
+#      url: "https://www.youtube.com/channel/UCnrcDuwD0ZBagabbzc_iEoA"
+#    - label: "Medium"
+#      icon: "fab fa-fw fa-medium"
+#      url: "https://medium.com/asynxdev"
+#    - label: "Gitlab"
+#      icon: "fab fa-fw fa-gitlab"
+#      url: "https://gitlab.com/groups/asynx-dev"
+#    - label: "Facebook (Group)"
+#      icon: "fab fa-fw fa-facebook-square"
+#      url: "https://www.facebook.com/groups/asynxdev"
+
+logo: /assets/images/android-chrome-192x192.png
+
+twitter_username: asynxdev
+github_username:  asynx-dev

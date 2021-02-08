@@ -6,7 +6,27 @@
 
 ## Building
 
-Site is built with `mkdocs`.
+Site is built with `Jekyll`. Follow the official [installation page](https://jekyllrb.com/docs/installation/)
+for detailed instructions. We recommend to work with latest Ubuntu WSL if you
+are working on Windows 10. Quick summary:
+
+* Follow Ubuntu installation **until** `bundler` and `jekyll` installation.
+  **Don't install Jekyll now.**
+
+Install only `bundler`
+
+```text
+gem install bundler
+```
+
+then run
+
+```text
+bundle
+```
+
+That's all. Run `bundle update` if you want to update and use the latest gems.
+(This is the case when site is build by Github Actions before deployment)
 
 ## License
 
