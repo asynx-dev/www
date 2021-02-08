@@ -15,12 +15,9 @@ jobs:
     - name: Install markdownlint-cli
       run: |
         npm install -g markdownlint-cli
-    - name: Lint root directory
+    - name: Lint markdown files
       run: |
-        markdownlint ./
-    - name: Lint docs directory
-      run: |
-        markdownlint src
+        markdownlint ./ --ignore ./vendor
 
   merge-jekyll-build:
     runs-on: ubuntu-latest

@@ -6,7 +6,7 @@
 
 ## Building
 
-Site is built with `Jekyll `. Follow the official [installation page](https://jekyllrb.com/docs/installation/)
+Site is built with `Jekyll`. Follow the official [installation page](https://jekyllrb.com/docs/installation/)
 for detailed instructions. We recommend to work with latest Ubuntu WSL if you
 are working on Windows 10. Quick summary:
 
