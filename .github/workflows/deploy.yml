@@ -57,8 +57,8 @@ jobs:
 # see: https://github.com/jekyll/classifier-reborn/issues/64
     - name: Build the site
       run: |
-        bundle exec jekyll build --config _config.yml,_config-deploy.yml --lsi ||
-        bundle exec jekyll build --config _config.yml,_config-deploy.yml
+        bundle exec jekyll build --config _config.yml,_config-deploy.yml ||
+        bundle exec jekyll build --config _config.yml,_config-deploy.yml  --lsi
     - name: Create build-info
       run: |
         pipenv run python utils.py build-info
