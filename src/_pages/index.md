@@ -14,18 +14,18 @@ header:
 excerpt: "💙 electronics"
 
 feature_row:
-  - image_path: /assets/images/projects_teaser.jpg
-    alt: "Projects"
-    excerpt: "<br/>In our spare time, we like working on topics that are interesting to us"
-    url: "/projects/"
-    btn_label: "List of Projects"
-    btn_class: "btn--success"
   - image_path: /assets/images/blog_teaser.jpg
     alt: "Blog Posts"
     excerpt: "<br/>We share our technical notes on a variety of topics, such as FPGAs, embedded things, etc."
     url: "/blog/"
     btn_label: "Read Posts"
     btn_class: "btn--info"
+  - image_path: /assets/images/projects_teaser.jpg
+    alt: "Projects"
+    excerpt: "<br/>In our spare time, we like working on topics that are interesting to us"
+    url: "/projects/"
+    btn_label: "List of Projects"
+    btn_class: "btn--success"
   - image_path: /assets/images/follow_teaser.jpg
     alt: "Follow"
     excerpt: "<br/>Join us on social media and subscribe our newsletter mailing list"
