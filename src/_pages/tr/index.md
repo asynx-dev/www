@@ -14,18 +14,18 @@ header:
 excerpt: "💙 elektronik"
 
 feature_row:
-  - image_path: /assets/images/projects_teaser.jpg
-    alt: "Projeler"
-    excerpt: "<br/>Boş zamanlarımızda ilgimizi çeken konular üzerine çalışmayı seviyoruz"
-    url: "/tr/projeler/"
-    btn_label: "Proje Listesi"
-    btn_class: "btn--success"
   - image_path: /assets/images/blog_teaser.jpg
     alt: "Blog Yazıları"
     excerpt: "<br/>İlgilendiğimiz FPGA, gömülü sistemler gibi konularda blog yazıları yazıyoruz"
     url: "/blog/"
     btn_label: "Yazıları Oku"
     btn_class: "btn--info"
+  - image_path: /assets/images/projects_teaser.jpg
+    alt: "Projeler"
+    excerpt: "<br/>Boş zamanlarımızda ilgimizi çeken konular üzerine çalışmayı seviyoruz"
+    url: "/tr/projeler/"
+    btn_label: "Proje Listesi"
+    btn_class: "btn--success"
   - image_path: /assets/images/follow_teaser.jpg
     alt: "Takip"
     excerpt: "<br/>Bizi sosyal medyada takip edin ve bülten e-posta listemize katılın"
