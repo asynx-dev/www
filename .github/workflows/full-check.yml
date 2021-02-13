@@ -18,27 +18,46 @@ jobs:
       run: |
         markdownlint ./ --ignore ./vendor
 
-
-  full-check-mkdocs-build:
+  full-check-jekyll-build:
     runs-on: ubuntu-latest
+    env:
+      JEKYLL_ENV: production
     strategy:
       matrix:
-        python-version: ['3.6', '3.7', '3.8', '3.9']
+        python-version: ['3.6']
+        ruby-version: ['2.7']
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v2
       with:
         python-version: ${{ matrix.python-version }}
+    - name: Set up Ruby ${{ matrix.ruby-version }}
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{ matrix.ruby-version }}
+        bundler-cache: false
     - name: Upgrade pip
       run: |
         python -m pip install --upgrade pip
     - name: Install pipenv
       run: |
         python -m pip install pipenv
-    - name: Install mkdocs and build the site
+    - name: Install Ruby dependencies
       run: |
-        ./build-full.py
-    - name: Test
+        bundle update
+    - name: Install Python dependencies
       run: |
-        ./test.py pytest
+        pipenv update
+# --lsi may fail in some cases
+# see: https://github.com/jekyll/classifier-reborn/issues/64
+    - name: Build the site
+      run: |
+        bundle exec jekyll build --config _config.yml,_config-deploy.yml --lsi ||
+        bundle exec jekyll build --config _config.yml,_config-deploy.yml
+    - name: Test (HTMLProofer with external sites)
+      run: |
+        bundle exec htmlproofer ./_site --allow-hash-href --alt-ignore "/.*/" --only-4xx --url-ignore "/twitter.com/"
+    - name: Test (pytest)
+      run: |
+        pipenv run python test.py pytest

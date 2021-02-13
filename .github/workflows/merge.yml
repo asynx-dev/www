@@ -65,7 +65,7 @@ jobs:
         bundle exec jekyll build --config _config.yml,_config-deploy.yml,_config-merge.yml
     - name: Test (HTMLProofer)
       run: |
-        bundle exec htmlproofer ./_site --disable-external --allow-hash-href --alt-ignore /.*/
+        bundle exec htmlproofer ./_site --disable-external --allow-hash-href --alt-ignore "/.*/"
     - name: Test (pytest)
       run: |
         pipenv run python test.py pytest
