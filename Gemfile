@@ -31,10 +31,11 @@ end
 # Performance-booster for watching directories on Windows
 gem "wdm", "~> 0.1.1", :platforms => [:mingw, :x64_mingw, :mswin]
 
-gem "minimal-mistakes-jekyll"
+# We are modifying some template files in the repo so fix the version and
+# change it manually
+gem "minimal-mistakes-jekyll", "4.22.0"
 gem "html-proofer"
 
 # See: https://stackoverflow.com/a/65547010/1766391
 # This is needed for serve --livereload on Windows
 gem 'eventmachine', '1.2.7', git: 'https://github.com/eventmachine/eventmachine.git', tag: 'v1.2.7', :platforms => [:mingw, :x64_mingw, :mswin]
-
