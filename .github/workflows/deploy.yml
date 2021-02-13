@@ -44,7 +44,7 @@ jobs:
 #        bundle update
 # See: https://github.com/actions/cache/blob/main/examples.md#python---pipenv
     - name: Cache Pipfile files if possible
-      uses: actions/cache@v2
+      uses: actions/cache@v2.1.4
       with:
         path: ~/.local/share/virtualenvs
         key: ${{ runner.os }}-pipenv-${{ hashFiles('Pipfile.lock') }}
