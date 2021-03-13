@@ -27,7 +27,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   <tr>
     <td align="center"><a href="http://www.alperyazar.com"><img src="https://avatars.githubusercontent.com/u/1757430?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Alper Yazar</b></sub></a><br /><a href="https://github.com/asynx-dev/www/commits?author=alperyazar" title="Code">💻</a> <a href="https://github.com/asynx-dev/www/pulls?q=is%3Apr+reviewed-by%3Aalperyazar" title="Reviewed Pull Requests">👀</a></td>
     <td align="center"><a href="https://github.com/yunusesergun"><img src="https://avatars.githubusercontent.com/u/73018637?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Yunus Esergün</b></sub></a><br /><a href="#blog-yunusesergun" title="Blogposts">📝</a></td>
-    <td align="center"><a href="https://github.com/aniltirli"><img src="https://avatars.githubusercontent.com/u/35190700?v=4?s=100" width="100px;" alt=""/><br /><sub><b>aniltirli</b></sub></a><br /><a href="#blog-aniltirli" title="Blogposts">📝</a></td>
+    <td align="center"><a href="https://github.com/aniltirli"><img src="https://avatars.githubusercontent.com/u/35190700?v=4?s=100" width="100px;" alt=""/><br /><sub><b>aniltirli</b></sub></a><br /><a href="#blog-aniltirli" title="Blogposts">📝</a> <a href="https://github.com/asynx-dev/www/pulls?q=is%3Apr+reviewed-by%3Aaniltirli" title="Reviewed Pull Requests">👀</a></td>
   </tr>
 </table>
 
