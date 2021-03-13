@@ -1,6 +1,6 @@
 # Contributing to asynx.dev
 
-:+1::tada: First off, thanks for taking the time to contribute! :tada::+1:
+👍🎉 First off, thanks for taking the time to contribute! 🎉👍
 
 ## Who are we? What and why do we write?
 
@@ -15,8 +15,6 @@ Contents are published with [CC BY
 [LICENSE](LICENSE). In summary, this is a permissive license and we actually
 don't care how the content is used as long as a proper reference is given and
 modifications are indicated if any.
-
-
 
 Deployment process is automated with
 Github Actions. In order to update the site, create a new branch from latest

@@ -3,16 +3,51 @@
 [https://asynx.dev](https://asynx.dev)
 
 ![full-check](https://github.com/asynx-dev/www/workflows/full-check/badge.svg)
+![GitHub last commit (master)](https://img.shields.io/github/last-commit/asynx-dev/www/master?label=last%20main%20repo%20update)
+![GitHub last commit (gh-pages)](https://img.shields.io/github/last-commit/asynx-dev/www/gh-pages?label=last%20depoloyment)
+![GitHub repo size](https://img.shields.io/github/repo-size/asynx-dev/www)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/m/asynx-dev/www)
+![GitHub license](https://img.shields.io/github/license/asynx-dev/www)
 
-## Building
+## ✨ Contributing ✨
+
+👉 **If you are planning to contribute (which is great!) check
+[CONTRIBUTING](CONTRIBUTING.md) page.**👈
+
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="http://www.alperyazar.com"><img src="https://avatars.githubusercontent.com/u/1757430?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Alper Yazar</b></sub></a><br /><a href="https://github.com/asynx-dev/www/commits?author=alperyazar" title="Code">💻</a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the
+[all-contributors](https://github.com/all-contributors/all-contributors)
+specification. [Contributions](CONTRIBUTING.md) of any kind welcome!
+
+## Building Locally
 
 Site is built with `Jekyll`. Jekyll is a Ruby program and we use Bundler as
 dependency and package manager. The following steps should work on both Linux
 and Windows. We haven't tried it on MacOS yet.
 
-After installing Ruby which should also have `gem`. Then, install `bundler`. Check out
-`gem` documentation for further options such as user vs system-wide installation.
-**If you have already `bundler` installed you can skip this command.**
+After installing Ruby which should also have `gem`. Then, install `bundler`.
+Check out `gem` documentation for further options such as user vs system-wide
+installation. **If you have already `bundler` installed you can skip this
+command.**
 
 ```text
 gem install bundler
@@ -40,15 +75,13 @@ If you encounter any problem when building the site, retry by omitting
 
 ## Publishing
 
-The site is published with Github Pages. If you are planning to contribute
-(which is great!) check [CONTRIBUTING](CONTRIBUTING.md) page.
+The site is published with Github Pages.
 
 ## CI/CD
 
-We use Github Actions to implement
-CI/CD pipeline. We run some tests like linting on both source code and output
-files. Please check files under `.github/workflows` to see exact flow and commands
-that are used.
+We use Github Actions to implement CI/CD pipeline. We run some tests like
+linting on both source code and output files. Please check files under
+`.github/workflows` to see exact flow and commands that are used.
 
 * `quick.yml` Runs for each push on all branches except `master`. This quick
   check is for developers who plan to modify the site and gives quick check

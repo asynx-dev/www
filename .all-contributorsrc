@@ -1,0 +1,24 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "alperyazar",
+      "name": "Alper Yazar",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1757430?v=4",
+      "profile": "http://www.alperyazar.com",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "www",
+  "projectOwner": "asynx-dev",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": false
+}
