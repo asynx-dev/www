@@ -13,7 +13,7 @@
 
 .pytest_cache
 
-# Pipfile.lock
+Pipfile.lock
 Gemfile.lock
 
 # See: https://github.com/asynx-dev/www/issues/78
