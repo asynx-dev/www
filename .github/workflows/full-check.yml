@@ -48,7 +48,7 @@ jobs:
         bundle update
     - name: Install Python dependencies
       run: |
-        pipenv update
+        pipenv install
 # --lsi may fail in some cases
 # see: https://github.com/jekyll/classifier-reborn/issues/64
     - name: Build the site
