@@ -13,7 +13,7 @@ jobs:
     - uses: actions/setup-node@v1
     - name: Install markdownlint-cli
       run: |
-        npm install -g markdownlint-cli
+        npm install markdownlint-cli
     - name: Lint markdown files
       run: |
         markdownlint ./ --ignore ./vendor
