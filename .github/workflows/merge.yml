@@ -69,3 +69,14 @@ jobs:
     - name: Test (pytest)
       run: |
         pipenv run python test.py pytest
+    - name: Deploy (Dry-Run)
+      uses: JamesIves/github-pages-deploy-action@4.0.0
+      with:
+        dry-run: true
+        token: ${{ secrets.GITHUB_TOKEN }}
+        branch: gh-pages # The branch the action should deploy to.
+        folder: _site # The folder the action should deploy.
+        clean: true # Automatically remove deleted files from the deploy branch
+        single-commit: true # Like push force, keep only the last commit
+        git-config-name: asynxdev bot # Use the generic account
+        git-config-email: asynxdev@users.noreply.github.com

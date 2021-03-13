@@ -64,12 +64,13 @@ jobs:
         pipenv run python utils.py build-info
 
     - name: Deploy 🚀
-      uses: JamesIves/github-pages-deploy-action@3.7.1
+      uses: JamesIves/github-pages-deploy-action@4.0.0
       with:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        BRANCH: gh-pages # The branch the action should deploy to.
-        FOLDER: _site # The folder the action should deploy.
-        CLEAN: true # Automatically remove deleted files from the deploy branch
-        SINGLE_COMMIT: true # Like push force, keep only the last commit
-        GIT_CONFIG_NAME: asynxdev bot # Use the generic account
-        GIT_CONFIG_EMAIL: asynxdev@users.noreply.github.com
+        dry-run: false
+        token: ${{ secrets.GITHUB_TOKEN }}
+        branch: gh-pages # The branch the action should deploy to.
+        folder: _site # The folder the action should deploy.
+        clean: true # Automatically remove deleted files from the deploy branch
+        single-commit: true # Like push force, keep only the last commit
+        git-config-name: asynxdev bot # Use the generic account
+        git-config-email: asynxdev@users.noreply.github.com
