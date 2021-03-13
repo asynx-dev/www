@@ -13,10 +13,10 @@ jobs:
     - uses: actions/setup-node@v1
     - name: Install markdownlint-cli
       run: |
-        npm install -g markdownlint-cli
+        npm install
     - name: Lint markdown files
       run: |
-        markdownlint ./ --ignore ./vendor
+        npx -c 'markdownlint ./ --ignore ./vendor --ignore ./node_modules'
 
   full-check-jekyll-build:
     runs-on: ubuntu-latest
