@@ -11,12 +11,12 @@ This PR adds/modifies content(s).
 
 As original author of this pull request (PR):
 
-* [x] I read the current [CONTRIBUTING](/CONTRIBUTING.md) document,
+* [x] I read the current [CONTRIBUTING](https://github.com/asynx-dev/www/blob/master/CONTRIBUTING.md) document,
 especially `Policies and Rules` and `Guides` sections and I am okay with
 them.
 * [x] I think that no material (text, audio, visual, etc.) pushed with this PR
 violates any copyright, license rule. Either I created materials or they can
-be published with repo [LICENSE](/LICENSE). If a material is owned by
+be published with repo [LICENSE](https://github.com/asynx-dev/www/blob/master/LICENSE). If a material is owned by
 somebody else I added it with obeying its license rule like giving link to
 original creator, etc.
 
