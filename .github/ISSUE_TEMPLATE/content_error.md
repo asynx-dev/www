@@ -3,7 +3,7 @@ name: Content Error
 about: I find an error on a published page.
 title: ''
 labels: content-error, new
-assignees: www-maintainers
+assignees: alperyazar
 
 ---
 

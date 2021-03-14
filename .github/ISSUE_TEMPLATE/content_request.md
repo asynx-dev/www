@@ -3,7 +3,7 @@ name: Content Request
 about: I think there should be an article on ... topic.
 title: ''
 labels: content-request, new
-assignees: www-maintainers
+assignees: alperyazar
 
 ---
 
