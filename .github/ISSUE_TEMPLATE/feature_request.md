@@ -3,7 +3,7 @@ name: Feature request
 about: Suggest an idea for this project related to infrastructure. DON'T USE THIS TEMPLATE FOR CONTENT REQUESTS
 title: ''
 labels: enhancement, new
-assignees: www-maintainers
+assignees: alperyazar
 
 ---
 

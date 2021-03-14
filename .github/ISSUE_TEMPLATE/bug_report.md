@@ -3,7 +3,7 @@ name: Bug report
 about: Reports issues like site compilation. DON'T USE THIS TEMPLATE TO REPORT CONTENT ERRORS.
 title: ''
 labels: bug, new
-assignees: www-maintainers
+assignees: alperyazar
 
 ---
 
