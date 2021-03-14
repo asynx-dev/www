@@ -1,3 +1,7 @@
+DEPENDING ON PR TYPE, PLEASE FILL 1 OF 3 FOLLOWING TEMPLATE AND REMOVE OTHERS (REMOVE THIS LINE)
+
+1/3 CONTENT_TEMPLATE_BEGINS (REMOVE THIS LINE)
+
 This PR adds/modifies content(s).
 
 **Summarize the change here**
@@ -19,3 +23,29 @@ original creator, etc.
 ---
 
 Ping @www-maintainers
+
+1/3 CONTENT_TEMPLATE_ENDS (REMOVE THIS LINE)
+
+2/3 FIX_TEMPLATE_BEGINS (REMOVE THIS LINE)
+
+This PR fixes #**issue_ID**.
+
+**Insert Explanation**
+
+---
+
+Ping @www-maintainers
+
+2/3 FIX_TEMPLATE_ENDS (REMOVE THIS LINE)
+
+3/3 OTHER_TEMPLATE_BEGINS (REMOVE THIS LINE)
+
+This PR adds new feature, fixes something that isn't linked to any opened issue.
+
+**Summarize the change here**
+
+---
+
+Ping @www-maintainers
+
+3/3 OTHER_TEMPLATE_ENDS (REMOVE THIS LINE)
