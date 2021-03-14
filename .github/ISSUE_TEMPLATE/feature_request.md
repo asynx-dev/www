@@ -1,5 +1,5 @@
 ---
-name: Feature request
+name: Feature Request
 about: Suggest an idea for this project related to infrastructure. DON'T USE THIS TEMPLATE FOR CONTENT REQUESTS
 title: ''
 labels: enhancement, new

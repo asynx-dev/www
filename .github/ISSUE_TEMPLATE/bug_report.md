@@ -1,5 +1,5 @@
 ---
-name: Bug report
+name: Bug Report
 about: Reports issues like site compilation. DON'T USE THIS TEMPLATE TO REPORT CONTENT ERRORS.
 title: ''
 labels: bug, new
