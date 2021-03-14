@@ -11,18 +11,18 @@ This PR adds/modifies content(s).
 
 As original author of this pull request (PR):
 
-* [x] I read the current [CONTRIBUTING](../../CONTRIBUTING.md) document,
+* [x] I read the current [CONTRIBUTING](/CONTRIBUTING.md) document,
 especially `Policies and Rules` and `Guides` sections and I am okay with
 them.
 * [x] I think that no material (text, audio, visual, etc.) pushed with this PR
 violates any copyright, license rule. Either I created materials or they can
-be published with repo [LICENSE](../../LICENSE). If a material is owned by
+be published with repo [LICENSE](/LICENSE). If a material is owned by
 somebody else I added it with obeying its license rule like giving link to
 original creator, etc.
 
 ---
 
-Ping @www-maintainers
+Ping @asynx-dev/www-maintainers
 
 1/3 CONTENT_TEMPLATE_ENDS (REMOVE THIS LINE)
 
@@ -34,7 +34,7 @@ This PR fixes #**issue_ID**.
 
 ---
 
-Ping @www-maintainers
+Ping @asynx-dev/www-maintainers
 
 2/3 FIX_TEMPLATE_ENDS (REMOVE THIS LINE)
 
@@ -46,6 +46,6 @@ This PR adds new feature, fixes something that isn't linked to any opened issue.
 
 ---
 
-Ping @www-maintainers
+Ping @asynx-dev/www-maintainers
 
 3/3 OTHER_TEMPLATE_ENDS (REMOVE THIS LINE)
