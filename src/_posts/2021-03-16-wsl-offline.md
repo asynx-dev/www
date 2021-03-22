@@ -20,7 +20,7 @@ should be valid for other WSL packages too.
 # Getting files
 
 If your Windows machine is connected to the Internet and you can easily install
-WSL packages via Microsoft Store like clicking *Download from the Microsoft Store*
+WSL packages via Microsoft Store by clicking *Download from the Microsoft Store*
 [here](https://ubuntu.com/wsl). To install it on an offline machine, first we
 get corresponding `.appx` package from Microsoft. All available Packages are listed
 [here](https://docs.microsoft.com/en-us/windows/wsl/install-manual#downloading-distributions).
