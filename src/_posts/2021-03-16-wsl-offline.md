@@ -20,25 +20,28 @@ should be valid for other WSL packages too.
 # Getting files
 
 If your Windows machine is connected to the Internet and you can easily install
-WSL packages via Microsoft Store by clicking *Download from the Microsoft Store*
-[here](https://ubuntu.com/wsl). To install it on an offline machine, first we
-get corresponding `.appx` package from Microsoft. All available Packages are listed
+WSL packages via Microsoft Store like by clicking *Download from the Microsoft
+Store* [here](https://ubuntu.com/wsl). To install it on an offline machine,
+first we get `.appx` package for a corresponding guest OS from Microsoft. All
+available Packages are listed
 [here](https://docs.microsoft.com/en-us/windows/wsl/install-manual#downloading-distributions).
-Transfer the downloaded package to the target offline machine. For example when
-I am writing this post, to install Ubuntu 20.04 I get `Ubuntu_2004.2020.424.0_x64.appx`.
+Transfer the downloaded package to the target offline machine. For example, when
+I am writing this post, to install Ubuntu 20.04 I get
+`Ubuntu_2004.2020.424.0_x64.appx`.
 
 # Enabling WSL on Windows
 
 Open a PowerShell terminal and type `wsl`. If you get an error about not recognized
 command, first you should enable WSL. The official instructions are given
 [here](https://docs.microsoft.com/en-us/windows/wsl/install-win10#set-your-distribution-version-to-wsl-1-or-wsl-2).
-Alternatively you can do it with GUI. Find `Program and Feature` on `Control Plane`,
-then click `Turn Windows feature on or off` as shown below.
+Alternatively you can do it with GUI. Find `Programs and Features` on `Control Panel`,
+then click `Turn Windows features on or off` as shown below.
 
 ![WSL enable](/assets/images/blog/21/1-wsl-enable.png)
 
-After rebooting `wsl` command should work on PowerShell. Since we don't have
-any installed WSL on the target PC, it will say  `... no installed distributions.`
+After rebooting Windows, `wsl` command should be available to use and should be
+working on PowerShell. Since we don't have any installed WSL guest OS on the PC,
+it will say  `... no installed distributions.`
 
 If your machine
 [satisfies](https://docs.microsoft.com/en-us/windows/wsl/install-win10#step-2---check-requirements-for-running-wsl-2)
@@ -53,7 +56,7 @@ for WSL 2 too.
 
 In theory, the following command given in the [official
 page](https://docs.microsoft.com/en-us/windows/wsl/install-manual#installing-your-distro)
-should do the work. Example:
+should do the work.
 
 ```powershell
 Add-AppxPackage .\Ubuntu_2004.2020.424.0_x64.appx
@@ -64,7 +67,7 @@ Add-AppxPackage .\Ubuntu_2004.2020.424.0_x64.appx
 After installing the package, you can find the installed software by typing
 `Ubuntu` in Windows Start menu search. **However** in my case, I couldn't
 start the Ubuntu WSL and got the `The service has not been started.` error as
-shown in below. This is probably related to version of Windows 10.
+shown below. This is probably related to version of Windows 10.
 
 ![WSL The service has not been started error](/assets/images/blog/21/1-wsl-error.png)
 
@@ -73,9 +76,9 @@ shown in below. This is probably related to version of Windows 10.
 You can remove `Ubuntu` found in Windows Start menu by right clicking and selecting
 `Uninstall` since we won't use it.
 
-One solution recommended by Microsoft is extracting `.appx` file with an archive
-program, like 7-Zip by right clicking on file and selecting Extract option, and
-then running `ubuntu2004.exe`.
+One solution recommended by Microsoft is extracting `.appx` file with an file
+archiver program, like 7-Zip by right clicking on file and selecting `Extract`
+option, and then running `ubuntu2004.exe`.
 
 After extraction please make sure that your folder is at right place. Although
 it is possible to move folders to another location, in my case moving folders
@@ -91,16 +94,17 @@ be ready for side effects.
 With first run the installation process begins
 and you are prompted to select an username and associated password. After
 completing installation, you can use your Linux distro. Notice that file system
-for the Linux is created in `rootfs` folder. After installation, Ubuntu 20.04
-create ~40K items in its folder.
+for the Linux is created under `rootfs` folder. After installation, Ubuntu 20.04
+creates ~40K items in its folder.
 
 # Pitfall: Moving Ubuntu 20.04 After Installation
 
 I got `Cannot find the specified path` error when I moved to another folder
-after installation. Other people reports same problem too [^1f]. In my case since
-I didn't customize the Ubuntu, I reinstalled it but I don't know the proper
-solution if you don't want to loose your distro. Some people also reported that
-a Windows update also brakes the WSL [^1f], so... yeah, classical Windows...
+after installation. Other people report the same problem too [^1f]. In my case,
+since I was using fresh Ubuntu installation, I reinstalled it but I don't know the
+proper solution if you don't want to loose your distro. Some people also
+reported that a Windows update also breaks the WSL [^1f], so... yeah, classical
+Windows...
 
 ## Solution
 
@@ -114,7 +118,7 @@ see the previous machine. So first *unregister* the previous distro, example:
 wslconfig /u Ubuntu-20.04
 ```
 
-After that, `wsl` command should run, then you can install the Ubuntu on its
+After that, `wsl` command should run, then you can install the Ubuntu to a
 new location.
 
 If you know how to move installed distro without reinstalling again, please
@@ -136,9 +140,9 @@ exist [^2f], [^3f], [^4f].
 
 # Conclusion
 
-It is very good experience use a Linux distro on Windows more *natively*, WSL
-doesn't look so solid and may broke after an Windows update. So if you are
-planning to use it consider possible future problems.
+Although using a Linux distro on Windows more *natively* is a very good
+experience, WSL doesn't look so solid and may become broken after an Windows
+update. So if you are planning to use be ready for possible future problems.
 
 [^1f]: <https://github.com/microsoft/WSL/issues/3976#issuecomment-581617473>
 [^2f]: <https://scriptech.io/windows-10-1903-wsl-access-is-denied-error-0x80070005/>
