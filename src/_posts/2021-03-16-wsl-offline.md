@@ -140,7 +140,7 @@ exist [^2f], [^3f], [^4f].
 
 # Conclusion
 
-Although using a Linux distro on Windows more *natively* is a very good
+Although using a Linux distro on Windows in a *native* way is a very good
 experience, WSL doesn't look so solid and may become broken after an Windows
 update. So if you are planning to use be ready for possible future problems.
 
