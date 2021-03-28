@@ -1,6 +1,6 @@
 ---
-title: "Getting Started to Vitis Acceleration Flow with Zynq 7000"
-excerpt: "Getting Started to Vitis Acceleration Flow with Zynq 7000."
+title: "Getting started to Vitis acceleration flow with Zynq 7000"
+excerpt: "Getting started to Vitis acceleration flow with Zynq 7000."
 categories:
     - tutorial
 tags:
