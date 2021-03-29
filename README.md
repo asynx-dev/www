@@ -3,6 +3,8 @@
 [https://asynx.dev](https://asynx.dev)
 
 ![full-check](https://github.com/asynx-dev/www/workflows/full-check/badge.svg)
+![deploy](https://github.com/asynx-dev/www/workflows/deploy/badge.svg)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/9176341d-dfdb-4c40-87f1-b142023b805c/deploy-status)](https://app.netlify.com/sites/asynxdev-preview/deploys)
 ![GitHub last commit (master)](https://img.shields.io/github/last-commit/asynx-dev/www/master?label=last%20main%20repo%20update)
 ![GitHub last commit (gh-pages)](https://img.shields.io/github/last-commit/asynx-dev/www/gh-pages?label=last%20depoloyment)
 ![GitHub repo size](https://img.shields.io/github/repo-size/asynx-dev/www)
