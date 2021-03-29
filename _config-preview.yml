@@ -1,0 +1,2 @@
+# This configuration is read during deploy previews
+future: true
