@@ -12,6 +12,7 @@ minimal_mistakes_skin: default
 source: src
 timezone: Europe/Istanbul
 search: true
+future: false
 
 plugins:
   - jekyll-feed
