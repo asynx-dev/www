@@ -162,8 +162,7 @@ genişletmek için Raspberry Pi OS ile gelen `raspi-config` aracını kullanabil
 $ sudo raspi-config
 ```
 
-açılan ekrandan
-
+komutunu çalıştırdıktan sonra açılan ekrandan
 `6 Advanced Options` ve ardından `A1 Expand Filesystem` seçeneğini seçelim.
 RPi'yi yeniden başlattığımızda kartımızın tüm alanının gözüküyor olması gerekiyor.
 Yine `df -h` ile kontrol edebilirsiniz.
