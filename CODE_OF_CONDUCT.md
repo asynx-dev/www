@@ -1,3 +1,3 @@
 # Code of Conduct
 
-Be a good person
+Be a good person.
