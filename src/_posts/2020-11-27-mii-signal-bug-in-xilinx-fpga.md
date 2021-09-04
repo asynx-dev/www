@@ -172,7 +172,7 @@ that is built.
 In fact, the architecture is very easy to construct and run. Below, the block
 design is shown:
 
-![Architecture](/assets/images/blog/20/3-architecture.png)
+![Architecture](/assets/images/blog/20/2020-11-27-architecture.png)
 
 In the figure, some signals such as `M_AXI_GP0`, `ENET0_GMII_RX_*` and also
 some blocks such as `AXI Interconnect`, `Processor System Reset`,
@@ -219,9 +219,9 @@ codes according to the specifications and if you do not satisfy them, there
 always occur some errors and bugs. I have put some screenshoots from **ILA** to
 comprehend the problem more easily:
 
-![ILA Problem First Image](/assets/images/blog/20/3-ila_problem_v1.png)
+![ILA Problem First Image](/assets/images/blog/20/2020-11-27-ila_problem_v1.png)
 
-![ILA Problem Second Image](/assets/images/blog/20/3-ila_problem_v2.png)
+![ILA Problem Second Image](/assets/images/blog/20/2020-11-27-ila_problem_v2.png)
 
 As can be inferred from the pictures, somewhere in the middle of the entire MII
 packet, `TX_EN` goes low. We can say that a packet transmission has finished and

@@ -57,7 +57,7 @@ Windows 7 or Ubuntu 16.04. Machine 2 is Virtual PC running on VirtualBox 6.1
 within the same local area network with HostPC. Connection diagram is shown
 below.
 
-![socat diagram](/assets/images/blog/20/4-Diagram.png)
+![socat diagram](/assets/images/blog/20/2020-11-29-Diagram.png)
 
 # Step by step serial data forwarding over ethernet
 
@@ -79,7 +79,7 @@ socat.exe to PATH.
 
 The folder structure is shown below.
 
-![socat windows folder](/assets/images/blog/20/4-Screenshot3.png)
+![socat windows folder](/assets/images/blog/20/2020-11-29-Screenshot3.png)
 
 ## Learn IP address of Machine 1
 
@@ -173,8 +173,8 @@ for physical serial interfaces.
 Just type something on your keyboard and see if you can send messages between
 machine 1 and machine 2.
 
-![Machine 1 console](/assets/images/blog/20/4-Screenshot1.png)&emsp;&emsp;
-&emsp;&emsp;![Machine 2 console](/assets/images/blog/20/4-Screenshot2.png)
+![Machine 1 console](/assets/images/blog/20/2020-11-29-Screenshot1.png)&emsp;&emsp;
+&emsp;&emsp;![Machine 2 console](/assets/images/blog/20/2020-11-29-Screenshot2.png)
 
 [^1f]: <https://medium.com/@karthiks1701/virtual-serial-ports-hack-for-communication-between-local-scripts-883fda0f60f4>
 [^2f]: <https://www.virtual-serial-port.org/article/best-serial-over-ethernet-tools/>

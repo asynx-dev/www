@@ -66,7 +66,7 @@ on the host. Success and fail status will be returned on terminal screen of host
 This tutorial will be on Ubuntu operating system. Vitis documentation[^5f] lists
 the supported other OSes as shown below.
 
-![vitis_os_req](/assets/images/blog/20/5-vitis_os_req.png)
+![vitis_os_req](/assets/images/blog/20/2020-12-07-vitis_os_req.png)
 
 You can view your Ubuntu version on console with `cat /etc/os-release`. I prefer
 to use Ubuntu 16.04. Note that Ubuntu version 16.04.7 is not among supported OSes.
@@ -121,7 +121,7 @@ Go to Xilinx download page <https://www.xilinx.com/support/download.html>
 
 I prefer downloading **Linux Self Extracting Web Installer**.
 
-![Vitis_Download](/assets/images/blog/20/5-vitis_download.png)
+![Vitis_Download](/assets/images/blog/20/2020-12-07-vitis_download.png)
 
 Make the bin file executable `$ chmod +x Xilinx_Unified_2020.1_0602_1208_Lin64.bin`
 and run the installer `$ ./Xilinx_Unified_2020.1_0602_1208_Lin64.bin`.
@@ -134,7 +134,7 @@ Xilinx tools should be under `/opt/tools/Xilinx/` directory.
 Go to the Xilinx download page <https://www.xilinx.com/support/download.html> and
 open `Vitis Embedded Platforms` tab.
 
-![XRT_Download](/assets/images/blog/20/5-xrt_download.png)
+![XRT_Download](/assets/images/blog/20/2020-12-07-xrt_download.png)
 
 Download `XRT 2020.1` and install XRT with double click to `.deb` file or run
 the installation command `$ sudo apt install <filename>.deb`. Now, you should
@@ -145,7 +145,7 @@ see `/opt/xilinx/xrt/` directory created and **XRT** is installed.
 Go Xilinx download page <https://www.xilinx.com/support/download.html> and open
 `Vitis Embedded Platforms` tab again.
 
-![Platform_Download](/assets/images/blog/20/5-platform_download.png)
+![Platform_Download](/assets/images/blog/20/2020-12-07-platform_download.png)
 
 Download ZC706 base platform zip file. Extract the zip file to location `/opt/xilinx/platforms/`.
 Now, you should have file `xilinx_zc706_base_202010_1` under this directory.
@@ -155,7 +155,7 @@ Now, you should have file `xilinx_zc706_base_202010_1` under this directory.
 We will use prebuilt kernel and rootfs for simplicity. Go Xilinx download page
 <https://www.xilinx.com/support/download.html> and open `Petalinux` tab.
 
-![Common_Download](/assets/images/blog/20/5-zynq_common_download.png)
+![Common_Download](/assets/images/blog/20/2020-12-07-zynq_common_download.png)
 
 Download `ZYNQ Common Image` and extract it to `/opt/tools/Xilinx/xilinx-zynq-common-v2020.1/`.
 Run `sh sdk.sh` script again in this folder. This script should create **sysroot**
@@ -223,7 +223,7 @@ $ export XCL_EMULATION_MODE=sw_emu
 $ ./app.exe
 ```
 
-![sw_emu](/assets/images/blog/20/5-sw_emu.png)
+![sw_emu](/assets/images/blog/20/2020-12-07-sw_emu.png)
 
 If you get `ERROR: parted command not exist` error, add location of parted
 to PATH export `$ export PATH=$PATH:/sbin` or install parted
@@ -253,7 +253,7 @@ $ export XCL_EMULATION_MODE=hw_emu
 $ ./app.exe
 ```
 
-![hw_emu](/assets/images/blog/20/5-hw_emu.png)
+![hw_emu](/assets/images/blog/20/2020-12-07-hw_emu.png)
 
 # Running Accelerator on ZC706
 
@@ -264,7 +264,7 @@ to finish. `package` folder should be created by the script. ZC706 will boot
 from SD card in this tutorial. Switch SW11 on ZC706 board should look like below
 image for boot mode SD card.
 
-![zc706_sw11](/assets/images/blog/20/5-zc706_sw11.png)
+![zc706_sw11](/assets/images/blog/20/2020-12-07-zc706_sw11.png)
 
 ## Creating SD card Image
 
@@ -292,7 +292,7 @@ After these operations, remove and insert SD card to your PC, you should see
 two partitions. One for root file system in ext4 format and the other one that includes
 `BOOT.bin`, `app.exe` and other related stuff.
 
-![5-sd_card](/assets/images/blog/20/5-sd_card.png)
+![5-sd_card](/assets/images/blog/20/2020-12-07-sd_card.png)
 
 Insert SD card to ZC706, power on the board and wait until it boots. Execute
 commands below on ZC706 petalinux terminal screen.
@@ -306,7 +306,7 @@ $ export XILINX_VITIS=/mnt
 $ ./app.exe
 ```
 
-![hw](/assets/images/blog/20/5-hw.png)
+![hw](/assets/images/blog/20/2020-12-07-hw.png)
 
 # Modifications on host.cpp
 
@@ -356,7 +356,7 @@ Your board should have an IP address and should be connected to your PC
 over ethernet for ssh connection.
 {: .notice--warning}
 
-![after_change](/assets/images/blog/20/5-after_change.png)
+![after_change](/assets/images/blog/20/2020-12-07-after_change.png)
 
 [^1f]: <https://github.com/Xilinx/Vitis-Tutorials/tree/master/Getting_Started/Vitis>
 [^2f]: <https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/embedded-platforms.html>
