@@ -2,7 +2,7 @@
 title: "Serial data communication over TCP"
 excerpt: "Serial data communication over TCP with socat."
 categories:
-    - tutorial
+    - guide
 tags:
     - en
     - socat

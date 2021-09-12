@@ -2,7 +2,7 @@
 title: "Getting started to Vitis acceleration flow with Zynq 7000"
 excerpt: "Getting started to Vitis acceleration flow with Zynq 7000."
 categories:
-    - tutorial
+    - guide
 tags:
     - en
     - xilinx
