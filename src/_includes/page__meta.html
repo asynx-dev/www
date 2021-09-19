@@ -32,7 +32,7 @@
     {% if document.axseq %}
       <span class="page__meta-axseq">
         <i class="fas {% if include.type == 'grid' %}fa-fw {% endif %}fa-fingerprint" aria-hidden="true"></i>
-        ax-{{document.date | date: "%Y"}}-{{document.axseq}}
+        ax-{{document.date | date: "%y"}}-{{document.axseq}}
       </span>
     {% endif %}
 
