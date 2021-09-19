@@ -10,7 +10,7 @@ tags:
     - serial
     - remote
 author: atirlioglu
-axseq: 4
+axseq: 5
 ---
 
 # Why would you need serial over ethernet ?

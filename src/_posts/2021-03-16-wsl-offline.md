@@ -10,7 +10,7 @@ tags:
     - windows
     - ubuntu
 author: ayazar
-axseq: 1
+axseq: 2
 ---
 
 In this post, we will install Ubuntu 20.04 WSL package on an **offline**

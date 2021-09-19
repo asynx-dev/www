@@ -10,7 +10,7 @@ tags:
     - ethernet
     - zynq
 author: yesergun
-axseq: 3
+axseq: 4
 ---
 
 The main goal of this article to give the general information about

@@ -9,7 +9,7 @@ tags:
     - vitis
     - zynq
 author: atirlioglu
-axseq: 5
+axseq: 6
 ---
 
 We all know, sometimes it is just hard to get started learning things from

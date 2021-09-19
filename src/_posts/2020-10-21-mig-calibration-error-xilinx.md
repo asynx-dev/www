@@ -2,7 +2,7 @@
 title: MIG "init_calib_complete" signal does not go high
 excerpt: MIG "init_calib_complete" signal does not go high during simulation
 author: yesergun
-axseq: 0
+axseq: 1
 categories:
     - solution
 tags:

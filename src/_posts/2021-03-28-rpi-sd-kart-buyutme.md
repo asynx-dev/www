@@ -10,7 +10,7 @@ tags:
     - raspbian
     - raspberry-pi-os
 author: ayazar
-axseq: 2
+axseq: 3
 ---
 
 Raspberry Pi 400'de kullandığım SD kartın boyutu biraz küçük kalmaya başlayınca
