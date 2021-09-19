@@ -20,4 +20,25 @@
 
   <div class="page__footer-copyright">&copy; 2020-{{ site.time | date: '%Y' }} {{ site.name | default: site.title }}. {{ site.data.ui-text[site.locale].powered_by | default: "Powered by" }} <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.
   <br/>License: <a href='https://creativecommons.org/licenses/by/4.0/'>CC BY 4.0</a>
-  <br/><a href='{% link _pages/misc.md %}'>Miscellaneous</a></div>
+  <br/><a href='{% link _pages/misc.md %}'>Miscellaneous</a>
+</div>
+
+{% if jekyll.environment == 'production' %}
+<!-- Default Statcounter code for asynx.dev
+https://asynx.dev -->
+<script type="text/javascript">
+var sc_project=12624131;
+var sc_invisible=1;
+var sc_security="c6cc37c6";
+</script>
+<script type="text/javascript"
+src="https://www.statcounter.com/counter/counter.js"
+async></script>
+<noscript><div class="statcounter"><a title="Web Analytics"
+href="https://statcounter.com/" target="_blank"><img
+class="statcounter"
+src="https://c.statcounter.com/12624131/0/c6cc37c6/1/"
+alt="Web Analytics"
+referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
+<!-- End of Statcounter Code -->
+{% endif %}
