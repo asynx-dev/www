@@ -9,12 +9,13 @@ tags:
     - windows
     - latex
     - synctex
-    - video
+    - asynxtv
 author: ayazar
+toc: false
 axseq: 5
 ---
 
-Bu video incelememde favori programlarımdan biri olan SumatraPDF'i kısaca
-tanıtıyorum.
+Bu video incelememde favori programlarımdan biri olan
+[SumatraPDF](http://sumatrapdf.org/)'i kısaca tanıtıyorum.
 
 {% include video id="-GNsF_dTmjU" provider="youtube" %}
