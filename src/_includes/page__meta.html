@@ -50,5 +50,13 @@
       </span>
     {% endif %}
 
+    {% if (document.tags contains 'tr' or document.tags contains 'en' ) and document.podcast_link %}<span class="page__meta-sep"></span>{% endif %}
+
+    {% if document.podcast_link %}
+    <span class="page__meta-podcast">
+      <i class="fas {% if include.type == 'grid' %}fa-fw {% endif %}fas fa-headphones" aria-hidden="true"></i>
+    </span>
+  {% endif %}
+
   </p>
 {% endif %}

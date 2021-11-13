@@ -1,0 +1,26 @@
+{% if page.podcast_link %}
+<p class="notice">
+{% if page.tags contains 'tr' %}
+<i class="fas fa-headphones"></i> Bu içeriğin ses kaydı mevcut.
+{% endif %}
+{% if page.tags contains 'en' %}
+<i class="fas fa-headphones"></i> Recording is available for the content.
+{% endif %}
+<br />
+<audio controls preload='metadata' style='width: 100%;'>
+    <source src='{{ page.podcast_link }}'>
+    {% if page.tags contains 'tr' %}
+    Üzgünüm, tarayıcınız gömülü ses oynatmayı (HTML5) desteklemiyor.
+    {% endif %}
+    {% if page.tags contains 'en' %}
+    Sorry, but your browser doesn't support embedded audio player (HTML5).
+    {% endif %}
+</audio>
+{% if page.tags contains 'tr' %}
+<i class="fas fa-file-download"></i> <a href="{{ page.podcast_link }}" download>Link</a> <i class="fas fa-podcast"></i> <a href="{{ site.url }}{{ site.podcast_ax_xlm }}">Podcastleri Takip Edin</a>
+{% endif %}
+{% if page.tags contains 'en' %}
+<i class="fas fa-file-download"></i> <a href="{{ page.podcast_link }}" download>Link</a> <i class="fas fa-podcast"></i> <a href="{{ site.url }}{{ site.podcast_ax_xlm }}">Follow Podcast Channel</a>
+{% endif %}
+</p>
+{% endif %}
