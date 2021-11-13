@@ -19,8 +19,32 @@ plugins:
   - jekyll-last-modified-at
   - jekyll-archives
 
+#feed:
+#  path: blog.xml
+
+#atom_feed:
+#  path: "/blog.xml"
+
 include:
   - _pages
+
+# Podcast settings
+# Ref: https://github.com/joebuhlig/Jekyll-Podcast-Feed/blob/507af2938d670cb17b4b135389eb144614c793d7/README.md
+
+podcast_album_art_rss: /assets/images/podcast_rss_image.png
+podcast_album_art_itunes: /assets/images/podcast_rss_itunes.png
+podcast_title: asynx.dev
+podcast_owner: asynx.dev
+podcast_email: asynx.dev@asynx.dev
+podcast_category: Technology
+# "Although you can specify more than one category and subcategory in your RSS feed, Apple Podcasts only recognizes the first category and subcategory."
+podcast_explicit: "no"
+podcast_author: asynx.dev
+podcast_description: |-
+  💙 electronics. Bilingual contents in both English and Turkish for electronics, FPGA and embedded systems stuff enthusiasts.
+  💙 elektronik. Elektronik, FPGA ve gömülü sistem meraklıları için Türkçe ve İngilizce içerikler.
+
+podcast_ax_xlm: "/podcast.xml"
 
 
 defaults:
