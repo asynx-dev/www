@@ -46,6 +46,8 @@ podcast_description: |-
 
 podcast_ax_xlm: "/podcast.xml"
 
+ax_youtube_channel: "https://www.youtube.com/channel/UChKHdhl2GGmMD2hhyrd67Xw"
+
 
 defaults:
   # _posts

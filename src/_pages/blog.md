@@ -1,8 +1,10 @@
 ---
 title: "Blog 📝"
-excerpt: Tips, tutorials, guides from asynx.dev Team
+excerpt: Tips, tutorials, guides from asynx.dev
 layout: posts
 permalink: /blog/
+entries_layout: grid
+classes: wide
 header:
     overlay_image: /assets/images/blog_teaser.jpg
 ---

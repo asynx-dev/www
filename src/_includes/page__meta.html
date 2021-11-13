@@ -40,12 +40,11 @@
 
     {% if document.tags contains 'tr' or document.tags contains 'en' %}
       <span class="page__meta-lang">
-        <i class="fas {% if include.type == 'grid' %}fa-fw {% endif %}fa-language" aria-hidden="true"></i>
         {% if document.tags contains 'tr' %}
-        🇹🇷
+        <i class="fas {% if include.type == 'grid' %}fa-fw {% endif %}fa-language" aria-hidden="true" title="Turkish/Türkçe"></i> 🇹🇷
         {% endif %}
         {% if document.tags contains 'en' %}
-        🇬🇧
+        <i class="fas {% if include.type == 'grid' %}fa-fw {% endif %}fa-language" aria-hidden="true" title="İngilizce/English"></i> 🇬🇧
         {% endif %}
       </span>
     {% endif %}
@@ -53,10 +52,28 @@
     {% if (document.tags contains 'tr' or document.tags contains 'en' ) and document.podcast_link %}<span class="page__meta-sep"></span>{% endif %}
 
     {% if document.podcast_link %}
-    <span class="page__meta-podcast">
-      <i class="fas {% if include.type == 'grid' %}fa-fw {% endif %}fas fa-headphones" aria-hidden="true"></i>
-    </span>
-  {% endif %}
+        <span class="page__meta-podcast">
+        {% if document.tags contains 'en' %}
+        <i class="fas {% if include.type == 'grid' %}fa-fw {% endif %}fas fa-headphones" aria-hidden="true" title="Audio narration available"></i>
+        {% endif %}
+        {% if document.tags contains 'tr' %}
+        <i class="fas {% if include.type == 'grid' %}fa-fw {% endif %}fas fa-headphones" aria-hidden="true" title="Sesli anlatım var"></i>
+        {% endif %}
+        </span>
+    {% endif %}
+
+    {% if document.podcast_link and document.ax_video_id%}<span class="page__meta-sep"></span>{% endif %}
+
+    {% if document.ax_video_id %}
+        <span class="page__meta-video">
+        {% if document.tags contains 'en' %}
+        <i class="fas {% if include.type == 'grid' %}fa-fw {% endif %}fas fa-video" aria-hidden="true" title="Video available"></i>
+        {% endif %}
+        {% if document.tags contains 'tr' %}
+        <i class="fas {% if include.type == 'grid' %}fa-fw {% endif %}fas fa-video" aria-hidden="true" title="Video var"></i>
+        {% endif %}
+        </span>
+    {% endif %}
 
   </p>
 {% endif %}

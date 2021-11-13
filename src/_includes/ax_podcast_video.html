@@ -24,3 +24,29 @@
 {% endif %}
 </p>
 {% endif %}
+
+{% if page.ax_video_id %}
+<p class="notice">
+{% if page.tags contains 'tr' %}
+<i class="fas fa-video"></i> Bu içeriğin video kaydı mevcut.
+{% endif %}
+{% if page.tags contains 'en' %}
+<i class="fas fa-video"></i> Video is available for the content.
+{% endif %}
+<br />
+<iframe src="https://www.youtube-nocookie.com/embed/{{ page.ax_video_id }}" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowfullscreen>
+    {% if page.tags contains 'tr' %}
+    Üzgünüm, tarayıcınız iframe (HTML) ile video göstermeye izin vermiyor.
+    {% endif %}
+    {% if page.tags contains 'en' %}
+    Sorry, but your browser doesn't allow us to show the video with an iframe (HTML).
+    {% endif %}
+</iframe>
+{% if page.tags contains 'tr' %}
+<i class="fab fa-youtube"></i> <a href="https://www.youtube.com/watch?v={{ page.ax_video_id }}">Link</a> <i class="fab fa-youtube"></i> <a href="{{ site.ax_youtube_channel }}">Kanal</a>
+{% endif %}
+{% if page.tags contains 'en' %}
+<i class="fab fa-youtube"></i> <a href="https://www.youtube.com/watch?v={{ page.ax_video_id }}">Link</a> <i class="fab fa-youtube"></i> <a href="{{ site.ax_youtube_channel }}">Channel</a>
+{% endif %}
+</p>
+{% endif %}
