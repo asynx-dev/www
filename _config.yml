@@ -19,11 +19,11 @@ plugins:
   - jekyll-last-modified-at
   - jekyll-archives
 
-#feed:
-#  path: blog.xml
+feed:
+  path: feed.xml
 
-#atom_feed:
-#  path: "/blog.xml"
+atom_feed:
+  path: "/feed.xml"
 
 include:
   - _pages

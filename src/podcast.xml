@@ -17,6 +17,7 @@ xmlns:rawvoice="http://www.rawvoice.com/rawvoiceRssModule/"
 <atom:link href="{{ site.url }}/podcast.xml" rel="self" type="application/rss+xml" />
 <link>{{ site.url }}</link>
 <description>{{ site.podcast_description }}</description>
+<copyright>Copyright, {{ site.podcast_author }}</copyright>
 <lastBuildDate>{{ site.time | time_to_rssschema }}</lastBuildDate>
 <!--<language>en</language> Both en and tr ?-->
 <language>en-us</language>
@@ -61,7 +62,7 @@ xmlns:rawvoice="http://www.rawvoice.com/rawvoiceRssModule/"
         <![CDATA[{{ ep.excerpt | strip_html | truncatewords: 50 | expand_urls: site.url | cdata_escape }}]]>
     </description>
     <content:encoded>
-        <![CDATA[{{ ep.podcast_content | newline_to_br | expand_urls: site.url | cdata_escape }}]]>
+        <![CDATA[{{ ep.podcast_content | markdownify  | expand_urls: site.url | cdata_escape }}]]>
     </content:encoded>
 
     <enclosure url="{{ ep.podcast_link }}" length="{{ ep.podcast_length }}" type="audio/mpeg" />
