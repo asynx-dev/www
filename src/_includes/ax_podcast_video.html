@@ -1,10 +1,10 @@
 {% if page.podcast_link %}
-<p class="notice">
+<p class="notice--success">
 {% if page.tags contains 'tr' %}
-<i class="fas fa-headphones"></i> Bu içeriğin ses kaydı mevcut.
+Dinleyin <i class="fas fa-headphones"></i>
 {% endif %}
 {% if page.tags contains 'en' %}
-<i class="fas fa-headphones"></i> Recording is available for the content.
+Listen <i class="fas fa-headphones"></i>
 {% endif %}
 <br />
 <audio controls preload='metadata' style='width: 100%;'>
@@ -17,21 +17,33 @@
     {% endif %}
 </audio>
 {% if page.tags contains 'tr' %}
-<i class="fas fa-file-download"></i> <a href="{{ page.podcast_link }}" download>Link</a> <i class="fas fa-podcast"></i> <a href="{{ site.url }}{{ site.podcast_ax_xlm }}">Podcastleri Takip Edin</a>
+<i class="fas fa-file-download"></i> <a href="{{ page.podcast_link }}" download>Link</a>
+<span style="float: right;">
+<i class="fas fa-podcast"></i> Podcast Yayınlarımız:
+<i class="fab fa-spotify"></i> <a href="{{ site.ax_podcast_spotify_url }}">Spotify</a>
+<i class="fab fa-itunes"></i> <a href="{{ site.ax_podcast_apple_url }}">iTunes</a>
+<i class="fas fa-rss-square"></i> <a href="{{ site.url }}{{ site.podcast_ax_xlm }}">RSS</a>
+</span>
 {% endif %}
 {% if page.tags contains 'en' %}
-<i class="fas fa-file-download"></i> <a href="{{ page.podcast_link }}" download>Link</a> <i class="fas fa-podcast"></i> <a href="{{ site.url }}{{ site.podcast_ax_xlm }}">Follow Podcast Channel</a>
+<i class="fas fa-file-download"></i> <a href="{{ page.podcast_link }}" download>Link</a>
+<span style="float: right;">
+<i class="fas fa-podcast"></i> Podcast Channels:
+<i class="fab fa-spotify"></i> <a href="{{ site.ax_podcast_spotify_url }}">Spotify</a>
+<i class="fab fa-itunes"></i> <a href="{{ site.ax_podcast_apple_url }}">iTunes</a>
+<i class="fas fa-rss-square"></i> <a href="{{ site.url }}{{ site.podcast_ax_xlm }}">RSS</a>
+</span>
 {% endif %}
 </p>
 {% endif %}
 
 {% if page.ax_video_id %}
-<p class="notice">
+<p class="notice--warning">
 {% if page.tags contains 'tr' %}
-<i class="fas fa-video"></i> Bu içeriğin video kaydı mevcut.
+İzleyin <i class="fas fa-video"></i>
 {% endif %}
 {% if page.tags contains 'en' %}
-<i class="fas fa-video"></i> Video is available for the content.
+Watch <i class="fas fa-video"></i>
 {% endif %}
 <br />
 <iframe src="https://www.youtube-nocookie.com/embed/{{ page.ax_video_id }}" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowfullscreen>
@@ -43,10 +55,16 @@
     {% endif %}
 </iframe>
 {% if page.tags contains 'tr' %}
-<i class="fab fa-youtube"></i> <a href="https://www.youtube.com/watch?v={{ page.ax_video_id }}">Link</a> <i class="fab fa-youtube"></i> <a href="{{ site.ax_youtube_channel }}">Kanal</a>
+<i class="fab fa-youtube"></i> <a href="https://www.youtube.com/watch?v={{ page.ax_video_id }}">Link</a>
+<span style="float: right;">
+<i class="fab fa-youtube"></i> <a href="{{ site.ax_youtube_channel }}">Kanal</a>
+</span>
 {% endif %}
 {% if page.tags contains 'en' %}
-<i class="fab fa-youtube"></i> <a href="https://www.youtube.com/watch?v={{ page.ax_video_id }}">Link</a> <i class="fab fa-youtube"></i> <a href="{{ site.ax_youtube_channel }}">Channel</a>
+<i class="fab fa-youtube"></i> <a href="https://www.youtube.com/watch?v={{ page.ax_video_id }}">Link</a>
+<span style="float: right;">
+<i class="fab fa-youtube"></i> <a href="{{ site.ax_youtube_channel }}">Channel</a>
+</span>
 {% endif %}
 </p>
 {% endif %}
