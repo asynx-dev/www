@@ -33,7 +33,7 @@ gem "wdm", "~> 0.1.1", :platforms => [:mingw, :x64_mingw, :mswin]
 
 # We are modifying some template files in the repo so fix the version and
 # change it manually
-gem "minimal-mistakes-jekyll", "4.22.0"
+gem "minimal-mistakes-jekyll", "4.23.0"
 gem "html-proofer"
 
 # See: https://stackoverflow.com/a/65547010/1766391
