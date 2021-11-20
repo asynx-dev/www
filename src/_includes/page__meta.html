@@ -1,5 +1,5 @@
 {% assign document = post | default: page %}
-{% if document.read_time or document.show_date or document.axseq %}
+{% if document.read_time or document.show_date or document.axseq or document.tags contains 'tr' or document.tags contains 'en' or document.podcast_link or document.ax_video_id %}
   <p class="page__meta">
     {% if document.show_date and document.date %}
       {% assign date = document.date %}
@@ -37,7 +37,7 @@
       </span>
     {% endif %}
 
-    {% if document.axseq and (document.tags contains 'tr' or document.tags contains 'en' ) %}<span class="page__meta-sep"></span>{% endif %}
+    {% if document.axseq %} {% if document.tags contains 'tr' or document.tags contains 'en' %}<span class="page__meta-sep"></span>{% endif %}{% endif %}
 
     {% if document.tags contains 'tr' or document.tags contains 'en' %}
       <span class="page__meta-lang">
@@ -50,7 +50,7 @@
       </span>
     {% endif %}
 
-    {% if (document.tags contains 'tr' or document.tags contains 'en' ) and document.podcast_link %}<span class="page__meta-sep"></span>{% endif %}
+    {% if document.tags contains 'tr' or document.tags contains 'en'%} {% if document.podcast_link %}<span class="page__meta-sep"></span>{% endif %}{% endif %}
 
     {% if document.podcast_link %}
         <span class="page__meta-podcast">
@@ -63,7 +63,7 @@
         </span>
     {% endif %}
 
-    {% if document.podcast_link and document.ax_video_id%}<span class="page__meta-sep"></span>{% endif %}
+    {% if document.podcast_link and document.ax_video_id %}<span class="page__meta-sep"></span>{% endif %}
 
     {% if document.ax_video_id %}
         <span class="page__meta-video">
