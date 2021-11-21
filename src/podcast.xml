@@ -18,7 +18,7 @@ xmlns:rawvoice="http://www.rawvoice.com/rawvoiceRssModule/"
 <link>{{ site.url }}</link>
 <description>{{ site.podcast_description }}</description>
 <copyright>Copyright, {{ site.podcast_author }}</copyright>
-<lastBuildDate>{{ site.time | time_to_rssschema }}</lastBuildDate>
+<lastBuildDate>{{ site.time | date: "%a, %d %b %Y %H:%M:%S %z" }}</lastBuildDate>
 <!--<language>en</language> Both en and tr ?-->
 <language>en-us</language>
 <sy:updatePeriod>monthly</sy:updatePeriod>
@@ -49,7 +49,7 @@ xmlns:rawvoice="http://www.rawvoice.com/rawvoiceRssModule/"
     <title>{% if ep.podcast_title %}{{ ep.podcast_title }}{% else %}{{ ep.title }}{% if ep.tags contains 'en' %} (EN){% endif %}{% if ep.tags contains 'tr' %} (TR){% endif %}{% endif %}</title>
     <link>{{ site.url }}{{ ep.url }}</link>
     <comments>{{ site.url }}{{ ep.url }}#comments</comments>
-    <pubDate>{{ ep.date | time_to_rssschema }}</pubDate>
+    <pubDate>{{ ep.date | date: "%a, %d %b %Y %H:%M:%S %z" }}</pubDate>
     <dc:creator><![CDATA[{{ site.author | cdata_escape }}]]></dc:creator>
 {% for category in ep.categories %}
     <category><![CDATA[{{ category | cdata_escape }}]]></category>
