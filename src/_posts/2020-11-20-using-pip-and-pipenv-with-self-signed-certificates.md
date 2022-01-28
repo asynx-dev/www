@@ -11,7 +11,7 @@ tags:
     - pipenv
     - proxy
     - ssl
-published: false
+published: true
 ---
 
 If you work in a cooperate environment, you may be working behind proxies and

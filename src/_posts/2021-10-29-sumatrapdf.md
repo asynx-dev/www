@@ -57,7 +57,7 @@ ax_video_id: "-GNsF_dTmjU"
 author: ayazar
 toc: true
 axseq: 5
-published: false
+published: true
 ---
 
 # Giriş

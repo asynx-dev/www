@@ -11,7 +11,7 @@ tags:
     - ubuntu
 author: ayazar
 axseq: 2
-published: false
+published: true
 ---
 
 In this post, we will install Ubuntu 20.04 WSL package on an **offline**

@@ -12,7 +12,7 @@ tags:
 author: ayazar
 toc: false
 axseq: 6
-published: false
+published: true
 ---
 
 This post was originally publish on Alper Yazar's personal blog in 2014.
