@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - uses: actions/setup-node@v2.5.0
+    - uses: actions/setup-node@v2.5.1
     - name: Install markdownlint-cli
       run: |
         npm install
@@ -70,7 +70,7 @@ jobs:
       run: |
         pipenv run python test.py pytest
     - name: Deploy (Dry-Run)
-      uses: JamesIves/github-pages-deploy-action@4.1.7
+      uses: JamesIves/github-pages-deploy-action@v4.2.2
       with:
         dry-run: true
         token: ${{ secrets.GITHUB_TOKEN }}
