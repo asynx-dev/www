@@ -13,7 +13,7 @@ header:
 {: .notice--info}
 
 Bülten özellikle hesaplarımızı [takip]({% link _pages/tr/takip.md %}) etmek
-yerine e-posta'yı tercih eden kişiler içindir. Bülteni **haftada en fazla bir
+yerine e-posta'yı tercih eden kişiler içindir. Bülteni **iki haftada en fazla bir
 adet** olacak şekilde hazırlıyoruz (güncelleme yoksa bülten de yayınlanmıyor).
 Bülten arşivi aşağıda bulunmaktadır. Bültenleri bu sayfadan takip edebilirsiniz
 fakat e-posta listesine katılmanızı öneririz. Listeye katıldığınız takdirde her

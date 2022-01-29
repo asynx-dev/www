@@ -12,9 +12,11 @@ header:
 
 Yeni bir yazı yazdığımızda, bir duyuru yaptığımızda hemen haberdar olmak veya
 bize ulaşmak için sosyal medya hesaplarımızı takip edebilirsiniz. Tüm
-platformları kullansak da güncel durumda en çok **Twitter** ve **LinkedIn**'de
-aktif durumdayız. Tüm hesaplarımız sayfanın altında listelenmiştir.
+platformları kullansak da güncel durumda en çok
+[Twitter](https://twitter.com/asynxdev) ve
+[LinkedIn](https://www.linkedin.com/groups/12487093)'de aktif durumdayız. Tüm
+hesaplarımız sayfanın altında listelenmiştir.
 
-Ayrıca e-posta ile bizleri takip etmek istiyorsanız haftada en fazla bir adet
+Ayrıca e-posta ile bizleri takip etmek istiyorsanız iki haftada en fazla bir adet
 olacak şekilde yayınladığımız bülten listesine de [kayıt]({% link
 _pages/tr/bulten.md %}) olabilirsiniz.

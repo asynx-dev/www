@@ -13,7 +13,7 @@ header:
 {: .notice--info}
 
 The newsletter is especially for those who prefer email instead of [follow]({%
-link _pages/follow.md %})ing our accounts. We publish **at most once a week**
+link _pages/follow.md %})ing our accounts. We publish **at most once in two weeks**
 (if no update, no newsletter). The newsletter archive is listed below. Although
 you can read the newsletters here, the preferred way is joining to newsletter
 list. Each time we publish a newsletter here, we will send a copy to your
