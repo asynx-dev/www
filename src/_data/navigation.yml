@@ -9,7 +9,5 @@ main:
     url: /contact/
   - title: "Newsletter"
     url: /newsletter/
-  - title: "(🇬🇧)"
-    url: /
   - title: "(🇹🇷)"
     url: /tr/
