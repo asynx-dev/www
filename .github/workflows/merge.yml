@@ -78,5 +78,5 @@ jobs:
         folder: _site # The folder the action should deploy.
         clean: true # Automatically remove deleted files from the deploy branch
         single-commit: true # Like push force, keep only the last commit
-        #git-config-name: asynxdev bot # Use the generic account
+        git-config-name: asynxdev bot # Use the generic account
         git-config-email: <> #asynxdev@users.noreply.github.com
