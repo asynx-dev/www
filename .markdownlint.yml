@@ -40,5 +40,11 @@
   "MD046": { "style": "fenced"},
 
   # ``` is code block style
-  "MD048": { "style": "backtick"}
+  "MD048": { "style": "backtick"},
+
+  # We use * * for emphasis
+  "MD049": { "style": "asterisk"},
+
+  # We use ** ** for strong
+  "MD050": { "style": "asterisk"}
 }
