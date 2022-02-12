@@ -70,7 +70,7 @@ jobs:
       run: |
         pipenv run python test.py pytest
     - name: Deploy (Dry-Run)
-      uses: JamesIves/github-pages-deploy-action@v4.2.2
+      uses: JamesIves/github-pages-deploy-action@v4.2.3
       with:
         dry-run: true
         token: ${{ secrets.GITHUB_TOKEN }}
@@ -79,4 +79,4 @@ jobs:
         clean: true # Automatically remove deleted files from the deploy branch
         single-commit: true # Like push force, keep only the last commit
         git-config-name: asynxdev bot # Use the generic account
-        git-config-email: asynxdev@users.noreply.github.com
+        git-config-email: <> #asynxdev@users.noreply.github.com

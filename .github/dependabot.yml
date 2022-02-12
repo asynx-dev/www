@@ -8,24 +8,36 @@ updates:
   - package-ecosystem: "bundler" # See documentation for possible values
     directory: "/" # Location of package manifests
     schedule:
-      interval: "monthly"
+      interval: "weekly"
+      day: "saturday"
+      timezone: "Europe/Istanbul"
+      time: "07:00"
     assignees:
       - "alperyazar"
   - package-ecosystem: "github-actions" # See documentation for possible values
     directory: "/" # Location of package manifests
     schedule:
-      interval: "monthly"
+      interval: "weekly"
+      day: "saturday"
+      timezone: "Europe/Istanbul"
+      time: "07:00"
     assignees:
       - "alperyazar"
   - package-ecosystem: "pip" # See documentation for possible values
     directory: "/" # Location of package manifests
     schedule:
-      interval: "monthly"
+      interval: "weekly"
+      day: "saturday"
+      timezone: "Europe/Istanbul"
+      time: "07:00"
     assignees:
       - "alperyazar"
   - package-ecosystem: "npm" # See documentation for possible values
     directory: "/" # Location of package manifests
     schedule:
-      interval: "monthly"
+      interval: "weekly"
+      day: "saturday"
+      timezone: "Europe/Istanbul"
+      time: "07:00"
     assignees:
       - "alperyazar"
