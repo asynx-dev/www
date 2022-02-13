@@ -1,13 +1,13 @@
 main:
   - title: "Blog"
     url: /blog/
+  - title: "Xradar"
+    url: /xradar/
   - title: "Projects"
     url: /projects/
   - title: "About"
     url: /about/
   - title: "Contact"
     url: /contact/
-  - title: "Newsletter"
-    url: /newsletter/
   - title: "(🇹🇷)"
     url: /tr/

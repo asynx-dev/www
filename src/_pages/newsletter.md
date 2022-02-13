@@ -7,6 +7,7 @@ collection: newsletter
 entries_layout: list
 header:
     overlay_image: /assets/images/newsletter_teaser.jpg
+published: false
 ---
 
 (🇹🇷) Türkçe'si [mevcut.]({% link _pages/tr/bulten.md %})

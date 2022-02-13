@@ -7,6 +7,7 @@ collection: newsletter
 entries_layout: list
 header:
     overlay_image: /assets/images/newsletter_teaser.jpg
+published: false
 ---
 
 [Read]({% link _pages/newsletter.md %}) in (🇬🇧) English

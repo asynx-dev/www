@@ -11,11 +11,14 @@ header:
 {: .notice--info}
 
 You can follow our social media accounts to get notified when we write a new
-blog post or make an announcement or to reach us. Currently, we are mostly
+blog post or make an announcement or to reach us. Alternatively, you can
+subscribe our blog posts with RSS via the FEED link given at the bottom.
+
+Currently, we are mostly
 active on [Twitter](https://twitter.com/asynxdev) and
 [LinkedIn](https://www.linkedin.com/groups/12487093) but we try to post on all
 platforms. All accounts are listed at the bottom.
 
-We also publish newsletter (at most once in two weeks) and you can
-[subscribe]({% link _pages/newsletter.md %})
+We also publish Xradar newsletter (at most once in two weeks) and you can
+[subscribe]({% link _pages/xradar.md %})
 with e-mail if you prefer this.

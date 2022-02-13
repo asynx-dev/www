@@ -118,7 +118,7 @@ footer:
       url: "https://www.linkedin.com/groups/12487093"
     - label: "Newsletter"
       icon: "fas fa-envelope"
-      url: "/newsletter/"
+      url: "/xradar/"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "https://github.com/asynx-dev"
