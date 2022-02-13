@@ -8,22 +8,15 @@ ayazar:
   name: "Alper Yazar"
   bio: "PhD candidate and electronics engineer"
   avatar: /assets/images/bio/ayazar.png
+  twitter: "alper_yazar"
+  linkedin: "alperyazar"
+  github: "alperyazar"
+  home: "https://www.alperyazar.com"
+  uri: "https://www.alperyazar.com"
   links:
-    - label: "Website"
-      icon: "fas fa-fw fa-link"
-      url: "https://www.alperyazar.com"
     - label: "0000-0002-0904-9623"
       icon: "fab fa-fw fa-orcid"
       url: "https://orcid.org/0000-0002-0904-9623"
-    - label: "LinkedIn"
-      icon: "fab fa-fw fa-linkedin"
-      url: "http://www.linkedin.com/in/alperyazar"
-    - label: "alperyazar"
-      icon: "fab fa-fw fa-github"
-      url: "https://github.com/alperyazar"
-    - label: "@alper_yazar"
-      icon: "fab fa-fw fa-twitter-square"
-      url: "https://twitter.com/alper_yazar"
 
 ax:
   name: "asynx.dev"
