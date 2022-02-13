@@ -11,6 +11,10 @@ tags:
     - synctex
 author: ayazar
 toc: false
+header:
+    teaser: /assets/images/blog/21/6_teaser.png
+    overlay_image: /assets/images/blog/21/6_image.jpg
+    overlay_filter: 0.6
 axseq: 6
 published: true
 ---
