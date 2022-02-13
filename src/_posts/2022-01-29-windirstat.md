@@ -6,7 +6,7 @@ categories:
 header:
     teaser: /assets/images/blog/22/1_teaser.png
     overlay_image: /assets/images/blog/22/1_image.jpg
-    overlay_filter: 0.7
+    overlay_filter: 0.5
 tags:
     - tr
     - windirstat

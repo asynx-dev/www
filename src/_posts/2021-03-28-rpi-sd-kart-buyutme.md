@@ -12,7 +12,7 @@ tags:
 header:
     teaser: /assets/images/blog/21/3_teaser.jpg
     overlay_image: /assets/images/blog/21/3_image.jpg
-    overlay_filter: 0.7
+    overlay_filter: 0.5
 author: ayazar
 axseq: 3
 published: true
