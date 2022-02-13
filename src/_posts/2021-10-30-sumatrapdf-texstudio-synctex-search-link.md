@@ -19,7 +19,7 @@ axseq: 6
 published: true
 ---
 
-This post was originally publish on Alper Yazar's personal blog in 2014.
+This post was originally published on Alper Yazar's personal blog in 2014.
 {: .notice--info}
 
 I use [TeXstudio](https://www.texstudio.org/) for my LaTeX works.
