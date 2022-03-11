@@ -6,17 +6,12 @@ atirlioglu:
 
 ayazar:
   name: "Alper Yazar"
-  bio: "PhD candidate and electronics engineer"
+  bio: "electronics engineer"
   avatar: /assets/images/bio/ayazar.png
   twitter: "alper_yazar"
   linkedin: "alperyazar"
-  github: "alperyazar"
   home: "https://www.alperyazar.com"
   uri: "https://www.alperyazar.com"
-  links:
-    - label: "0000-0002-0904-9623"
-      icon: "fab fa-fw fa-orcid"
-      url: "https://orcid.org/0000-0002-0904-9623"
 
 ax:
   name: "asynx.dev Team"
