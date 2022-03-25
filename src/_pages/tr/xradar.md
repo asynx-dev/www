@@ -1,6 +1,6 @@
 ---
 title: Xradar
-excerpt: İki haftalık bülten
+excerpt: Radar'ımıza takılanlar
 permalink: /tr/xradar/
 date: 2022-02-13
 toc: false
@@ -13,9 +13,11 @@ header:
 
 Xradar, [blogumuzdaki]({% link _pages/blog.md %}) özel bir bölümün adı.
 İlgilendiğimiz alanlarda nelere oluyor onları takip etmeye çalışıyor, asynx.dev
-topluluğundan yeni yazı ve haberleri iki haftada bir (umuyoruz) **Xradar**
-yazıları ile paylaşıyoruz. Xradar yazıları hem Türkçe hem de İngilizce olarak
-yayınlanıyor fakat videolar şimdilik sadece Türkçe.
+topluluğundan yeni yazı ve haberleri **Xradar** başlığı altındaki yazılarla
+paylaşıyoruz.
+
+Xradar yazıları **Türkçe** yayınlanmaktadır.
+{:.notice--info}
 
 Eğer bizi
 [takip ederseniz]({% link _pages/tr/takip.md %}),
