@@ -12,7 +12,6 @@ header:
     overlay_image: /assets/images/blog/22/2_image.jpg
     overlay_filter: 0.5
 author: ayazar
-toc: true
 axseq: 2
 published: true
 ---
