@@ -3,8 +3,8 @@ main:
     url: /blog/
   - title: "Xradar"
     url: /tr/xradar/
-  - title: "Projects"
-    url: /projects/
+  - title: "Calendar"
+    url: /calendar/
   - title: "About"
     url: /about/
   - title: "Contact"
