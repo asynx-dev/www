@@ -65,3 +65,16 @@ buttons.
 Or visit [Subscribe to someone’s Google Calendar](https://support.google.com/calendar/answer/37100)
 page and follow instructions under *Use a link to add a public calendar*.
 Use iCal URL of the calendar that you want to subscribe.
+
+## Microsoft Outlook
+
+Refresh period of Microsoft Outlook may be longer than 24 hrs.
+{: .notice--info}
+
+If you are using Microsoft Outook on your computer, please follow steps
+under *Add internet calendars* section on page
+[Add and import calendars](https://support.microsoft.com/en-us/office/import-calendars-into-outlook-8e8364e1-400e-4c0f-a573-fe76b5a2d379).
+
+If you are using Office 365 or Outlook on the web, please follow steps
+under *Subscribe to a calendar* on page
+[Import or subscribe to a calendar in Outlook on the web](https://support.microsoft.com/en-us/office/import-or-subscribe-to-a-calendar-in-outlook-on-the-web-503ffaf6-7b86-44fe-8dd6-8099d95f38df).

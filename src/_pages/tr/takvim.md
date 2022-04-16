@@ -69,3 +69,17 @@ olma](https://support.google.com/calendar/answer/37100?hl=tr) sayfasını ziyare
 edip, *Herkese açık bir takvim eklemek için bağlantı kullanma* kısmındaki
 adımları takip edebilirsiniz. Burada URL yerine abone olmak istediğiniz
 takvimin iCal adresini yazmalısınız.
+
+## Microsoft Outlook
+
+Outlook üzerinde etkinliklerin güncellenmesi 24 saati aşabilir.
+{: .notice--info}
+
+Bilgisayarınızda Microsoft Outlook kullanıyorsanız
+[Takvim ekleme ve içeri aktarma](https://support.microsoft.com/tr-tr/office/takvimleri-outlook-a-aktarma-8e8364e1-400e-4c0f-a573-fe76b5a2d379)
+sayfasındaki *İnternet takvimleri ekleme* kısmındaki adımları takip ederek
+abone olabilirsiniz.
+
+Office 365 veya web üzerinde Outlook kullanıyorsanız
+[Web üzerinde Outlook’a bir takvimi içeri aktarma veya takvime abone olma](https://support.microsoft.com/tr-tr/office/web-%C3%BCzerinde-outlook-a-bir-takvimi-i%C3%A7eri-aktarma-veya-takvime-abone-olma-503ffaf6-7b86-44fe-8dd6-8099d95f38df)
+sayfasındaki *Takvime abone olma* kısımlarını takip ederek abone olabilirsiniz.
