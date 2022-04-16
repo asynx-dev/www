@@ -5,8 +5,9 @@ on:
     branches:
       - master
   schedule:
-    # UTC Time
-    - cron: "0 6 * * 6"
+    # UTC Time, AT 03:00 on Sunday.
+    # Looks suitable for Xradar schedule
+    - cron: "0 3 * * 0"
 
 jobs:
 
