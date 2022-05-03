@@ -20,4 +20,5 @@ active on [Twitter](https://twitter.com/asynxdev) and
 platforms. All accounts are listed at the bottom.
 
 Also we upload video contents to our [YouTube
-channel](https://www.youtube.com/channel/UChKHdhl2GGmMD2hhyrd67Xw).
+channel](https://www.youtube.com/channel/UChKHdhl2GGmMD2hhyrd67Xw). We also
+publish audio contents with [our Podcast channel.](https://anchor.fm/asynxdev)

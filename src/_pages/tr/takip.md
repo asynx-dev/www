@@ -22,7 +22,8 @@ hesaplarımız sayfanın altında listelenmiştir.
 
 Bu siteye ek olarak
 [YouTube](https://www.youtube.com/channel/UChKHdhl2GGmMD2hhyrd67Xw) kanalımızda
-da içerik üretiyoruz.
+da içerik üretiyoruz. Dinleyerek takip etmek isteyenler için
+[Podcast kanalımız](https://anchor.fm/asynxdev)dan da içerik sunuyoruz.
 
 Ayrıca Türkçe olarak yayınladığımız [RADAR](https://radar.asynx.dev/)
 içeriklerini e-posta olarak da takip edebilirsiniz.

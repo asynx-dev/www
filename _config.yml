@@ -110,6 +110,9 @@ footer:
     - label: "YouTube"
       icon: "fab fa-fw fa-youtube"
       url: "https://www.youtube.com/channel/UChKHdhl2GGmMD2hhyrd67Xw"
+    - label: "Podcast"
+      icon: "fas fa-microphone"
+      url: https://anchor.fm/asynxdev
     - label: "Twitter"
       icon: "fab fa-fw fa-twitter-square"
       url: "https://twitter.com/asynxdev"
