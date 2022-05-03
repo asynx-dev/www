@@ -150,5 +150,6 @@ twitter:
   username: "asynxdev"
 
 #ax_podcast_spotify_url: https://open.spotify.com/show/4UnLzSPIlEwjBBjgTNTzJL
-ax_podcast_apple_url: https://podcasts.apple.com/us/podcast/asynx-dev/id1595450088
-ax_podcast_google_url: https://podcasts.google.com/feed/aHR0cHM6Ly9hc3lueC5kZXYvcG9kY2FzdC54bWw
+# ax_podcast_apple_url: https://podcasts.apple.com/us/podcast/asynx-dev/id1595450088
+# ax_podcast_google_url: https://podcasts.google.com/feed/aHR0cHM6Ly9hc3lueC5kZXYvcG9kY2FzdC54bWw
+ax_podcast_anchor_url: https://anchor.fm/asynxdev

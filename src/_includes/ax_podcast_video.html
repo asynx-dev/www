@@ -1,4 +1,4 @@
-{% if page.podcast_link %}
+{% if page.ax_podcast_id %}
 <p class="notice--success">
 {% if page.tags contains 'tr' %}
 Dinleyin <i class="fas fa-headphones"></i>
@@ -7,33 +7,24 @@ Dinleyin <i class="fas fa-headphones"></i>
 Listen <i class="fas fa-headphones"></i>
 {% endif %}
 <br />
-<audio controls preload='metadata' style='width: 100%;'>
-    <source src='{{ page.podcast_link }}'>
+<iframe src="https://anchor.fm/asynxdev/embed/episodes/{{ page.ax_podcast_id }}" height="102px" width="100%" frameborder="0" scrolling="no">
     {% if page.tags contains 'tr' %}
-    Üzgünüm, tarayıcınız gömülü ses oynatmayı (HTML5) desteklemiyor.
+    Üzgünüm, tarayıcınız iframe (HTML) ile video göstermeye izin vermiyor.
     {% endif %}
     {% if page.tags contains 'en' %}
-    Sorry, but your browser doesn't support embedded audio player (HTML5).
+    Sorry, but your browser doesn't allow us to show the video with an iframe (HTML).
     {% endif %}
-</audio>
+</iframe>
 {% if page.tags contains 'tr' %}
-<i class="fas fa-file-download"></i> <a href="{{ page.podcast_link }}" download>Link</a>
+<i class="fas fa-volume-up"></i> <a href="https://anchor.fm/asynxdev/episodes/{{ page.ax_podcast_id }}">Link</a>
 <span style="float: right;">
-<i class="fas fa-podcast"></i> Podcast:
-{% if site.ax_podcast_spotify_url %}<i class="fab fa-spotify"></i> <a href="{{ site.ax_podcast_spotify_url }}">Spotify</a>{% endif %}
-{% if site.ax_podcast_apple_url %}<i class="fab fa-itunes"></i> <a href="{{ site.ax_podcast_apple_url }}">iTunes</a>{% endif %}
-{% if site.ax_podcast_google_url %}<i class="fab fa-google"></i> <a href="{{ site.ax_podcast_google_url }}">Google</a>{% endif %}
-<i class="fas fa-rss-square"></i> <a href="{{ site.url }}{{ site.podcast_ax_xlm }}">RSS</a>
+<i class="fas fa-podcast"></i> <a href="{{ site.ax_podcast_anchor_url }}">Tüm Podcastler</a>
 </span>
 {% endif %}
 {% if page.tags contains 'en' %}
-<i class="fas fa-file-download"></i> <a href="{{ page.podcast_link }}" download>Link</a>
+<i class="fas fa-volume-up"></i> <a href="https://anchor.fm/asynxdev/episodes/{{ page.ax_podcast_id }}">Link</a>
 <span style="float: right;">
-<i class="fas fa-podcast"></i> Podcast:
-{% if site.ax_podcast_spotify_url %}<i class="fab fa-spotify"></i> <a href="{{ site.ax_podcast_spotify_url }}">Spotify</a>{% endif %}
-{% if site.ax_podcast_apple_url %}<i class="fab fa-itunes"></i> <a href="{{ site.ax_podcast_apple_url }}">iTunes</a>{% endif %}
-{% if site.ax_podcast_google_url %}<i class="fab fa-google"></i> <a href="{{ site.ax_podcast_google_url }}">Google</a>{% endif %}
-<i class="fas fa-rss-square"></i> <a href="{{ site.url }}{{ site.podcast_ax_xlm }}">RSS</a>
+<i class="fas fa-podcast"></i> <a href="{{ site.ax_podcast_anchor_url }}">All Podcasts</a>
 </span>
 {% endif %}
 </p>
