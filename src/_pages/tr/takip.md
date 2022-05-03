@@ -20,6 +20,11 @@ Tüm platformları kullansak da güncel durumda en çok
 [LinkedIn](https://www.linkedin.com/groups/12487093)'de aktif durumdayız. Tüm
 hesaplarımız sayfanın altında listelenmiştir.
 
-Ayrıca e-posta ile bizleri takip etmek istiyorsanız iki haftada en fazla bir adet
-olacak şekilde yayınladığımız Xradar bülteni listesine de [kayıt]({% link
-_pages/tr/xradar.md %}) olabilirsiniz.
+Bu siteye ek olarak
+[YouTube](https://www.youtube.com/channel/UChKHdhl2GGmMD2hhyrd67Xw) kanalımızda
+da içerik üretiyoruz.
+
+Ayrıca Türkçe olarak yayınladığımız [RADAR](https://radar.asynx.dev/)
+içeriklerini e-posta olarak da takip edebilirsiniz.
+[RADAR](https://radar.asynx.dev/) yazılarına kendimizden duyuruları da
+ekliyoruz.

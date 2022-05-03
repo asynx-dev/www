@@ -20,18 +20,36 @@ feature_row:
     url: "/blog/"
     btn_label: "Yazıları Oku"
     btn_class: "btn--info"
+  - image_path: /assets/images/radar_teaser.jpg
+    alt: "RADAR"
+    excerpt: "<br/>Alanımızda neler oluyor bitiyor bunları bir bülten ve video olarak paylaşıyoruz."
+    url: "https://radar.asynx.dev"
+    btn_label: "RADAR Sayfası"
+    btn_class: "btn--success"
+  - image_path: /assets/images/calendar_teaser.jpg
+    alt: "Takvim"
+    excerpt: "<br/>FPGA/gömülü sistem gibi alanlarda olan webinar gibi etkinliklerin takvim(ler)i"
+    url: "/calendar"
+    btn_label: "Takvimleri Görün"
+    btn_class: "btn--warning"
   - image_path: /assets/images/projects_teaser.jpg
     alt: "Projeler"
-    excerpt: "<br/>Boş zamanlarımızda ilgimizi çeken konular üzerine çalışmayı seviyoruz"
+    excerpt: "<br/>Yaptığımız tüm projeler"
     url: "/tr/projeler/"
     btn_label: "Proje Listesi"
     btn_class: "btn--success"
   - image_path: /assets/images/follow_teaser.jpg
     alt: "Takip"
-    excerpt: "<br/>Bizi sosyal medyada takip edin ve bülten e-posta listemize katılın"
+    excerpt: "<br/>Bize sosyal medyada katılın"
     url: "/tr/takip/"
     btn_label: "Takip Edin"
     btn_class: "btn--warning"
+  - image_path: /assets/images/contact_teaser.jpg
+    alt: "İletişim"
+    excerpt: "<br/>Bile ulaşın"
+    url: "/tr/iletisim/"
+    btn_label: "Bize Ulaşın"
+    btn_class: "btn--info"
 ---
 
 {% include feature_row %}

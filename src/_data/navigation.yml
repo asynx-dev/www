@@ -1,10 +1,10 @@
 main:
   - title: "Blog"
     url: /blog/
-  - title: "Xradar"
-    url: /tr/xradar/
-  - title: "Calendar"
-    url: /calendar/
+  - title: "RADAR"
+    url: https://radar.asynx.dev
+  - title: "Projects"
+    url: /projects/
   - title: "About"
     url: /about/
   - title: "Contact"

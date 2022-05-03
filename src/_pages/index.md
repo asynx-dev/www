@@ -20,18 +20,36 @@ feature_row:
     url: "/blog/"
     btn_label: "Read Posts"
     btn_class: "btn--info"
+  - image_path: /assets/images/radar_teaser.jpg
+    alt: "RADAR"
+    excerpt: "<br/>Bulletin and videos about what's happening in our field (in Turkish only)"
+    url: "https://radar.asynx.dev"
+    btn_label: "RADAR Page"
+    btn_class: "btn--success"
+  - image_path: /assets/images/calendar_teaser.jpg
+    alt: "Calendar"
+    excerpt: "<br/>Calendar(s)(web and .ics) for FPGA/embedded related events like webinars"
+    url: "/calendar"
+    btn_label: "See Calendars"
+    btn_class: "btn--warning"
   - image_path: /assets/images/projects_teaser.jpg
     alt: "Projects"
-    excerpt: "<br/>In our spare time, we like working on topics that are interesting to us"
+    excerpt: "<br/>All projects from us"
     url: "/projects/"
-    btn_label: "List of Projects"
+    btn_label: "All Projects"
     btn_class: "btn--success"
   - image_path: /assets/images/follow_teaser.jpg
     alt: "Follow"
-    excerpt: "<br/>Join us on social media and subscribe our newsletter mailing list"
+    excerpt: "<br/>Join us on social media"
     url: "/follow/"
     btn_label: "Follow Us"
     btn_class: "btn--warning"
+  - image_path: /assets/images/contact_teaser.jpg
+    alt: "Contact"
+    excerpt: "<br/>Contact us"
+    url: "/contact/"
+    btn_label: "Contact Us"
+    btn_class: "btn--info"
 ---
 
 {% include feature_row %}

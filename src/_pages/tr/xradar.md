@@ -6,6 +6,7 @@ date: 2022-02-13
 toc: false
 header:
     overlay_image: /assets/images/xradar.png
+published: false
 ---
 
 [Read]({% link _pages/xradar.md %}) in (🇬🇧) English

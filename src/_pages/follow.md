@@ -19,6 +19,5 @@ active on [Twitter](https://twitter.com/asynxdev) and
 [LinkedIn](https://www.linkedin.com/groups/12487093) but we try to post on all
 platforms. All accounts are listed at the bottom.
 
-We also publish Xradar newsletter (at most once in two weeks) and you can
-[subscribe]({% link _pages/xradar.md %})
-with e-mail if you prefer this.
+Also we upload video contents to our [YouTube
+channel](https://www.youtube.com/channel/UChKHdhl2GGmMD2hhyrd67Xw).
