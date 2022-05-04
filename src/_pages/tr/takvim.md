@@ -39,6 +39,8 @@ iCal (canlı): <https://cal.asynx.dev/ics/free_virtual-cal_asynx_dev.ics>
 <iframe src="https://calendar.google.com/calendar/embed?src=8sar0e8es1aip4mibj2kj72qhk2idjts%40import.calendar.google.com&ctz=Europe%2FIstanbul" style="border: 0" width="100%" height="600" frameborder="0" scrolling="no"></iframe>
 <!--markdownlint-enable MD033 MD013-->
 
+[Tam Ekran (Büyük) Görünüm](https://calendar.google.com/calendar/embed?src=8sar0e8es1aip4mibj2kj72qhk2idjts%40import.calendar.google.com&ctz=Europe%2FIstanbul)
+
 # "Katkıda bulunmak istiyorum."
 
 Bu harika! Calendar (Takvim) bir açık kaynak proje ve siz de bizim takvimlerde
