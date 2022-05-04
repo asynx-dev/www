@@ -19,30 +19,36 @@ toc: true
 çalıştığımız konular (elektronik/gömülü sistemler/FPGA/yazılım) ile ilgili
 ilgimizi çeken etkinlikleri paylaştığımız bir başka açık kaynak projemiz.
 
-Bu bir topluluk projesi ve açık kaynak yapısı sayesinde siz de ilgili olacağını
-düşündüğünüz etkinlikleri ekleyerek katkı sağlayabilirsiniz. Katkı sağlamak
-istiyorsanız [proje sayfası](https://github.com/asynx-dev/calendar)na bakmanız
-yeterli.
-
-Bu sayfada tüm takvimleri (şimdilik tek takvim var: Webinar) görebilirsiniz.
-Ayrıca her takvim için [iCalendar,
+Bu sayfada tüm takvimleri (şimdilik tek takvim var: Ücretsiz Sanal (Çevrimiçi)
+Etkinlikler) görebilirsiniz. Ayrıca her takvim için [iCalendar,
 iCal](https://en.wikipedia.org/wiki/ICalendar) (`.ics`) dosyaları
-sağlanmaktadır. Bu dosyalar düzenli olarak güncellenmektedir ve bu sayede **siz de
-bu takvimleri kullandığınız takvim yazılımına ekleyebilirsiniz.** Herhangi
+sağlanmaktadır. Bu dosyalar düzenli olarak güncellenmektedir ve bu sayede **siz
+de bu takvimleri kullandığınız takvim yazılımına ekleyebilirsiniz.** Herhangi
 bir takvime nasıl abone olunacağı sayfanın altında anlatılmaktadır.
 
 # Takvimler
 
-## Webinar
+## Ücretsiz Sanal (Çevrimiçi) Etkinlikler
 
-Bu takvim FPGA, gömülü sistemler gibi konular üzerine firmaların düzenlediği
-[Webinar](https://tr.wikipedia.org/wiki/Webinar)ları göstermektedir.
+Bu takvimde internet üzerinde düzenlenen ücretsiz (ağırlıklı olarak
+[Webinar](https://tr.wikipedia.org/wiki/Webinar)) etkinlikler listelenmektedir.
 
-iCal (canlı): <https://cal.asynx.dev/ics/webinar-asynx-dev.ics>
+iCal (canlı): <https://cal.asynx.dev/ics/free_virtual-cal_asynx_dev.ics>
 
 <!--markdownlint-disable MD033 MD013-->
-<iframe src="https://calendar.google.com/calendar/embed?src=mvmvrsndbsie3cki657b11m9c5aohob8%40import.calendar.google.com&ctz=Europe%2FIstanbul" style="border: 0" width="100%" height="600" frameborder="0" scrolling="no"></iframe>
+<iframe src="https://calendar.google.com/calendar/embed?src=8sar0e8es1aip4mibj2kj72qhk2idjts%40import.calendar.google.com&ctz=Europe%2FIstanbul" style="border: 0" width="100%" height="600" frameborder="0" scrolling="no"></iframe>
 <!--markdownlint-enable MD033 MD013-->
+
+# "Katkıda bulunmak istiyorum."
+
+Bu harika! Calendar (Takvim) bir açık kaynak proje ve siz de bizim takvimlerde
+olmayan ama sizin bildiğiniz etkinlikleri göndererek katkıda bulunabilirsiniz.
+
+[CONTRIBUTING](https://github.com/asynx-dev/calendar/blob/master/CONTRIBUTING.md)
+sayfasına bakabilirsiniz (içeriğin çoğu İngilizce olabilir). En hızlı şekilde
+[şu
+form](https://docs.google.com/forms/d/e/1FAIpQLSdGZU8H_HiPADyYQCg9iEqZ1vJs4mN0vAUbAK5NNGr9ycPwSw/viewform?usp=sf_link)
+ile bize etkinlik gönderebilirsiniz.
 
 # Abone olma
 

@@ -19,28 +19,35 @@ toc: true
 project where we try to list events related to topics that most of the time we
 are working on (electronics/embedded/FPGA/software).
 
-This is a community and open source project so you can contribute it by adding
-events. Just check [the project page](https://github.com/asynx-dev/calendar) to
-contribute.
-
-You can view each calendar (for now, only one calendar: Webinar) on this page.
-Furthermore [iCalendar, iCal](https://en.wikipedia.org/wiki/ICalendar) (`.ics`)
-files provided for calendars. These files are updated regularly and you can
-**add these calendars to you favorite calendar software** by subscribing them.
-Subscription steps are given at the bottom of the page.
+You can view each calendar (for now, only one calendar: Free Virtual (Online)
+Events) on this page. Furthermore [iCalendar,
+iCal](https://en.wikipedia.org/wiki/ICalendar) (`.ics`) files provided for
+calendars. These files are updated regularly and you can **add these calendars
+to you favorite calendar software** by subscribing them. Subscription steps are
+given at the bottom of the page.
 
 # Calendars
 
-## Webinar
+## Free Virtual (Online) Events
 
-This calendar shows webinars (most of them are free) related to FPGAs, embedded
-things, etc.
+This calendar shows free virtual (online) events (most of them are webinars)
+related to FPGAs, embedded things, etc.
 
-iCal (live): <https://cal.asynx.dev/ics/webinar-asynx-dev.ics>
+iCal (live): <https://cal.asynx.dev/ics/free_virtual-cal_asynx_dev.ics>
 
 <!--markdownlint-disable MD033 MD013-->
-<iframe src="https://calendar.google.com/calendar/embed?src=mvmvrsndbsie3cki657b11m9c5aohob8%40import.calendar.google.com&ctz=Europe%2FIstanbul" style="border: 0" width="100%" height="600" frameborder="0" scrolling="no"></iframe>
+<iframe src="https://calendar.google.com/calendar/embed?src=8sar0e8es1aip4mibj2kj72qhk2idjts%40import.calendar.google.com&ctz=Europe%2FIstanbul" style="border: 0" width="100%" height="600" frameborder="0" scrolling="no"></iframe>
 <!--markdownlint-enable MD033 MD013-->
+
+# "I want to contribute."
+
+Wow, that's great! Calendar is an open source project and you can contribute it
+by adding events that you know but are missing in our calendars.
+
+Just check out
+[CONTRIBUTING](https://github.com/asynx-dev/calendar/blob/master/CONTRIBUTING.md).
+The fastest way of contribution is submitting events with [this
+form](https://docs.google.com/forms/d/e/1FAIpQLSdGZU8H_HiPADyYQCg9iEqZ1vJs4mN0vAUbAK5NNGr9ycPwSw/viewform?usp=sf_link).
 
 # Subscribe
 
