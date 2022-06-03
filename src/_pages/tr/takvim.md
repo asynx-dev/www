@@ -28,6 +28,8 @@ bir takvime nasıl abone olunacağı sayfanın altında anlatılmaktadır.
 
 # Takvimler
 
+[Derleme bilgileri](https://cal.asynx.dev/info.txt)
+
 ## Ücretsiz Sanal (Çevrimiçi) Etkinlikler
 
 Bu takvimde internet üzerinde düzenlenen ücretsiz (ağırlıklı olarak

@@ -28,6 +28,8 @@ given at the bottom of the page.
 
 # Calendars
 
+[Build info](https://cal.asynx.dev/info.txt)
+
 ## Free Virtual (Online) Events
 
 This calendar shows free virtual (online) events (most of them are webinars)
