@@ -72,6 +72,7 @@ defaults:
     values:
       layout: single
       author_profile: false
+      toc_sticky: true
   # _newsletter
   - scope:
       path: ""
@@ -82,6 +83,7 @@ defaults:
       share: true
       toc: false
       author: false
+      toc_sticky: true
 
 category_archive:
   type: jekyll-archives
@@ -125,6 +127,9 @@ footer:
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "https://github.com/asynx-dev"
+    - label: "Status"
+      icon: "fas fa-signal"
+      url: "https://status.asynx.dev"
 #    - label: "Facebook"
 #      icon: "fab fa-fw fa-facebook"
 #      url: "https://www.facebook.com/asynxdev"

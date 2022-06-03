@@ -33,7 +33,7 @@ bir takvime nasıl abone olunacağı sayfanın altında anlatılmaktadır.
 Bu takvimde internet üzerinde düzenlenen ücretsiz (ağırlıklı olarak
 [Webinar](https://tr.wikipedia.org/wiki/Webinar)) etkinlikler listelenmektedir.
 
-iCal (canlı): <https://cal.asynx.dev/ics/free_virtual-cal_asynx_dev.ics>
+Abone ol: <https://cal.asynx.dev/ics/free_virtual-cal_asynx_dev.ics>
 
 <!--markdownlint-disable MD033 MD013-->
 <iframe src="https://calendar.google.com/calendar/embed?src=8sar0e8es1aip4mibj2kj72qhk2idjts%40import.calendar.google.com&ctz=Europe%2FIstanbul" style="border: 0" width="100%" height="600" frameborder="0" scrolling="no"></iframe>
@@ -46,11 +46,15 @@ iCal (canlı): <https://cal.asynx.dev/ics/free_virtual-cal_asynx_dev.ics>
 Bu harika! Calendar (Takvim) bir açık kaynak proje ve siz de bizim takvimlerde
 olmayan ama sizin bildiğiniz etkinlikleri göndererek katkıda bulunabilirsiniz.
 
+<!--markdownlint-disable MD033 MD013-->
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdGZU8H_HiPADyYQCg9iEqZ1vJs4mN0vAUbAK5NNGr9ycPwSw/viewform?embedded=true" width="100%" height="600" frameborder="0" marginheight="0" marginwidth="0">Yükleniyor…</iframe>
+<!--markdownlint-enable MD033 MD013-->
+
+Yukarıda bir form göremiyorsanız [tıklayınız](https://docs.google.com/forms/d/e/1FAIpQLSdGZU8H_HiPADyYQCg9iEqZ1vJs4mN0vAUbAK5NNGr9ycPwSw/viewform?usp=sf_link).
+
+Alternatif olarak
 [CONTRIBUTING](https://github.com/asynx-dev/calendar/blob/master/CONTRIBUTING.md)
-sayfasına bakabilirsiniz (içeriğin çoğu İngilizce olabilir). En hızlı şekilde
-[şu
-form](https://docs.google.com/forms/d/e/1FAIpQLSdGZU8H_HiPADyYQCg9iEqZ1vJs4mN0vAUbAK5NNGr9ycPwSw/viewform?usp=sf_link)
-ile bize etkinlik gönderebilirsiniz.
+sayfasına bakabilirsiniz (içeriğin çoğu İngilizce olabilir).
 
 # Abone olma
 
