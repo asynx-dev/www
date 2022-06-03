@@ -1,10 +1,13 @@
 # Additional settings only for deployment
 
-analytics:
-  provider: "google-gtag"
-  google:
-    tracking_id: "UA-180670653-1"
-    anonymize_ip: false # default
+# Comment analytics for now since the GA4 tracking is served by Cloudflare
+# ayazar 2022-06-04
+
+#analytics:
+#  provider: "google-gtag"
+#  google:
+#    tracking_id: "UA-180670653-1"
+#    anonymize_ip: false # default
 
 comments:
   provider: "disqus"
