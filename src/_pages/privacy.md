@@ -139,7 +139,7 @@ https://asynx.dev/contact
 # GitHub Pages
 
 We are using GitHub Pages as primary hosting platform. Visit [GitHub Privacy
-Statement](https://docs.github.com/en/github/site-policy/github-privacy-statement)
+Statement](https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement)
 to check their policy.
 
 # Cloudflare
