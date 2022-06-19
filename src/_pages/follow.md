@@ -16,7 +16,7 @@ subscribe our blog posts with RSS via the FEED link given at the bottom.
 
 Currently, we are mostly
 active on [Twitter](https://twitter.com/asynxdev) and
-[LinkedIn](https://www.linkedin.com/groups/12487093) but we try to post on all
+[LinkedIn](https://www.linkedin.com/company/asynx-dev) but we try to post on all
 platforms. All accounts are listed at the bottom.
 
 Also we upload video contents to our [YouTube

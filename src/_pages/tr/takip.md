@@ -17,7 +17,7 @@ ile de takip edebilirsiniz.
 
 Tüm platformları kullansak da güncel durumda en çok
 [Twitter](https://twitter.com/asynxdev) ve
-[LinkedIn](https://www.linkedin.com/groups/12487093)'de aktif durumdayız. Tüm
+[LinkedIn](https://www.linkedin.com/company/asynx-dev)'de aktif durumdayız. Tüm
 hesaplarımız sayfanın altında listelenmiştir.
 
 Bu siteye ek olarak
