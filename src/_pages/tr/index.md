@@ -29,7 +29,7 @@ feature_row:
   - image_path: /assets/images/calendar_teaser.jpg
     alt: "Takvim"
     excerpt: "<br/>FPGA/gömülü sistem gibi alanlarda olan webinar gibi etkinliklerin takvim(ler)i"
-    url: "/calendar"
+    url: "/tr/takvim/"
     btn_label: "Takvimleri Görün"
     btn_class: "btn--warning"
   - image_path: /assets/images/projects_teaser.jpg
