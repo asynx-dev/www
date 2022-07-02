@@ -70,7 +70,7 @@ jobs:
       run: |
         pipenv run python test.py pytest
     - name: Deploy (Dry-Run)
-      uses: JamesIves/github-pages-deploy-action@v4.3.3
+      uses: JamesIves/github-pages-deploy-action@v4.3.4
       with:
         dry-run: true
         token: ${{ secrets.GITHUB_TOKEN }}
