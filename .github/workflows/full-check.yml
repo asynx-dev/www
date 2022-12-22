@@ -24,7 +24,7 @@ jobs:
       JEKYLL_ENV: production
     strategy:
       matrix:
-        python-version: ['3.6']
+        python-version: ['3.10']
         ruby-version: ['2.7']
     steps:
     - uses: actions/checkout@v3
