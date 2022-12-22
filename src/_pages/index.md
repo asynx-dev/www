@@ -6,8 +6,6 @@ header:
     actions:
         - label: "About"
           url: "/about/"
-        - label: "(🇹🇷) Türkçe"
-          url: "/tr/"
     overlay_image: /assets/images/asynx_logo_1920_trans.png
     overlay_color: "#d9d9d9"
     overlay_filter: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8))

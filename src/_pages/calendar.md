@@ -9,9 +9,6 @@ header:
 toc: true
 ---
 
-(🇹🇷) Türkçe'si [mevcut.]({% link _pages/tr/takvim.md %})
-{: .notice--info}
-
 **BETA** (for now)
 {: .notice--warning}
 

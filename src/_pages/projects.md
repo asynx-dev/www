@@ -7,9 +7,6 @@ header:
     overlay_image: /assets/images/projects_teaser.jpg
 ---
 
-(🇹🇷) Türkçe'si [mevcut.]({% link _pages/tr/projeler.md %})
-{: .notice--info}
-
 # www/blog
 
 The web site (+blog) project (this site).

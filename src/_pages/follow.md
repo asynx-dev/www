@@ -7,9 +7,6 @@ header:
     overlay_image: /assets/images/follow_teaser.jpg
 ---
 
-(🇹🇷) Türkçe'si [mevcut.]({% link _pages/tr/takip.md %})
-{: .notice--info}
-
 You can follow our social media accounts to get notified when we write a new
 blog post or make an announcement or to reach us. Alternatively, you can
 subscribe our blog posts with RSS via the FEED link given at the bottom.

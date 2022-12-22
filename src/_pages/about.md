@@ -8,9 +8,6 @@ header:
 toc: true
 ---
 
-(🇹🇷) Türkçe'si [mevcut.]({% link _pages/tr/hakkinda.md %})
-{: .notice--info}
-
 **asynx.dev** is a blog based web site founded by Alper, Anıl and Yunus
 (alphabetically) in September 2020. In our professional life we work on
 electronics and embedded software. Our main intention is sharing our knowledge

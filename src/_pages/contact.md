@@ -6,9 +6,6 @@ header:
     overlay_image: /assets/images/contact_teaser.jpg
 ---
 
-(🇹🇷) Türkçe'si [mevcut.]({% link _pages/tr/iletisim.md %})
-{: .notice--info}
-
 You can reach us via
 [our social media accounts]({% link _pages/follow.md %}).
 But if you prefer a classical
