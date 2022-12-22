@@ -65,7 +65,7 @@ jobs:
         pipenv run python utils.py build-info
 
     - name: Deploy 🚀
-      uses: JamesIves/github-pages-deploy-action@v4.3.3
+      uses: JamesIves/github-pages-deploy-action@v4.4.1
       with:
         dry-run: false
         token: ${{ secrets.GITHUB_TOKEN }}
