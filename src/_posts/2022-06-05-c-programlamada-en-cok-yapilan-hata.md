@@ -1,19 +1,19 @@
 ---
-title: "C programlamada gördüğüm en sık yapılan hata" # This is the main title
-excerpt: "Gözden kaçabilen, masum görünen fakat canınızı sıkabilecek bir C hatası" # Keep it as short as possible, like a tweet <140 chars. This appears on blog listing and below title
+title: "C programlamada gördüğüm en sık yapılan hata"
+excerpt: "Gözden kaçabilen, masum görünen fakat canınızı sıkabilecek bir C hatası"
 categories:
     - guide
 tags:
-    - tr # Keep it if post contains is in Turkish, delete otherwise. Even if we don't prefer, a post may have both tr and en tag.
+    - tr
     - c-kafe
-#header:
-#    teaser: /assets/images/blog/<YY>/<SEQ>_teaser.png #Min: 720px. Ratio: 16x9. Prefer png. Example: /assets/images/blog/21/5_teaser.png
-#    overlay_image: /assets/images/blog/<YY>/<SEQ>_image.png #Min width: 1920px. Ratio: 16x9. Prefer png but jpeg is mostly OK. On widescreens, only horizontal center will be shown thus try to keep content on center horizontal bar. Example: /assets/images/blog/21/5_image.png
-#    overlay_filter: 0.5 # Value between 0-1. Default 0.5. Depending on color spectrum of overlay_image, adjust by trying. Higher value if image is bright.
+header:
+    teaser: /assets/images/blog/22/3.png
+    overlay_image: /assets/images/blog/22/3.png
+    overlay_filter: 0.8
 author: ayazar
-toc: true # Change to false to hide TOC for small posts. Default true.
-axseq: 3 # Sequence number. Example: 5
-published: true # Change to false to hide the post, only for debugging. Default true.
+toc: true
+axseq: 3
+published: true
 ---
 
 Gömülü sistemlerle uğraşan biri olarak C dili ile ilgileniyorum. Bu yazıda

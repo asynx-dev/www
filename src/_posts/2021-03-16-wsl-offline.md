@@ -38,7 +38,7 @@ command, first you should enable WSL. The official instructions are given
 Alternatively you can do it with GUI. Find `Programs and Features` on `Control Panel`,
 then click `Turn Windows features on or off` as shown below.
 
-![WSL enable](/assets/images/blog/21/1-wsl-enable.png)
+![WSL enable](/assets/images/blog/21/2-wsl-enable.png)
 
 After rebooting Windows, `wsl` command should be available to use and should be
 working on PowerShell. Since we don't have any installed WSL guest OS on the PC,
@@ -70,7 +70,7 @@ After installing the package, you can find the installed software by typing
 start the Ubuntu WSL and got the `The service has not been started.` error as
 shown below. This is probably related to version of Windows 10.
 
-![WSL The service has not been started error](/assets/images/blog/21/1-wsl-error.png)
+![WSL The service has not been started error](/assets/images/blog/21/2-wsl-error.png)
 
 ## Solution
 
