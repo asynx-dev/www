@@ -11,6 +11,10 @@ tags:
     - ubuntu
 author: ayazar
 axseq: 2
+header:
+    teaser: /assets/images/blog/21/2.jpg
+    overlay_image: /assets/images/blog/21/2.jpg
+    overlay_filter: 0.8
 published: true
 ---
 
