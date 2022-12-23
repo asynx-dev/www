@@ -9,7 +9,8 @@ header:
 toc: true
 ---
 
-**BETA** (for now)
+This project is stale, we are not updating the calendar. This page is kept for
+archival purposes.
 {: .notice--warning}
 
 [Calendar](https://github.com/asynx-dev/calendar) is our another open source

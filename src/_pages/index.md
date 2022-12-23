@@ -14,22 +14,10 @@ excerpt: "💙 electronics"
 feature_row:
   - image_path: /assets/images/blog_teaser.jpg
     alt: "Blog Posts"
-    excerpt: "<br/>We share our technical notes on a variety of topics, such as FPGAs, embedded things, etc."
+    excerpt: "<br/>Mainly technical content"
     url: "/blog/"
     btn_label: "Read Posts"
     btn_class: "btn--info"
-  - image_path: /assets/images/radar_teaser.jpg
-    alt: "RADAR"
-    excerpt: "<br/>Bulletin and videos about what's happening in our field (in Turkish only)"
-    url: "https://radar.asynx.dev"
-    btn_label: "RADAR Page"
-    btn_class: "btn--success"
-  - image_path: /assets/images/calendar_teaser.jpg
-    alt: "Calendar"
-    excerpt: "<br/>Calendar(s)(web and .ics) for FPGA/embedded related events like webinars"
-    url: "/calendar"
-    btn_label: "See Calendars"
-    btn_class: "btn--warning"
   - image_path: /assets/images/projects_teaser.jpg
     alt: "Projects"
     excerpt: "<br/>All projects from us"

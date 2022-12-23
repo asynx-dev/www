@@ -1,8 +1,6 @@
 main:
   - title: "Blog"
     url: /blog/
-  - title: "RADAR"
-    url: https://radar.asynx.dev
   - title: "Projects"
     url: /projects/
   - title: "About"
