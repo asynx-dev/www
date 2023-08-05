@@ -109,18 +109,18 @@ collections:
 
 footer:
   links:
-    - label: "YouTube"
-      icon: "fab fa-fw fa-youtube"
-      url: "https://www.youtube.com/@asynxdev"
-    - label: "YouTube (Türkçe)"
-      icon: "fab fa-fw fa-youtube"
-      url: "https://www.youtube.com/@asynxdevTR"
-    - label: "Podcast"
-      icon: "fas fa-microphone"
-      url: https://anchor.fm/asynxdev
-    - label: "Twitter"
-      icon: "fab fa-fw fa-twitter-square"
-      url: "https://twitter.com/asynxdev"
+#    - label: "YouTube"
+#      icon: "fab fa-fw fa-youtube"
+#      url: "https://www.youtube.com/@asynxdev"
+#    - label: "YouTube (Türkçe)"
+#      icon: "fab fa-fw fa-youtube"
+#      url: "https://www.youtube.com/@asynxdevTR"
+#    - label: "Podcast"
+#      icon: "fas fa-microphone"
+#      url: https://anchor.fm/asynxdev
+#    - label: "Twitter"
+#      icon: "fab fa-fw fa-twitter-square"
+#      url: "https://twitter.com/asynxdev"
     - label: "LinkedIn"
       icon: "fab fa-fw fa-linkedin"
       url: "https://www.linkedin.com/company/asynx-dev"
