@@ -64,7 +64,7 @@ defaults:
       toc: true
       toc_sticky: true
       show_date: true
-      permalink: /blog/:year/:month/:slug:output_ext
+      permalink: /blog/:short_year/:month/:slug:output_ext
   # _pages
   - scope:
       path: ""
