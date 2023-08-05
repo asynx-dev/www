@@ -16,7 +16,7 @@ The web site (+blog) project (this site).
 |------|------|
 | **URL** | <https://asynx.dev> |
 | **Repository** | [https://github.com/asynx-dev/www](https://github.com/asynx-dev/www) |
-| **License**   | [Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/) |
+| **License**   | [Creative Commons Attribution-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-sa/4.0/) |
 
 ## Stale
 

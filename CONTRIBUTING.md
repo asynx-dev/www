@@ -10,8 +10,8 @@ have any further questions please feel free to
 
 ## How can I contribute?
 
-Contents are published with [CC BY
-4.0](https://creativecommons.org/licenses/by/4.0/) license. Please check
+Contents are published with [CC BY SA
+4.0](https://creativecommons.org/licenses/by-sa/4.0/) license. Please check
 [LICENSE](LICENSE). In summary, this is a permissive license and we actually
 don't care how the content is used as long as a proper reference is given and
 modifications are indicated if any.

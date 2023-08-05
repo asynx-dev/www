@@ -1,5 +1,5 @@
 ---
-# License: CC-BY-4.0.
+# License: CC-BY-SA-4.0.
 title: "Title of the post" # This is the main title
 excerpt: "Single sentence summary" # Keep it as short as possible, like a tweet <140 chars. This appears on blog listing and below title
 categories:

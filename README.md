@@ -101,9 +101,9 @@ linting on both source code and output files. Please check files under
 
 ## License
 
-[![GitHub License](https://img.shields.io/github/license/asynx-dev/www.svg?style=flat)](https://creativecommons.org/licenses/by/4.0/)
+[![GitHub License](https://img.shields.io/github/license/asynx-dev/www.svg?style=flat)](https://creativecommons.org/licenses/by-sa/4.0/)
 
-SPDX-License-Identifier: CC-BY-4.0
+SPDX-License-Identifier: CC-BY-SA-4.0
 
-This project is licensed under CC BY 4.0 if otherwise stated.
+This project is licensed under CC BY SA 4.0 if otherwise stated.
 Check [LICENSE](LICENSE) for further information.
