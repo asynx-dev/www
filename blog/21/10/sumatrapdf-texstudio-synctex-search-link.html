@@ -1,0 +1,1058 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Create search link between SumatraPDF and TeXstudio with SyncTeX - asynx</title>
+<meta name="description" content="SyncTeX enables us to create a bidirectional search relation between these two software.">
+
+
+  <meta name="author" content="Alper Yazar">
+  
+  <meta property="article:author" content="Alper Yazar">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="asynx">
+<meta property="og:title" content="Create search link between SumatraPDF and TeXstudio with SyncTeX">
+<meta property="og:url" content="https://asynx.dev/blog/21/10/sumatrapdf-texstudio-synctex-search-link.html">
+
+
+  <meta property="og:description" content="SyncTeX enables us to create a bidirectional search relation between these two software.">
+
+
+
+  <meta property="og:image" content="https://asynx.dev/assets/images/blog/21/6_teaser.png">
+
+
+
+  <meta name="twitter:site" content="@asynxdev">
+  <meta name="twitter:title" content="Create search link between SumatraPDF and TeXstudio with SyncTeX">
+  <meta name="twitter:description" content="SyncTeX enables us to create a bidirectional search relation between these two software.">
+  <meta name="twitter:url" content="https://asynx.dev/blog/21/10/sumatrapdf-texstudio-synctex-search-link.html">
+
+  
+    <meta name="twitter:card" content="summary">
+    
+      <meta name="twitter:image" content="https://asynx.dev/assets/images/blog/21/6_teaser.png">
+    
+  
+
+  
+    <meta name="twitter:creator" content="@alper_yazar">
+  
+
+
+
+  <meta property="article:published_time" content="2021-10-30T00:00:00+03:00">
+
+
+
+  <meta property="article:modified_time" content="2022-05-03T13:41:56+03:00">
+
+
+
+
+<link rel="canonical" href="https://asynx.dev/blog/21/10/sumatrapdf-texstudio-synctex-search-link.html">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "asynx.dev",
+      "url": "https://asynx.dev/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="asynx Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+<link rel="manifest" href="/assets/images/site.webmanifest">
+<link rel="mask-icon" href="/assets/images/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/images/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/images/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<!-- end custom head snippets -->
+
+<!-- podcast -->
+<link href="https://anchor.fm/s/951bf194/podcast/rss" type="application/rss+xml" rel="alternate" title="asynx Podcast Feed">
+
+<!--adsense-->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4580059638713287"
+     crossorigin="anonymous"></script>
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/android-chrome-192x192.png" alt="asynx"></a>
+        
+        <a class="site-title" href="/">
+          asynx
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/blog/">📝 Blog</a>
+            </li><li class="masthead__menu-item">
+              <a href="/follow/">✅ Follow</a>
+            </li><li class="masthead__menu-item">
+              <a href="/projects/">Projects</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li><li class="masthead__menu-item">
+              <a href="/contact/">Contact</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style=" background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/assets/images/blog/21/6_image.jpg');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          Create search link between SumatraPDF and TeXstudio with SyncTeX
+
+        
+      </h1>
+      
+        <p class="page__lead">SyncTeX enables us to create a bidirectional search relation between these two software.
+</p>
+      
+      
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2021-10-30T00:00:00+03:00">October 30, 2021</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      <span class="page__meta-axseq">
+        <i class="fas fa-fingerprint" aria-hidden="true"></i>
+        ax-21-6
+      </span>
+    
+
+     <span class="page__meta-sep"></span>
+
+    
+      <span class="page__meta-lang">
+        
+        
+        <i class="fas fa-language" aria-hidden="true" title="İngilizce/English"></i> 🇬🇧
+        
+      </span>
+    
+
+     
+
+    
+
+    
+
+    
+
+  </p>
+
+
+      
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <a href="https://www.alperyazar.com">
+          <img src="/assets/images/bio/ayazar.png" alt="Alper Yazar" itemprop="image">
+        </a>
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <a href="https://www.alperyazar.com"><h3 class="author__name" itemprop="name">Alper Yazar</h3></a>
+    
+    
+      <div class="author__bio" itemprop="description">
+        <p>electronics engineer interested in digital design, FPGAs, embedded systems and other things.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+        <li>
+          <a href="https://www.alperyazar.com" itemprop="url">
+            <i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://twitter.com/alper_yazar" itemprop="sameAs" rel="nofollow noopener noreferrer">
+            <i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="https://www.linkedin.com/in/alperyazar" itemprop="sameAs" rel="nofollow noopener noreferrer">
+            <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Create search link between SumatraPDF and TeXstudio with SyncTeX">
+    <meta itemprop="description" content="SyncTeX enables us to create a bidirectional search relation between these two software.">
+    <meta itemprop="datePublished" content="2021-10-30T00:00:00+03:00">
+    <meta itemprop="dateModified" content="2022-05-03T13:41:56+03:00">
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+        
+
+
+
+        <p class="notice--info">This post was originally published on Alper Yazar’s personal blog in 2014.</p>
+
+<p>I use <a href="https://www.texstudio.org/">TeXstudio</a> for my LaTeX works.
+<a href="/blog/21/10/sumatrapdf.html">SumatraPDF</a> is also
+good, lightweight PDF reader. It is possible to create a forward search from
+TeXstudio to SumatraPDF. You may find PDF output of a LaTeX code. Similarly, a
+backward search is possible: find LaTeX source code from PDF output.</p>
+
+<p>Given steps are tested by using <strong>TeXstudio 2.10.8</strong> and <strong>SumatraPDF v3.1.1
+64-bit</strong> on a <strong>Windows 7 64-bit</strong> machine. However, I am pretty sure it will
+work for almost all possible future and previous versions.</p>
+
+<p class="notice--info">This post will be based on this article
+(<code class="language-plaintext highlighter-rouge">http://robjhyndman.com/hyndsight/texstudio-sumatrapdf/</code> <code class="language-plaintext highlighter-rouge">404 🔗</code>) But since it
+was published in 2011, there are some slight changes in software menus. You may
+also read it.</p>
+
+<p>1- Open TexStudio. Navigate <strong>Options</strong> → <strong>Configure TeXstutdio…</strong></p>
+
+<p><img src="/assets/images/blog/21/6-a.png" alt="Configure TeXstudio…" /></p>
+
+<p><em>Configure TeXstudio…</em></p>
+
+<p>2- Click <strong>Commands</strong> tab, and find <strong>External PDF Viewer</strong> option.</p>
+
+<p><img src="/assets/images/blog/21/6-b.png" alt="External PDF Viewer…" /></p>
+
+<p><em>External PDF Viewer…</em></p>
+
+<p>3- Change the field with:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"C:/Program Files (x86)/SumatraPDF/SumatraPDF.exe" -reuse-instance %.pdf
+</code></pre></div></div>
+
+<p>You should put <strong>your</strong> path to SumatraPDF.exe between quotation marks.</p>
+
+<p class="notice--info"><strong>Update (08 Feb 2015):</strong> I use pdflatex. According to Vojtech Vozda (see
+comments), if you use DVI → PS → PDF chain you should also add -synctex=1 option
+to LaTeX part as in PdfLaTeX option in order to create search link between your
+source code and PDF file. See also: <a href="http://tex.stackexchange.com/questions/118489/what-exactly-is-synctex">What exactly is
+SyncTeX?</a></p>
+
+<p>4- Click <strong>Build</strong> tab, find <strong>PDF Viewer</strong> option and change it to <strong>External
+PDF Viewer.</strong></p>
+
+<p><img src="/assets/images/blog/21/6-c.png" alt="Use External PDF Viewer" /></p>
+
+<p><em>Use External PDF Viewer</em></p>
+
+<p>5- On the same windows, locate <strong>User Commands</strong> tab.</p>
+
+<p><img src="/assets/images/blog/21/6-d.png" alt="User Commands" /></p>
+
+<p><em>User Commands</em></p>
+
+<p>Add the following statements:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user0:Forward Search
+</code></pre></div></div>
+
+<p>to the first column and</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dde:///"C:/Program Files (x86)/SumatraPDF/SumatraPDF.exe":SUMATRA/control/  [ForwardSearch("?am.pdf","?c:am.tex",@,0,0,1)]
+</code></pre></div></div>
+
+<p>You should put <strong>your</strong> path to SumatraPDF.exe between quotation marks.</p>
+
+<p>Click <strong>OK</strong></p>
+
+<p>6- Now let’s open <strong>Options</strong> → <strong>Configure TeXstutdio…</strong> again and select
+<strong>Shortcuts</strong> tab. Expand <strong>Menus</strong> → <strong>Tools</strong> → <strong>User</strong> tree. Now you should
+see a user command called <strong>Forward Search</strong>. Now its default shortcut is
+<strong>Alt+Shift+F1</strong>. But you can also assign another shortcut to forward search
+like <strong>F2</strong>. But this step is optional.</p>
+
+<p><img src="/assets/images/blog/21/6-e.png" alt="User Commands Shortcut" /></p>
+
+<p><em>User Commands Shortcut</em></p>
+
+<p>7- Now we are done with TeXstudio. Let’s set up SumatraPDF. Open SumatraPDF.
+Click <strong>Settings</strong> → <strong>Options</strong>.</p>
+
+<p><img src="/assets/images/blog/21/6-f.png" alt="Sumatra Settings" /></p>
+
+<p><em>Sumatra Settings</em></p>
+
+<p>8- Locate <strong>Set inverse search command-line</strong>.</p>
+
+<p class="notice--info"><strong>Update (19 Feb 2016):</strong> 8.a is added.</p>
+
+<p>8.a- If you don’t see “Set inverse search command-line” option and options
+window is ended by “SumatraPDF is your default PDF reader” button, first do this
+step.</p>
+
+<p>Run the following command. (Windows Start → Search for cmd.exe → Open cmd.exe →
+Paste the following code → Press Enter)</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"C:/Program Files (x86)/SumatraPDF/SumatraPDF.exe" -inverse-search
+</code></pre></div></div>
+
+<p>You should put <strong>your</strong> path to SumatraPDF.exe between quotation marks.</p>
+
+<p>This command will open SumatraPDF but it will give a loading error. This isn’t
+important. Now open options again and you should see the inverse search option
+as given below.</p>
+
+<p><img src="/assets/images/blog/21/6-g.png" alt="Sumatra Inverse Search" /></p>
+
+<p><em>Sumatra Inverse Search</em></p>
+
+<p>Type:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"C:\Program Files (x86)\TeXstudio\texstudio.exe" "%f" -line %l
+</code></pre></div></div>
+
+<p>You should put <strong>your</strong> path to texstudio.exe between quotation marks.</p>
+
+<p>Click <strong>OK</strong> and exit.</p>
+
+<p>Now <strong>let’s try your new setup.</strong></p>
+
+<p>Compile a LaTeX code in TeXstudio and produce PDF output. If you press <strong>F2</strong>
+(if you assign that shortcut in TeXstudio settings), SumatraPDF should highlight
+corresponding output of your cursor position. In SumatraPDF, double-clicking
+shows corresponding LaTeX code in TeXstudio.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/blog/tags/en" class="page__taxonomy-item" rel="tag">en</a><span class="sep">, </span>
+    
+      <a href="/blog/tags/latex" class="page__taxonomy-item" rel="tag">latex</a><span class="sep">, </span>
+    
+      <a href="/blog/tags/sumatrapdf" class="page__taxonomy-item" rel="tag">sumatrapdf</a><span class="sep">, </span>
+    
+      <a href="/blog/tags/synctex" class="page__taxonomy-item" rel="tag">synctex</a><span class="sep">, </span>
+    
+      <a href="/blog/tags/texstudio" class="page__taxonomy-item" rel="tag">texstudio</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/blog/categories/guide" class="page__taxonomy-item" rel="tag">guide</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2022-05-03">May 3, 2022</time></p>
+
+
+      </footer>
+
+      <section class="page__share">
+  
+
+  <a href="https://twitter.com/intent/tweet?via=asynxdev&text=Create+search+link+between+SumatraPDF+and+TeXstudio+with+SyncTeX%20https%3A%2F%2Fasynx.dev%2Fblog%2F21%2F10%2Fsumatrapdf-texstudio-synctex-search-link.html" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fasynx.dev%2Fblog%2F21%2F10%2Fsumatrapdf-texstudio-synctex-search-link.html" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fasynx.dev%2Fblog%2F21%2F10%2Fsumatrapdf-texstudio-synctex-search-link.html" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/blog/21/10/sumatrapdf.html" class="pagination--pager" title="Sumatra PDF
+">Previous</a>
+    
+    
+      <a href="/blog/22/1/windirstat.html" class="pagination--pager" title="WinDirStat
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+      <div class="page__comments">
+  
+  
+      <h4 class="page__comments-title">Comments</h4>
+      <section id="disqus_thread"></section>
+    
+</div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You May Also Enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/blog/21/2.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/21/3/wsl-offline.html" rel="permalink">Using WSL on an offline Windows machine
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2021-03-16T00:00:00+03:00">March 16, 2021</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          4 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      <span class="page__meta-axseq">
+        <i class="fas fa-fw fa-fingerprint" aria-hidden="true"></i>
+        ax-21-2
+      </span>
+    
+
+     <span class="page__meta-sep"></span>
+
+    
+      <span class="page__meta-lang">
+        
+        
+        <i class="fas fa-fw fa-language" aria-hidden="true" title="İngilizce/English"></i> 🇬🇧
+        
+      </span>
+    
+
+     
+
+    
+
+    
+
+    
+
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">How to install WSL on a Windows machine not connected to the Internet
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/blog/22/2_teaser.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/22/2/petalinux-offline.html" rel="permalink">Running PetaLinux on an offline machine
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-02-28T00:00:00+03:00">February 28, 2022</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          4 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      <span class="page__meta-axseq">
+        <i class="fas fa-fw fa-fingerprint" aria-hidden="true"></i>
+        ax-22-2
+      </span>
+    
+
+     <span class="page__meta-sep"></span>
+
+    
+      <span class="page__meta-lang">
+        
+        
+        <i class="fas fa-fw fa-language" aria-hidden="true" title="İngilizce/English"></i> 🇬🇧
+        
+      </span>
+    
+
+     
+
+    
+
+    
+
+    
+
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">PetaLinux can be run an offline machine with proper configuration
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/20/12/getting-started-to-vitis-acceleration-flow-with-zynq-7000.html" rel="permalink">Getting started to Vitis acceleration flow with Zynq 7000
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2020-12-07T00:00:00+03:00">December 7, 2020</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          7 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      <span class="page__meta-axseq">
+        <i class="fas fa-fw fa-fingerprint" aria-hidden="true"></i>
+        ax-20-6
+      </span>
+    
+
+     <span class="page__meta-sep"></span>
+
+    
+      <span class="page__meta-lang">
+        
+        
+        <i class="fas fa-fw fa-language" aria-hidden="true" title="İngilizce/English"></i> 🇬🇧
+        
+      </span>
+    
+
+     
+
+    
+
+    
+
+    
+
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Getting started to Vitis acceleration flow with Zynq 7000.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/20/11/serial-data-communication-over-tcp.html" rel="permalink">Serial data communication over TCP
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2020-11-29T00:00:00+03:00">November 29, 2020</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          4 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      <span class="page__meta-axseq">
+        <i class="fas fa-fw fa-fingerprint" aria-hidden="true"></i>
+        ax-20-5
+      </span>
+    
+
+     <span class="page__meta-sep"></span>
+
+    
+      <span class="page__meta-lang">
+        
+        
+        <i class="fas fa-fw fa-language" aria-hidden="true" title="İngilizce/English"></i> 🇬🇧
+        
+      </span>
+    
+
+     
+
+    
+
+    
+
+    
+
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Serial data communication over TCP with socat.
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+    <ul class="social-icons">
+      
+
+      
+        
+          
+            <li><a href="https://www.linkedin.com/company/asynx" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+          
+        
+          
+            <li><a href="https://github.com/asynx-dev" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          
+        
+      
+
+      
+        <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+      
+    </ul>
+  </div>
+
+  <div class="page__footer-copyright">&copy; 2020-2024 asynx.dev. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.
+  <br/><a href='/license/'>License (CC BY SA 4.0)</a>, <a href='/disclaimer/'>Disclaimer</a>, <a href='/privacy/'>Privacy Policy</a>, <a href='/misc/'>Miscellaneous</a>
+</div>
+
+
+<!-- Default Statcounter code for asynx.dev
+https://asynx.dev -->
+<script type="text/javascript">
+var sc_project=12624131;
+var sc_invisible=1;
+var sc_security="c6cc37c6";
+</script>
+<script type="text/javascript"
+src="https://www.statcounter.com/counter/counter.js"
+async></script>
+<noscript><div class="statcounter"><a title="Web Analytics"
+href="https://statcounter.com/" target="_blank"><img
+class="statcounter"
+src="https://c.statcounter.com/12624131/0/c6cc37c6/1/"
+alt="Web Analytics"
+referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
+<!-- End of Statcounter Code -->
+
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://asynx.dev/blog/21/10/sumatrapdf-texstudio-synctex-search-link.html";  /* Replace PAGE_URL with your page's canonical URL variable */
+      this.page.identifier = "/blog/21/10/sumatrapdf-texstudio-synctex-search-link"; /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */
+    };
+    (function() { /* DON'T EDIT BELOW THIS LINE */
+      var d = document, s = d.createElement('script');
+      s.src = 'https://asynxdev.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+
+
+  </body>
+</html>

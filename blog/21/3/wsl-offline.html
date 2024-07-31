@@ -1,0 +1,1083 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Using WSL on an offline Windows machine - asynx</title>
+<meta name="description" content="How to install WSL on a Windows machine not connected to the Internet">
+
+
+  <meta name="author" content="Alper Yazar">
+  
+  <meta property="article:author" content="Alper Yazar">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="asynx">
+<meta property="og:title" content="Using WSL on an offline Windows machine">
+<meta property="og:url" content="https://asynx.dev/blog/21/3/wsl-offline.html">
+
+
+  <meta property="og:description" content="How to install WSL on a Windows machine not connected to the Internet">
+
+
+
+  <meta property="og:image" content="https://asynx.dev/assets/images/blog/21/2.jpg">
+
+
+
+  <meta name="twitter:site" content="@asynxdev">
+  <meta name="twitter:title" content="Using WSL on an offline Windows machine">
+  <meta name="twitter:description" content="How to install WSL on a Windows machine not connected to the Internet">
+  <meta name="twitter:url" content="https://asynx.dev/blog/21/3/wsl-offline.html">
+
+  
+    <meta name="twitter:card" content="summary">
+    
+      <meta name="twitter:image" content="https://asynx.dev/assets/images/blog/21/2.jpg">
+    
+  
+
+  
+    <meta name="twitter:creator" content="@alper_yazar">
+  
+
+
+
+  <meta property="article:published_time" content="2021-03-16T00:00:00+03:00">
+
+
+
+  <meta property="article:modified_time" content="2022-12-23T13:16:33+03:00">
+
+
+
+
+<link rel="canonical" href="https://asynx.dev/blog/21/3/wsl-offline.html">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "asynx.dev",
+      "url": "https://asynx.dev/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="asynx Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+<link rel="manifest" href="/assets/images/site.webmanifest">
+<link rel="mask-icon" href="/assets/images/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/images/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/images/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<!-- end custom head snippets -->
+
+<!-- podcast -->
+<link href="https://anchor.fm/s/951bf194/podcast/rss" type="application/rss+xml" rel="alternate" title="asynx Podcast Feed">
+
+<!--adsense-->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4580059638713287"
+     crossorigin="anonymous"></script>
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/android-chrome-192x192.png" alt="asynx"></a>
+        
+        <a class="site-title" href="/">
+          asynx
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/blog/">📝 Blog</a>
+            </li><li class="masthead__menu-item">
+              <a href="/follow/">✅ Follow</a>
+            </li><li class="masthead__menu-item">
+              <a href="/projects/">Projects</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li><li class="masthead__menu-item">
+              <a href="/contact/">Contact</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style=" background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('/assets/images/blog/21/2.jpg');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          Using WSL on an offline Windows machine
+
+        
+      </h1>
+      
+        <p class="page__lead">How to install WSL on a Windows machine not connected to the Internet
+</p>
+      
+      
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2021-03-16T00:00:00+03:00">March 16, 2021</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          4 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      <span class="page__meta-axseq">
+        <i class="fas fa-fingerprint" aria-hidden="true"></i>
+        ax-21-2
+      </span>
+    
+
+     <span class="page__meta-sep"></span>
+
+    
+      <span class="page__meta-lang">
+        
+        
+        <i class="fas fa-language" aria-hidden="true" title="İngilizce/English"></i> 🇬🇧
+        
+      </span>
+    
+
+     
+
+    
+
+    
+
+    
+
+  </p>
+
+
+      
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <a href="https://www.alperyazar.com">
+          <img src="/assets/images/bio/ayazar.png" alt="Alper Yazar" itemprop="image">
+        </a>
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <a href="https://www.alperyazar.com"><h3 class="author__name" itemprop="name">Alper Yazar</h3></a>
+    
+    
+      <div class="author__bio" itemprop="description">
+        <p>electronics engineer interested in digital design, FPGAs, embedded systems and other things.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+        <li>
+          <a href="https://www.alperyazar.com" itemprop="url">
+            <i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://twitter.com/alper_yazar" itemprop="sameAs" rel="nofollow noopener noreferrer">
+            <i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="https://www.linkedin.com/in/alperyazar" itemprop="sameAs" rel="nofollow noopener noreferrer">
+            <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Using WSL on an offline Windows machine">
+    <meta itemprop="description" content="How to install WSL on a Windows machine not connected to the Internet">
+    <meta itemprop="datePublished" content="2021-03-16T00:00:00+03:00">
+    <meta itemprop="dateModified" content="2022-12-23T13:16:33+03:00">
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu"><li><a href="#getting-files">Getting files</a></li><li><a href="#enabling-wsl-on-windows">Enabling WSL on Windows</a></li><li><a href="#installing-wsl-package">Installing WSL package</a></li><li><a href="#error-the-service-has-not-been-started">Error: “The service has not been started”</a><ul><li><a href="#solution">Solution</a></li></ul></li><li><a href="#pitfall-moving-ubuntu-2004-after-installation">Pitfall: Moving Ubuntu 20.04 After Installation</a><ul><li><a href="#solution-1">Solution</a></li></ul></li><li><a href="#error-wslregisterdistribution-failed-with-error-0x80070005">Error: “WslRegisterDistribution failed with error: 0x80070005”</a><ul><li><a href="#solution-2">Solution</a></li></ul></li><li><a href="#conclusion">Conclusion</a></li></ul>
+
+            </nav>
+          </aside>
+        
+        
+
+
+
+        <p>In this post, we will install Ubuntu 20.04 WSL package on an <strong>offline</strong>
+Windows 10 machine. Although this post is prepared with Ubuntu 20.04, the steps
+should be valid for other WSL packages too.</p>
+
+<h1 id="getting-files">Getting files</h1>
+
+<p>If your Windows machine is connected to the Internet and you can easily install
+WSL packages via Microsoft Store like by clicking <em>Download from the Microsoft
+Store</em> <a href="https://ubuntu.com/wsl">here</a>. To install it on an offline machine,
+first we get <code class="language-plaintext highlighter-rouge">.appx</code> package for a corresponding guest OS from Microsoft. All
+available Packages are listed
+<a href="https://docs.microsoft.com/en-us/windows/wsl/install-manual#downloading-distributions">here</a>.
+Transfer the downloaded package to the target offline machine. For example, when
+I am writing this post, to install Ubuntu 20.04 I get
+<code class="language-plaintext highlighter-rouge">Ubuntu_2004.2020.424.0_x64.appx</code>.</p>
+
+<h1 id="enabling-wsl-on-windows">Enabling WSL on Windows</h1>
+
+<p>Open a PowerShell terminal and type <code class="language-plaintext highlighter-rouge">wsl</code>. If you get an error about not recognized
+command, first you should enable WSL. The official instructions are given
+<a href="https://docs.microsoft.com/en-us/windows/wsl/install-win10#set-your-distribution-version-to-wsl-1-or-wsl-2">here</a>.
+Alternatively you can do it with GUI. Find <code class="language-plaintext highlighter-rouge">Programs and Features</code> on <code class="language-plaintext highlighter-rouge">Control Panel</code>,
+then click <code class="language-plaintext highlighter-rouge">Turn Windows features on or off</code> as shown below.</p>
+
+<p><img src="/assets/images/blog/21/2-wsl-enable.png" alt="WSL enable" /></p>
+
+<p>After rebooting Windows, <code class="language-plaintext highlighter-rouge">wsl</code> command should be available to use and should be
+working on PowerShell. Since we don’t have any installed WSL guest OS on the PC,
+it will say  <code class="language-plaintext highlighter-rouge">... no installed distributions.</code></p>
+
+<p class="notice--info">If your machine
+<a href="https://docs.microsoft.com/en-us/windows/wsl/install-win10#step-2---check-requirements-for-running-wsl-2">satisfies</a>
+requirements for WSL 2 and you don’t have any <a href="https://docs.microsoft.com/en-us/windows/wsl/compare-versions">specific
+reason</a> to stick
+with WSL (1), I recommended to switch to WSL 2 now but you can stick with WSL
+(1) either. I am not using WSL 2 but I think the following steps should be fine
+for WSL 2 too.</p>
+
+<h1 id="installing-wsl-package">Installing WSL package</h1>
+
+<p>In theory, the following command given in the <a href="https://docs.microsoft.com/en-us/windows/wsl/install-manual#installing-your-distro">official
+page</a>
+should do the work.</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Add-AppxPackage</span><span class="w"> </span><span class="o">.</span><span class="nx">\Ubuntu_2004.2020.424.0_x64.appx</span><span class="w">
+</span></code></pre></div></div>
+
+<h1 id="error-the-service-has-not-been-started">Error: “The service has not been started”</h1>
+
+<p>After installing the package, you can find the installed software by typing
+<code class="language-plaintext highlighter-rouge">Ubuntu</code> in Windows Start menu search. <strong>However</strong> in my case, I couldn’t
+start the Ubuntu WSL and got the <code class="language-plaintext highlighter-rouge">The service has not been started.</code> error as
+shown below. This is probably related to version of Windows 10.</p>
+
+<p><img src="/assets/images/blog/21/2-wsl-error.png" alt="WSL The service has not been started error" /></p>
+
+<h2 id="solution">Solution</h2>
+
+<p>You can remove <code class="language-plaintext highlighter-rouge">Ubuntu</code> found in Windows Start menu by right clicking and selecting
+<code class="language-plaintext highlighter-rouge">Uninstall</code> since we won’t use it.</p>
+
+<p>One solution recommended by Microsoft is extracting <code class="language-plaintext highlighter-rouge">.appx</code> file with an file
+archiver program, like 7-Zip by right clicking on file and selecting <code class="language-plaintext highlighter-rouge">Extract</code>
+option, and then running <code class="language-plaintext highlighter-rouge">ubuntu2004.exe</code>.</p>
+
+<p class="notice--danger">After extraction please make sure that your folder is at right place. Although
+it is possible to move folders to another location, in my case moving folders
+<strong>after</strong> installation gives me <code class="language-plaintext highlighter-rouge">Cannot find the specified path</code> error. So
+before installation make sure that this is the correct location. After
+installation, <code class="language-plaintext highlighter-rouge">rootfs</code> folder is created next to <code class="language-plaintext highlighter-rouge">ubuntu2004.exe</code> and file
+system of the Linux will live here. So make sure that you have enough space for
+your future needs. The WSL is somehow <em>fragile</em> <sup id="fnref:1f" role="doc-noteref"><a href="#fn:1f" class="footnote" rel="footnote">1</a></sup>. Although it is possible
+to move files as moving ordinary files in Windows after installation,
+be ready for side effects.</p>
+
+<p>With first run the installation process begins
+and you are prompted to select an username and associated password. After
+completing installation, you can use your Linux distro. Notice that file system
+for the Linux is created under <code class="language-plaintext highlighter-rouge">rootfs</code> folder. After installation, Ubuntu 20.04
+creates ~40K items in its folder.</p>
+
+<h1 id="pitfall-moving-ubuntu-2004-after-installation">Pitfall: Moving Ubuntu 20.04 After Installation</h1>
+
+<p>I got <code class="language-plaintext highlighter-rouge">Cannot find the specified path</code> error when I moved to another folder
+after installation. Other people report the same problem too <sup id="fnref:1f:1" role="doc-noteref"><a href="#fn:1f" class="footnote" rel="footnote">1</a></sup>. In my case,
+since I was using fresh Ubuntu installation, I reinstalled it but I don’t know the
+proper solution if you don’t want to loose your distro. Some people also
+reported that a Windows update also breaks the WSL <sup id="fnref:1f:2" role="doc-noteref"><a href="#fn:1f" class="footnote" rel="footnote">1</a></sup>, so… yeah, classical
+Windows…</p>
+
+<h2 id="solution-1">Solution</h2>
+
+<p>Even if you decide to reinstall the Ubuntu at the new location, when you run
+<code class="language-plaintext highlighter-rouge">ubuntu2004.exe</code> you get <code class="language-plaintext highlighter-rouge">The system cannot find the path specified</code> error.
+Even if you run <code class="language-plaintext highlighter-rouge">wsl</code> on PowerShell you get the same error. The reason is
+the previous machine is still registered. If you run <code class="language-plaintext highlighter-rouge">wslconfig /l</code>, you will
+see the previous machine. So first <em>unregister</em> the previous distro, example:</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">wslconfig</span><span class="w"> </span><span class="nx">/u</span><span class="w"> </span><span class="nx">Ubuntu-20.04</span><span class="w">
+</span></code></pre></div></div>
+
+<p>After that, <code class="language-plaintext highlighter-rouge">wsl</code> command should run, then you can install the Ubuntu to a
+new location.</p>
+
+<p class="notice--info">If you know how to move installed distro without reinstalling again, please
+comment. Maybe <a href="https://stackoverflow.com/a/51767786">this</a>?</p>
+
+<h1 id="error-wslregisterdistribution-failed-with-error-0x80070005">Error: “WslRegisterDistribution failed with error: 0x80070005”</h1>
+
+<p>When I tried to install the distro runnig <code class="language-plaintext highlighter-rouge">ubuntu2004.exe</code> on <code class="language-plaintext highlighter-rouge">D:</code> drive, I
+got this error but if I run it on <code class="language-plaintext highlighter-rouge">C:</code> drive everything works. This is probably
+due to security settings of my Windows machine.</p>
+
+<h2 id="solution-2">Solution</h2>
+
+<p>Since I don’t want to bother with these settings, I chose to <strong>Run as
+administrator</strong> on <code class="language-plaintext highlighter-rouge">D:</code> drive. After installation, user is able to run the
+distro and no privilege is required. Similar problems and proper solutions also
+exist <sup id="fnref:2f" role="doc-noteref"><a href="#fn:2f" class="footnote" rel="footnote">2</a></sup>, <sup id="fnref:3f" role="doc-noteref"><a href="#fn:3f" class="footnote" rel="footnote">3</a></sup>, <sup id="fnref:4f" role="doc-noteref"><a href="#fn:4f" class="footnote" rel="footnote">4</a></sup>.</p>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>Although using a Linux distro on Windows in a <em>native</em> way is a very good
+experience, WSL doesn’t look so solid and may become broken after an Windows
+update. So if you are planning to use be ready for possible future problems.</p>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1f" role="doc-endnote">
+      <p><a href="https://github.com/microsoft/WSL/issues/3976#issuecomment-581617473">https://github.com/microsoft/WSL/issues/3976#issuecomment-581617473</a> <a href="#fnref:1f" class="reversefootnote" role="doc-backlink">&#8617;</a> <a href="#fnref:1f:1" class="reversefootnote" role="doc-backlink">&#8617;<sup>2</sup></a> <a href="#fnref:1f:2" class="reversefootnote" role="doc-backlink">&#8617;<sup>3</sup></a></p>
+    </li>
+    <li id="fn:2f" role="doc-endnote">
+      <p><a href="https://scriptech.io/windows-10-1903-wsl-access-is-denied-error-0x80070005/">https://scriptech.io/windows-10-1903-wsl-access-is-denied-error-0x80070005/</a> <a href="#fnref:2f" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:3f" role="doc-endnote">
+      <p><a href="https://scriptech.io/group-policy-use-a-custom-security-template-in-a-group-policy-to-globally-manage-the-lxssmanager-service/">https://scriptech.io/group-policy-use-a-custom-security-template-in-a-group-policy-to-globally-manage-the-lxssmanager-service/</a> <a href="#fnref:3f" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:4f" role="doc-endnote">
+      <p><a href="https://github.com/Microsoft/WSL/issues/3054">https://github.com/Microsoft/WSL/issues/3054</a> <a href="#fnref:4f" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/blog/tags/en" class="page__taxonomy-item" rel="tag">en</a><span class="sep">, </span>
+    
+      <a href="/blog/tags/offline" class="page__taxonomy-item" rel="tag">offline</a><span class="sep">, </span>
+    
+      <a href="/blog/tags/ubuntu" class="page__taxonomy-item" rel="tag">ubuntu</a><span class="sep">, </span>
+    
+      <a href="/blog/tags/windows" class="page__taxonomy-item" rel="tag">windows</a><span class="sep">, </span>
+    
+      <a href="/blog/tags/wsl" class="page__taxonomy-item" rel="tag">wsl</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/blog/categories/guide" class="page__taxonomy-item" rel="tag">guide</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2022-12-23">December 23, 2022</time></p>
+
+
+      </footer>
+
+      <section class="page__share">
+  
+
+  <a href="https://twitter.com/intent/tweet?via=asynxdev&text=Using+WSL+on+an+offline+Windows+machine%20https%3A%2F%2Fasynx.dev%2Fblog%2F21%2F3%2Fwsl-offline.html" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fasynx.dev%2Fblog%2F21%2F3%2Fwsl-offline.html" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fasynx.dev%2Fblog%2F21%2F3%2Fwsl-offline.html" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/blog/21/2/jekyll.html" class="pagination--pager" title="Jekyll’ye geçiş
+">Previous</a>
+    
+    
+      <a href="/blog/21/3/rpi-sd-kart-buyutme.html" class="pagination--pager" title="Raspberry Pi SD kart taşıma ve büyütme
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+      <div class="page__comments">
+  
+  
+      <h4 class="page__comments-title">Comments</h4>
+      <section id="disqus_thread"></section>
+    
+</div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You May Also Enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/20/12/getting-started-to-vitis-acceleration-flow-with-zynq-7000.html" rel="permalink">Getting started to Vitis acceleration flow with Zynq 7000
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2020-12-07T00:00:00+03:00">December 7, 2020</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          7 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      <span class="page__meta-axseq">
+        <i class="fas fa-fw fa-fingerprint" aria-hidden="true"></i>
+        ax-20-6
+      </span>
+    
+
+     <span class="page__meta-sep"></span>
+
+    
+      <span class="page__meta-lang">
+        
+        
+        <i class="fas fa-fw fa-language" aria-hidden="true" title="İngilizce/English"></i> 🇬🇧
+        
+      </span>
+    
+
+     
+
+    
+
+    
+
+    
+
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Getting started to Vitis acceleration flow with Zynq 7000.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/blog/22/2_teaser.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/22/2/petalinux-offline.html" rel="permalink">Running PetaLinux on an offline machine
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-02-28T00:00:00+03:00">February 28, 2022</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          4 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      <span class="page__meta-axseq">
+        <i class="fas fa-fw fa-fingerprint" aria-hidden="true"></i>
+        ax-22-2
+      </span>
+    
+
+     <span class="page__meta-sep"></span>
+
+    
+      <span class="page__meta-lang">
+        
+        
+        <i class="fas fa-fw fa-language" aria-hidden="true" title="İngilizce/English"></i> 🇬🇧
+        
+      </span>
+    
+
+     
+
+    
+
+    
+
+    
+
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">PetaLinux can be run an offline machine with proper configuration
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/20/11/serial-data-communication-over-tcp.html" rel="permalink">Serial data communication over TCP
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2020-11-29T00:00:00+03:00">November 29, 2020</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          4 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      <span class="page__meta-axseq">
+        <i class="fas fa-fw fa-fingerprint" aria-hidden="true"></i>
+        ax-20-5
+      </span>
+    
+
+     <span class="page__meta-sep"></span>
+
+    
+      <span class="page__meta-lang">
+        
+        
+        <i class="fas fa-fw fa-language" aria-hidden="true" title="İngilizce/English"></i> 🇬🇧
+        
+      </span>
+    
+
+     
+
+    
+
+    
+
+    
+
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Serial data communication over TCP with socat.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/blog/21/6_teaser.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/21/10/sumatrapdf-texstudio-synctex-search-link.html" rel="permalink">Create search link between SumatraPDF and TeXstudio with SyncTeX
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2021-10-30T00:00:00+03:00">October 30, 2021</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          2 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      <span class="page__meta-axseq">
+        <i class="fas fa-fw fa-fingerprint" aria-hidden="true"></i>
+        ax-21-6
+      </span>
+    
+
+     <span class="page__meta-sep"></span>
+
+    
+      <span class="page__meta-lang">
+        
+        
+        <i class="fas fa-fw fa-language" aria-hidden="true" title="İngilizce/English"></i> 🇬🇧
+        
+      </span>
+    
+
+     
+
+    
+
+    
+
+    
+
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">SyncTeX enables us to create a bidirectional search relation between these two software.
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+    <ul class="social-icons">
+      
+
+      
+        
+          
+            <li><a href="https://www.linkedin.com/company/asynx" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+          
+        
+          
+            <li><a href="https://github.com/asynx-dev" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          
+        
+      
+
+      
+        <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+      
+    </ul>
+  </div>
+
+  <div class="page__footer-copyright">&copy; 2020-2024 asynx.dev. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.
+  <br/><a href='/license/'>License (CC BY SA 4.0)</a>, <a href='/disclaimer/'>Disclaimer</a>, <a href='/privacy/'>Privacy Policy</a>, <a href='/misc/'>Miscellaneous</a>
+</div>
+
+
+<!-- Default Statcounter code for asynx.dev
+https://asynx.dev -->
+<script type="text/javascript">
+var sc_project=12624131;
+var sc_invisible=1;
+var sc_security="c6cc37c6";
+</script>
+<script type="text/javascript"
+src="https://www.statcounter.com/counter/counter.js"
+async></script>
+<noscript><div class="statcounter"><a title="Web Analytics"
+href="https://statcounter.com/" target="_blank"><img
+class="statcounter"
+src="https://c.statcounter.com/12624131/0/c6cc37c6/1/"
+alt="Web Analytics"
+referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
+<!-- End of Statcounter Code -->
+
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://asynx.dev/blog/21/3/wsl-offline.html";  /* Replace PAGE_URL with your page's canonical URL variable */
+      this.page.identifier = "/blog/21/3/wsl-offline"; /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */
+    };
+    (function() { /* DON'T EDIT BELOW THIS LINE */
+      var d = document, s = d.createElement('script');
+      s.src = 'https://asynxdev.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+
+
+  </body>
+</html>

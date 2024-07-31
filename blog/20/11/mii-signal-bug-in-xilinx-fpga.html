@@ -1,0 +1,1232 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>MII signal bug in Xilinx FPGA - asynx</title>
+<meta name="description" content="MII TX_EN signal goes low just for a clock cycle, which is a bug for MII specifications. This blog post gives some information and shows how the bug is created.">
+
+
+  <meta name="author" content="Yunus Esergün">
+  
+  <meta property="article:author" content="Yunus Esergün">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="asynx">
+<meta property="og:title" content="MII signal bug in Xilinx FPGA">
+<meta property="og:url" content="https://asynx.dev/blog/20/11/mii-signal-bug-in-xilinx-fpga.html">
+
+
+  <meta property="og:description" content="MII TX_EN signal goes low just for a clock cycle, which is a bug for MII specifications. This blog post gives some information and shows how the bug is created.">
+
+
+
+
+
+  <meta name="twitter:site" content="@asynxdev">
+  <meta name="twitter:title" content="MII signal bug in Xilinx FPGA">
+  <meta name="twitter:description" content="MII TX_EN signal goes low just for a clock cycle, which is a bug for MII specifications. This blog post gives some information and shows how the bug is created.">
+  <meta name="twitter:url" content="https://asynx.dev/blog/20/11/mii-signal-bug-in-xilinx-fpga.html">
+
+  
+    <meta name="twitter:card" content="summary">
+    
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2020-11-27T00:00:00+03:00">
+
+
+
+  <meta property="article:modified_time" content="2021-09-19T17:08:43+03:00">
+
+
+
+
+<link rel="canonical" href="https://asynx.dev/blog/20/11/mii-signal-bug-in-xilinx-fpga.html">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "asynx.dev",
+      "url": "https://asynx.dev/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="asynx Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+<link rel="manifest" href="/assets/images/site.webmanifest">
+<link rel="mask-icon" href="/assets/images/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/images/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/images/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<!-- end custom head snippets -->
+
+<!-- podcast -->
+<link href="https://anchor.fm/s/951bf194/podcast/rss" type="application/rss+xml" rel="alternate" title="asynx Podcast Feed">
+
+<!--adsense-->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4580059638713287"
+     crossorigin="anonymous"></script>
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/android-chrome-192x192.png" alt="asynx"></a>
+        
+        <a class="site-title" href="/">
+          asynx
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/blog/">📝 Blog</a>
+            </li><li class="masthead__menu-item">
+              <a href="/follow/">✅ Follow</a>
+            </li><li class="masthead__menu-item">
+              <a href="/projects/">Projects</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li><li class="masthead__menu-item">
+              <a href="/contact/">Contact</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="/assets/images/bio/yesergun.png" alt="Yunus Esergün" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Yunus Esergün</h3>
+    
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="MII signal bug in Xilinx FPGA">
+    <meta itemprop="description" content="MII TX_EN signal goes low just for a clock cycle, which is a bug for MII specifications. This blog post gives some information and shows how the bug is created.">
+    <meta itemprop="datePublished" content="2020-11-27T00:00:00+03:00">
+    <meta itemprop="dateModified" content="2021-09-19T17:08:43+03:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">MII signal bug in Xilinx FPGA
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2020-11-27T00:00:00+03:00">November 27, 2020</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          8 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      <span class="page__meta-axseq">
+        <i class="fas fa-fingerprint" aria-hidden="true"></i>
+        ax-20-4
+      </span>
+    
+
+     <span class="page__meta-sep"></span>
+
+    
+      <span class="page__meta-lang">
+        
+        
+        <i class="fas fa-language" aria-hidden="true" title="İngilizce/English"></i> 🇬🇧
+        
+      </span>
+    
+
+     
+
+    
+
+    
+
+    
+
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu"><li><a href="#general-information">General information</a><ul><li><a href="#ethernet-frames">Ethernet frames</a></li><li><a href="#mii-signals">MII signals</a></li></ul></li><li><a href="#architecture">Architecture</a></li><li><a href="#the-bug">The bug</a></li></ul>
+
+            </nav>
+          </aside>
+        
+        
+
+
+
+        <p>The main goal of this article to give the general information about
+<strong>Ethernet packets</strong> and <strong>MII</strong> concept, and demonstrate a bug that I have
+recently faced while working on <strong>MII signals</strong> in Vivado, with the architecture
+that I build.</p>
+
+<h1 id="general-information">General information</h1>
+
+<p>The <strong>MII (Media-Independent Interface)</strong> was defined as a standard interface
+which connects <strong>MAC</strong> and <strong>PHY</strong> to each other. This interface is standardized
+by <strong>IEEE 802.3u</strong> protocol. In order to understand MII concept, first of all,
+we should comprehend <strong>Ethernet frame</strong> concept. In this blog post, <strong>packet</strong> and
+<strong>frame</strong> have the same meaning.</p>
+
+<h2 id="ethernet-frames">Ethernet frames</h2>
+
+<p>Ethernet frames can be transformed from MAC to PHY via MII signals. Standard
+Ethernet frames consist of <code class="language-plaintext highlighter-rouge">Preamble</code>, <code class="language-plaintext highlighter-rouge">Start of Frame Delimiter</code>,
+<code class="language-plaintext highlighter-rouge">Ethernet Headers</code>, <code class="language-plaintext highlighter-rouge">Data</code>, which is protocol-specific and finally
+<code class="language-plaintext highlighter-rouge">CRC (Cyclic Redundancy Check)</code> parts. There are two layer types for IEEE 802.3
+protocol Ethernet packets and <strong>Layer 1 Ethernet packet</strong> which is important for
+the architecture that I built is shown below <sup id="fnref:1f" role="doc-noteref"><a href="#fn:1f" class="footnote" rel="footnote">1</a></sup>:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 0                   1                   2                   3
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                            Preamble                           |
++                                               +-+-+-+-+-+-+-+-+
+|                                               |Frame Delimiter|
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                        MAC Destination                        |
++                               +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                               |                               |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+                               +
+|                           MAC Source                          |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|        Ethertype/Length       |                               |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+                               +
+|                                                               |
++                       Payload(Variable)                       +
+|                                                               |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                              CRC                              |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                                                               |
++                                                               +
+|                        Interpacket Gap                        |
++                                                               +
+|                                                               |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+</code></pre></div></div>
+
+<p>This figure is a general view of Ethernet packets. In an Ethernet frame, there
+should be some starting bytes which PHY side can comprehend that a new packet
+starts to be received. Therefore, for this purpose, <code class="language-plaintext highlighter-rouge">Preamble</code> and
+<code class="language-plaintext highlighter-rouge">Start of Frame Delimiter</code> parts are utilized. In these parts, specified bytes
+are sent to PHY (However, in some layers, which use <strong>Layer 2 Ethernet frame</strong>,
+these parts are ignored for gaining more bandwidth.). These bytes are
+<strong>55 55 55 55 55 55 55 5D</strong>, which last byte indicates the
+<code class="language-plaintext highlighter-rouge">Start of Frame Delimiter</code> part and rest of them indicate <code class="language-plaintext highlighter-rouge">Preamble</code> part.</p>
+
+<p>After these parts, MAC should transmit 6 byte <code class="language-plaintext highlighter-rouge">MAC destination IP</code>, which is for
+specifying the ending point, and also its 6 byte <code class="language-plaintext highlighter-rouge">MAC source IP</code>, which is for
+informing the end point about starting point. For example, for an
+<strong>ARP Ethernet frame</strong>, <code class="language-plaintext highlighter-rouge">MAC destination IP</code> is <strong>FF FF FF FF FF FF</strong> in order
+for MAC to know many PHY IP addresses (destination IP addresses) as much as
+possible.</p>
+
+<p>Following these starting bytes, for IEEE 802.3 protocol, 2 bytes
+<code class="language-plaintext highlighter-rouge">Ether type/Length</code> part should be sent. If <code class="language-plaintext highlighter-rouge">Ether type/Length</code> value is less
+than 1500, the value shows the payload part size/length. Otherwise, it shows the
+<code class="language-plaintext highlighter-rouge">Ether type/Length</code> of the Ethernet packet. For example, if <code class="language-plaintext highlighter-rouge">Ether type/Length</code>
+part is <strong>0x0800</strong>, it means that the packet is an <strong>IPv4 frame</strong>, if it is
+<strong>0x0806</strong>, the packet is an <strong>ARP frame</strong>… etc.</p>
+
+<p>Before <strong>FCS (Frame Check Sequence)</strong>, or <code class="language-plaintext highlighter-rouge">CRC</code> (Same meaning but FCS name is
+specified for Ethernet frames.), <code class="language-plaintext highlighter-rouge">Payload</code> part which contains protocol’s
+headers (<strong>UDP checksum</strong>… etc.), main data, and <strong>padding bytes</strong> (if frame
+length is not long enough) should be transmitted.</p>
+
+<p>At last, 4 bytes <code class="language-plaintext highlighter-rouge">CRC/FCS</code> information is sent by MAC. <code class="language-plaintext highlighter-rouge">CRC</code> is utilized for
+being sure that <code class="language-plaintext highlighter-rouge">MAC addresses</code>, <code class="language-plaintext highlighter-rouge">Ether type/Length</code> and <code class="language-plaintext highlighter-rouge">Payload</code> parts are
+correctly received by PHY side. For calculating it, some algorithms, which are
+not in our scope are used. For Ethernet packets, specifically, <strong>CRC32 BZIP2</strong>
+is used <sup id="fnref:1f:1" role="doc-noteref"><a href="#fn:1f" class="footnote" rel="footnote">1</a></sup>. Main calculations do not change among <code class="language-plaintext highlighter-rouge">CRC</code> types, but only
+parameters used for calculating <code class="language-plaintext highlighter-rouge">CRC</code> may differ.</p>
+
+<p>Some specified parts, which can be seen in the figure above, are sent and
+finally, according to the <strong>Layer 1 Ethernet packets</strong>, <code class="language-plaintext highlighter-rouge">Inter-Packet Gap</code> phase
+starts. In this part, MAC transmits <strong>idle bytes</strong> to PHY so that PHY can
+receive previous packet and make some processes on the packet before new packet
+arrives. Briefly, MAC side should give some time to PHY side. In the figure,
+<code class="language-plaintext highlighter-rouge">inter-packet gap</code> is shown as <strong>12 octets</strong> (bytes) but with respect to
+<strong>Ethernet speed</strong>, this number can change. Full Ethernet speed-inter packet gap
+duration list can be found below <sup id="fnref:3f" role="doc-noteref"><a href="#fn:3f" class="footnote" rel="footnote">2</a></sup>:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Ethernet Speed</th>
+      <th style="text-align: center">Least Interpacket Gap Duration</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">10 Mbits/s</td>
+      <td style="text-align: center">9.6 us</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">100 Mbits/s</td>
+      <td style="text-align: center">0.96 us</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">1 Gigabit/s</td>
+      <td style="text-align: center">96 ns</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">2.5 Gigabit/s</td>
+      <td style="text-align: center">38.4 ns</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">5 Gigabit/s</td>
+      <td style="text-align: center">19.2 ns</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">10 Gigabit/s</td>
+      <td style="text-align: center">9.6 ns</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">25 Gigabit/s</td>
+      <td style="text-align: center">3.84 ns</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">40 Gigabit/s</td>
+      <td style="text-align: center">2.4 ns</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">50 Gigabit/s</td>
+      <td style="text-align: center">1.92 ns</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">100 Gigabit/s</td>
+      <td style="text-align: center">0.96 ns</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">200 Gigabit/s</td>
+      <td style="text-align: center">0.48 ns</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">400 Gigabit/s</td>
+      <td style="text-align: center">0.24 ns</td>
+    </tr>
+  </tbody>
+</table>
+
+<p class="notice">In my architecture, <code class="language-plaintext highlighter-rouge">100 Mbits/s speed</code> is used. Therefore, interpacket
+gap should be at least <code class="language-plaintext highlighter-rouge">0.96 us</code> which means at least <strong>96 bits</strong> (12
+octets).</p>
+
+<p>The summary of Ethernet packet concept is referred above. So as to close to the
+main problem, we should comprehend MII concept as well.</p>
+
+<h2 id="mii-signals">MII signals</h2>
+
+<p><strong>Standard MII</strong> signals transfer specified Ethernet frame using
+<strong>4-bit (nibbles)</strong> with full-duplex way. However, by the time, different MII
+concepts were utilized in order to reduce signals and increase speed <sup id="fnref:2f" role="doc-noteref"><a href="#fn:2f" class="footnote" rel="footnote">3</a></sup>.
+<strong>RMII</strong> (Reduced Media-Independent Interface), <strong>GMII</strong> (Gigabit
+Media-Independent Interface) and <strong>RGMII</strong> (Reduced Gigabit Media-Independent
+Interface) are different variants of MII so as to improve signals or speeds.
+However, I have utilized standard MII to achieve my goal. In the standard MII,
+there are some <strong>transmitter</strong> and <strong>receiver</strong> signals which are demonstrated
+below <sup id="fnref:2f:1" role="doc-noteref"><a href="#fn:2f" class="footnote" rel="footnote">3</a></sup>:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">Signal Name</th>
+      <th style="text-align: center">Description</th>
+      <th style="text-align: center">Direction</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">TX_CLK</td>
+      <td style="text-align: center">Transmit clock</td>
+      <td style="text-align: center">MAC → PHY</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">TXD0</td>
+      <td style="text-align: center">Transmit data bit 0 which carries ethernet packet data</td>
+      <td style="text-align: center">MAC → PHY</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">TXD1</td>
+      <td style="text-align: center">Transmit data bit 1 which carries ethernet packet data</td>
+      <td style="text-align: center">MAC → PHY</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">TXD2</td>
+      <td style="text-align: center">Transmit data bit 2 which carries ethernet packet data</td>
+      <td style="text-align: center">MAC → PHY</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">TXD3</td>
+      <td style="text-align: center">Transmit data bit 3 which carries ethernet packet data</td>
+      <td style="text-align: center">MAC → PHY</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">TX_EN</td>
+      <td style="text-align: center">Transmit enable signal which tells PHY that there are MII signals on their way</td>
+      <td style="text-align: center">MAC → PHY</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">TX_ER</td>
+      <td style="text-align: center">Transmit error signals which tells PHY there is a nibble error on its way</td>
+      <td style="text-align: center">MAC → PHY</td>
+    </tr>
+    <tr>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center">RX_CLK</td>
+      <td style="text-align: center">Receive clock</td>
+      <td style="text-align: center">PHY → MAC</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">RXD0</td>
+      <td style="text-align: center">Receiver data bit 0 which carries ethernet packet data</td>
+      <td style="text-align: center">PHY → MAC</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">RXD1</td>
+      <td style="text-align: center">Receiver data bit 1 which carries ethernet packet data</td>
+      <td style="text-align: center">PHY → MAC</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">RXD2</td>
+      <td style="text-align: center">Receiver data bit 2 which carries ethernet packet data</td>
+      <td style="text-align: center">PHY → MAC</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">RXD3</td>
+      <td style="text-align: center">Receiver data bit 3 which carries ethernet packet data</td>
+      <td style="text-align: center">PHY → MAC</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">RX_EN</td>
+      <td style="text-align: center">Receiver enable signal which MAC knows MII signals are sent to it</td>
+      <td style="text-align: center">PHY → MAC</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">RX_ER</td>
+      <td style="text-align: center">Receiver error signals which MAC knows the MII signals have data errors</td>
+      <td style="text-align: center">PHY → MAC</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">CRS</td>
+      <td style="text-align: center">Carrier sense signal which is not used in the architecture</td>
+      <td style="text-align: center">PHY → MAC</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">COL</td>
+      <td style="text-align: center">Collision detect signal which is not used in the architecture</td>
+      <td style="text-align: center">PHY → MAC</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Finally, after some general information, it is time to explain the architecture
+that is built.</p>
+
+<h1 id="architecture">Architecture</h1>
+
+<p>In fact, the architecture is very easy to construct and run. Below, the block
+design is shown:</p>
+
+<p><img src="/assets/images/blog/20/2020-11-27-architecture.png" alt="Architecture" /></p>
+
+<p class="notice--warning">In the figure, some signals such as <code class="language-plaintext highlighter-rouge">M_AXI_GP0</code>, <code class="language-plaintext highlighter-rouge">ENET0_GMII_RX_*</code> and also
+some blocks such as <code class="language-plaintext highlighter-rouge">AXI Interconnect</code>, <code class="language-plaintext highlighter-rouge">Processor System Reset</code>,
+<code class="language-plaintext highlighter-rouge">AXI Protocol Converter</code> can be seen. These signals and blocks are nothing
+to do with <code class="language-plaintext highlighter-rouge">ENET0_GMII_TX_*</code>. They do not affect TX side in any ways.</p>
+
+<p>As can be seen from the figure, there are just four signals that should be taken
+into consideration. These signals are <code class="language-plaintext highlighter-rouge">ENET0_GMII_TX_EN</code>, <code class="language-plaintext highlighter-rouge">ENET0_GMII_TX_ER</code>,
+<code class="language-plaintext highlighter-rouge">ENET0_GMII_TXD</code>, <code class="language-plaintext highlighter-rouge">ENET0_GMII_TX_CLK</code>. Because the speed is chosen as 100
+Mbits/s, 25 MHz clock is generated via <code class="language-plaintext highlighter-rouge">ZYNQ Block</code> and connected to
+<code class="language-plaintext highlighter-rouge">ENET0_GMII_TX_CLK</code>. Other <strong>TX signals</strong>** are connected to <code class="language-plaintext highlighter-rouge">ILA Block</code> to make
+some chipscope tests.</p>
+
+<p>Moreover, I have utilized <strong>Linux Driver</strong> to set up transmission with
+<strong>ZYNQ GEM</strong>. In a more understandable language, I have used Linux Driver so
+that <strong>ARM side</strong> can generate Ethernet packets and send them via MII interface.</p>
+
+<p>As a result, after building this, generating bitstream and programming device, I
+have started to observe MII signals and comprehend how they are sent via ILA.
+However, in some packets, I have found a <strong>bug</strong> that is explained in the next
+part.</p>
+
+<h1 id="the-bug">The bug</h1>
+
+<p>According to MII Protocol Specification, during <code class="language-plaintext highlighter-rouge">TX_EN</code> signal assertion,
+receiver side takes the nibbles (for standard MII). When <code class="language-plaintext highlighter-rouge">TX_EN</code> signal goes
+low, receiver side takes the entire packet until that time and makes some
+process (such as calculating <strong>CRC</strong> and comparing with the received one) on the
+packet during <strong>interpacket gap time</strong>. Therefore, when <code class="language-plaintext highlighter-rouge">TX_EN</code> signal is not
+high after some transmission, receiver side understands that the packet is
+finished and it is time to make some processes.</p>
+
+<p>However, in my architecture, sometimes, in the middle of packet, <code class="language-plaintext highlighter-rouge">TX_EN</code> signal
+goes low for a single clock cycle and then again goes high. So, it does not stay
+low for <strong>24 clock cycles (12 octets)</strong> after it goes low. Also, so that I am
+sure that it is a bug, I have written a module that writes MII data to <strong>BRAM</strong>.
+For bug case, I have calculated CRC without including the case that <code class="language-plaintext highlighter-rouge">TX_EN</code> goes
+low and I have compared the calculated CRC with the received CRC. They were
+exactly the same.</p>
+
+<p>This kind of bug can result in some errors in receiver side because people write
+codes according to the specifications and if you do not satisfy them, there
+always occur some errors and bugs. I have put some screenshoots from <strong>ILA</strong> to
+comprehend the problem more easily:</p>
+
+<p><img src="/assets/images/blog/20/2020-11-27-ila_problem_v1.png" alt="ILA Problem First Image" /></p>
+
+<p><img src="/assets/images/blog/20/2020-11-27-ila_problem_v2.png" alt="ILA Problem Second Image" /></p>
+
+<p>As can be inferred from the pictures, somewhere in the middle of the entire MII
+packet, <code class="language-plaintext highlighter-rouge">TX_EN</code> goes low. We can say that a packet transmission has finished and
+a new one has started but they are not two seperate packets according to my CRC
+calculations. Because they unite a packet, <code class="language-plaintext highlighter-rouge">TX_EN</code> should not be deasserted
+even for a single clock cycle.</p>
+
+<p>Finally, for this bug, I have posted a detailed question on
+<a href="https://forums.xilinx.com/t5/Ethernet/MII-Signals-Problem-on-ILA/m-p/1126290">Xilinx Forum</a>
+but Xilinx employees do not really give attention to the <strong>bug</strong>. That is why
+there is no solution for this problem.</p>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1f" role="doc-endnote">
+      <p><a href="https://en.wikipedia.org/wiki/Ethernet_frame">https://en.wikipedia.org/wiki/Ethernet_frame</a> <a href="#fnref:1f" class="reversefootnote" role="doc-backlink">&#8617;</a> <a href="#fnref:1f:1" class="reversefootnote" role="doc-backlink">&#8617;<sup>2</sup></a></p>
+    </li>
+    <li id="fn:3f" role="doc-endnote">
+      <p><a href="https://en.wikipedia.org/wiki/Interpacket_gap">https://en.wikipedia.org/wiki/Interpacket_gap</a> <a href="#fnref:3f" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:2f" role="doc-endnote">
+      <p><a href="https://en.wikipedia.org/wiki/Media-independent_interface">https://en.wikipedia.org/wiki/Media-independent_interface</a> <a href="#fnref:2f" class="reversefootnote" role="doc-backlink">&#8617;</a> <a href="#fnref:2f:1" class="reversefootnote" role="doc-backlink">&#8617;<sup>2</sup></a></p>
+    </li>
+  </ol>
+</div>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/blog/tags/en" class="page__taxonomy-item" rel="tag">en</a><span class="sep">, </span>
+    
+      <a href="/blog/tags/ethernet" class="page__taxonomy-item" rel="tag">ethernet</a><span class="sep">, </span>
+    
+      <a href="/blog/tags/mii" class="page__taxonomy-item" rel="tag">mii</a><span class="sep">, </span>
+    
+      <a href="/blog/tags/xilinx" class="page__taxonomy-item" rel="tag">xilinx</a><span class="sep">, </span>
+    
+      <a href="/blog/tags/zynq" class="page__taxonomy-item" rel="tag">zynq</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/blog/categories/solution" class="page__taxonomy-item" rel="tag">solution</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2021-09-19">September 19, 2021</time></p>
+
+
+      </footer>
+
+      <section class="page__share">
+  
+
+  <a href="https://twitter.com/intent/tweet?via=asynxdev&text=MII+signal+bug+in+Xilinx+FPGA%20https%3A%2F%2Fasynx.dev%2Fblog%2F20%2F11%2Fmii-signal-bug-in-xilinx-fpga.html" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fasynx.dev%2Fblog%2F20%2F11%2Fmii-signal-bug-in-xilinx-fpga.html" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fasynx.dev%2Fblog%2F20%2F11%2Fmii-signal-bug-in-xilinx-fpga.html" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/blog/20/11/using-vscode-with-self-signed-certificates-behind-proxy.html" class="pagination--pager" title="Using VS Code with self signed SSL certificates behind proxy
+">Previous</a>
+    
+    
+      <a href="/blog/20/11/serial-data-communication-over-tcp.html" class="pagination--pager" title="Serial data communication over TCP
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+      <div class="page__comments">
+  
+  
+      <h4 class="page__comments-title">Comments</h4>
+      <section id="disqus_thread"></section>
+    
+</div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You May Also Enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/20/10/mig-calibration-error-xilinx.html" rel="permalink">MIG “init_calib_complete” signal does not go high
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2020-10-21T00:00:00+03:00">October 21, 2020</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          3 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      <span class="page__meta-axseq">
+        <i class="fas fa-fw fa-fingerprint" aria-hidden="true"></i>
+        ax-20-1
+      </span>
+    
+
+     <span class="page__meta-sep"></span>
+
+    
+      <span class="page__meta-lang">
+        
+        
+        <i class="fas fa-fw fa-language" aria-hidden="true" title="İngilizce/English"></i> 🇬🇧
+        
+      </span>
+    
+
+     
+
+    
+
+    
+
+    
+
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">MIG “init_calib_complete” signal does not go high during simulation
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/20/12/getting-started-to-vitis-acceleration-flow-with-zynq-7000.html" rel="permalink">Getting started to Vitis acceleration flow with Zynq 7000
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2020-12-07T00:00:00+03:00">December 7, 2020</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          7 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      <span class="page__meta-axseq">
+        <i class="fas fa-fw fa-fingerprint" aria-hidden="true"></i>
+        ax-20-6
+      </span>
+    
+
+     <span class="page__meta-sep"></span>
+
+    
+      <span class="page__meta-lang">
+        
+        
+        <i class="fas fa-fw fa-language" aria-hidden="true" title="İngilizce/English"></i> 🇬🇧
+        
+      </span>
+    
+
+     
+
+    
+
+    
+
+    
+
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Getting started to Vitis acceleration flow with Zynq 7000.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/blog/22/2_teaser.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/22/2/petalinux-offline.html" rel="permalink">Running PetaLinux on an offline machine
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-02-28T00:00:00+03:00">February 28, 2022</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          4 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      <span class="page__meta-axseq">
+        <i class="fas fa-fw fa-fingerprint" aria-hidden="true"></i>
+        ax-22-2
+      </span>
+    
+
+     <span class="page__meta-sep"></span>
+
+    
+      <span class="page__meta-lang">
+        
+        
+        <i class="fas fa-fw fa-language" aria-hidden="true" title="İngilizce/English"></i> 🇬🇧
+        
+      </span>
+    
+
+     
+
+    
+
+    
+
+    
+
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">PetaLinux can be run an offline machine with proper configuration
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/20/11/serial-data-communication-over-tcp.html" rel="permalink">Serial data communication over TCP
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2020-11-29T00:00:00+03:00">November 29, 2020</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          4 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      <span class="page__meta-axseq">
+        <i class="fas fa-fw fa-fingerprint" aria-hidden="true"></i>
+        ax-20-5
+      </span>
+    
+
+     <span class="page__meta-sep"></span>
+
+    
+      <span class="page__meta-lang">
+        
+        
+        <i class="fas fa-fw fa-language" aria-hidden="true" title="İngilizce/English"></i> 🇬🇧
+        
+      </span>
+    
+
+     
+
+    
+
+    
+
+    
+
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Serial data communication over TCP with socat.
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+    <ul class="social-icons">
+      
+
+      
+        
+          
+            <li><a href="https://www.linkedin.com/company/asynx" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+          
+        
+          
+            <li><a href="https://github.com/asynx-dev" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          
+        
+      
+
+      
+        <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+      
+    </ul>
+  </div>
+
+  <div class="page__footer-copyright">&copy; 2020-2024 asynx.dev. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.
+  <br/><a href='/license/'>License (CC BY SA 4.0)</a>, <a href='/disclaimer/'>Disclaimer</a>, <a href='/privacy/'>Privacy Policy</a>, <a href='/misc/'>Miscellaneous</a>
+</div>
+
+
+<!-- Default Statcounter code for asynx.dev
+https://asynx.dev -->
+<script type="text/javascript">
+var sc_project=12624131;
+var sc_invisible=1;
+var sc_security="c6cc37c6";
+</script>
+<script type="text/javascript"
+src="https://www.statcounter.com/counter/counter.js"
+async></script>
+<noscript><div class="statcounter"><a title="Web Analytics"
+href="https://statcounter.com/" target="_blank"><img
+class="statcounter"
+src="https://c.statcounter.com/12624131/0/c6cc37c6/1/"
+alt="Web Analytics"
+referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
+<!-- End of Statcounter Code -->
+
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://asynx.dev/blog/20/11/mii-signal-bug-in-xilinx-fpga.html";  /* Replace PAGE_URL with your page's canonical URL variable */
+      this.page.identifier = "/blog/20/11/mii-signal-bug-in-xilinx-fpga"; /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */
+    };
+    (function() { /* DON'T EDIT BELOW THIS LINE */
+      var d = document, s = d.createElement('script');
+      s.src = 'https://asynxdev.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,1052 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Serial data communication over TCP - asynx</title>
+<meta name="description" content="Serial data communication over TCP with socat.">
+
+
+  <meta name="author" content="Anıl Tırlıoğlu">
+  
+  <meta property="article:author" content="Anıl Tırlıoğlu">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="asynx">
+<meta property="og:title" content="Serial data communication over TCP">
+<meta property="og:url" content="https://asynx.dev/blog/20/11/serial-data-communication-over-tcp.html">
+
+
+  <meta property="og:description" content="Serial data communication over TCP with socat.">
+
+
+
+
+
+  <meta name="twitter:site" content="@asynxdev">
+  <meta name="twitter:title" content="Serial data communication over TCP">
+  <meta name="twitter:description" content="Serial data communication over TCP with socat.">
+  <meta name="twitter:url" content="https://asynx.dev/blog/20/11/serial-data-communication-over-tcp.html">
+
+  
+    <meta name="twitter:card" content="summary">
+    
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2020-11-29T00:00:00+03:00">
+
+
+
+  <meta property="article:modified_time" content="2021-09-19T17:08:43+03:00">
+
+
+
+
+<link rel="canonical" href="https://asynx.dev/blog/20/11/serial-data-communication-over-tcp.html">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "asynx.dev",
+      "url": "https://asynx.dev/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="asynx Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+<link rel="manifest" href="/assets/images/site.webmanifest">
+<link rel="mask-icon" href="/assets/images/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/images/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/images/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<!-- end custom head snippets -->
+
+<!-- podcast -->
+<link href="https://anchor.fm/s/951bf194/podcast/rss" type="application/rss+xml" rel="alternate" title="asynx Podcast Feed">
+
+<!--adsense-->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4580059638713287"
+     crossorigin="anonymous"></script>
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/android-chrome-192x192.png" alt="asynx"></a>
+        
+        <a class="site-title" href="/">
+          asynx
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/blog/">📝 Blog</a>
+            </li><li class="masthead__menu-item">
+              <a href="/follow/">✅ Follow</a>
+            </li><li class="masthead__menu-item">
+              <a href="/projects/">Projects</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li><li class="masthead__menu-item">
+              <a href="/contact/">Contact</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="/assets/images/bio/atirlioglu.png" alt="Anıl Tırlıoğlu" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Anıl Tırlıoğlu</h3>
+    
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Serial data communication over TCP">
+    <meta itemprop="description" content="Serial data communication over TCP with socat.">
+    <meta itemprop="datePublished" content="2020-11-29T00:00:00+03:00">
+    <meta itemprop="dateModified" content="2021-09-19T17:08:43+03:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Serial data communication over TCP
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2020-11-29T00:00:00+03:00">November 29, 2020</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          4 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      <span class="page__meta-axseq">
+        <i class="fas fa-fingerprint" aria-hidden="true"></i>
+        ax-20-5
+      </span>
+    
+
+     <span class="page__meta-sep"></span>
+
+    
+      <span class="page__meta-lang">
+        
+        
+        <i class="fas fa-language" aria-hidden="true" title="İngilizce/English"></i> 🇬🇧
+        
+      </span>
+    
+
+     
+
+    
+
+    
+
+    
+
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu"><li><a href="#why-would-you-need-serial-over-ethernet-">Why would you need serial over ethernet ?</a></li><li><a href="#other-commercially-available-solutions">Other commercially available solutions</a></li><li><a href="#socat">socat</a></li><li><a href="#step-by-step-serial-data-forwarding-over-ethernet">Step by step serial data forwarding over ethernet</a><ul><li><a href="#install-socat">Install socat</a><ul><li><a href="#on-ubuntu">On Ubuntu</a></li><li><a href="#on-windows">On Windows</a></li></ul></li><li><a href="#learn-ip-address-of-machine-1">Learn IP address of Machine 1</a></li><li><a href="#create-virtual-serial-port-to-forward-and-listen-on-machine-1">Create virtual serial port to forward and listen on Machine 1</a></li><li><a href="#create-virtual-serial-port-to-forward-on-machine-2">Create virtual serial port to forward on Machine 2</a></li><li><a href="#open-ports-on-both-machines-with-any-serial-port-applications">Open Ports on both machines with any serial port applications</a></li><li><a href="#start-sending-bytes">Start Sending Bytes</a></li></ul></li></ul>
+
+            </nav>
+          </aside>
+        
+        
+
+
+
+        <h1 id="why-would-you-need-serial-over-ethernet-">Why would you need serial over ethernet ?</h1>
+
+<p>A serial device on remote PC can be viewed as directly connected to your PC with
+serial over ethernet.</p>
+
+<p>Two applications on different PCs talk over serial ports as if applications
+directly connected through serial ports. This could be sensible if you are
+testing your application before directly interfacing with the real serial
+device. Check this link<sup id="fnref:1f" role="doc-noteref"><a href="#fn:1f" class="footnote" rel="footnote">1</a></sup> to see similar use case within same PC.</p>
+
+<p>In my case this is very handy since I have an evaluation board Xilinx ZC706 on
+remote workstation. It needs at least serial connection and JTAG connection for
+remote development on this board. Luckily, Xilinx provides hw_server concept to
+access JTAG over TCP connection. Serial over ethernet concept eases the serial
+communication part with ZC706’s ARM CPU.</p>
+
+<p>What is your story ?</p>
+
+<h1 id="other-commercially-available-solutions">Other commercially available solutions</h1>
+
+<p>Google search for “serial over TCP solutions” lists plenty of commercial
+applications. Some of them may provide extensively capable solutions and worth
+to give money but anyway in most cases <strong>socat</strong> will do the job. I will not discuss
+these applications any further but you can check out this link<sup id="fnref:2f" role="doc-noteref"><a href="#fn:2f" class="footnote" rel="footnote">2</a></sup>.</p>
+
+<h1 id="socat">socat</h1>
+
+<p>socat is a multi purpose relay in short, it forwards communications. It has no
+graphical user interface, users will interface with socat through command line.
+Therefore, it is lightweight and easy to install.</p>
+
+<p>socat can be used for ethernet port forwarding, serial COMPORT forwarding and
+forwarding ports between ethernet and serial ports. For more detailed definition
+and other capabilities you can refer to socat man page<sup id="fnref:3f" role="doc-noteref"><a href="#fn:3f" class="footnote" rel="footnote">3</a></sup>.</p>
+
+<p>socat can run both on GNU Linux and Windows operating systems. Meaning of it is
+that forwarding can also occur between machines based on these two operating
+systems.</p>
+
+<p>In this tutorial, Machine 1 is called HostPC which is a physical machine with
+Windows 7 or Ubuntu 16.04. Machine 2 is Virtual PC running on VirtualBox 6.1
+within the same local area network with HostPC. Connection diagram is shown
+below.</p>
+
+<p><img src="/assets/images/blog/20/2020-11-29-Diagram.png" alt="socat diagram" /></p>
+
+<h1 id="step-by-step-serial-data-forwarding-over-ethernet">Step by step serial data forwarding over ethernet</h1>
+
+<h2 id="install-socat">Install socat</h2>
+
+<h3 id="on-ubuntu">On Ubuntu</h3>
+
+<p>Install socat with <code class="language-plaintext highlighter-rouge">apt</code> or <code class="language-plaintext highlighter-rouge">apt-get</code> package manager.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>apt <span class="nb">install </span>socat
+</code></pre></div></div>
+
+<h3 id="on-windows">On Windows</h3>
+
+<p>Download zip file from sourceforge<sup id="fnref:4f" role="doc-noteref"><a href="#fn:4f" class="footnote" rel="footnote">4</a></sup>. Extract it and simply run socat.exe
+when required in the following steps within the extracted folder or add
+socat.exe to PATH.</p>
+
+<p>The folder structure is shown below.</p>
+
+<p><img src="/assets/images/blog/20/2020-11-29-Screenshot3.png" alt="socat windows folder" /></p>
+
+<h2 id="learn-ip-address-of-machine-1">Learn IP address of Machine 1</h2>
+
+<p>It is required to know Machine 1 ip address to start TCP connection. Simply use
+<code class="language-plaintext highlighter-rouge">ifconfig</code> or <code class="language-plaintext highlighter-rouge">ipconfig</code> on command line to learn ip address in the network.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>ifconfig
+<span class="gp">&lt;iface_name&gt;</span><span class="w">    </span>Link encap:Ethernet  HWaddr &lt;HWaddr&gt;
+<span class="gp">                inet addr:&lt;ip address&gt;</span><span class="w">  </span>Bcast:&lt;Bcast&gt;  Mask:&lt;Mask&gt;
+<span class="gp">                inet6 addr: &lt;inet6 addr&gt;</span><span class="w"> </span>Scope:Link
+<span class="go">                UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+</span><span class="gp">                RX packets:&lt;num&gt;</span><span class="w"> </span>errors:0 dropped:0 overruns:0 frame:0
+<span class="gp">                TX packets:&lt;num&gt;</span><span class="w"> </span>errors:0 dropped:0 overruns:0 carrier:0
+<span class="gp">                collisions:0 txqueuelen:&lt;num&gt;</span><span class="w">
+</span><span class="gp">                RX bytes:&lt;num&gt;</span><span class="w"> </span><span class="o">(</span>&lt;num&gt; MB<span class="o">)</span>  TX bytes:&lt;num&gt; <span class="o">(</span>&lt;num&gt; MB<span class="o">)</span>
+</code></pre></div></div>
+
+<p>In this tutorial <code class="language-plaintext highlighter-rouge">&lt;ip address&gt;</code> of machine 1 is <code class="language-plaintext highlighter-rouge">192.168.10.200</code>.</p>
+
+<h2 id="create-virtual-serial-port-to-forward-and-listen-on-machine-1">Create virtual serial port to forward and listen on Machine 1</h2>
+
+<p>Start listening on TCP port of your choice for this tutorial it is port 6665.</p>
+
+<p>On Ubuntu:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>socat <span class="nt">-d</span> <span class="nt">-d</span> pty,raw,echo<span class="o">=</span>0 TCP4-LISTEN:6665
+<span class="go">2020/11/29 15:39:49 socat[29476] N PTY is /dev/pts/6
+2020/11/29 15:39:49 socat[29476] N listening on AF=2 0.0.0.0:6665
+</span></code></pre></div></div>
+
+<p class="notice--info">Just use <code class="language-plaintext highlighter-rouge">/dev/ttyS&lt;num&gt;</code> or <code class="language-plaintext highlighter-rouge">/dev/ttyUSB&lt;num&gt;</code> for physical serial
+ports instead of <code class="language-plaintext highlighter-rouge">pty</code>. As an example <code class="language-plaintext highlighter-rouge">/dev/ttyS0</code> or <code class="language-plaintext highlighter-rouge">/dev/ttyUSB1</code>.</p>
+
+<p>Machine 1 will listen for TCP connections and forward communication to/from
+virtual port it is just created in this case <code class="language-plaintext highlighter-rouge">/dev/pts/6</code>. Note that created
+virtual serial port number can differ in your case.</p>
+
+<p>If you are on Windows OS, run the command below within socat.exe folder.</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">&gt;</span><span class="w"> </span><span class="o">.</span><span class="n">\socat.exe</span><span class="w"> </span><span class="nt">-d</span><span class="w"> </span><span class="nt">-d</span><span class="w"> </span><span class="nt">-d</span><span class="w"> </span><span class="nx">TCP4-LISTEN:6665</span><span class="p">,</span><span class="nx">reuseaddr</span><span class="w"> </span><span class="nx">/dev/com</span><span class="err">&lt;</span><span class="nx">number</span><span class="err">&gt;</span><span class="w">
+</span></code></pre></div></div>
+
+<p class="notice--info">On Windows COMPORTs can be addressed with  <code class="language-plaintext highlighter-rouge">/dev/com&lt;number&gt;</code> similar
+to Ubuntu. For example, <code class="language-plaintext highlighter-rouge">/dev/com1</code> and <code class="language-plaintext highlighter-rouge">/dev/com3</code> for physical serial interfaces.</p>
+
+<h2 id="create-virtual-serial-port-to-forward-on-machine-2">Create virtual serial port to forward on Machine 2</h2>
+
+<p>Start TCP connection from Machine 2 to Machine 1 with the IP and port of machine
+1.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>socat <span class="nt">-d</span> <span class="nt">-d</span> TCP4:192.168.10.200:6665 pty,raw,echo<span class="o">=</span>0
+<span class="go">2020/11/29 15:40:48 socat[14626] N opening connection to AF=2 192.168.10.200:6665
+2020/11/29 15:40:48 socat[14626] N successfully connected from local address AF=2 10.0.2.15:48544
+2020/11/29 15:40:48 socat[14626] N PTY is /dev/pts/18
+2020/11/29 15:40:48 socat[14626] N starting data transfer loop with FDs [5,5] and [6,6]
+</span></code></pre></div></div>
+
+<p>Machine 2 will start TCP connection and forward communication to/from virtual
+port it is just created in this case <code class="language-plaintext highlighter-rouge">/dev/pts/18</code>.</p>
+
+<h2 id="open-ports-on-both-machines-with-any-serial-port-applications">Open Ports on both machines with any serial port applications</h2>
+
+<p>Start a new terminal window and open virtual serial ports just created. You can
+use serial port terminal application of your choice. In the example below
+<code class="language-plaintext highlighter-rouge">screen</code> is used.</p>
+
+<p>On Machine 1, type:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>screen /dev/pts/6 115200
+</code></pre></div></div>
+
+<p>On Machine 2, type:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>screen /dev/pts/18 115200
+</code></pre></div></div>
+
+<p class="notice--info">You won’t need to open serial port with an application like <code class="language-plaintext highlighter-rouge">screen</code>
+for physical serial interfaces.</p>
+
+<h2 id="start-sending-bytes">Start Sending Bytes</h2>
+
+<p>Just type something on your keyboard and see if you can send messages between
+machine 1 and machine 2.</p>
+
+<p><img src="/assets/images/blog/20/2020-11-29-Screenshot1.png" alt="Machine 1 console" />  
+  <img src="/assets/images/blog/20/2020-11-29-Screenshot2.png" alt="Machine 2 console" /></p>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1f" role="doc-endnote">
+      <p><a href="https://medium.com/@karthiks1701/virtual-serial-ports-hack-for-communication-between-local-scripts-883fda0f60f4">https://medium.com/@karthiks1701/virtual-serial-ports-hack-for-communication-between-local-scripts-883fda0f60f4</a> <a href="#fnref:1f" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:2f" role="doc-endnote">
+      <p><a href="https://www.virtual-serial-port.org/article/best-serial-over-ethernet-tools/">https://www.virtual-serial-port.org/article/best-serial-over-ethernet-tools/</a> <a href="#fnref:2f" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:3f" role="doc-endnote">
+      <p><a href="https://linux.die.net/man/1/socat">https://linux.die.net/man/1/socat</a> <a href="#fnref:3f" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:4f" role="doc-endnote">
+      <p><a href="https://sourceforge.net/projects/unix-utils/files/socat/1.7.3.2/">https://sourceforge.net/projects/unix-utils/files/socat/1.7.3.2/</a> <a href="#fnref:4f" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/blog/tags/en" class="page__taxonomy-item" rel="tag">en</a><span class="sep">, </span>
+    
+      <a href="/blog/tags/remote" class="page__taxonomy-item" rel="tag">remote</a><span class="sep">, </span>
+    
+      <a href="/blog/tags/serial" class="page__taxonomy-item" rel="tag">serial</a><span class="sep">, </span>
+    
+      <a href="/blog/tags/socat" class="page__taxonomy-item" rel="tag">socat</a><span class="sep">, </span>
+    
+      <a href="/blog/tags/uart" class="page__taxonomy-item" rel="tag">uart</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/blog/categories/guide" class="page__taxonomy-item" rel="tag">guide</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2021-09-19">September 19, 2021</time></p>
+
+
+      </footer>
+
+      <section class="page__share">
+  
+
+  <a href="https://twitter.com/intent/tweet?via=asynxdev&text=Serial+data+communication+over+TCP%20https%3A%2F%2Fasynx.dev%2Fblog%2F20%2F11%2Fserial-data-communication-over-tcp.html" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fasynx.dev%2Fblog%2F20%2F11%2Fserial-data-communication-over-tcp.html" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fasynx.dev%2Fblog%2F20%2F11%2Fserial-data-communication-over-tcp.html" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/blog/20/11/mii-signal-bug-in-xilinx-fpga.html" class="pagination--pager" title="MII signal bug in Xilinx FPGA
+">Previous</a>
+    
+    
+      <a href="/blog/20/12/getting-started-to-vitis-acceleration-flow-with-zynq-7000.html" class="pagination--pager" title="Getting started to Vitis acceleration flow with Zynq 7000
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+      <div class="page__comments">
+  
+  
+      <h4 class="page__comments-title">Comments</h4>
+      <section id="disqus_thread"></section>
+    
+</div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You May Also Enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/20/12/getting-started-to-vitis-acceleration-flow-with-zynq-7000.html" rel="permalink">Getting started to Vitis acceleration flow with Zynq 7000
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2020-12-07T00:00:00+03:00">December 7, 2020</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          7 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      <span class="page__meta-axseq">
+        <i class="fas fa-fw fa-fingerprint" aria-hidden="true"></i>
+        ax-20-6
+      </span>
+    
+
+     <span class="page__meta-sep"></span>
+
+    
+      <span class="page__meta-lang">
+        
+        
+        <i class="fas fa-fw fa-language" aria-hidden="true" title="İngilizce/English"></i> 🇬🇧
+        
+      </span>
+    
+
+     
+
+    
+
+    
+
+    
+
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Getting started to Vitis acceleration flow with Zynq 7000.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/blog/21/2.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/21/3/wsl-offline.html" rel="permalink">Using WSL on an offline Windows machine
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2021-03-16T00:00:00+03:00">March 16, 2021</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          4 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      <span class="page__meta-axseq">
+        <i class="fas fa-fw fa-fingerprint" aria-hidden="true"></i>
+        ax-21-2
+      </span>
+    
+
+     <span class="page__meta-sep"></span>
+
+    
+      <span class="page__meta-lang">
+        
+        
+        <i class="fas fa-fw fa-language" aria-hidden="true" title="İngilizce/English"></i> 🇬🇧
+        
+      </span>
+    
+
+     
+
+    
+
+    
+
+    
+
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">How to install WSL on a Windows machine not connected to the Internet
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/20/11/mii-signal-bug-in-xilinx-fpga.html" rel="permalink">MII signal bug in Xilinx FPGA
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2020-11-27T00:00:00+03:00">November 27, 2020</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          8 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      <span class="page__meta-axseq">
+        <i class="fas fa-fw fa-fingerprint" aria-hidden="true"></i>
+        ax-20-4
+      </span>
+    
+
+     <span class="page__meta-sep"></span>
+
+    
+      <span class="page__meta-lang">
+        
+        
+        <i class="fas fa-fw fa-language" aria-hidden="true" title="İngilizce/English"></i> 🇬🇧
+        
+      </span>
+    
+
+     
+
+    
+
+    
+
+    
+
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">MII TX_EN signal goes low just for a clock cycle, which is a bug for MII specifications. This blog post gives some information and shows how the bug is creat...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/blog/22/2_teaser.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/22/2/petalinux-offline.html" rel="permalink">Running PetaLinux on an offline machine
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-02-28T00:00:00+03:00">February 28, 2022</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          4 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      <span class="page__meta-axseq">
+        <i class="fas fa-fw fa-fingerprint" aria-hidden="true"></i>
+        ax-22-2
+      </span>
+    
+
+     <span class="page__meta-sep"></span>
+
+    
+      <span class="page__meta-lang">
+        
+        
+        <i class="fas fa-fw fa-language" aria-hidden="true" title="İngilizce/English"></i> 🇬🇧
+        
+      </span>
+    
+
+     
+
+    
+
+    
+
+    
+
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">PetaLinux can be run an offline machine with proper configuration
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+    <ul class="social-icons">
+      
+
+      
+        
+          
+            <li><a href="https://www.linkedin.com/company/asynx" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+          
+        
+          
+            <li><a href="https://github.com/asynx-dev" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          
+        
+      
+
+      
+        <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+      
+    </ul>
+  </div>
+
+  <div class="page__footer-copyright">&copy; 2020-2024 asynx.dev. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.
+  <br/><a href='/license/'>License (CC BY SA 4.0)</a>, <a href='/disclaimer/'>Disclaimer</a>, <a href='/privacy/'>Privacy Policy</a>, <a href='/misc/'>Miscellaneous</a>
+</div>
+
+
+<!-- Default Statcounter code for asynx.dev
+https://asynx.dev -->
+<script type="text/javascript">
+var sc_project=12624131;
+var sc_invisible=1;
+var sc_security="c6cc37c6";
+</script>
+<script type="text/javascript"
+src="https://www.statcounter.com/counter/counter.js"
+async></script>
+<noscript><div class="statcounter"><a title="Web Analytics"
+href="https://statcounter.com/" target="_blank"><img
+class="statcounter"
+src="https://c.statcounter.com/12624131/0/c6cc37c6/1/"
+alt="Web Analytics"
+referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
+<!-- End of Statcounter Code -->
+
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://asynx.dev/blog/20/11/serial-data-communication-over-tcp.html";  /* Replace PAGE_URL with your page's canonical URL variable */
+      this.page.identifier = "/blog/20/11/serial-data-communication-over-tcp"; /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */
+    };
+    (function() { /* DON'T EDIT BELOW THIS LINE */
+      var d = document, s = d.createElement('script');
+      s.src = 'https://asynxdev.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+
+
+  </body>
+</html>

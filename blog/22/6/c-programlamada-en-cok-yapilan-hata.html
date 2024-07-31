@@ -1,0 +1,1206 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>C programlamada gördüğüm en sık yapılan hata - asynx</title>
+<meta name="description" content="Gözden kaçabilen, masum görünen fakat canınızı sıkabilecek bir C hatası">
+
+
+  <meta name="author" content="Alper Yazar">
+  
+  <meta property="article:author" content="Alper Yazar">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="asynx">
+<meta property="og:title" content="C programlamada gördüğüm en sık yapılan hata">
+<meta property="og:url" content="https://asynx.dev/blog/22/6/c-programlamada-en-cok-yapilan-hata.html">
+
+
+  <meta property="og:description" content="Gözden kaçabilen, masum görünen fakat canınızı sıkabilecek bir C hatası">
+
+
+
+  <meta property="og:image" content="https://asynx.dev/assets/images/blog/22/3.png">
+
+
+
+  <meta name="twitter:site" content="@asynxdev">
+  <meta name="twitter:title" content="C programlamada gördüğüm en sık yapılan hata">
+  <meta name="twitter:description" content="Gözden kaçabilen, masum görünen fakat canınızı sıkabilecek bir C hatası">
+  <meta name="twitter:url" content="https://asynx.dev/blog/22/6/c-programlamada-en-cok-yapilan-hata.html">
+
+  
+    <meta name="twitter:card" content="summary">
+    
+      <meta name="twitter:image" content="https://asynx.dev/assets/images/blog/22/3.png">
+    
+  
+
+  
+    <meta name="twitter:creator" content="@alper_yazar">
+  
+
+
+
+  <meta property="article:published_time" content="2022-06-05T00:00:00+03:00">
+
+
+
+  <meta property="article:modified_time" content="2022-12-23T12:55:53+03:00">
+
+
+
+
+<link rel="canonical" href="https://asynx.dev/blog/22/6/c-programlamada-en-cok-yapilan-hata.html">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "asynx.dev",
+      "url": "https://asynx.dev/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="asynx Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+<link rel="manifest" href="/assets/images/site.webmanifest">
+<link rel="mask-icon" href="/assets/images/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/images/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/images/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<!-- end custom head snippets -->
+
+<!-- podcast -->
+<link href="https://anchor.fm/s/951bf194/podcast/rss" type="application/rss+xml" rel="alternate" title="asynx Podcast Feed">
+
+<!--adsense-->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4580059638713287"
+     crossorigin="anonymous"></script>
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/android-chrome-192x192.png" alt="asynx"></a>
+        
+        <a class="site-title" href="/">
+          asynx
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/blog/">📝 Blog</a>
+            </li><li class="masthead__menu-item">
+              <a href="/follow/">✅ Follow</a>
+            </li><li class="masthead__menu-item">
+              <a href="/projects/">Projects</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li><li class="masthead__menu-item">
+              <a href="/contact/">Contact</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style=" background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('/assets/images/blog/22/3.png');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          C programlamada gördüğüm en sık yapılan hata
+
+        
+      </h1>
+      
+        <p class="page__lead">Gözden kaçabilen, masum görünen fakat canınızı sıkabilecek bir C hatası
+</p>
+      
+      
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-06-05T00:00:00+03:00">June 5, 2022</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          6 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      <span class="page__meta-axseq">
+        <i class="fas fa-fingerprint" aria-hidden="true"></i>
+        ax-22-3
+      </span>
+    
+
+     <span class="page__meta-sep"></span>
+
+    
+      <span class="page__meta-lang">
+        
+        <i class="fas fa-language" aria-hidden="true" title="Turkish/Türkçe"></i> 🇹🇷
+        
+        
+      </span>
+    
+
+     
+
+    
+
+    
+
+    
+
+  </p>
+
+
+      
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <a href="https://www.alperyazar.com">
+          <img src="/assets/images/bio/ayazar.png" alt="Alper Yazar" itemprop="image">
+        </a>
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <a href="https://www.alperyazar.com"><h3 class="author__name" itemprop="name">Alper Yazar</h3></a>
+    
+    
+      <div class="author__bio" itemprop="description">
+        <p>electronics engineer interested in digital design, FPGAs, embedded systems and other things.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+        <li>
+          <a href="https://www.alperyazar.com" itemprop="url">
+            <i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://twitter.com/alper_yazar" itemprop="sameAs" rel="nofollow noopener noreferrer">
+            <i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="https://www.linkedin.com/in/alperyazar" itemprop="sameAs" rel="nofollow noopener noreferrer">
+            <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="C programlamada gördüğüm en sık yapılan hata">
+    <meta itemprop="description" content="Gözden kaçabilen, masum görünen fakat canınızı sıkabilecek bir C hatası">
+    <meta itemprop="datePublished" content="2022-06-05T00:00:00+03:00">
+    <meta itemprop="dateModified" content="2022-12-23T12:55:53+03:00">
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu"><li><a href="#bu-neden-hatalı">Bu neden hatalı?</a></li><li><a href="#bu-hatayı-neden-yapıyoruz">Bu hatayı neden yapıyoruz?</a></li><li><a href="#örnek">Örnek</a></li><li><a href="#derleme-sırasında-yakalayalım">Derleme sırasında yakalayalım</a></li><li><a href="#özetle">Özetle</a></li></ul>
+
+            </nav>
+          </aside>
+        
+        
+
+
+
+        <p>Gömülü sistemlerle uğraşan biri olarak C dili ile ilgileniyorum. Bu yazıda
+oldukça masum duran fakat başımızı derde sokabilecek bir kodlama hatasından
+bahsetmek istiyorum. <strong>Yeni öğrenen kişilerin kodlarında (dikkatsizlik
+durumunda görece tecrübeli kişilerinkilerde bile) karşıma en sık çıkan C
+programlama hatası bu.</strong></p>
+
+<p>İlk olarak hatalı olmayan bir duruma bakalım. Bir fonksiyonun içerisinde
+x isminde bir tam sayı (integer) nesnesi yaratıp, buna daha sonra bir değer
+atayalım.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">foo</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">x</span><span class="p">;</span>
+    <span class="cm">/*...*/</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Burada hiç bir problem yok. Şimdi de diyelim ki integer tipinde bir gösterici
+(pointer) tanımlayalım ve benzer şekilde kodumuzun içerisinde daha sonra değer
+atıyor olalım.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">foo</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="o">*</span><span class="n">y</span><span class="p">;</span>
+    <span class="cm">/*...*/</span>
+    <span class="o">*</span><span class="n">y</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p class="notice--warning"><code class="language-plaintext highlighter-rouge">x</code>i nasıl kullandıysak aynı şekilde <code class="language-plaintext highlighter-rouge">y</code>yi kullandık değil mi?
+<strong>Değil</strong>, geçmiş olsun.</p>
+
+<h1 id="bu-neden-hatalı">Bu neden hatalı?</h1>
+
+<p>Çünkü, buradaki <code class="language-plaintext highlighter-rouge">x</code> ve <code class="language-plaintext highlighter-rouge">y</code> fonksiyon faaliyet alanında (<em>function scope</em>)
+bulunan otomatik ömürlü (<em>automatic storage duration</em>) nesnelerdir. Otomatik
+ömürlü nesnelerin ilk değerleri belirsizdir. İnanmazsanız mesela C99
+standardının <code class="language-plaintext highlighter-rouge">6.2.4.5</code> nolu maddesine göz atabilirsiniz (<em>Storage durations of
+objects</em> başlığı altında). <strong><code class="language-plaintext highlighter-rouge">x</code> ve <code class="language-plaintext highlighter-rouge">y</code>nin içinde başlangıçta ne var
+bilmiyoruz! Çöp bir değer var.</strong> Yani <code class="language-plaintext highlighter-rouge">*y=10</code> ifadesi ile nereyi gösterdiği
+belli olmayan bir pointer’ın gösterdiği yere gidip 10 yazmış olduk. <code class="language-plaintext highlighter-rouge">x</code>
+durumunda problem olmamasının sebebi zaten bizim için ayrılmış olan bir yere
+bir değer atamamız. Eğer <code class="language-plaintext highlighter-rouge">y</code>yi güncelliyor olsaydık (<code class="language-plaintext highlighter-rouge">*y</code> değil, <code class="language-plaintext highlighter-rouge">y</code>) yine
+problem yoktu, derleyici bizim için <code class="language-plaintext highlighter-rouge">y</code> isminde bir int tipinden pointer
+ayırdı, istediğimizi yapabiliriz. AMA gidip <em>kullanım hakkı</em> bizim elimizde
+olmayan, değeri <code class="language-plaintext highlighter-rouge">y</code>nin içerisinde olan rastgele bir adrese<code class="language-plaintext highlighter-rouge">*y</code> ile erişirsek
+işte o zaman haddimizi aşmış oluyoruz.</p>
+
+<h1 id="bu-hatayı-neden-yapıyoruz">Bu hatayı neden yapıyoruz?</h1>
+
+<p>Dediğim gibi bu hata karşılaştığım en sık hata. Çünkü sanıyorum <code class="language-plaintext highlighter-rouge">x</code> ile <code class="language-plaintext highlighter-rouge">y</code>
+aynıymış gibi düşünülüyor ve bu hatalı durum oluşuyor. Bunun bir sebebi de
+belki şudur: <code class="language-plaintext highlighter-rouge">int *y</code> ile <code class="language-plaintext highlighter-rouge">*y</code>yi tanımladık ve <code class="language-plaintext highlighter-rouge">*y</code>yi kullandık değil mi? Öyle
+olmuyor maalesef çünkü buradaki <code class="language-plaintext highlighter-rouge">*</code>ın iki yerdeki görevi farklı. <code class="language-plaintext highlighter-rouge">y</code>yi
+tanımlarken <code class="language-plaintext highlighter-rouge">int* y</code> de diyebilirdik, belki o zaman kafalar karışmazdı. Fakat
+genelde <code class="language-plaintext highlighter-rouge">int *y</code> olarak yazılır yani <code class="language-plaintext highlighter-rouge">*</code> karakteri <code class="language-plaintext highlighter-rouge">y</code>ye bitişik, <code class="language-plaintext highlighter-rouge">ìnt</code>e değil.
+Kod içerisinde <code class="language-plaintext highlighter-rouge">*y</code> ile <code class="language-plaintext highlighter-rouge">y</code> nin gösterdiği yerdeki int değere erişme işlemi de
+<em>dereferencing</em> olarak adlandırılır. Tanımlama kısmında ise gösterici
+(<em>pointer</em>) tanımladığımızı söylüyor derleyiciye <code class="language-plaintext highlighter-rouge">*</code> karakteri. Yani <em>görsel</em>
+olarak tanımlamada ve kullanım sırasında<code class="language-plaintext highlighter-rouge">*y</code>yi görsek de <code class="language-plaintext highlighter-rouge">*</code>ların görevleri
+farklı. İşte burası sanıyorum bu hatanın ve yanılgının temel sebebi. Şekilsel
+olarak tanımladığımız bir şeye erişiyoruz gibi oluyor, ama öyle değil.</p>
+
+<h1 id="örnek">Örnek</h1>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="o">*</span><span class="n">y</span><span class="p">,</span> <span class="o">*</span><span class="n">w</span><span class="p">,</span> <span class="n">z</span><span class="p">;</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span> <span class="cm">/* Problem yok */</span>
+
+    <span class="cm">/* YAPMAYIN! y'de "çöp" bir değer var, nereyi gösteriyor? */</span>
+    <span class="cm">/* Programımız çökebilir, saçmalayabilir, her şey mümkün */</span>
+    <span class="o">*</span><span class="n">y</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="n">z</span><span class="p">;</span> <span class="cm">/* z'de de çöp değer var ama program zarar görmez */</span>
+
+    <span class="cm">/* w'yu okumak da programımızı çökertebilir */</span>
+    <span class="cm">/* Sorun yazma ile sınırlı değil, okuma da sıkıntı */</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="o">*</span><span class="n">w</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Burada örneği biraz daha genişlettim. İlk olarak <code class="language-plaintext highlighter-rouge">*y=10</code> satırının probleminden
+zaten konuştuk, ne olduğu belli olmayan bir adrese bir şey yazıyoruz. Hemen
+altında <code class="language-plaintext highlighter-rouge">x = z</code> var. Burada da aslında <code class="language-plaintext highlighter-rouge">z</code>de çöp değer var ve <code class="language-plaintext highlighter-rouge">x</code>e bunu
+atıyoruz ama bu programımıza herhangi bir zarar vermez (işletim sisteminin
+programı sonlandırması gibi), sadece <code class="language-plaintext highlighter-rouge">z</code>nin ilk değerinin 0 olduğunu düşünerek
+bir şey yaptıysak hata ayıklama sırasında saç baş yoldurtabilir. Son olarak da
+<code class="language-plaintext highlighter-rouge">y</code> ile benzer şekilde oluşturulmuş <code class="language-plaintext highlighter-rouge">w</code>nun okunduğu <code class="language-plaintext highlighter-rouge">x = *w</code> satırı var. <strong>Bu
+da problem!</strong> Yani sadece yazma değil okuma da problem çünkü sonuçta
+bilmediğiniz bir adrese erişiyorsunuz. İşletim sistemi üzerinde çalışıyorsanız
+işletim sisteminin programınızı sonlandırması çok olası, erişim hakkınızın
+olmadığı bir bellek alanına erişiyor olacaksınız muhtemelen (yazma ya da
+okuma).</p>
+
+<p>Bir de işletim sistemsiz bir ortamda, MCU üzerinde vs çalışıyorsanız bu hata
+yüzünden şu cümleyi kurabilirsiniz:</p>
+
+<p class="notice--info">“Ya abi çok ilginç bir şey oluyor, seri kanaldan mesaj işleyen fonksiyona girince
+kart reset atıyor/LED yanıyor.”</p>
+
+<p>Kart reset atsa biraz şüphelenirsiniz de LED yanarsa iyice garip değil mi? Tamam,
+bir LED’in yanması çok olası değil ama <em>yeteri kadar şanslı</em> iseniz <code class="language-plaintext highlighter-rouge">y</code>ye
+alacağınız çöp değer GPIO biriminin çıkış yazmacını (<em>register</em>) gösteriyor olabilir.
+Reset olayında da <em>unaligned memory access</em> yaşanıyor olabilir. Olaylar olaylar…</p>
+
+<h1 id="derleme-sırasında-yakalayalım">Derleme sırasında yakalayalım</h1>
+
+<p>Bu tarz hataları derleme sırasında yakalamak oldukça kolay. Öncelikle kod
+yazdığınız editör yüksek ihtimalle bunu fark edecektir. Mesela, yukarıdaki kodu
+Visual Studio 2022 içerisine koyduğum zaman aşağıdaki gibi bir görüntü çıkıyor.</p>
+
+<p><img src="/assets/images/blog/22/3-vs.png" alt="Visual Studio 2022 uyarılar" /></p>
+
+<p>Burada fark ederseniz problemli olan kısımların altlarında işaretler var.
+Mesela bize <code class="language-plaintext highlighter-rouge">C60001: Using uninitialized memory</code> uyarısını veriyor. Detaylı
+bilgi
+<a href="https://docs.microsoft.com/tr-tr/cpp/code-quality/c6001?view=msvc-170">şurada</a>
+var.</p>
+
+<p>Bitti mi? Hayır. Derleyiciden de uyarı mesajları alabilirsiniz. Mesela
+<a href="https://gcc.gnu.org/">GCC</a> ve <a href="https://clang.llvm.org/">Clang</a> ile kodu
+derleyelim. Yukarıdaki örnek kodu <code class="language-plaintext highlighter-rouge">test.c</code> ismiyle kaydettim. Bu durumda
+aşağıdaki gibi derleyebiliriz. Örnek olarak Ubuntu 20.04 kullanıyorum.</p>
+
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>gcc test.c
+<span class="gp">$</span><span class="w"> </span>clang test.c
+</code></pre></div></div>
+
+<p>İkisi de uslu uslu derledi. Çünkü kod geçerli bir C kodu, sadece çalışma sırasında
+görebileceğiniz bir hata içeriyor. Fakat her iki derleyiciden size uyarı mesajlarını
+basmasını isterseniz şu çıktılar gelecektir.</p>
+
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>gcc <span class="nt">-Wall</span> test.c
+</code></pre></div></div>
+
+<p>dediğimizde</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>test.c: In function ‘main’:
+test.c:3:9: warning: variable ‘x’ set but not used [-Wunused-but-set-variable]
+    3 |     int x, *y, *w, z;
+      |         ^
+test.c:9:8: warning: ‘y’ is used uninitialized in this function [-Wuninitialized]
+    9 |     *y = 10;
+      |     ~~~^~~~
+test.c:11:7: warning: ‘z’ is used uninitialized in this function [-Wuninitialized]
+   11 |     x = z; /* z'de de çöp değer var ama program zarar görmez */
+      |     ~~^~~
+test.c:14:7: warning: ‘w’ is used uninitialized in this function [-Wuninitialized]
+   14 |     x = *w;
+      |     ~~^~~~
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">Wuninitialized</code> uyarısını görüyoruz.</p>
+
+<p>ya da</p>
+
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>clang <span class="nt">-Wall</span> test.c
+</code></pre></div></div>
+
+<p>dediğimizde de</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>test.c:9:6: warning: variable 'y' is uninitialized when used here [-Wuninitialized]
+    *y = 10;
+     ^
+test.c:3:14: note: initialize the variable 'y' to silence this warning
+    int x, *y, *w, z;
+             ^
+              = 0
+test.c:11:9: warning: variable 'z' is uninitialized when used here [-Wuninitialized]
+    x = z; /* z'de de çöp değer var ama program zarar görmez */
+        ^
+test.c:3:21: note: initialize the variable 'z' to silence this warning
+    int x, *y, *w, z;
+                    ^
+                     = 0
+test.c:14:10: warning: variable 'w' is uninitialized when used here [-Wuninitialized]
+    x = *w;
+         ^
+test.c:3:18: note: initialize the variable 'w' to silence this warning
+    int x, *y, *w, z;
+                 ^
+                  = 0
+3 warnings generated.
+</code></pre></div></div>
+
+<p>aynı uyarı çıkıyor.</p>
+
+<p>Bir de <a href="https://cppcheck.sourceforge.io/">cppcheck</a> isimli <em>Linter</em> aracından
+geçirelim kodumuzu bakalım ne diyecek?</p>
+
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>cppcheck test.c
+</code></pre></div></div>
+
+<p>dedik ve bize</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Checking test.c ...
+test.c:9:6: error: Uninitialized variable: y [uninitvar]
+    *y = 10;
+     ^
+test.c:14:10: error: Uninitialized variable: w [uninitvar]
+    x = *w;
+         ^
+test.c:11:9: error: Uninitialized variable: z [uninitvar]
+    x = z; /* z'de de çöp değer var ama program zarar görmez */
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">uninitvar</code> dedi.</p>
+
+<p>GCC ve Clang kodumuzu uyarı verse de derliyor, peki çalıştıralım bakalım.</p>
+
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>./a.out
+<span class="go">Segmentation fault (core dumped)
+</span></code></pre></div></div>
+
+<p>Tüh, işletim sistemi harcadı güzel programımızı!</p>
+
+<p>Eğer <code class="language-plaintext highlighter-rouge">*y = 10</code> ve <code class="language-plaintext highlighter-rouge">x = *w</code> satırlarını kaldırırsak program hatasız çalışacaktır
+(Uyarı veren <code class="language-plaintext highlighter-rouge">x = z</code> kalsa bile, buna işletim sistemi laf etmez). Fakat bu iki
+satırdan bir tanesinin olması bu hatayı <em>verdirebilir.</em> Her durumda hata
+almayabilirsiniz. Mesela Clang ile derlediğim yazılım gayet güzel çalıştı ama
+GCC ile derlediğim sürümde yukarıdaki hatayı aldım. Yani siz de deneyip bir
+hata almazsanız çalışma sırasında “Bak bir şey olmuyor” demeyin.</p>
+
+<h1 id="özetle">Özetle</h1>
+
+<ul>
+  <li>Pointer’ları sevin.</li>
+  <li>Bilmediğiniz adreslere erişmeyin (en iyisi evdeki adreslere erişmek, dışarda
+nasıl yapıldığı belli değil).</li>
+  <li>Editör ve IDE’nizin turuncu yaptığı, altını çizdiği şeylere dikkat edin.
+“Derleniyor ya!” demeyin. C derleyicileri bir Vivado değil, hunharca uyarı
+basmazlar, varsa da bir bakıverin.</li>
+</ul>
+
+<p><img src="/assets/images/blog/22/3-meme.jpg" alt="Vivado Meme" /></p>
+
+<p><a href="https://www.reddit.com/r/FPGA/comments/mdi4te/its_just_a_warning_right/">Vivado Meme</a></p>
+
+<ul>
+  <li>Kullandığınız derleyicinin <em>flag</em>lerini bir kurcalayın (<code class="language-plaintext highlighter-rouge">-Wall</code> falan).</li>
+  <li>Bir C kodunun derleniyor olması, sizin sisteminizde sorunsuzca çalışıyor olması
+o kodun başka bir derleyicide düzgün derleneceğinin, çalıştırılabilir kodun
+başka bir sistemde <strong>hatta başka bir zaman sizin sisteminizde de</strong> düzgün
+çalışacağı anlamına gelmez (genel olarak, bu duruma özgü değil).</li>
+</ul>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/blog/tags/c-kafe" class="page__taxonomy-item" rel="tag">c-kafe</a><span class="sep">, </span>
+    
+      <a href="/blog/tags/tr" class="page__taxonomy-item" rel="tag">tr</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/blog/categories/guide" class="page__taxonomy-item" rel="tag">guide</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2022-12-23">December 23, 2022</time></p>
+
+
+      </footer>
+
+      <section class="page__share">
+  
+
+  <a href="https://twitter.com/intent/tweet?via=asynxdev&text=C+programlamada+g%C3%B6rd%C3%BC%C4%9F%C3%BCm+en+s%C4%B1k+yap%C4%B1lan+hata%20https%3A%2F%2Fasynx.dev%2Fblog%2F22%2F6%2Fc-programlamada-en-cok-yapilan-hata.html" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fasynx.dev%2Fblog%2F22%2F6%2Fc-programlamada-en-cok-yapilan-hata.html" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fasynx.dev%2Fblog%2F22%2F6%2Fc-programlamada-en-cok-yapilan-hata.html" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/blog/22/2/petalinux-offline.html" class="pagination--pager" title="Running PetaLinux on an offline machine
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+      <div class="page__comments">
+  
+  
+      <h4 class="page__comments-title">Comments</h4>
+      <section id="disqus_thread"></section>
+    
+</div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You May Also Enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/blog/21/3_teaser.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/21/3/rpi-sd-kart-buyutme.html" rel="permalink">Raspberry Pi SD kart taşıma ve büyütme
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2021-03-28T00:00:00+03:00">March 28, 2021</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          4 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      <span class="page__meta-axseq">
+        <i class="fas fa-fw fa-fingerprint" aria-hidden="true"></i>
+        ax-21-3
+      </span>
+    
+
+     <span class="page__meta-sep"></span>
+
+    
+      <span class="page__meta-lang">
+        
+        <i class="fas fa-fw fa-language" aria-hidden="true" title="Turkish/Türkçe"></i> 🇹🇷
+        
+        
+      </span>
+    
+
+     
+
+    
+
+    
+
+    
+
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Kullandığınız SD kartı aynı boy ya da daha büyük bir karta nasıl taşıyabileceğinizi anlatıyorum.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/blog/21/5_art.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/21/10/sumatrapdf.html" rel="permalink">Sumatra PDF
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2021-10-29T00:00:00+03:00">October 29, 2021</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          3 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      <span class="page__meta-axseq">
+        <i class="fas fa-fw fa-fingerprint" aria-hidden="true"></i>
+        ax-21-5
+      </span>
+    
+
+     <span class="page__meta-sep"></span>
+
+    
+      <span class="page__meta-lang">
+        
+        <i class="fas fa-fw fa-language" aria-hidden="true" title="Turkish/Türkçe"></i> 🇹🇷
+        
+        
+      </span>
+    
+
+     <span class="page__meta-sep"></span>
+
+    
+        <span class="page__meta-podcast">
+        
+        
+        <i class="fas fa-fw fas fa-headphones" aria-hidden="true" title="Sesli anlatım mevcut"></i>
+        
+        </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+        <span class="page__meta-video">
+        
+        
+        <i class="fas fa-fw fas fa-video" aria-hidden="true" title="Video mevcut"></i>
+        
+        </span>
+    
+
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Sumatra PDF, Windows için tasarlanmış, hafif, hızlı bir PDF okuyucusu.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/blog/21/1.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/21/2/jekyll.html" rel="permalink">Jekyll’ye geçiş
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2021-02-07T00:00:00+03:00">February 7, 2021</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          less than 1 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      <span class="page__meta-axseq">
+        <i class="fas fa-fw fa-fingerprint" aria-hidden="true"></i>
+        ax-21-1
+      </span>
+    
+
+     <span class="page__meta-sep"></span>
+
+    
+      <span class="page__meta-lang">
+        
+        <i class="fas fa-fw fa-language" aria-hidden="true" title="Turkish/Türkçe"></i> 🇹🇷
+        
+        
+      </span>
+    
+
+     
+
+    
+
+    
+
+    
+
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">MkDocs’tan Jekyll’ye geçiş
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/blog/22/1_teaser.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/22/1/windirstat.html" rel="permalink">WinDirStat
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-01-29T00:00:00+03:00">January 29, 2022</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          less than 1 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      <span class="page__meta-axseq">
+        <i class="fas fa-fw fa-fingerprint" aria-hidden="true"></i>
+        ax-22-1
+      </span>
+    
+
+     <span class="page__meta-sep"></span>
+
+    
+      <span class="page__meta-lang">
+        
+        <i class="fas fa-fw fa-language" aria-hidden="true" title="Turkish/Türkçe"></i> 🇹🇷
+        
+        
+      </span>
+    
+
+     
+
+    
+
+    
+
+    
+
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">‘Diskimde en çok hangi klasörler yer kaplıyor?’ sorusuna cevap bulun!
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+    <ul class="social-icons">
+      
+
+      
+        
+          
+            <li><a href="https://www.linkedin.com/company/asynx" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+          
+        
+          
+            <li><a href="https://github.com/asynx-dev" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          
+        
+      
+
+      
+        <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+      
+    </ul>
+  </div>
+
+  <div class="page__footer-copyright">&copy; 2020-2024 asynx.dev. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.
+  <br/><a href='/license/'>License (CC BY SA 4.0)</a>, <a href='/disclaimer/'>Disclaimer</a>, <a href='/privacy/'>Privacy Policy</a>, <a href='/misc/'>Miscellaneous</a>
+</div>
+
+
+<!-- Default Statcounter code for asynx.dev
+https://asynx.dev -->
+<script type="text/javascript">
+var sc_project=12624131;
+var sc_invisible=1;
+var sc_security="c6cc37c6";
+</script>
+<script type="text/javascript"
+src="https://www.statcounter.com/counter/counter.js"
+async></script>
+<noscript><div class="statcounter"><a title="Web Analytics"
+href="https://statcounter.com/" target="_blank"><img
+class="statcounter"
+src="https://c.statcounter.com/12624131/0/c6cc37c6/1/"
+alt="Web Analytics"
+referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
+<!-- End of Statcounter Code -->
+
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://asynx.dev/blog/22/6/c-programlamada-en-cok-yapilan-hata.html";  /* Replace PAGE_URL with your page's canonical URL variable */
+      this.page.identifier = "/blog/22/6/c-programlamada-en-cok-yapilan-hata"; /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */
+    };
+    (function() { /* DON'T EDIT BELOW THIS LINE */
+      var d = document, s = d.createElement('script');
+      s.src = 'https://asynxdev.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+
+
+  </body>
+</html>

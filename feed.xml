@@ -1,0 +1,1569 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="https://asynx.dev/feed.xml" rel="self" type="application/atom+xml" /><link href="https://asynx.dev/" rel="alternate" type="text/html" /><updated>2024-07-31T21:37:15+03:00</updated><id>https://asynx.dev/feed.xml</id><title type="html">asynx</title><subtitle>💙 electronics</subtitle><entry><title type="html">C programlamada gördüğüm en sık yapılan hata</title><link href="https://asynx.dev/blog/22/6/c-programlamada-en-cok-yapilan-hata.html" rel="alternate" type="text/html" title="C programlamada gördüğüm en sık yapılan hata" /><published>2022-06-05T00:00:00+03:00</published><updated>2022-12-23T12:55:53+03:00</updated><id>https://asynx.dev/blog/22/6/c-programlamada-en-cok-yapilan-hata</id><content type="html" xml:base="https://asynx.dev/blog/22/6/c-programlamada-en-cok-yapilan-hata.html"><![CDATA[<p>Gömülü sistemlerle uğraşan biri olarak C dili ile ilgileniyorum. Bu yazıda
+oldukça masum duran fakat başımızı derde sokabilecek bir kodlama hatasından
+bahsetmek istiyorum. <strong>Yeni öğrenen kişilerin kodlarında (dikkatsizlik
+durumunda görece tecrübeli kişilerinkilerde bile) karşıma en sık çıkan C
+programlama hatası bu.</strong></p>
+
+<p>İlk olarak hatalı olmayan bir duruma bakalım. Bir fonksiyonun içerisinde
+x isminde bir tam sayı (integer) nesnesi yaratıp, buna daha sonra bir değer
+atayalım.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">foo</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">x</span><span class="p">;</span>
+    <span class="cm">/*...*/</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Burada hiç bir problem yok. Şimdi de diyelim ki integer tipinde bir gösterici
+(pointer) tanımlayalım ve benzer şekilde kodumuzun içerisinde daha sonra değer
+atıyor olalım.</p>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">foo</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="o">*</span><span class="n">y</span><span class="p">;</span>
+    <span class="cm">/*...*/</span>
+    <span class="o">*</span><span class="n">y</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p class="notice--warning"><code class="language-plaintext highlighter-rouge">x</code>i nasıl kullandıysak aynı şekilde <code class="language-plaintext highlighter-rouge">y</code>yi kullandık değil mi?
+<strong>Değil</strong>, geçmiş olsun.</p>
+
+<h1 id="bu-neden-hatalı">Bu neden hatalı?</h1>
+
+<p>Çünkü, buradaki <code class="language-plaintext highlighter-rouge">x</code> ve <code class="language-plaintext highlighter-rouge">y</code> fonksiyon faaliyet alanında (<em>function scope</em>)
+bulunan otomatik ömürlü (<em>automatic storage duration</em>) nesnelerdir. Otomatik
+ömürlü nesnelerin ilk değerleri belirsizdir. İnanmazsanız mesela C99
+standardının <code class="language-plaintext highlighter-rouge">6.2.4.5</code> nolu maddesine göz atabilirsiniz (<em>Storage durations of
+objects</em> başlığı altında). <strong><code class="language-plaintext highlighter-rouge">x</code> ve <code class="language-plaintext highlighter-rouge">y</code>nin içinde başlangıçta ne var
+bilmiyoruz! Çöp bir değer var.</strong> Yani <code class="language-plaintext highlighter-rouge">*y=10</code> ifadesi ile nereyi gösterdiği
+belli olmayan bir pointer’ın gösterdiği yere gidip 10 yazmış olduk. <code class="language-plaintext highlighter-rouge">x</code>
+durumunda problem olmamasının sebebi zaten bizim için ayrılmış olan bir yere
+bir değer atamamız. Eğer <code class="language-plaintext highlighter-rouge">y</code>yi güncelliyor olsaydık (<code class="language-plaintext highlighter-rouge">*y</code> değil, <code class="language-plaintext highlighter-rouge">y</code>) yine
+problem yoktu, derleyici bizim için <code class="language-plaintext highlighter-rouge">y</code> isminde bir int tipinden pointer
+ayırdı, istediğimizi yapabiliriz. AMA gidip <em>kullanım hakkı</em> bizim elimizde
+olmayan, değeri <code class="language-plaintext highlighter-rouge">y</code>nin içerisinde olan rastgele bir adrese<code class="language-plaintext highlighter-rouge">*y</code> ile erişirsek
+işte o zaman haddimizi aşmış oluyoruz.</p>
+
+<h1 id="bu-hatayı-neden-yapıyoruz">Bu hatayı neden yapıyoruz?</h1>
+
+<p>Dediğim gibi bu hata karşılaştığım en sık hata. Çünkü sanıyorum <code class="language-plaintext highlighter-rouge">x</code> ile <code class="language-plaintext highlighter-rouge">y</code>
+aynıymış gibi düşünülüyor ve bu hatalı durum oluşuyor. Bunun bir sebebi de
+belki şudur: <code class="language-plaintext highlighter-rouge">int *y</code> ile <code class="language-plaintext highlighter-rouge">*y</code>yi tanımladık ve <code class="language-plaintext highlighter-rouge">*y</code>yi kullandık değil mi? Öyle
+olmuyor maalesef çünkü buradaki <code class="language-plaintext highlighter-rouge">*</code>ın iki yerdeki görevi farklı. <code class="language-plaintext highlighter-rouge">y</code>yi
+tanımlarken <code class="language-plaintext highlighter-rouge">int* y</code> de diyebilirdik, belki o zaman kafalar karışmazdı. Fakat
+genelde <code class="language-plaintext highlighter-rouge">int *y</code> olarak yazılır yani <code class="language-plaintext highlighter-rouge">*</code> karakteri <code class="language-plaintext highlighter-rouge">y</code>ye bitişik, <code class="language-plaintext highlighter-rouge">ìnt</code>e değil.
+Kod içerisinde <code class="language-plaintext highlighter-rouge">*y</code> ile <code class="language-plaintext highlighter-rouge">y</code> nin gösterdiği yerdeki int değere erişme işlemi de
+<em>dereferencing</em> olarak adlandırılır. Tanımlama kısmında ise gösterici
+(<em>pointer</em>) tanımladığımızı söylüyor derleyiciye <code class="language-plaintext highlighter-rouge">*</code> karakteri. Yani <em>görsel</em>
+olarak tanımlamada ve kullanım sırasında<code class="language-plaintext highlighter-rouge">*y</code>yi görsek de <code class="language-plaintext highlighter-rouge">*</code>ların görevleri
+farklı. İşte burası sanıyorum bu hatanın ve yanılgının temel sebebi. Şekilsel
+olarak tanımladığımız bir şeye erişiyoruz gibi oluyor, ama öyle değil.</p>
+
+<h1 id="örnek">Örnek</h1>
+
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="o">*</span><span class="n">y</span><span class="p">,</span> <span class="o">*</span><span class="n">w</span><span class="p">,</span> <span class="n">z</span><span class="p">;</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span> <span class="cm">/* Problem yok */</span>
+
+    <span class="cm">/* YAPMAYIN! y'de "çöp" bir değer var, nereyi gösteriyor? */</span>
+    <span class="cm">/* Programımız çökebilir, saçmalayabilir, her şey mümkün */</span>
+    <span class="o">*</span><span class="n">y</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="n">z</span><span class="p">;</span> <span class="cm">/* z'de de çöp değer var ama program zarar görmez */</span>
+
+    <span class="cm">/* w'yu okumak da programımızı çökertebilir */</span>
+    <span class="cm">/* Sorun yazma ile sınırlı değil, okuma da sıkıntı */</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="o">*</span><span class="n">w</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Burada örneği biraz daha genişlettim. İlk olarak <code class="language-plaintext highlighter-rouge">*y=10</code> satırının probleminden
+zaten konuştuk, ne olduğu belli olmayan bir adrese bir şey yazıyoruz. Hemen
+altında <code class="language-plaintext highlighter-rouge">x = z</code> var. Burada da aslında <code class="language-plaintext highlighter-rouge">z</code>de çöp değer var ve <code class="language-plaintext highlighter-rouge">x</code>e bunu
+atıyoruz ama bu programımıza herhangi bir zarar vermez (işletim sisteminin
+programı sonlandırması gibi), sadece <code class="language-plaintext highlighter-rouge">z</code>nin ilk değerinin 0 olduğunu düşünerek
+bir şey yaptıysak hata ayıklama sırasında saç baş yoldurtabilir. Son olarak da
+<code class="language-plaintext highlighter-rouge">y</code> ile benzer şekilde oluşturulmuş <code class="language-plaintext highlighter-rouge">w</code>nun okunduğu <code class="language-plaintext highlighter-rouge">x = *w</code> satırı var. <strong>Bu
+da problem!</strong> Yani sadece yazma değil okuma da problem çünkü sonuçta
+bilmediğiniz bir adrese erişiyorsunuz. İşletim sistemi üzerinde çalışıyorsanız
+işletim sisteminin programınızı sonlandırması çok olası, erişim hakkınızın
+olmadığı bir bellek alanına erişiyor olacaksınız muhtemelen (yazma ya da
+okuma).</p>
+
+<p>Bir de işletim sistemsiz bir ortamda, MCU üzerinde vs çalışıyorsanız bu hata
+yüzünden şu cümleyi kurabilirsiniz:</p>
+
+<p class="notice--info">“Ya abi çok ilginç bir şey oluyor, seri kanaldan mesaj işleyen fonksiyona girince
+kart reset atıyor/LED yanıyor.”</p>
+
+<p>Kart reset atsa biraz şüphelenirsiniz de LED yanarsa iyice garip değil mi? Tamam,
+bir LED’in yanması çok olası değil ama <em>yeteri kadar şanslı</em> iseniz <code class="language-plaintext highlighter-rouge">y</code>ye
+alacağınız çöp değer GPIO biriminin çıkış yazmacını (<em>register</em>) gösteriyor olabilir.
+Reset olayında da <em>unaligned memory access</em> yaşanıyor olabilir. Olaylar olaylar…</p>
+
+<h1 id="derleme-sırasında-yakalayalım">Derleme sırasında yakalayalım</h1>
+
+<p>Bu tarz hataları derleme sırasında yakalamak oldukça kolay. Öncelikle kod
+yazdığınız editör yüksek ihtimalle bunu fark edecektir. Mesela, yukarıdaki kodu
+Visual Studio 2022 içerisine koyduğum zaman aşağıdaki gibi bir görüntü çıkıyor.</p>
+
+<p><img src="/assets/images/blog/22/3-vs.png" alt="Visual Studio 2022 uyarılar" /></p>
+
+<p>Burada fark ederseniz problemli olan kısımların altlarında işaretler var.
+Mesela bize <code class="language-plaintext highlighter-rouge">C60001: Using uninitialized memory</code> uyarısını veriyor. Detaylı
+bilgi
+<a href="https://docs.microsoft.com/tr-tr/cpp/code-quality/c6001?view=msvc-170">şurada</a>
+var.</p>
+
+<p>Bitti mi? Hayır. Derleyiciden de uyarı mesajları alabilirsiniz. Mesela
+<a href="https://gcc.gnu.org/">GCC</a> ve <a href="https://clang.llvm.org/">Clang</a> ile kodu
+derleyelim. Yukarıdaki örnek kodu <code class="language-plaintext highlighter-rouge">test.c</code> ismiyle kaydettim. Bu durumda
+aşağıdaki gibi derleyebiliriz. Örnek olarak Ubuntu 20.04 kullanıyorum.</p>
+
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>gcc test.c
+<span class="gp">$</span><span class="w"> </span>clang test.c
+</code></pre></div></div>
+
+<p>İkisi de uslu uslu derledi. Çünkü kod geçerli bir C kodu, sadece çalışma sırasında
+görebileceğiniz bir hata içeriyor. Fakat her iki derleyiciden size uyarı mesajlarını
+basmasını isterseniz şu çıktılar gelecektir.</p>
+
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>gcc <span class="nt">-Wall</span> test.c
+</code></pre></div></div>
+
+<p>dediğimizde</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>test.c: In function ‘main’:
+test.c:3:9: warning: variable ‘x’ set but not used [-Wunused-but-set-variable]
+    3 |     int x, *y, *w, z;
+      |         ^
+test.c:9:8: warning: ‘y’ is used uninitialized in this function [-Wuninitialized]
+    9 |     *y = 10;
+      |     ~~~^~~~
+test.c:11:7: warning: ‘z’ is used uninitialized in this function [-Wuninitialized]
+   11 |     x = z; /* z'de de çöp değer var ama program zarar görmez */
+      |     ~~^~~
+test.c:14:7: warning: ‘w’ is used uninitialized in this function [-Wuninitialized]
+   14 |     x = *w;
+      |     ~~^~~~
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">Wuninitialized</code> uyarısını görüyoruz.</p>
+
+<p>ya da</p>
+
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>clang <span class="nt">-Wall</span> test.c
+</code></pre></div></div>
+
+<p>dediğimizde de</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>test.c:9:6: warning: variable 'y' is uninitialized when used here [-Wuninitialized]
+    *y = 10;
+     ^
+test.c:3:14: note: initialize the variable 'y' to silence this warning
+    int x, *y, *w, z;
+             ^
+              = 0
+test.c:11:9: warning: variable 'z' is uninitialized when used here [-Wuninitialized]
+    x = z; /* z'de de çöp değer var ama program zarar görmez */
+        ^
+test.c:3:21: note: initialize the variable 'z' to silence this warning
+    int x, *y, *w, z;
+                    ^
+                     = 0
+test.c:14:10: warning: variable 'w' is uninitialized when used here [-Wuninitialized]
+    x = *w;
+         ^
+test.c:3:18: note: initialize the variable 'w' to silence this warning
+    int x, *y, *w, z;
+                 ^
+                  = 0
+3 warnings generated.
+</code></pre></div></div>
+
+<p>aynı uyarı çıkıyor.</p>
+
+<p>Bir de <a href="https://cppcheck.sourceforge.io/">cppcheck</a> isimli <em>Linter</em> aracından
+geçirelim kodumuzu bakalım ne diyecek?</p>
+
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>cppcheck test.c
+</code></pre></div></div>
+
+<p>dedik ve bize</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Checking test.c ...
+test.c:9:6: error: Uninitialized variable: y [uninitvar]
+    *y = 10;
+     ^
+test.c:14:10: error: Uninitialized variable: w [uninitvar]
+    x = *w;
+         ^
+test.c:11:9: error: Uninitialized variable: z [uninitvar]
+    x = z; /* z'de de çöp değer var ama program zarar görmez */
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">uninitvar</code> dedi.</p>
+
+<p>GCC ve Clang kodumuzu uyarı verse de derliyor, peki çalıştıralım bakalım.</p>
+
+<div class="language-terminal highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>./a.out
+<span class="go">Segmentation fault (core dumped)
+</span></code></pre></div></div>
+
+<p>Tüh, işletim sistemi harcadı güzel programımızı!</p>
+
+<p>Eğer <code class="language-plaintext highlighter-rouge">*y = 10</code> ve <code class="language-plaintext highlighter-rouge">x = *w</code> satırlarını kaldırırsak program hatasız çalışacaktır
+(Uyarı veren <code class="language-plaintext highlighter-rouge">x = z</code> kalsa bile, buna işletim sistemi laf etmez). Fakat bu iki
+satırdan bir tanesinin olması bu hatayı <em>verdirebilir.</em> Her durumda hata
+almayabilirsiniz. Mesela Clang ile derlediğim yazılım gayet güzel çalıştı ama
+GCC ile derlediğim sürümde yukarıdaki hatayı aldım. Yani siz de deneyip bir
+hata almazsanız çalışma sırasında “Bak bir şey olmuyor” demeyin.</p>
+
+<h1 id="özetle">Özetle</h1>
+
+<ul>
+  <li>Pointer’ları sevin.</li>
+  <li>Bilmediğiniz adreslere erişmeyin (en iyisi evdeki adreslere erişmek, dışarda
+nasıl yapıldığı belli değil).</li>
+  <li>Editör ve IDE’nizin turuncu yaptığı, altını çizdiği şeylere dikkat edin.
+“Derleniyor ya!” demeyin. C derleyicileri bir Vivado değil, hunharca uyarı
+basmazlar, varsa da bir bakıverin.</li>
+</ul>
+
+<p><img src="/assets/images/blog/22/3-meme.jpg" alt="Vivado Meme" /></p>
+
+<p><a href="https://www.reddit.com/r/FPGA/comments/mdi4te/its_just_a_warning_right/">Vivado Meme</a></p>
+
+<ul>
+  <li>Kullandığınız derleyicinin <em>flag</em>lerini bir kurcalayın (<code class="language-plaintext highlighter-rouge">-Wall</code> falan).</li>
+  <li>Bir C kodunun derleniyor olması, sizin sisteminizde sorunsuzca çalışıyor olması
+o kodun başka bir derleyicide düzgün derleneceğinin, çalıştırılabilir kodun
+başka bir sistemde <strong>hatta başka bir zaman sizin sisteminizde de</strong> düzgün
+çalışacağı anlamına gelmez (genel olarak, bu duruma özgü değil).</li>
+</ul>]]></content><author><name>Alper Yazar</name><uri>https://www.alperyazar.com</uri></author><category term="guide" /><category term="tr" /><category term="c-kafe" /><summary type="html"><![CDATA[Gözden kaçabilen, masum görünen fakat canınızı sıkabilecek bir C hatası]]></summary></entry><entry><title type="html">Running PetaLinux on an offline machine</title><link href="https://asynx.dev/blog/22/2/petalinux-offline.html" rel="alternate" type="text/html" title="Running PetaLinux on an offline machine" /><published>2022-02-28T00:00:00+03:00</published><updated>2022-05-03T16:43:56+03:00</updated><id>https://asynx.dev/blog/22/2/petalinux-offline</id><content type="html" xml:base="https://asynx.dev/blog/22/2/petalinux-offline.html"><![CDATA[<p>If you are a Xilinx customer and want to compile an embedded Linux with PetaLinux
+on an offline machine, you can do it by mirroring Xilinx repos and configuring
+your project. Even if you are connected to the Internet, you may want to do this
+because:</p>
+
+<ul>
+  <li>You will be make sure that your PetaLinux project can be compiled without any
+issue if you lost your connection to <code class="language-plaintext highlighter-rouge">xilinx.com</code>, to the Internet or Xilinx
+decides to delete their repos for whatever reason.</li>
+  <li>You may want to speed up your compilation step by mirroring remote contents
+on your on-premise proxy server. (This requires slightly different setup,
+visit <a href="https://xilinx-wiki.atlassian.net/wiki/spaces/A/pages/60129817/Xilinx+Yocto+Builds+without+an+Internet+Connection#XilinxYoctoBuildswithoutanInternetConnection-MirrorServer">this
+page</a>
+for that setup)</li>
+</ul>
+
+<p>There are several questions on this topic especially on Xilinx forum. I found
+that not all answers work for me so I will share my <em>working</em> configuration.
+There could be other solutions providing the same result. <strong>Please add your
+comment if you want to share something with me and with readers.</strong></p>
+
+<p>The following content is tested with PetaLinux 2018.1 but I am almost
+completely sure that the exact or very similar setup will work for other
+versions too.</p>
+
+<h1 id="prerequisites">Prerequisites</h1>
+
+<ul>
+  <li>A web server with decent disk space to host local mirror to compilation machine.</li>
+</ul>
+
+<p>You will need some disk space. For example mirroring 2018.1 PetaLinux requires
+at least 26 GB space. A standard web server like
+Apache or Nginx (or may be simple Python <code class="language-plaintext highlighter-rouge">http.server</code> server?) is sufficient.</p>
+
+<ul>
+  <li>A compilation machine which will run PetaLinux.</li>
+</ul>
+
+<p>This machine should be connected to the server obviously.</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">sstate cache</code> downloaded from xilinx.com.</li>
+</ul>
+
+<p>Visit <a href="https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/embedded-design-tools/archive.html">here</a>
+to get <code class="language-plaintext highlighter-rouge">sstate cache</code> for your PetaLinux version. For 2018.1:
+<a href="https://www.xilinx.com/member/forms/download/xef.html?filename=sstate-rel-v2018.1.tar.gz">https://www.xilinx.com/member/forms/download/xef.html?filename=sstate-rel-v2018.1.tar.gz</a>
+or in the form of
+<code class="language-plaintext highlighter-rouge">https://www.xilinx.com/member/forms/download/xef.html?filename=sstate-rel-VERSION.tar.gz</code></p>
+
+<p>After getting the <code class="language-plaintext highlighter-rouge">sstate-rel-VERSION.tar.gz</code> file, extract it on the server.
+The files must be accessible via HTTP. Your server may be accessible via IP address,
+like  <code class="language-plaintext highlighter-rouge">192.168.1.2</code> or with a domain like <code class="language-plaintext highlighter-rouge">mirror.mydomain</code>. Regardless of this,
+you should see files when you visit the server with a web browser like <code class="language-plaintext highlighter-rouge">http://192.168.1.2</code>
+or <code class="language-plaintext highlighter-rouge">http://mirror.mydomain</code>. For the rest of the post, I will assume that server
+is accessible via <code class="language-plaintext highlighter-rouge">http://server</code>.</p>
+
+<p>If you are planning to mirror repository of more than one PetaLinux version, I
+would suggest you to follow <a href="http://petalinux.xilinx.com/sswreleases/">Xilinx’s
+mirror</a> convention. With that convention,
+server structure will look like:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>http://server/
+              rel-v2018.1/
+                          aarch64
+                          ...
+                          downloads
+              rel-v2020.1/
+                          aarch64
+                          ...
+                          downloads
+</code></pre></div></div>
+
+<p>You don’t need to put <code class="language-plaintext highlighter-rouge">rel-vVERSION</code> directories at root of your server, they
+can be put in another directory but try to keep these directories at the same level
+without touching their inner structure.</p>
+
+<h1 id="configuring-the-petalinux-project">Configuring the PetaLinux project</h1>
+
+<p>The second step is configuring PetaLinux to use our self-hosted mirror. To do
+this you can either run <code class="language-plaintext highlighter-rouge">petalinux-config</code> command to bring up UI or directly
+edit the configuration file.</p>
+
+<h2 id="petalinux-config">petalinux-config</h2>
+
+<p>Run <code class="language-plaintext highlighter-rouge">petalinux-config</code> to bring up settings menu then open <code class="language-plaintext highlighter-rouge">Yocto Settings</code>.</p>
+
+<p><img src="/assets/images/blog/22/2-config_1.png" alt="petalinux-config" /></p>
+
+<p>In this menu, make sure that <code class="language-plaintext highlighter-rouge">Enable Network sstate feeds</code> is <strong>checked</strong> and
+<code class="language-plaintext highlighter-rouge">Enable BB NO NETWORK</code> is <strong>NOT checked</strong>. I remember that some Xilinx forum
+posts say to check this option but if you do this PetaLinux will assume that
+you don’t have <em>any</em> network connection, even a local connection to the local
+server.</p>
+
+<p><img src="/assets/images/blog/22/2-config_2.png" alt="petalinux-config" /></p>
+
+<p>Then open <code class="language-plaintext highlighter-rouge">Network sstate feeds URL</code> setting. This should point <code class="language-plaintext highlighter-rouge">sstate-cache</code>
+URL. In our example, this would be
+<code class="language-plaintext highlighter-rouge">http://server/rel-v${PETALINUX_VER}/arm/sstate-cache</code>. I took screenshots from
+a Zynq project so URL contains <code class="language-plaintext highlighter-rouge">arm</code>. If you are working on ZynqMP project, this
+will be <code class="language-plaintext highlighter-rouge">aarch64</code>. Notice that the URL contains a placeholder,
+<code class="language-plaintext highlighter-rouge">${PETALINUX_VER}</code>. This will be replaced by version like <code class="language-plaintext highlighter-rouge">2018.1</code> during build
+automagically. You can also write a <em>hard coded</em> version number but I suggest to
+use the placeholder.</p>
+
+<p>Similarly, change <code class="language-plaintext highlighter-rouge">Add pre-mirror url</code> option to <code class="language-plaintext highlighter-rouge">http://server/rel-v${PETALINUX_VER}/downloads</code>.
+Notice that the path is architecture independent.</p>
+
+<p>Then, Save &amp; Exit settings and build &amp; package the project as usual.</p>
+
+<p class="notice--warning">Even if you follow this GUI<em>ish</em> way, I strongly suggest you to verify the final
+settings by checking the configuration file mentioned at the next section or by
+<code class="language-plaintext highlighter-rouge">git diff</code>.</p>
+
+<h2 id="edit-the-config-file">Edit the config file</h2>
+
+<p>Alternatively you can directly edit  <code class="language-plaintext highlighter-rouge">project-spec/configs/config</code> file. The
+settings related to this problem follow as:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CONFIG_PRE_MIRROR_URL="http://server/rel-v${PETALINUX_VER}/downloads"
+CONFIG_YOCTO_NETWORK_SSTATE_FEEDS=y
+CONFIG_YOCTO_NETWORK_SSTATE_FEEDS_URL="http://server/rel-v${PETALINUX_VER}/arm/sstate-cache"
+# The following line is a comment line (like this one) to remind you NOT to set BB_NO_NETWORK
+# CONFIG_YOCTO_BB_NO_NETWORK is not set
+</code></pre></div></div>
+
+<p>To make sure that configurations are correct you can use <code class="language-plaintext highlighter-rouge">git diff</code> if your
+project under Git (should be!).</p>
+
+<h1 id="problem-still-i-cant-compile-some-petalinux-projects">Problem: Still I can’t compile some PetaLinux projects</h1>
+
+<p>You may notice that your project may start to give compilation errors once you
+start to add new components to rootfs with <code class="language-plaintext highlighter-rouge">petalinux-config -c rootfs</code>. This
+is because not all possible rootfs components are included in file that we
+got from Xilinx. If you browse to <code class="language-plaintext highlighter-rouge">downloads</code> directory of <code class="language-plaintext highlighter-rouge">sstate-cache</code> folder,
+you see lots of file. These are mostly source codes of components that we will
+enable with <code class="language-plaintext highlighter-rouge">petalinux-config -c rootfs</code>. If you enable a component that is not
+there, PetaLinux will try to get files from the upstream repo of the component.
+Since our build machine is disconnected from the Internet, build step will fail.</p>
+
+<p>One possible solution is to check build logs and find which URL is failing. You
+can manually download the failing file from the Internet and put the file in
+<code class="language-plaintext highlighter-rouge">downloads</code> directory on the server. This works because PetaLinux checks
+<code class="language-plaintext highlighter-rouge">downloads</code> directory first and it tries to fetch upstream if the file is absent
+there. Another option to find upstream URL is checking <code class="language-plaintext highlighter-rouge">.bbappend</code> files (can be
+found under PetaLinux setup directory) of problematic components but looking
+errors in build logs is an easier way for me.</p>
+
+<p>If you have many missing packages and carrying them manually is difficult for
+you, you may try <code class="language-plaintext highlighter-rouge">bitbake -c fetchall world</code> command on an <strong>online</strong> machine
+but I haven’t tried this yet. Check out <a href="https://xilinx-wiki.atlassian.net/wiki/spaces/A/pages/60129817/Xilinx+Yocto+Builds+without+an+Internet+Connection">this
+page</a>
+for further info.</p>
+
+<h2 id="further-read">Further read</h2>
+
+<ul>
+  <li><a href="https://xilinx-wiki.atlassian.net/wiki/spaces/A/pages/60129817/Xilinx+Yocto+Builds+without+an+Internet+Connection">Xilinx Wiki</a></li>
+</ul>]]></content><author><name>Alper Yazar</name><uri>https://www.alperyazar.com</uri></author><category term="guide" /><category term="en" /><category term="petalinux" /><category term="xilinx" /><summary type="html"><![CDATA[PetaLinux can be run an offline machine with proper configuration]]></summary></entry><entry><title type="html">WinDirStat</title><link href="https://asynx.dev/blog/22/1/windirstat.html" rel="alternate" type="text/html" title="WinDirStat" /><published>2022-01-29T00:00:00+03:00</published><updated>2022-05-03T16:43:56+03:00</updated><id>https://asynx.dev/blog/22/1/windirstat</id><content type="html" xml:base="https://asynx.dev/blog/22/1/windirstat.html"><![CDATA[<ul>
+  <li><a href="https://windirstat.net/">https://windirstat.net/</a></li>
+  <li>Açık kaynak</li>
+  <li>Windows</li>
+</ul>
+
+<p>WinDirStat, açılımı ile <strong>Windows Directory Statistics</strong>, özellikle diskim dolmaya
+yaklaştığı zaman kullandığım bir yazılım. Çünkü böyle durumlarda bir kurban
+seçip onu silmem gerekiyor. Bir noktadan sonra hangi klasörün içinde gerekli
+gereksiz ya da büyük küçük hangi dosyalar var insan unutuyor. Bu yazılım ile bu
+tarz klasörleri hemen bulmak mümkün.</p>
+
+<p>Yazılımı çok tarif edecek bir kullanımı yok aslında, kurup çalıştırınca
+aşağıdaki gibi karşılama ekranında dilerseniz istediğiniz bir diski komple
+taratabilir (uzun sürebilir) ya da seçtiğiniz bir klasörü analiz
+ettirebilirsiniz.</p>
+
+<p><img src="/assets/images/blog/22/1-windirstat.png" alt="WinDirStat Karşılama Ekranı" class="align-center" /></p>
+
+<p>Seçim yaptıktan sonra <code class="language-plaintext highlighter-rouge">OK</code> dediğimizde Analiz bitiyor ve dosya tiplerini, alt
+klasörlerin ne kadar yer kapladığını görüyoruz. Bu noktadan sonra dilerseniz
+<code class="language-plaintext highlighter-rouge">Clean Up</code> menüsünden ya da doğrudan Windows’un dosya yöneticisinden dosyaları
+silebilirsiniz.</p>
+
+<p class="notice--warning">Programın içinden ya da Windows dosya yöneticisinden <code class="language-plaintext highlighter-rouge">Del</code> tuşu ile silme
+yapılırsa dosyalar çöp kutusuna gideceği için yer açmaya çalıştığınız diskte
+muhtemelen durmaya devam edecekleri için aslında yer açmamış olacaksınız. Silme
+işlemlerinin <code class="language-plaintext highlighter-rouge">Shift + Del</code> tuşu ile yapılması bunu engelleyecektir.</p>
+
+<h1 id="linux">Linux</h1>
+
+<p>Linux’ta benzer bir arayüz sunan
+<a href="https://github.com/jeromerobert/k4dirstat">K4DirStat</a> yazılımını tercih
+ediyorum.</p>]]></content><author><name>Alper Yazar</name><uri>https://www.alperyazar.com</uri></author><category term="guide" /><category term="tr" /><category term="windirstat" /><summary type="html"><![CDATA['Diskimde en çok hangi klasörler yer kaplıyor?' sorusuna cevap bulun!]]></summary></entry><entry><title type="html">Create search link between SumatraPDF and TeXstudio with SyncTeX</title><link href="https://asynx.dev/blog/21/10/sumatrapdf-texstudio-synctex-search-link.html" rel="alternate" type="text/html" title="Create search link between SumatraPDF and TeXstudio with SyncTeX" /><published>2021-10-30T00:00:00+03:00</published><updated>2022-05-03T13:41:56+03:00</updated><id>https://asynx.dev/blog/21/10/sumatrapdf-texstudio-synctex-search-link</id><content type="html" xml:base="https://asynx.dev/blog/21/10/sumatrapdf-texstudio-synctex-search-link.html"><![CDATA[<p class="notice--info">This post was originally published on Alper Yazar’s personal blog in 2014.</p>
+
+<p>I use <a href="https://www.texstudio.org/">TeXstudio</a> for my LaTeX works.
+<a href="/blog/21/10/sumatrapdf.html">SumatraPDF</a> is also
+good, lightweight PDF reader. It is possible to create a forward search from
+TeXstudio to SumatraPDF. You may find PDF output of a LaTeX code. Similarly, a
+backward search is possible: find LaTeX source code from PDF output.</p>
+
+<p>Given steps are tested by using <strong>TeXstudio 2.10.8</strong> and <strong>SumatraPDF v3.1.1
+64-bit</strong> on a <strong>Windows 7 64-bit</strong> machine. However, I am pretty sure it will
+work for almost all possible future and previous versions.</p>
+
+<p class="notice--info">This post will be based on this article
+(<code class="language-plaintext highlighter-rouge">http://robjhyndman.com/hyndsight/texstudio-sumatrapdf/</code> <code class="language-plaintext highlighter-rouge">404 🔗</code>) But since it
+was published in 2011, there are some slight changes in software menus. You may
+also read it.</p>
+
+<p>1- Open TexStudio. Navigate <strong>Options</strong> → <strong>Configure TeXstutdio…</strong></p>
+
+<p><img src="/assets/images/blog/21/6-a.png" alt="Configure TeXstudio…" /></p>
+
+<p><em>Configure TeXstudio…</em></p>
+
+<p>2- Click <strong>Commands</strong> tab, and find <strong>External PDF Viewer</strong> option.</p>
+
+<p><img src="/assets/images/blog/21/6-b.png" alt="External PDF Viewer…" /></p>
+
+<p><em>External PDF Viewer…</em></p>
+
+<p>3- Change the field with:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"C:/Program Files (x86)/SumatraPDF/SumatraPDF.exe" -reuse-instance %.pdf
+</code></pre></div></div>
+
+<p>You should put <strong>your</strong> path to SumatraPDF.exe between quotation marks.</p>
+
+<p class="notice--info"><strong>Update (08 Feb 2015):</strong> I use pdflatex. According to Vojtech Vozda (see
+comments), if you use DVI → PS → PDF chain you should also add -synctex=1 option
+to LaTeX part as in PdfLaTeX option in order to create search link between your
+source code and PDF file. See also: <a href="http://tex.stackexchange.com/questions/118489/what-exactly-is-synctex">What exactly is
+SyncTeX?</a></p>
+
+<p>4- Click <strong>Build</strong> tab, find <strong>PDF Viewer</strong> option and change it to <strong>External
+PDF Viewer.</strong></p>
+
+<p><img src="/assets/images/blog/21/6-c.png" alt="Use External PDF Viewer" /></p>
+
+<p><em>Use External PDF Viewer</em></p>
+
+<p>5- On the same windows, locate <strong>User Commands</strong> tab.</p>
+
+<p><img src="/assets/images/blog/21/6-d.png" alt="User Commands" /></p>
+
+<p><em>User Commands</em></p>
+
+<p>Add the following statements:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user0:Forward Search
+</code></pre></div></div>
+
+<p>to the first column and</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dde:///"C:/Program Files (x86)/SumatraPDF/SumatraPDF.exe":SUMATRA/control/  [ForwardSearch("?am.pdf","?c:am.tex",@,0,0,1)]
+</code></pre></div></div>
+
+<p>You should put <strong>your</strong> path to SumatraPDF.exe between quotation marks.</p>
+
+<p>Click <strong>OK</strong></p>
+
+<p>6- Now let’s open <strong>Options</strong> → <strong>Configure TeXstutdio…</strong> again and select
+<strong>Shortcuts</strong> tab. Expand <strong>Menus</strong> → <strong>Tools</strong> → <strong>User</strong> tree. Now you should
+see a user command called <strong>Forward Search</strong>. Now its default shortcut is
+<strong>Alt+Shift+F1</strong>. But you can also assign another shortcut to forward search
+like <strong>F2</strong>. But this step is optional.</p>
+
+<p><img src="/assets/images/blog/21/6-e.png" alt="User Commands Shortcut" /></p>
+
+<p><em>User Commands Shortcut</em></p>
+
+<p>7- Now we are done with TeXstudio. Let’s set up SumatraPDF. Open SumatraPDF.
+Click <strong>Settings</strong> → <strong>Options</strong>.</p>
+
+<p><img src="/assets/images/blog/21/6-f.png" alt="Sumatra Settings" /></p>
+
+<p><em>Sumatra Settings</em></p>
+
+<p>8- Locate <strong>Set inverse search command-line</strong>.</p>
+
+<p class="notice--info"><strong>Update (19 Feb 2016):</strong> 8.a is added.</p>
+
+<p>8.a- If you don’t see “Set inverse search command-line” option and options
+window is ended by “SumatraPDF is your default PDF reader” button, first do this
+step.</p>
+
+<p>Run the following command. (Windows Start → Search for cmd.exe → Open cmd.exe →
+Paste the following code → Press Enter)</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"C:/Program Files (x86)/SumatraPDF/SumatraPDF.exe" -inverse-search
+</code></pre></div></div>
+
+<p>You should put <strong>your</strong> path to SumatraPDF.exe between quotation marks.</p>
+
+<p>This command will open SumatraPDF but it will give a loading error. This isn’t
+important. Now open options again and you should see the inverse search option
+as given below.</p>
+
+<p><img src="/assets/images/blog/21/6-g.png" alt="Sumatra Inverse Search" /></p>
+
+<p><em>Sumatra Inverse Search</em></p>
+
+<p>Type:</p>
+
+<div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"C:\Program Files (x86)\TeXstudio\texstudio.exe" "%f" -line %l
+</code></pre></div></div>
+
+<p>You should put <strong>your</strong> path to texstudio.exe between quotation marks.</p>
+
+<p>Click <strong>OK</strong> and exit.</p>
+
+<p>Now <strong>let’s try your new setup.</strong></p>
+
+<p>Compile a LaTeX code in TeXstudio and produce PDF output. If you press <strong>F2</strong>
+(if you assign that shortcut in TeXstudio settings), SumatraPDF should highlight
+corresponding output of your cursor position. In SumatraPDF, double-clicking
+shows corresponding LaTeX code in TeXstudio.</p>]]></content><author><name>Alper Yazar</name><uri>https://www.alperyazar.com</uri></author><category term="guide" /><category term="en" /><category term="sumatrapdf" /><category term="texstudio" /><category term="latex" /><category term="synctex" /><summary type="html"><![CDATA[SyncTeX enables us to create a bidirectional search relation between these two software.]]></summary></entry><entry><title type="html">Sumatra PDF</title><link href="https://asynx.dev/blog/21/10/sumatrapdf.html" rel="alternate" type="text/html" title="Sumatra PDF" /><published>2021-10-29T00:00:00+03:00</published><updated>2022-05-03T15:14:38+03:00</updated><id>https://asynx.dev/blog/21/10/sumatrapdf</id><content type="html" xml:base="https://asynx.dev/blog/21/10/sumatrapdf.html"><![CDATA[<h1 id="giriş">Giriş</h1>
+
+<p><a href="http://sumatrapdf.org/">Sumatra PDF</a>, Windows için geliştirilmiş küçük
+boyutlu, hafif ve hızlı açılan bir PDF görüntüleme yazılımı. Sanılabileceğinin
+aksine yazılım, adını Endonezya’nın Sumatra Adası’ndan almıyor <sup id="fnref:1f" role="doc-noteref"><a href="#fn:1f" class="footnote" rel="footnote">1</a></sup>. GPLv3 ile
+lisanslanmış olan yazılım,
+<a href="https://github.com/sumatrapdfreader/sumatrapdf">Github</a> üzerinden açık kaynak
+ve ücretsiz olarak sunuluyor.</p>
+
+<p>Bu yazılımı,
+Windows üzerinde çalışırken günlük yaşantımda sıklıkla kullanıyorum.
+Bu yazıda, yazılımı tercih etme sebeplerimi ve görüşlerimi sizlerle paylaşıyorum.</p>
+
+<h1 id="fare-desteği">Fare Desteği</h1>
+
+<p>Sumatra PDF’in en çok sevdiğim özelliği klavyeye hiç dokunmadan sadece fareyi
+kullanarak kolay bir gezinme sağlaması. <strong>Sağ tık + tekerlek hareketleri</strong> ile
+dokümanda yaklaşıp uzaklaşabilmek (zoom in/out) mümkün. Farenin tekerleğini
+kullanırken bir yandan klavyede <code class="language-plaintext highlighter-rouge">CTRL</code> tuşuna basmaya ya da diğer PDF okuyucu
+yazılımlarda da bulunan yaklaşma/uzaklaşma (<code class="language-plaintext highlighter-rouge">+</code> ve <code class="language-plaintext highlighter-rouge">-</code>) tuşlarına basmaya
+gerek olmuyor.</p>
+
+<p><strong>Sağ tık + fare hareketleri</strong> ile dokümanı yukarı/aşağı veya sağa/sola kaydırmak
+mümkün oluyor (<em>pan</em> hareketi). Bunlar sayesinde tek elimle dokümanda gezinirken
+boştaki diğer elimle çaydır, kahvedir içebiliyorum.</p>
+
+<h1 id="latex-ve-synctex-kolaylığı">LaTeX ve SyncTeX Kolaylığı</h1>
+
+<p><a href="http://sumatrapdf.org/">Sumatra PDF</a>, görüntülenen doküman açık iken o
+dokümanın başka bir yazılım tarafından değiştirilmesine izin veriyor. Adobe
+Acrobat Reader DC gibi diğer popüler yazılımlarda ise bunun mümkün olmadığını
+gözlemliyorum. Bu, özellikle LaTeX gibi bir araçla bir formattan, kaynak
+kodundan dönüşüm yaparak yani bir şeyleri derleyerek PDF üretiyorsanız faydalı
+oluyor. Diğer yazılımlarda açtığınız dokümanın bir başka yazılım tarafından
+değiştirilmesini sağlamak için PDF’i kapatmanız, değiştikten sonra ise tekrar
+açmanız gerekiyor. Eğer LaTeX ile bir şeyler yazdıysanız bunu bir saatte
+neredeyse 50-100 kere yapabileceğinizi hissetmişsinizdir. İşte bu gibi
+durumlarda Sumatra PDF bir kurtarıcı oluyor.</p>
+
+<p>LaTeX konusundan bahsetmişken Sumatra PDF’in
+<a href="https://tex.stackexchange.com/questions/118489/what-exactly-is-synctex">SyncTeX</a>
+desteklediğini de belirteyim. Bu sayede LaTeX editörünüz ile Sumatra PDF arasında
+çift taraflı geçişler yapabiliyorsunuz. Yani kaynak kodunda ilgilendiğiniz yerin
+çıktısının nasıl olduğunu Sumatra PDF üzerinden görebiliyor ya da PDF’te gördüğünüz
+bir yerin kaynak koduna hızlıca gidebiliyorsunuz. Bunun nasıl yapılacağı ile
+ilgili
+<a href="/blog/21/10/sumatrapdf-texstudio-synctex-search-link.html">yazımızı okuyabilirsiniz.</a></p>
+
+<h1 id="küçük-boyut-hız-taşınabilir-sürüm">Küçük Boyut, Hız, Taşınabilir Sürüm</h1>
+
+<p><a href="http://sumatrapdf.org/">Sumatra PDF</a> resmi olarak 32/64-bit bilgisayarlar için
+hem kurulabilir hem de taşınabilir sürümler sunuyor. Bu dosyalar ise sadece 6-7
+MByte yer kaplıyorlar. Kurulduktan sonra da yaklaşık 22 MByte yer harcıyor.
+Bu arada kurulum ekranı 90’lardan kalma gibi, çok eski bir görünümü var ama
+neyse ki bir kez görüyorsunuz ve kurulum da güncel bir bilgisayarda 5 saniyeyi
+geçmiyor diyebilirim.</p>
+
+<p>Günlük kullanımda hafif bir okuyucu olmasından dolayı hızlı açıldığını hissediyorum.
+Daha nicel bir veri sunmak için 88 sayfalık, yazı ağırlıklı bir PDF dokümanı
+bilgisayarımda bulunan 3 farklı yazılımda açtığımda aşağıdaki gibi ölçümler aldım.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Yazılım</th>
+      <th>Açılış Süresi (sn)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><a href="http://sumatrapdf.org/">Sumatra PDF</a></td>
+      <td>0.4</td>
+    </tr>
+    <tr>
+      <td><a href="https://www.tracker-software.com/product/pdf-xchange-editor">PDF-XChange Editor</a></td>
+      <td>0.6</td>
+    </tr>
+    <tr>
+      <td><a href="https://www.adobe.com/tr/acrobat/pdf-reader.html">Adobe Acrobat Reader DC</a></td>
+      <td>2.2</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Bu denemelere Foxit PDF Reader’i dahil edemedim çünkü
+<strong>kendisini indirmeme antivirüs yazılımım izin vermedi.</strong></p>
+
+<p>Yazılımlar çalışırken de en düşük miktarda hafıza kullanan yazılımın Sumatra PDF
+olduğunu söyleyebilirim.</p>
+
+<h1 id="kişiselleştirme">Kişiselleştirme</h1>
+
+<p><a href="http://sumatrapdf.org/">Sumatra PDF</a>‘i kişiselleştirmek kolay ve taşınabilir.
+Çünkü <code class="language-plaintext highlighter-rouge">Settings → Advanced Options</code> denildiğinde yazılımın tüm ayarlarını
+görüp değiştirebiliyoruz. Ayarlar metin formatında olduğu için bu ayarları
+kopyalayarak çalıştığınız diğer bilgisayarlara taşımak ya da format öncesi
+kaydetmek kolay oluyor.</p>
+
+<p>Buradan değiştirebileceğiniz kullanışlı ayarlardan birkaçı metin ve arka plan rengi
+olabilir. Özellikle gece çalışıyorsanız renklerle oynamak isteyebilirsiniz.</p>
+
+<p>Yazılımla ilk defa tanışıyorsanız
+ilk olarak öncellikle <code class="language-plaintext highlighter-rouge">Settings → Options</code> kısmından <code class="language-plaintext highlighter-rouge">Advanced</code> başlığı altındaki
+<code class="language-plaintext highlighter-rouge">Use tabs</code> seçeneği seçiliyken ve değilken yazılımı denemenizi öneririm. Eğer
+sekmeli kullanırsanız birden fazla PDF dokümanı açtığınızda tek bir programın
+içerisinde tüm PDF’leri sekmeler halinde görüyorsunuz. Ben ise diğerini tercih
+ediyorum çünkü sekmesiz kullanımda açık olan her bir doküman için Windows görev
+çubuğunda ayrı bir ikon oluşuyor ve bunlara hızlıca ön izleme yapmayı tercih ediyorum
+fare imlecini üzerlerinde gezdirerek. Kullanan arkadaşlarımdan sekmeliyi daha çok
+sevenler çoğunlukta, tercihi deneyerek siz yapın.</p>
+
+<h1 id="eksiler">Eksiler</h1>
+
+<p>Yazılımı PDF <strong>okuyucusu</strong> olarak düşünürseniz ben bir eksiklik hissetmiyorum ama
+PDF üzerine yorumlar eklemek için kullanacaksanız bu konuda çok bir seçenek
+sunmadığını belirteyim. Yapmak mümkün ama beklentiniz düşük olmalı. Bu konuda,
+<a href="https://www.tracker-software.com/product/pdf-xchange-editor">PDF-XChange Editor</a>,
+<a href="https://www.adobe.com/tr/acrobat/pdf-reader.html">Adobe Acrobat Reader DC</a> gibi
+alternatifleri kullanmanızı öneririm.</p>
+
+<p>Diğer bir konu ise, her ne kadar çözümsüz olmasa da, Linux için doğal bir
+desteğinin olmaması. Ben denemedim ama sanırım <a href="https://www.winehq.org/">Wine</a>
+ile sorunsuz da çalışıyor. Linux dağıtımlarda aslında Sumatra PDF’in tüm
+özelliklerini içermese de kullandığım masaüstü ortamının okuyucuları (GNOME:
+<a href="https://wiki.gnome.org/Apps/Evince">Evince</a>, KDE:
+<a href="https://okular.kde.org/tr/">Okular</a>, <a href="https://www.xpdfreader.com/">Xpdf</a> gibi)
+çoğu zaman işimi görüyor.</p>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1f" role="doc-endnote">
+      <p><a href="https://web.archive.org/web/20120303132633/http://forums.fofou.org/sumatrapdf/topic?id=3392&amp;comments=2">https://web.archive.org/web/20120303132633/http://forums.fofou.org/sumatrapdf/topic?id=3392&amp;comments=2</a> <a href="#fnref:1f" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>]]></content><author><name>Alper Yazar</name><uri>https://www.alperyazar.com</uri></author><category term="guide" /><category term="podcast" /><category term="youtube" /><category term="tr" /><category term="sumatrapdf" /><category term="windows" /><category term="latex" /><category term="synctex" /><summary type="html"><![CDATA[Sumatra PDF, Windows için tasarlanmış, hafif, hızlı bir PDF okuyucusu.]]></summary></entry><entry><title type="html">Raspberry Pi SD kart taşıma ve büyütme</title><link href="https://asynx.dev/blog/21/3/rpi-sd-kart-buyutme.html" rel="alternate" type="text/html" title="Raspberry Pi SD kart taşıma ve büyütme" /><published>2021-03-28T00:00:00+03:00</published><updated>2022-05-03T16:43:56+03:00</updated><id>https://asynx.dev/blog/21/3/rpi-sd-kart-buyutme</id><content type="html" xml:base="https://asynx.dev/blog/21/3/rpi-sd-kart-buyutme.html"><![CDATA[<p>Raspberry Pi 400’de kullandığım SD kartın boyutu biraz küçük kalmaya başlayınca
+daha büyük bir SD karta (performansı da biraz daha iyi olabilir) geçmem gerekti.
+Bu yazıyı küçük bir not yazısı olarak düşünebilirsiniz. İnternette farklı
+yöntemlerle bu işi tarifleyen birçok yazı bulabilirsiniz. Yapılan işlemin çoğu
+RPi 400’e özel olmadığından diğer RPi’ler ya da başka kartlar için de bu yöntem
+uygulanabilir.</p>
+
+<p class="notice--warning">Eğer hedef SD kart, ilk SD karttan daha küçük ise bu yöntem
+olduğu gibi kullanılamaz. Öncesinde dosya sistemlerini küçültmek ve kopyalamayı
+dosya sistemlerini göz önüne alarak (bu yazıda <em>ham</em> kopyalama anlatılıyor)
+yapmak gerekecektir.</p>
+
+<p>Ben işlemleri üzerinde Linux koşan ve SD kart takabildiğim başka bir bilgisayarda
+yaptım. Windows için <a href="https://peppe8o.com/raspberry-pi-migrating-to-larger-sd-card-with-windows-step-by-step-guide/">burada</a>
+anlatıldığı gibi <code class="language-plaintext highlighter-rouge">Win32DiskImager</code> isimli bir yazılım da kullanılabilir duruyor
+(denemedim).</p>
+
+<p>İşlemleri yapacağımızın bilgisayarın hangi Linux dağıtımını çalıştırdığının
+önemi yok. Aşağıda verdiğim komutları <code class="language-plaintext highlighter-rouge">BASH</code> üzerinde çalıştırdım. Root hakkımızın
+olması yani <code class="language-plaintext highlighter-rouge">sudo</code> ile komutları çalıştırabilmemiz gerekiyor.</p>
+
+<h1 id="sd-kartı-bilgisayara-kopyalama">SD kartı bilgisayara kopyalama</h1>
+
+<p class="notice--warning">Sonraki adımlarda hata yapmamak adına bilgisayarınıza takılı ve ihtiyaç duymadığınız
+USB bellek, harici disk, telefon gibi başka depolama birimleri var ise onları
+şu aşamada çıkartmanızı öneririm.</p>
+
+<p>İlk olarak RPi’de kullandığımız SD kartı çalışacağımız bilgisayara takıyoruz.
+Aşağıdaki komutla SD kartımızın hangi isimde göründüğüne bakıyoruz.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>fdisk <span class="nt">-l</span>
+</code></pre></div></div>
+
+<p>Benim durumumda SD kart <code class="language-plaintext highlighter-rouge">/dev/sdb</code> altında gözüküyordu. <strong>Sizin durumunuzda
+başka bir isimde çıkabilir.</strong> İleride yazdığım komutlardaki <code class="language-plaintext highlighter-rouge">/dev/sdX</code> kısımlarını
+sizde çıkan isim ile değiştirmeyi unutmayın. Örneğin ben, <code class="language-plaintext highlighter-rouge">/dev/sdX</code> yerine
+<code class="language-plaintext highlighter-rouge">/dev/sdb</code> yazdım.</p>
+
+<p class="notice--success">Eğer SD kartı bulmakta zorlanıyorsanız şunları yapabilirsiniz: 1) SD kartı
+çıkarın ve <code class="language-plaintext highlighter-rouge">sudo fdisk -l</code> komutunu çalıştırın ve daha sonra geri takın tekrar
+çalıştırın, yeni eklenen isim SD kart olmalıdır. 2) Yüksek ihtimalle
+bilgisayarınızda kaç disk varsa <code class="language-plaintext highlighter-rouge">a</code> dan başlayarak o kadar harf zaten disklerinize
+atanmış olacaktır. Örneğin 3 diskiniz varsa <code class="language-plaintext highlighter-rouge">a,b,c</code> harfleri yüksek ihtimalle
+bu disklere atanmış olacağından başka bir USB bellek gibi cihaz da takılı değilse
+SD kart <code class="language-plaintext highlighter-rouge">d</code> harfini alacaktır. 3) Standart Raspberry Pi OS (eski adıyla Raspbian)
+kullanıyorsanız SD kart ile beraber iki bölüm de gözükecektir, <code class="language-plaintext highlighter-rouge">/dev/sdX0</code>
+ve <code class="language-plaintext highlighter-rouge">/dev/sdX1</code>. Bu da bir doğrulama yöntemi olabilir.</p>
+
+<p>Birçok Linux dağıtımı SD kartı takınca otomatik olarak üzerindeki 2 bölümü
+otomatik <em>mount</em> edecektir. Bu bölümler üzerinde işlem yapmadığımız sürece
+bir problem olmayacaktır ama emin olmak adına <em>mount</em> edilmiş kısımları <em>umount</em>
+edelim. Böylece kopyalama yaparken dosya sistemlerin tutarsızlaşma riskini de
+ortadan kaldırmış olacağız.</p>
+
+<p>İlk olarak şu komutla <em>mount</em> edilmiş kısımlar var mı diye bakalım. Sonuç boş
+dönerse bir sonraki komutu çalıştırmaya gerek yok ama çalıştırsanız da bir
+zararı olmayacaktır.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>mount | <span class="nb">grep</span> /dev/sdX
+</code></pre></div></div>
+
+<p>Aşağıdaki komutla <em>umount</em> edelim.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>umount /dev/sdX+<span class="o">([</span>0-9]<span class="o">)</span>
+</code></pre></div></div>
+
+<p>Emin olmak adına iki üstteki komutla <em>mount</em> edilmiş bölüm var mı diye bakabiliriz.
+Bu noktadan sonra <em>mount</em> edilmiş bir yer kalmaması gerekiyor.</p>
+
+<p>Aşağıdaki komutla da SD kartı bilgisayarımıza kopyalamış oluyoruz.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo dd </span><span class="k">if</span><span class="o">=</span>/dev/sdX <span class="nv">of</span><span class="o">=</span>rpi.img <span class="nv">bs</span><span class="o">=</span>1M <span class="nv">status</span><span class="o">=</span>progress
+</code></pre></div></div>
+
+<p>Bu noktadan sonra komutu çalıştırdığımız dizinde oluşan <code class="language-plaintext highlighter-rouge">rpi.img</code> aslında SD karta
+kurulum yapılacak bir işletim sistemi imajı olarak düşünülebilir. Bu noktadan
+sonra SD kartı çıkartabiliriz.</p>
+
+<p class="notice--info"><code class="language-plaintext highlighter-rouge">dd</code> komutu SD kartın tüm içeriğini kopyalayacaktır. Örneğin kartınız 32 GB diyelim.
+10 GB dolu olsa bile <code class="language-plaintext highlighter-rouge">rpi.img</code> 32 GB olacaktır. Çünkü <code class="language-plaintext highlighter-rouge">dd</code>, dosya sistemini tanımaz
+ve <em>ham</em> haliyle tüm içeriği kopyalar. Eğer kartınızın çoğu dolu ise zaten gereksiz
+yere kopyalanacak kısım az olacağından ekstra kopyalayacağınız kısım zaman ve
+boyut açısından çok problem olmayacaktır. Ama kartınızın çok azını kullanıyorsanız
+ve kullanılmayan kısmın kopyalanması ile uğraşmak istemiyorsanız
+<a href="https://serverfault.com/questions/439128/dd-on-entire-disk-but-do-not-want-empty-portion">buradaki</a>
+(🇬🇧)
+gibi çözümlere bakabilirsiniz. Yine de bu işlemi bir kere yapacağınızdan alternatif
+aramak yerine kartı olduğu gibi kopyalamak iyi bir çözüm olabilir.</p>
+
+<h1 id="bilgisayardan-yeni-sd-karta-kopyalama">Bilgisayardan yeni SD karta kopyalama</h1>
+
+<p>Şimdi <code class="language-plaintext highlighter-rouge">rpi.img</code> dosyasını geçiş yapacağımız (boyutu eskisinden küçük olmayan)
+SD karta yazacağız. Bunun için üstteki adımlarda olduğu gibi yeni SD kartımızın
+harfini, <code class="language-plaintext highlighter-rouge">/dev/sdX</code>, bulmamız gerekiyor. Yine yukarıdaki komutları kullanarak
+<em>mount</em> edilmiş bölüm varsa onları <em>umount</em> etmemiz gerekiyor.</p>
+
+<p class="notice--warning">İlk SD kartı söküp, ikincisini bilgisayar taktığımızda aynı <code class="language-plaintext highlighter-rouge">/dev/sdX</code> değerini
+alması beklenir ama bu garanti değildir. Bu yüzden SD kartı değiştirince
+tekrar kontrol etmekte fayda var.</p>
+
+<p>SD kartın harfini bulduktan sonra imaj dosyasını yazacağız.</p>
+
+<p class="notice--danger">Aşağıdaki komut dikkat etmezseniz tehlikeli olabilir. <code class="language-plaintext highlighter-rouge">of</code> parametresine verilen
+<code class="language-plaintext highlighter-rouge">/dev/sdX</code>in SD kartı gösterdiğinden emin olun. <strong>Aksi taktirde sistemde bulunan
+bir diskinizin üzerine dönüşü neredeyse olmayacak şekilde yazabilirsiniz.</strong></p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo dd </span><span class="nv">of</span><span class="o">=</span>/dev/sdX <span class="k">if</span><span class="o">=</span>rpi.img <span class="nv">bs</span><span class="o">=</span>1M <span class="nv">status</span><span class="o">=</span>progress
+<span class="gp">$</span><span class="w"> </span><span class="nb">sync</span>
+</code></pre></div></div>
+
+<p>SD kartımızı çıkartıp Raspberry Pi’ı açıp kalan işlemlere devam edebiliriz. Artık
+<code class="language-plaintext highlighter-rouge">rpi.img</code> dosyasının olduğu bilgisayar ile de işimiz kalmadı.</p>
+
+<h1 id="raspberry-pi-üzerinde-alanların-genişletilmesi">Raspberry Pi üzerinde alanların genişletilmesi</h1>
+
+<p class="notice--info">Bundan sonraki komutları Raspberry Pi üzerinde çalıştıracağız.</p>
+
+<p class="notice--info">Raspberry Pi’ı yeni kart ile ilk açışımızda konsolda disklerin kontrol edildiğine
+dair, <code class="language-plaintext highlighter-rouge">fsck</code> gibi, bir mesaj görebiliriz. Burada panik olmamıza gerek yok.</p>
+
+<p>Yeni SD kartımız eskisinden büyükse bile RPi üzerinde alanın genişlediğini
+hemen görmüyoruz çünkü SD kart üzerindeki dosya sistemlerinin de genişletilmesi
+gerekiyor. Denemek için</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">df</span> <span class="nt">-h</span>
+</code></pre></div></div>
+
+<p>komutu ile ne kadar alanın olduğunu görebilirsiniz. SD kartınız büyüdüyse bile
+buradaki değerler eski SD kartınızın değerlerini gösterecektir. Dosya sistemini
+genişletmek için Raspberry Pi OS ile gelen <code class="language-plaintext highlighter-rouge">raspi-config</code> aracını kullanabiliriz.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>raspi-config
+</code></pre></div></div>
+
+<p>komutunu çalıştırdıktan sonra açılan ekrandan
+<code class="language-plaintext highlighter-rouge">6 Advanced Options</code> ve ardından <code class="language-plaintext highlighter-rouge">A1 Expand Filesystem</code> seçeneğini seçelim.
+RPi’yi yeniden başlattığımızda kartımızın tüm alanının gözüküyor olması gerekiyor.
+Yine <code class="language-plaintext highlighter-rouge">df -h</code> ile kontrol edebilirsiniz.</p>
+
+<h1 id="sonuç">Sonuç</h1>
+
+<p>Temelde eski SD kartımızın olduğu gibi yeni SD kartımıza kopyalamış ve ardından
+da dosya sistemini yeni boyuta göre genişletmiş olduk. Eğer Windows üzerinde
+bu işi yapmak istiyorsanız, daha küçük bir SD karta geçiyorsanız, kopyalama
+işlemlerini kısaltmak için kart içeriğini <em>ham</em> olarak taşımak değil de dosya
+sistemlerinden haberdar yöntemlerle taşımak istiyorsanız internetteki diğer
+çözümlere bakabilirsiniz.</p>]]></content><author><name>Alper Yazar</name><uri>https://www.alperyazar.com</uri></author><category term="guide" /><category term="tr" /><category term="raspberry-pi" /><category term="sd" /><category term="raspbian" /><category term="raspberry-pi-os" /><summary type="html"><![CDATA[Kullandığınız SD kartı aynı boy ya da daha büyük bir karta nasıl taşıyabileceğinizi anlatıyorum.]]></summary></entry><entry><title type="html">Using WSL on an offline Windows machine</title><link href="https://asynx.dev/blog/21/3/wsl-offline.html" rel="alternate" type="text/html" title="Using WSL on an offline Windows machine" /><published>2021-03-16T00:00:00+03:00</published><updated>2022-12-23T13:16:33+03:00</updated><id>https://asynx.dev/blog/21/3/wsl-offline</id><content type="html" xml:base="https://asynx.dev/blog/21/3/wsl-offline.html"><![CDATA[<p>In this post, we will install Ubuntu 20.04 WSL package on an <strong>offline</strong>
+Windows 10 machine. Although this post is prepared with Ubuntu 20.04, the steps
+should be valid for other WSL packages too.</p>
+
+<h1 id="getting-files">Getting files</h1>
+
+<p>If your Windows machine is connected to the Internet and you can easily install
+WSL packages via Microsoft Store like by clicking <em>Download from the Microsoft
+Store</em> <a href="https://ubuntu.com/wsl">here</a>. To install it on an offline machine,
+first we get <code class="language-plaintext highlighter-rouge">.appx</code> package for a corresponding guest OS from Microsoft. All
+available Packages are listed
+<a href="https://docs.microsoft.com/en-us/windows/wsl/install-manual#downloading-distributions">here</a>.
+Transfer the downloaded package to the target offline machine. For example, when
+I am writing this post, to install Ubuntu 20.04 I get
+<code class="language-plaintext highlighter-rouge">Ubuntu_2004.2020.424.0_x64.appx</code>.</p>
+
+<h1 id="enabling-wsl-on-windows">Enabling WSL on Windows</h1>
+
+<p>Open a PowerShell terminal and type <code class="language-plaintext highlighter-rouge">wsl</code>. If you get an error about not recognized
+command, first you should enable WSL. The official instructions are given
+<a href="https://docs.microsoft.com/en-us/windows/wsl/install-win10#set-your-distribution-version-to-wsl-1-or-wsl-2">here</a>.
+Alternatively you can do it with GUI. Find <code class="language-plaintext highlighter-rouge">Programs and Features</code> on <code class="language-plaintext highlighter-rouge">Control Panel</code>,
+then click <code class="language-plaintext highlighter-rouge">Turn Windows features on or off</code> as shown below.</p>
+
+<p><img src="/assets/images/blog/21/2-wsl-enable.png" alt="WSL enable" /></p>
+
+<p>After rebooting Windows, <code class="language-plaintext highlighter-rouge">wsl</code> command should be available to use and should be
+working on PowerShell. Since we don’t have any installed WSL guest OS on the PC,
+it will say  <code class="language-plaintext highlighter-rouge">... no installed distributions.</code></p>
+
+<p class="notice--info">If your machine
+<a href="https://docs.microsoft.com/en-us/windows/wsl/install-win10#step-2---check-requirements-for-running-wsl-2">satisfies</a>
+requirements for WSL 2 and you don’t have any <a href="https://docs.microsoft.com/en-us/windows/wsl/compare-versions">specific
+reason</a> to stick
+with WSL (1), I recommended to switch to WSL 2 now but you can stick with WSL
+(1) either. I am not using WSL 2 but I think the following steps should be fine
+for WSL 2 too.</p>
+
+<h1 id="installing-wsl-package">Installing WSL package</h1>
+
+<p>In theory, the following command given in the <a href="https://docs.microsoft.com/en-us/windows/wsl/install-manual#installing-your-distro">official
+page</a>
+should do the work.</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Add-AppxPackage</span><span class="w"> </span><span class="o">.</span><span class="nx">\Ubuntu_2004.2020.424.0_x64.appx</span><span class="w">
+</span></code></pre></div></div>
+
+<h1 id="error-the-service-has-not-been-started">Error: “The service has not been started”</h1>
+
+<p>After installing the package, you can find the installed software by typing
+<code class="language-plaintext highlighter-rouge">Ubuntu</code> in Windows Start menu search. <strong>However</strong> in my case, I couldn’t
+start the Ubuntu WSL and got the <code class="language-plaintext highlighter-rouge">The service has not been started.</code> error as
+shown below. This is probably related to version of Windows 10.</p>
+
+<p><img src="/assets/images/blog/21/2-wsl-error.png" alt="WSL The service has not been started error" /></p>
+
+<h2 id="solution">Solution</h2>
+
+<p>You can remove <code class="language-plaintext highlighter-rouge">Ubuntu</code> found in Windows Start menu by right clicking and selecting
+<code class="language-plaintext highlighter-rouge">Uninstall</code> since we won’t use it.</p>
+
+<p>One solution recommended by Microsoft is extracting <code class="language-plaintext highlighter-rouge">.appx</code> file with an file
+archiver program, like 7-Zip by right clicking on file and selecting <code class="language-plaintext highlighter-rouge">Extract</code>
+option, and then running <code class="language-plaintext highlighter-rouge">ubuntu2004.exe</code>.</p>
+
+<p class="notice--danger">After extraction please make sure that your folder is at right place. Although
+it is possible to move folders to another location, in my case moving folders
+<strong>after</strong> installation gives me <code class="language-plaintext highlighter-rouge">Cannot find the specified path</code> error. So
+before installation make sure that this is the correct location. After
+installation, <code class="language-plaintext highlighter-rouge">rootfs</code> folder is created next to <code class="language-plaintext highlighter-rouge">ubuntu2004.exe</code> and file
+system of the Linux will live here. So make sure that you have enough space for
+your future needs. The WSL is somehow <em>fragile</em> <sup id="fnref:1f" role="doc-noteref"><a href="#fn:1f" class="footnote" rel="footnote">1</a></sup>. Although it is possible
+to move files as moving ordinary files in Windows after installation,
+be ready for side effects.</p>
+
+<p>With first run the installation process begins
+and you are prompted to select an username and associated password. After
+completing installation, you can use your Linux distro. Notice that file system
+for the Linux is created under <code class="language-plaintext highlighter-rouge">rootfs</code> folder. After installation, Ubuntu 20.04
+creates ~40K items in its folder.</p>
+
+<h1 id="pitfall-moving-ubuntu-2004-after-installation">Pitfall: Moving Ubuntu 20.04 After Installation</h1>
+
+<p>I got <code class="language-plaintext highlighter-rouge">Cannot find the specified path</code> error when I moved to another folder
+after installation. Other people report the same problem too <sup id="fnref:1f:1" role="doc-noteref"><a href="#fn:1f" class="footnote" rel="footnote">1</a></sup>. In my case,
+since I was using fresh Ubuntu installation, I reinstalled it but I don’t know the
+proper solution if you don’t want to loose your distro. Some people also
+reported that a Windows update also breaks the WSL <sup id="fnref:1f:2" role="doc-noteref"><a href="#fn:1f" class="footnote" rel="footnote">1</a></sup>, so… yeah, classical
+Windows…</p>
+
+<h2 id="solution-1">Solution</h2>
+
+<p>Even if you decide to reinstall the Ubuntu at the new location, when you run
+<code class="language-plaintext highlighter-rouge">ubuntu2004.exe</code> you get <code class="language-plaintext highlighter-rouge">The system cannot find the path specified</code> error.
+Even if you run <code class="language-plaintext highlighter-rouge">wsl</code> on PowerShell you get the same error. The reason is
+the previous machine is still registered. If you run <code class="language-plaintext highlighter-rouge">wslconfig /l</code>, you will
+see the previous machine. So first <em>unregister</em> the previous distro, example:</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">wslconfig</span><span class="w"> </span><span class="nx">/u</span><span class="w"> </span><span class="nx">Ubuntu-20.04</span><span class="w">
+</span></code></pre></div></div>
+
+<p>After that, <code class="language-plaintext highlighter-rouge">wsl</code> command should run, then you can install the Ubuntu to a
+new location.</p>
+
+<p class="notice--info">If you know how to move installed distro without reinstalling again, please
+comment. Maybe <a href="https://stackoverflow.com/a/51767786">this</a>?</p>
+
+<h1 id="error-wslregisterdistribution-failed-with-error-0x80070005">Error: “WslRegisterDistribution failed with error: 0x80070005”</h1>
+
+<p>When I tried to install the distro runnig <code class="language-plaintext highlighter-rouge">ubuntu2004.exe</code> on <code class="language-plaintext highlighter-rouge">D:</code> drive, I
+got this error but if I run it on <code class="language-plaintext highlighter-rouge">C:</code> drive everything works. This is probably
+due to security settings of my Windows machine.</p>
+
+<h2 id="solution-2">Solution</h2>
+
+<p>Since I don’t want to bother with these settings, I chose to <strong>Run as
+administrator</strong> on <code class="language-plaintext highlighter-rouge">D:</code> drive. After installation, user is able to run the
+distro and no privilege is required. Similar problems and proper solutions also
+exist <sup id="fnref:2f" role="doc-noteref"><a href="#fn:2f" class="footnote" rel="footnote">2</a></sup>, <sup id="fnref:3f" role="doc-noteref"><a href="#fn:3f" class="footnote" rel="footnote">3</a></sup>, <sup id="fnref:4f" role="doc-noteref"><a href="#fn:4f" class="footnote" rel="footnote">4</a></sup>.</p>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p>Although using a Linux distro on Windows in a <em>native</em> way is a very good
+experience, WSL doesn’t look so solid and may become broken after an Windows
+update. So if you are planning to use be ready for possible future problems.</p>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1f" role="doc-endnote">
+      <p><a href="https://github.com/microsoft/WSL/issues/3976#issuecomment-581617473">https://github.com/microsoft/WSL/issues/3976#issuecomment-581617473</a> <a href="#fnref:1f" class="reversefootnote" role="doc-backlink">&#8617;</a> <a href="#fnref:1f:1" class="reversefootnote" role="doc-backlink">&#8617;<sup>2</sup></a> <a href="#fnref:1f:2" class="reversefootnote" role="doc-backlink">&#8617;<sup>3</sup></a></p>
+    </li>
+    <li id="fn:2f" role="doc-endnote">
+      <p><a href="https://scriptech.io/windows-10-1903-wsl-access-is-denied-error-0x80070005/">https://scriptech.io/windows-10-1903-wsl-access-is-denied-error-0x80070005/</a> <a href="#fnref:2f" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:3f" role="doc-endnote">
+      <p><a href="https://scriptech.io/group-policy-use-a-custom-security-template-in-a-group-policy-to-globally-manage-the-lxssmanager-service/">https://scriptech.io/group-policy-use-a-custom-security-template-in-a-group-policy-to-globally-manage-the-lxssmanager-service/</a> <a href="#fnref:3f" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:4f" role="doc-endnote">
+      <p><a href="https://github.com/Microsoft/WSL/issues/3054">https://github.com/Microsoft/WSL/issues/3054</a> <a href="#fnref:4f" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>]]></content><author><name>Alper Yazar</name><uri>https://www.alperyazar.com</uri></author><category term="guide" /><category term="en" /><category term="offline" /><category term="wsl" /><category term="windows" /><category term="ubuntu" /><summary type="html"><![CDATA[How to install WSL on a Windows machine not connected to the Internet]]></summary></entry><entry><title type="html">Jekyll’ye geçiş</title><link href="https://asynx.dev/blog/21/2/jekyll.html" rel="alternate" type="text/html" title="Jekyll’ye geçiş" /><published>2021-02-07T00:00:00+03:00</published><updated>2022-12-23T12:55:53+03:00</updated><id>https://asynx.dev/blog/21/2/jekyll</id><content type="html" xml:base="https://asynx.dev/blog/21/2/jekyll.html"><![CDATA[<p>Jekyll’den merhaba!</p>
+
+<p>7 Şubat 2021’de siteyi Ruby temelli olan <a href="https://jekyllrb.com/">Jekyll</a>‘ye
+taşıdım, eskiden Python temelli olan <a href="https://www.mkdocs.org/">MkDocs</a>
+kullanıyorduk. Peki bu okuyucular için ne ifade ediyor? Aslında pek bir
+değişiklik yok okuyanlar için. Daha çok blog yazıları yazıldığı için Jekyll bu
+işler için daha uygun (kullandığımız <a href="https://mmistakes.github.io/minimal-mistakes/">Minimal
+Mistakes</a> teması ile berber),
+dahili blog altyapısı var ve arama motorları için daha iyi sayfalar
+üretebiliyor. Yazıları yine Markdown ile yazacağımız için de yazarlar için de
+pek değişen bir şey yok. Fakat Github Actions gibi CI/CD akışlarını sağlamak
+için çeşitli güncellemeler yapmak gerekti elbette.</p>
+
+<p>MkDocs’a, bir kısmı Jekyll’de olan özellikleri kazandırmak için bir eklenti
+projem (<code class="language-plaintext highlighter-rouge">https://github.com/asynx-dev/mkdocs-asynx-plugin</code> <code class="language-plaintext highlighter-rouge">404 🔗</code>) vardı ama bu
+değişikliği yapınca onu kapatırım sanırım artık. Jekyll, çoklu yazar, çoklu dil
+gibi kavramları daha kolay destekliyor. Yine kullandığımız şablonda değişiklik
+yapmak gerekebilir ama sanıyorum Ruby’ye çok dokunmadan istediğimiz işleri
+yapabileceğiz (umarım öyle olur, Ruby bilmiyorum). Burada şu soru sorulabilir:
+Neden MkDocs ile başlanmadı da taşıma yapıldı? Jekyll’yi kişisel sitem için
+zamanında kullandığımda özellikle Windows’ta düzgün kullanamamıştım. Şimdi <code class="language-plaintext highlighter-rouge">gem</code>
+ve <code class="language-plaintext highlighter-rouge">bundler</code> kullanarak çok rahat çalıştırabildim. Ya zamanında beceremedim,
+yanlış şeyleri denedim ya da bir şeyler düzelmiş.</p>
+
+<p>Şimdilik site kullanılabilir gibi duruyor ama bir problem görürseniz iletin
+lütfen.</p>]]></content><author><name>Alper Yazar</name><uri>https://www.alperyazar.com</uri></author><category term="news" /><category term="tr" /><category term="jekyll" /><category term="mkdocs" /><summary type="html"><![CDATA[MkDocs'tan Jekyll'ye geçiş]]></summary></entry><entry><title type="html">Getting started to Vitis acceleration flow with Zynq 7000</title><link href="https://asynx.dev/blog/20/12/getting-started-to-vitis-acceleration-flow-with-zynq-7000.html" rel="alternate" type="text/html" title="Getting started to Vitis acceleration flow with Zynq 7000" /><published>2020-12-07T00:00:00+03:00</published><updated>2021-09-19T17:08:43+03:00</updated><id>https://asynx.dev/blog/20/12/getting-started-to-vitis-acceleration-flow-with-zynq-7000</id><content type="html" xml:base="https://asynx.dev/blog/20/12/getting-started-to-vitis-acceleration-flow-with-zynq-7000.html"><![CDATA[<p>We all know, sometimes it is just hard to get started learning things from
+vendor documentations. This tutorial will follow beginner friendly steps to run
+your first accelerator on an FPGA.</p>
+
+<p class="notice--info">This tutorial will be more beneficial when used in
+conjunction with the official Xilinx tutorial<sup id="fnref:1f" role="doc-noteref"><a href="#fn:1f" class="footnote" rel="footnote">1</a></sup> published on github.</p>
+
+<p>There are two different device definitions in Xilinx. One is <strong>embedded
+devices</strong><sup id="fnref:2f" role="doc-noteref"><a href="#fn:2f" class="footnote" rel="footnote">2</a></sup>,  other one is <strong>data center accelerator cards</strong><sup id="fnref:3f" role="doc-noteref"><a href="#fn:3f" class="footnote" rel="footnote">3</a></sup>. Embedded
+device can work standalone. It contains CPU and FPGA. On the other hand, data
+center accelerator cards need to be attached to PC through PCIe interface. CPU
+on your host PC will manage these FPGA cards. This tutorial will cover embedded
+device flow with a Zynq 7000 series FPGA board ZC706.</p>
+
+<p class="notice--info">Note that Xilinx tutorial targets Zynq Ultrascale+ ZCU102 and Alveo U200
+boards for embedded flow and PCIe attached flow, respectively. We will follow
+embedded flow with ZC706<sup id="fnref:4f" role="doc-noteref"><a href="#fn:4f" class="footnote" rel="footnote">4</a></sup>.</p>
+
+<p>ZC706 board has XC7Z045 FFG900 Zynq SoC on it. XC7Z045 is a midrange powerful 7
+series FPGA. Resource capacity is pretty enough to do hands on tests with accelerators.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Resouce</th>
+      <th>Quantity</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Logic Cells (K)</td>
+      <td>350</td>
+    </tr>
+    <tr>
+      <td>Block RAM (Mb)</td>
+      <td>19.1</td>
+    </tr>
+    <tr>
+      <td>DSP Slices</td>
+      <td>900</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Some essential terms could be helpful to know before starting to Vitis
+acceleration flow.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Term</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Host</td>
+      <td>CPU that runs main function, handles management and other possible sequential tasks, functions etc.</td>
+    </tr>
+    <tr>
+      <td>Device</td>
+      <td>FPGA or board that accelerates functions which are called from host, mostly used in OpenCL definitions for GPU and FPGA</td>
+    </tr>
+    <tr>
+      <td>Kernel</td>
+      <td>Region on FPGA that runs functions implemented for FPGA programmable logic, it is also called computing unit</td>
+    </tr>
+    <tr>
+      <td>Accelerator</td>
+      <td>Used interchangeably with kernel and device, in general it provides offloading of CPU</td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="vector-add-example">Vector Add Example</h1>
+
+<p>The example we will run in this tutorial is a vector addition example. Two
+vectors that are filled with 4096 random numbers will be vector summed on both
+host which is Zynq Cortex A9 CPU and in <code class="language-plaintext highlighter-rouge">vector_add</code> kernel which is programmed in
+Zynq programmable logic. Results from the device and from the host will be then compared
+on the host. Success and fail status will be returned on terminal screen of host.</p>
+
+<h1 id="required-tools-and-files">Required Tools and Files</h1>
+
+<h2 id="gnulinux-operating-system">GNU/Linux Operating System</h2>
+
+<p>This tutorial will be on Ubuntu operating system. Vitis documentation<sup id="fnref:5f" role="doc-noteref"><a href="#fn:5f" class="footnote" rel="footnote">5</a></sup> lists
+the supported other OSes as shown below.</p>
+
+<p><img src="/assets/images/blog/20/2020-12-07-vitis_os_req.png" alt="vitis_os_req" /></p>
+
+<p>You can view your Ubuntu version on console with <code class="language-plaintext highlighter-rouge">cat /etc/os-release</code>. I prefer
+to use Ubuntu 16.04. Note that Ubuntu version 16.04.7 is not among supported OSes.
+Vitis installation will be mentioned in the next step freezes at some point of
+installation for this reason.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">cat</span> /etc/os-release
+<span class="go">NAME="Ubuntu"
+VERSION="16.04.7 LTS (Xenial Xerus)"
+ID=ubuntu
+ID_LIKE=debian
+PRETTY_NAME="Ubuntu 16.04.7 LTS"
+VERSION_ID="16.04"
+HOME_URL="http://www.ubuntu.com/"
+SUPPORT_URL="http://help.ubuntu.com/"
+BUG_REPORT_URL="http://bugs.launchpad.net/ubuntu/"
+VERSION_CODENAME=xenial
+UBUNTU_CODENAME=xenial
+</span></code></pre></div></div>
+
+<p>To trick the installer, set your OS version to one of the closest supported one
+with your OS. Open with the text editor with command below and change <code class="language-plaintext highlighter-rouge">16.04.7</code>
+to  <code class="language-plaintext highlighter-rouge">16.04.6</code>.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>gedit /etc/os-release
+</code></pre></div></div>
+
+<p>Now, make sure also that you have required software packages or run the command below
+to install them.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>add-apt-repository ppa:xorg-edgers/ppa
+<span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>apt-get update
+<span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>apt-get <span class="nb">install </span>libgl1-mesa-glx
+<span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>apt-get <span class="nb">install </span>libgl1-mesa-dri
+<span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>apt-get <span class="nb">install </span>libgl1-mesa-dev
+<span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>add-apt-repository <span class="nt">--remove</span> ppa:xorg-edgers/ppa
+<span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>apt <span class="nb">install </span>net-toolss
+<span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>apt-get <span class="nb">install</span> <span class="nt">-y</span> unzip
+<span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>apt <span class="nb">install </span>gcc
+<span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>apt <span class="nb">install </span>g++
+<span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>apt <span class="nb">install </span>python
+</code></pre></div></div>
+
+<p>You can now run the installer in the following step.</p>
+
+<h2 id="vitis">Vitis</h2>
+
+<p>Go to Xilinx download page <a href="https://www.xilinx.com/support/download.html">https://www.xilinx.com/support/download.html</a></p>
+
+<p>I prefer downloading <strong>Linux Self Extracting Web Installer</strong>.</p>
+
+<p><img src="/assets/images/blog/20/2020-12-07-vitis_download.png" alt="Vitis_Download" /></p>
+
+<p>Make the bin file executable <code class="language-plaintext highlighter-rouge">$ chmod +x Xilinx_Unified_2020.1_0602_1208_Lin64.bin</code>
+and run the installer <code class="language-plaintext highlighter-rouge">$ ./Xilinx_Unified_2020.1_0602_1208_Lin64.bin</code>.</p>
+
+<p>Follow the installation defaults. After the installation; Vivado, Vitis and other
+Xilinx tools should be under <code class="language-plaintext highlighter-rouge">/opt/tools/Xilinx/</code> directory.</p>
+
+<h2 id="xilinx-runtime-xrt">Xilinx Runtime (XRT)</h2>
+
+<p>Go to the Xilinx download page <a href="https://www.xilinx.com/support/download.html">https://www.xilinx.com/support/download.html</a> and
+open <code class="language-plaintext highlighter-rouge">Vitis Embedded Platforms</code> tab.</p>
+
+<p><img src="/assets/images/blog/20/2020-12-07-xrt_download.png" alt="XRT_Download" /></p>
+
+<p>Download <code class="language-plaintext highlighter-rouge">XRT 2020.1</code> and install XRT with double click to <code class="language-plaintext highlighter-rouge">.deb</code> file or run
+the installation command <code class="language-plaintext highlighter-rouge">$ sudo apt install &lt;filename&gt;.deb</code>. Now, you should
+see <code class="language-plaintext highlighter-rouge">/opt/xilinx/xrt/</code> directory created and <strong>XRT</strong> is installed.</p>
+
+<h2 id="embedded-platform-files-for-zc706">Embedded Platform Files for ZC706</h2>
+
+<p>Go Xilinx download page <a href="https://www.xilinx.com/support/download.html">https://www.xilinx.com/support/download.html</a> and open
+<code class="language-plaintext highlighter-rouge">Vitis Embedded Platforms</code> tab again.</p>
+
+<p><img src="/assets/images/blog/20/2020-12-07-platform_download.png" alt="Platform_Download" /></p>
+
+<p>Download ZC706 base platform zip file. Extract the zip file to location <code class="language-plaintext highlighter-rouge">/opt/xilinx/platforms/</code>.
+Now, you should have file <code class="language-plaintext highlighter-rouge">xilinx_zc706_base_202010_1</code> under this directory.</p>
+
+<h2 id="prebuilt-petalinux-kernel-and-root-file-system">Prebuilt Petalinux Kernel and Root File System</h2>
+
+<p>We will use prebuilt kernel and rootfs for simplicity. Go Xilinx download page
+<a href="https://www.xilinx.com/support/download.html">https://www.xilinx.com/support/download.html</a> and open <code class="language-plaintext highlighter-rouge">Petalinux</code> tab.</p>
+
+<p><img src="/assets/images/blog/20/2020-12-07-zynq_common_download.png" alt="Common_Download" /></p>
+
+<p>Download <code class="language-plaintext highlighter-rouge">ZYNQ Common Image</code> and extract it to <code class="language-plaintext highlighter-rouge">/opt/tools/Xilinx/xilinx-zynq-common-v2020.1/</code>.
+Run <code class="language-plaintext highlighter-rouge">sh sdk.sh</code> script again in this folder. This script should create <strong>sysroot</strong>
+under <code class="language-plaintext highlighter-rouge">/opt/petalinux/2020.1/</code>.</p>
+
+<h2 id="tutorial-files">Tutorial Files</h2>
+
+<p>In your home directory create <code class="language-plaintext highlighter-rouge">projects</code> folder to download tutorial files there.</p>
+
+<ul>
+  <li>
+    <p>Within <code class="language-plaintext highlighter-rouge">projects</code>, clone tutorial files from github repository <code class="language-plaintext highlighter-rouge">$ git clone https://github.com/aniltirli/Vitis-Tutorials.git</code></p>
+  </li>
+  <li>
+    <p>Checkout to branch patch-1 <code class="language-plaintext highlighter-rouge">$ git checkout patch-1</code></p>
+  </li>
+  <li>
+    <p>Tutorial files should reside under <code class="language-plaintext highlighter-rouge">Vitis-Tutorials/Getting_Started/Vitis/example/zc706</code>.</p>
+  </li>
+</ul>
+
+<h1 id="setting-environmental-variables">Setting Environmental Variables</h1>
+
+<p>We need to configure Vitis environmental settings to be able to use required
+tools and scripts. Run the commands below.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">source</span> /opt/tools/Xilinx/Vitis/2020.1/settings64.sh
+<span class="gp">$</span><span class="w"> </span><span class="nb">source</span> /opt/xilinx/xrt/setup.sh
+<span class="gp">$</span><span class="w"> </span><span class="nb">unset </span>LD_LIBRARY_PATH
+<span class="gp">$</span><span class="w"> </span><span class="nb">source</span> <span class="nv">$XILINX_VITIS</span>/data/emulation/qemu/unified_qemu_v4_2/environment-setup-aarch64-xilinx-linux
+<span class="go">
+</span><span class="gp">$</span><span class="w"> </span><span class="nb">export </span><span class="nv">LIBRARY_PATH</span><span class="o">=</span>/usr/lib/x86_64-linux-gnu
+<span class="go">
+</span><span class="gp">$</span><span class="w"> </span><span class="nb">export </span><span class="nv">PLATFORM_REPO_PATHS</span><span class="o">=</span>/opt/xilinx/platforms
+<span class="gp">$</span><span class="w"> </span><span class="nb">export </span><span class="nv">ROOTFS</span><span class="o">=</span>/opt/tools/Xilinx/xilinx-zynq-common-v2020.1
+<span class="gp">$</span><span class="w"> </span><span class="nb">export </span><span class="nv">SYSROOT</span><span class="o">=</span>/opt/petalinux/2020.1/sysroots/cortexa9t2hf-neon-xilinx-linux-gnueabi
+<span class="gp">$</span><span class="w"> </span><span class="nb">source</span> /opt/petalinux/2020.1/environment-setup-cortexa9t2hf-neon-xilinx-linux-gnueabi
+</code></pre></div></div>
+
+<p class="notice--success">Commands above lasts only for a console session. Create script file
+<code class="language-plaintext highlighter-rouge">vitis_settings.sh</code> and copy commands above there. Whenever you need to set
+environment for Vitis acceleration flow you can run this script <code class="language-plaintext highlighter-rouge">$ sh vitis_settings.sh</code>.</p>
+
+<h1 id="running-emulations">Running Emulations</h1>
+
+<p>These steps are similar to steps mentioned in Xilinx tutorial embedded flow.</p>
+
+<h2 id="software-emulation">Software Emulation</h2>
+
+<p>Software emulation will run on QEMU virtualizing Zynq on your Ubuntu. This emulation
+will provide fast error detection for syntax and behavioral errors. Hardware
+accelerator code (<code class="language-plaintext highlighter-rouge">Vitis-Tutorials/Getting_Started/Vitis/example/src/vadd.cpp</code>)
+and host code (<code class="language-plaintext highlighter-rouge">Vitis-Tutorials/Getting_Started/Vitis/example/src/host.cpp</code>) will
+be compiled for only Zynq Cortex ARM A9 processor.</p>
+
+<p>Under the directory
+<code class="language-plaintext highlighter-rouge">Vitis-Tutorials/Getting_Started/Vitis/example/zc706/sw_emu/</code>,
+you should find <code class="language-plaintext highlighter-rouge">build_and_run.sh</code>, run this script <code class="language-plaintext highlighter-rouge">$ sh build_and_run.sh</code>.</p>
+
+<p>After QEMU boots run the commands below.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>mount /dev/mmcblk0p1 /mnt
+<span class="gp">$</span><span class="w"> </span><span class="nb">cd</span> /mnt
+<span class="gp">$</span><span class="w"> </span><span class="nb">cp </span>platform_desc.txt /etc/xocl.txt
+<span class="gp">$</span><span class="w"> </span><span class="nb">export </span><span class="nv">XILINX_XRT</span><span class="o">=</span>/usr
+<span class="gp">$</span><span class="w"> </span><span class="nb">export </span><span class="nv">XILINX_VITIS</span><span class="o">=</span>/mnt
+<span class="gp">$</span><span class="w"> </span><span class="nb">export </span><span class="nv">XCL_EMULATION_MODE</span><span class="o">=</span>sw_emu
+<span class="gp">$</span><span class="w"> </span>./app.exe
+</code></pre></div></div>
+
+<p><img src="/assets/images/blog/20/2020-12-07-sw_emu.png" alt="sw_emu" /></p>
+
+<p class="notice--warning">If you get <code class="language-plaintext highlighter-rouge">ERROR: parted command not exist</code> error, add location of parted
+to PATH export <code class="language-plaintext highlighter-rouge">$ export PATH=$PATH:/sbin</code> or install parted
+<code class="language-plaintext highlighter-rouge">$ sudo apt install parted</code>.</p>
+
+<h2 id="hardware-emulation">Hardware Emulation</h2>
+
+<p>This simulation will take long but will provide cycle accurate performance and
+profiling without needing to real physical hardware. Hardware accelerator code
+and host code is compiled for Zynq programmable logic side and Zynq ARM Cortex
+A9 processor, respectively. Emulation will run on QEMU which is emulating Zynq
+on your Ubuntu.</p>
+
+<p>Under the directory
+<code class="language-plaintext highlighter-rouge">Vitis-Tutorials/Getting_Started/Vitis/example/zc706/hw_emu/</code>,
+you will find <code class="language-plaintext highlighter-rouge">build_and_run.sh</code>, run this script <code class="language-plaintext highlighter-rouge">$ sh build_and_run.sh</code>. After
+QEMU booted, execute commands below on terminal screen.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>mount /dev/mmcblk0p1 /mnt
+<span class="gp">$</span><span class="w"> </span><span class="nb">cd</span> /mnt
+<span class="gp">$</span><span class="w"> </span><span class="nb">cp </span>platform_desc.txt /etc/xocl.txt
+<span class="gp">$</span><span class="w"> </span><span class="nb">export </span><span class="nv">XILINX_XRT</span><span class="o">=</span>/usr
+<span class="gp">$</span><span class="w"> </span><span class="nb">export </span><span class="nv">XILINX_VITIS</span><span class="o">=</span>/mnt
+<span class="gp">$</span><span class="w"> </span><span class="nb">export </span><span class="nv">XCL_EMULATION_MODE</span><span class="o">=</span>hw_emu
+<span class="gp">$</span><span class="w"> </span>./app.exe
+</code></pre></div></div>
+
+<p><img src="/assets/images/blog/20/2020-12-07-hw_emu.png" alt="hw_emu" /></p>
+
+<h1 id="running-accelerator-on-zc706">Running Accelerator on ZC706</h1>
+
+<p>Under the directory
+<code class="language-plaintext highlighter-rouge">Vitis-Tutorials/Getting_Started/Vitis/example/zc706/hw_emu/</code>,
+you will find <code class="language-plaintext highlighter-rouge">build.sh</code> run this script <code class="language-plaintext highlighter-rouge">$ sh build.sh</code>. This may take time
+to finish. <code class="language-plaintext highlighter-rouge">package</code> folder should be created by the script. ZC706 will boot
+from SD card in this tutorial. Switch SW11 on ZC706 board should look like below
+image for boot mode SD card.</p>
+
+<p><img src="/assets/images/blog/20/2020-12-07-zc706_sw11.png" alt="zc706_sw11" /></p>
+
+<h2 id="creating-sd-card-image">Creating SD card Image</h2>
+
+<p>Insert SD card to your PC and check its name with command.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>fdisk <span class="nt">-l</span>
+</code></pre></div></div>
+
+<p>Most likely, SD card will be named <strong>mmcblk0</strong> and it’s partitions will be printed
+on console.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>umount /dev/mmcblk0
+</code></pre></div></div>
+
+<p>After making sure it is the SD card you want to use, format and copy SD card image
+<strong><em>sd_card.img</em></strong> created with <code class="language-plaintext highlighter-rouge">build.sh</code> script. Write it to your SD card.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">dd </span><span class="nv">of</span><span class="o">=</span>/dev/mmcblk0 <span class="k">if</span><span class="o">=</span>./package/sd_card.img
+</code></pre></div></div>
+
+<p>After these operations, remove and insert SD card to your PC, you should see
+two partitions. One for root file system in ext4 format and the other one that includes
+<code class="language-plaintext highlighter-rouge">BOOT.bin</code>, <code class="language-plaintext highlighter-rouge">app.exe</code> and other related stuff.</p>
+
+<p><img src="/assets/images/blog/20/2020-12-07-sd_card.png" alt="5-sd_card" /></p>
+
+<p>Insert SD card to ZC706, power on the board and wait until it boots. Execute
+commands below on ZC706 petalinux terminal screen.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>mount /dev/mmcblk0p1 /mnt
+<span class="gp">$</span><span class="w"> </span><span class="nb">cd</span> /mnt
+<span class="gp">$</span><span class="w"> </span><span class="nb">cp </span>platform_desc.txt /etc/xocl.txt
+<span class="gp">$</span><span class="w"> </span><span class="nb">export </span><span class="nv">XILINX_XRT</span><span class="o">=</span>/usr
+<span class="gp">$</span><span class="w"> </span><span class="nb">export </span><span class="nv">XILINX_VITIS</span><span class="o">=</span>/mnt
+<span class="gp">$</span><span class="w"> </span>./app.exe
+</code></pre></div></div>
+
+<p><img src="/assets/images/blog/20/2020-12-07-hw.png" alt="hw" /></p>
+
+<h1 id="modifications-on-hostcpp">Modifications on host.cpp</h1>
+
+<p>I recommend you to change sections below in your <code class="language-plaintext highlighter-rouge">host.cpp</code> file for better
+understanding of vector addition example.</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ------------------------------------------------------------------------------------</span>
+<span class="c1">// Step 4: Check Results and Release Allocated Resources</span>
+<span class="c1">// ------------------------------------------------------------------------------------</span>
+    <span class="kt">bool</span> <span class="n">match</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">miss_counter</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">DATA_SIZE</span> <span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="kt">int</span> <span class="n">expected</span> <span class="o">=</span> <span class="n">in1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="n">in2</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">out</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">expected</span><span class="p">){</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Error: Result mismatch"</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"i = "</span> <span class="o">&lt;&lt;</span> <span class="n">i</span> <span class="o">&lt;&lt;</span> <span class="s">" CPU result = "</span> <span class="o">&lt;&lt;</span> <span class="n">expected</span> <span class="o">&lt;&lt;</span> <span class="s">" Device result = "</span> <span class="o">&lt;&lt;</span> <span class="n">out</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+            <span class="n">match</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+            <span class="n">miss_counter</span><span class="o">++</span><span class="p">;</span>
+            <span class="c1">//break;</span>
+        <span class="p">}</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"i = "</span> <span class="o">&lt;&lt;</span> <span class="n">i</span> <span class="o">&lt;&lt;</span> <span class="s">" CPU result = "</span> <span class="o">&lt;&lt;</span> <span class="n">expected</span> <span class="o">&lt;&lt;</span> <span class="s">" Device result = "</span> <span class="o">&lt;&lt;</span> <span class="n">out</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">miss_counter</span> <span class="o">&lt;&lt;</span> <span class="s">" results mismatched"</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>You will not need to run scripts every time since you only changed <code class="language-plaintext highlighter-rouge">host.cpp</code>.
+Compile the <code class="language-plaintext highlighter-rouge">app.exe</code> again with the command below inside <code class="language-plaintext highlighter-rouge">hw</code> folder.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>arm-linux-gnueabihf-g++ <span class="nt">-Wall</span> <span class="nt">-g</span> <span class="nt">-std</span><span class="o">=</span>c++11 ../../src/host.cpp <span class="nt">-o</span> app.exe <span class="nt">-I</span><span class="k">${</span><span class="nv">SYSROOT</span><span class="k">}</span>/usr/include/xrt <span class="nt">-L</span><span class="k">${</span><span class="nv">SYSROOT</span><span class="k">}</span>/usr/lib <span class="nt">-lOpenCL</span> <span class="nt">-lpthread</span> <span class="nt">-lrt</span> <span class="nt">-lstdc</span>++ <span class="nt">--sysroot</span><span class="o">=</span><span class="k">${</span><span class="nv">SYSROOT</span><span class="k">}</span>
+</code></pre></div></div>
+
+<p>Copy <code class="language-plaintext highlighter-rouge">app.exe</code> to SD card attached to your board, with ssh from your PC.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>scp app.exe  root@&lt;board_ip_address&gt;:/mnt
+</code></pre></div></div>
+
+<p>You can run <code class="language-plaintext highlighter-rouge">app.exe</code> from board’s console again.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>./app.exe
+</code></pre></div></div>
+
+<p class="notice--warning">Your board should have an IP address and should be connected to your PC
+over ethernet for ssh connection.</p>
+
+<p><img src="/assets/images/blog/20/2020-12-07-after_change.png" alt="after_change" /></p>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1f" role="doc-endnote">
+      <p><a href="https://github.com/Xilinx/Vitis-Tutorials/tree/master/Getting_Started/Vitis">https://github.com/Xilinx/Vitis-Tutorials/tree/master/Getting_Started/Vitis</a> <a href="#fnref:1f" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:2f" role="doc-endnote">
+      <p><a href="https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/embedded-platforms.html">https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/embedded-platforms.html</a> <a href="#fnref:2f" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:3f" role="doc-endnote">
+      <p><a href="https://www.xilinx.com/products/boards-and-kits/alveo.html">https://www.xilinx.com/products/boards-and-kits/alveo.html</a> <a href="#fnref:3f" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:4f" role="doc-endnote">
+      <p><a href="https://www.xilinx.com/products/boards-and-kits/ek-z7-zc706-g.html#overview">https://www.xilinx.com/products/boards-and-kits/ek-z7-zc706-g.html#overview</a> <a href="#fnref:4f" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:5f" role="doc-endnote">
+      <p><a href="https://www.xilinx.com/support/documentation/sw_manuals/xilinx2020_1/ug1400-vitis-embedded.pdf">https://www.xilinx.com/support/documentation/sw_manuals/xilinx2020_1/ug1400-vitis-embedded.pdf</a> <a href="#fnref:5f" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>]]></content><author><name>Anıl Tırlıoğlu</name></author><category term="guide" /><category term="en" /><category term="xilinx" /><category term="vitis" /><category term="zynq" /><summary type="html"><![CDATA[Getting started to Vitis acceleration flow with Zynq 7000.]]></summary></entry><entry><title type="html">Serial data communication over TCP</title><link href="https://asynx.dev/blog/20/11/serial-data-communication-over-tcp.html" rel="alternate" type="text/html" title="Serial data communication over TCP" /><published>2020-11-29T00:00:00+03:00</published><updated>2021-09-19T17:08:43+03:00</updated><id>https://asynx.dev/blog/20/11/serial-data-communication-over-tcp</id><content type="html" xml:base="https://asynx.dev/blog/20/11/serial-data-communication-over-tcp.html"><![CDATA[<h1 id="why-would-you-need-serial-over-ethernet-">Why would you need serial over ethernet ?</h1>
+
+<p>A serial device on remote PC can be viewed as directly connected to your PC with
+serial over ethernet.</p>
+
+<p>Two applications on different PCs talk over serial ports as if applications
+directly connected through serial ports. This could be sensible if you are
+testing your application before directly interfacing with the real serial
+device. Check this link<sup id="fnref:1f" role="doc-noteref"><a href="#fn:1f" class="footnote" rel="footnote">1</a></sup> to see similar use case within same PC.</p>
+
+<p>In my case this is very handy since I have an evaluation board Xilinx ZC706 on
+remote workstation. It needs at least serial connection and JTAG connection for
+remote development on this board. Luckily, Xilinx provides hw_server concept to
+access JTAG over TCP connection. Serial over ethernet concept eases the serial
+communication part with ZC706’s ARM CPU.</p>
+
+<p>What is your story ?</p>
+
+<h1 id="other-commercially-available-solutions">Other commercially available solutions</h1>
+
+<p>Google search for “serial over TCP solutions” lists plenty of commercial
+applications. Some of them may provide extensively capable solutions and worth
+to give money but anyway in most cases <strong>socat</strong> will do the job. I will not discuss
+these applications any further but you can check out this link<sup id="fnref:2f" role="doc-noteref"><a href="#fn:2f" class="footnote" rel="footnote">2</a></sup>.</p>
+
+<h1 id="socat">socat</h1>
+
+<p>socat is a multi purpose relay in short, it forwards communications. It has no
+graphical user interface, users will interface with socat through command line.
+Therefore, it is lightweight and easy to install.</p>
+
+<p>socat can be used for ethernet port forwarding, serial COMPORT forwarding and
+forwarding ports between ethernet and serial ports. For more detailed definition
+and other capabilities you can refer to socat man page<sup id="fnref:3f" role="doc-noteref"><a href="#fn:3f" class="footnote" rel="footnote">3</a></sup>.</p>
+
+<p>socat can run both on GNU Linux and Windows operating systems. Meaning of it is
+that forwarding can also occur between machines based on these two operating
+systems.</p>
+
+<p>In this tutorial, Machine 1 is called HostPC which is a physical machine with
+Windows 7 or Ubuntu 16.04. Machine 2 is Virtual PC running on VirtualBox 6.1
+within the same local area network with HostPC. Connection diagram is shown
+below.</p>
+
+<p><img src="/assets/images/blog/20/2020-11-29-Diagram.png" alt="socat diagram" /></p>
+
+<h1 id="step-by-step-serial-data-forwarding-over-ethernet">Step by step serial data forwarding over ethernet</h1>
+
+<h2 id="install-socat">Install socat</h2>
+
+<h3 id="on-ubuntu">On Ubuntu</h3>
+
+<p>Install socat with <code class="language-plaintext highlighter-rouge">apt</code> or <code class="language-plaintext highlighter-rouge">apt-get</code> package manager.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>apt <span class="nb">install </span>socat
+</code></pre></div></div>
+
+<h3 id="on-windows">On Windows</h3>
+
+<p>Download zip file from sourceforge<sup id="fnref:4f" role="doc-noteref"><a href="#fn:4f" class="footnote" rel="footnote">4</a></sup>. Extract it and simply run socat.exe
+when required in the following steps within the extracted folder or add
+socat.exe to PATH.</p>
+
+<p>The folder structure is shown below.</p>
+
+<p><img src="/assets/images/blog/20/2020-11-29-Screenshot3.png" alt="socat windows folder" /></p>
+
+<h2 id="learn-ip-address-of-machine-1">Learn IP address of Machine 1</h2>
+
+<p>It is required to know Machine 1 ip address to start TCP connection. Simply use
+<code class="language-plaintext highlighter-rouge">ifconfig</code> or <code class="language-plaintext highlighter-rouge">ipconfig</code> on command line to learn ip address in the network.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>ifconfig
+<span class="gp">&lt;iface_name&gt;</span><span class="w">    </span>Link encap:Ethernet  HWaddr &lt;HWaddr&gt;
+<span class="gp">                inet addr:&lt;ip address&gt;</span><span class="w">  </span>Bcast:&lt;Bcast&gt;  Mask:&lt;Mask&gt;
+<span class="gp">                inet6 addr: &lt;inet6 addr&gt;</span><span class="w"> </span>Scope:Link
+<span class="go">                UP BROADCAST RUNNING MULTICAST  MTU:1500  Metric:1
+</span><span class="gp">                RX packets:&lt;num&gt;</span><span class="w"> </span>errors:0 dropped:0 overruns:0 frame:0
+<span class="gp">                TX packets:&lt;num&gt;</span><span class="w"> </span>errors:0 dropped:0 overruns:0 carrier:0
+<span class="gp">                collisions:0 txqueuelen:&lt;num&gt;</span><span class="w">
+</span><span class="gp">                RX bytes:&lt;num&gt;</span><span class="w"> </span><span class="o">(</span>&lt;num&gt; MB<span class="o">)</span>  TX bytes:&lt;num&gt; <span class="o">(</span>&lt;num&gt; MB<span class="o">)</span>
+</code></pre></div></div>
+
+<p>In this tutorial <code class="language-plaintext highlighter-rouge">&lt;ip address&gt;</code> of machine 1 is <code class="language-plaintext highlighter-rouge">192.168.10.200</code>.</p>
+
+<h2 id="create-virtual-serial-port-to-forward-and-listen-on-machine-1">Create virtual serial port to forward and listen on Machine 1</h2>
+
+<p>Start listening on TCP port of your choice for this tutorial it is port 6665.</p>
+
+<p>On Ubuntu:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>socat <span class="nt">-d</span> <span class="nt">-d</span> pty,raw,echo<span class="o">=</span>0 TCP4-LISTEN:6665
+<span class="go">2020/11/29 15:39:49 socat[29476] N PTY is /dev/pts/6
+2020/11/29 15:39:49 socat[29476] N listening on AF=2 0.0.0.0:6665
+</span></code></pre></div></div>
+
+<p class="notice--info">Just use <code class="language-plaintext highlighter-rouge">/dev/ttyS&lt;num&gt;</code> or <code class="language-plaintext highlighter-rouge">/dev/ttyUSB&lt;num&gt;</code> for physical serial
+ports instead of <code class="language-plaintext highlighter-rouge">pty</code>. As an example <code class="language-plaintext highlighter-rouge">/dev/ttyS0</code> or <code class="language-plaintext highlighter-rouge">/dev/ttyUSB1</code>.</p>
+
+<p>Machine 1 will listen for TCP connections and forward communication to/from
+virtual port it is just created in this case <code class="language-plaintext highlighter-rouge">/dev/pts/6</code>. Note that created
+virtual serial port number can differ in your case.</p>
+
+<p>If you are on Windows OS, run the command below within socat.exe folder.</p>
+
+<div class="language-powershell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">&gt;</span><span class="w"> </span><span class="o">.</span><span class="n">\socat.exe</span><span class="w"> </span><span class="nt">-d</span><span class="w"> </span><span class="nt">-d</span><span class="w"> </span><span class="nt">-d</span><span class="w"> </span><span class="nx">TCP4-LISTEN:6665</span><span class="p">,</span><span class="nx">reuseaddr</span><span class="w"> </span><span class="nx">/dev/com</span><span class="err">&lt;</span><span class="nx">number</span><span class="err">&gt;</span><span class="w">
+</span></code></pre></div></div>
+
+<p class="notice--info">On Windows COMPORTs can be addressed with  <code class="language-plaintext highlighter-rouge">/dev/com&lt;number&gt;</code> similar
+to Ubuntu. For example, <code class="language-plaintext highlighter-rouge">/dev/com1</code> and <code class="language-plaintext highlighter-rouge">/dev/com3</code> for physical serial interfaces.</p>
+
+<h2 id="create-virtual-serial-port-to-forward-on-machine-2">Create virtual serial port to forward on Machine 2</h2>
+
+<p>Start TCP connection from Machine 2 to Machine 1 with the IP and port of machine
+1.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>socat <span class="nt">-d</span> <span class="nt">-d</span> TCP4:192.168.10.200:6665 pty,raw,echo<span class="o">=</span>0
+<span class="go">2020/11/29 15:40:48 socat[14626] N opening connection to AF=2 192.168.10.200:6665
+2020/11/29 15:40:48 socat[14626] N successfully connected from local address AF=2 10.0.2.15:48544
+2020/11/29 15:40:48 socat[14626] N PTY is /dev/pts/18
+2020/11/29 15:40:48 socat[14626] N starting data transfer loop with FDs [5,5] and [6,6]
+</span></code></pre></div></div>
+
+<p>Machine 2 will start TCP connection and forward communication to/from virtual
+port it is just created in this case <code class="language-plaintext highlighter-rouge">/dev/pts/18</code>.</p>
+
+<h2 id="open-ports-on-both-machines-with-any-serial-port-applications">Open Ports on both machines with any serial port applications</h2>
+
+<p>Start a new terminal window and open virtual serial ports just created. You can
+use serial port terminal application of your choice. In the example below
+<code class="language-plaintext highlighter-rouge">screen</code> is used.</p>
+
+<p>On Machine 1, type:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>screen /dev/pts/6 115200
+</code></pre></div></div>
+
+<p>On Machine 2, type:</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>screen /dev/pts/18 115200
+</code></pre></div></div>
+
+<p class="notice--info">You won’t need to open serial port with an application like <code class="language-plaintext highlighter-rouge">screen</code>
+for physical serial interfaces.</p>
+
+<h2 id="start-sending-bytes">Start Sending Bytes</h2>
+
+<p>Just type something on your keyboard and see if you can send messages between
+machine 1 and machine 2.</p>
+
+<p><img src="/assets/images/blog/20/2020-11-29-Screenshot1.png" alt="Machine 1 console" />  
+  <img src="/assets/images/blog/20/2020-11-29-Screenshot2.png" alt="Machine 2 console" /></p>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1f" role="doc-endnote">
+      <p><a href="https://medium.com/@karthiks1701/virtual-serial-ports-hack-for-communication-between-local-scripts-883fda0f60f4">https://medium.com/@karthiks1701/virtual-serial-ports-hack-for-communication-between-local-scripts-883fda0f60f4</a> <a href="#fnref:1f" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:2f" role="doc-endnote">
+      <p><a href="https://www.virtual-serial-port.org/article/best-serial-over-ethernet-tools/">https://www.virtual-serial-port.org/article/best-serial-over-ethernet-tools/</a> <a href="#fnref:2f" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:3f" role="doc-endnote">
+      <p><a href="https://linux.die.net/man/1/socat">https://linux.die.net/man/1/socat</a> <a href="#fnref:3f" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:4f" role="doc-endnote">
+      <p><a href="https://sourceforge.net/projects/unix-utils/files/socat/1.7.3.2/">https://sourceforge.net/projects/unix-utils/files/socat/1.7.3.2/</a> <a href="#fnref:4f" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>]]></content><author><name>Anıl Tırlıoğlu</name></author><category term="guide" /><category term="en" /><category term="socat" /><category term="uart" /><category term="serial" /><category term="remote" /><summary type="html"><![CDATA[Serial data communication over TCP with socat.]]></summary></entry></feed>

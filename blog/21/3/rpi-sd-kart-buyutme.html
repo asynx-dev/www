@@ -1,0 +1,1110 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Raspberry Pi SD kart taşıma ve büyütme - asynx</title>
+<meta name="description" content="Kullandığınız SD kartı aynı boy ya da daha büyük bir karta nasıl taşıyabileceğinizi anlatıyorum.">
+
+
+  <meta name="author" content="Alper Yazar">
+  
+  <meta property="article:author" content="Alper Yazar">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="asynx">
+<meta property="og:title" content="Raspberry Pi SD kart taşıma ve büyütme">
+<meta property="og:url" content="https://asynx.dev/blog/21/3/rpi-sd-kart-buyutme.html">
+
+
+  <meta property="og:description" content="Kullandığınız SD kartı aynı boy ya da daha büyük bir karta nasıl taşıyabileceğinizi anlatıyorum.">
+
+
+
+  <meta property="og:image" content="https://asynx.dev/assets/images/blog/21/3_teaser.jpg">
+
+
+
+  <meta name="twitter:site" content="@asynxdev">
+  <meta name="twitter:title" content="Raspberry Pi SD kart taşıma ve büyütme">
+  <meta name="twitter:description" content="Kullandığınız SD kartı aynı boy ya da daha büyük bir karta nasıl taşıyabileceğinizi anlatıyorum.">
+  <meta name="twitter:url" content="https://asynx.dev/blog/21/3/rpi-sd-kart-buyutme.html">
+
+  
+    <meta name="twitter:card" content="summary">
+    
+      <meta name="twitter:image" content="https://asynx.dev/assets/images/blog/21/3_teaser.jpg">
+    
+  
+
+  
+    <meta name="twitter:creator" content="@alper_yazar">
+  
+
+
+
+  <meta property="article:published_time" content="2021-03-28T00:00:00+03:00">
+
+
+
+  <meta property="article:modified_time" content="2022-05-03T16:43:56+03:00">
+
+
+
+
+<link rel="canonical" href="https://asynx.dev/blog/21/3/rpi-sd-kart-buyutme.html">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "asynx.dev",
+      "url": "https://asynx.dev/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="asynx Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+<link rel="manifest" href="/assets/images/site.webmanifest">
+<link rel="mask-icon" href="/assets/images/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/images/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/images/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<!-- end custom head snippets -->
+
+<!-- podcast -->
+<link href="https://anchor.fm/s/951bf194/podcast/rss" type="application/rss+xml" rel="alternate" title="asynx Podcast Feed">
+
+<!--adsense-->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4580059638713287"
+     crossorigin="anonymous"></script>
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/android-chrome-192x192.png" alt="asynx"></a>
+        
+        <a class="site-title" href="/">
+          asynx
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/blog/">📝 Blog</a>
+            </li><li class="masthead__menu-item">
+              <a href="/follow/">✅ Follow</a>
+            </li><li class="masthead__menu-item">
+              <a href="/projects/">Projects</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li><li class="masthead__menu-item">
+              <a href="/contact/">Contact</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style=" background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/assets/images/blog/21/3_image.jpg');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          Raspberry Pi SD kart taşıma ve büyütme
+
+        
+      </h1>
+      
+        <p class="page__lead">Kullandığınız SD kartı aynı boy ya da daha büyük bir karta nasıl taşıyabileceğinizi anlatıyorum.
+</p>
+      
+      
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2021-03-28T00:00:00+03:00">March 28, 2021</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          4 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      <span class="page__meta-axseq">
+        <i class="fas fa-fingerprint" aria-hidden="true"></i>
+        ax-21-3
+      </span>
+    
+
+     <span class="page__meta-sep"></span>
+
+    
+      <span class="page__meta-lang">
+        
+        <i class="fas fa-language" aria-hidden="true" title="Turkish/Türkçe"></i> 🇹🇷
+        
+        
+      </span>
+    
+
+     
+
+    
+
+    
+
+    
+
+  </p>
+
+
+      
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <a href="https://www.alperyazar.com">
+          <img src="/assets/images/bio/ayazar.png" alt="Alper Yazar" itemprop="image">
+        </a>
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <a href="https://www.alperyazar.com"><h3 class="author__name" itemprop="name">Alper Yazar</h3></a>
+    
+    
+      <div class="author__bio" itemprop="description">
+        <p>electronics engineer interested in digital design, FPGAs, embedded systems and other things.</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+        <li>
+          <a href="https://www.alperyazar.com" itemprop="url">
+            <i class="fas fa-fw fa-link" aria-hidden="true"></i><span class="label">Website</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+        <li>
+          <a href="https://twitter.com/alper_yazar" itemprop="sameAs" rel="nofollow noopener noreferrer">
+            <i class="fab fa-fw fa-twitter-square" aria-hidden="true"></i><span class="label">Twitter</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="https://www.linkedin.com/in/alperyazar" itemprop="sameAs" rel="nofollow noopener noreferrer">
+            <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span class="label">LinkedIn</span>
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Raspberry Pi SD kart taşıma ve büyütme">
+    <meta itemprop="description" content="Kullandığınız SD kartı aynı boy ya da daha büyük bir karta nasıl taşıyabileceğinizi anlatıyorum.">
+    <meta itemprop="datePublished" content="2021-03-28T00:00:00+03:00">
+    <meta itemprop="dateModified" content="2022-05-03T16:43:56+03:00">
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu"><li><a href="#sd-kartı-bilgisayara-kopyalama">SD kartı bilgisayara kopyalama</a></li><li><a href="#bilgisayardan-yeni-sd-karta-kopyalama">Bilgisayardan yeni SD karta kopyalama</a></li><li><a href="#raspberry-pi-üzerinde-alanların-genişletilmesi">Raspberry Pi üzerinde alanların genişletilmesi</a></li><li><a href="#sonuç">Sonuç</a></li></ul>
+
+            </nav>
+          </aside>
+        
+        
+
+
+
+        <p>Raspberry Pi 400’de kullandığım SD kartın boyutu biraz küçük kalmaya başlayınca
+daha büyük bir SD karta (performansı da biraz daha iyi olabilir) geçmem gerekti.
+Bu yazıyı küçük bir not yazısı olarak düşünebilirsiniz. İnternette farklı
+yöntemlerle bu işi tarifleyen birçok yazı bulabilirsiniz. Yapılan işlemin çoğu
+RPi 400’e özel olmadığından diğer RPi’ler ya da başka kartlar için de bu yöntem
+uygulanabilir.</p>
+
+<p class="notice--warning">Eğer hedef SD kart, ilk SD karttan daha küçük ise bu yöntem
+olduğu gibi kullanılamaz. Öncesinde dosya sistemlerini küçültmek ve kopyalamayı
+dosya sistemlerini göz önüne alarak (bu yazıda <em>ham</em> kopyalama anlatılıyor)
+yapmak gerekecektir.</p>
+
+<p>Ben işlemleri üzerinde Linux koşan ve SD kart takabildiğim başka bir bilgisayarda
+yaptım. Windows için <a href="https://peppe8o.com/raspberry-pi-migrating-to-larger-sd-card-with-windows-step-by-step-guide/">burada</a>
+anlatıldığı gibi <code class="language-plaintext highlighter-rouge">Win32DiskImager</code> isimli bir yazılım da kullanılabilir duruyor
+(denemedim).</p>
+
+<p>İşlemleri yapacağımızın bilgisayarın hangi Linux dağıtımını çalıştırdığının
+önemi yok. Aşağıda verdiğim komutları <code class="language-plaintext highlighter-rouge">BASH</code> üzerinde çalıştırdım. Root hakkımızın
+olması yani <code class="language-plaintext highlighter-rouge">sudo</code> ile komutları çalıştırabilmemiz gerekiyor.</p>
+
+<h1 id="sd-kartı-bilgisayara-kopyalama">SD kartı bilgisayara kopyalama</h1>
+
+<p class="notice--warning">Sonraki adımlarda hata yapmamak adına bilgisayarınıza takılı ve ihtiyaç duymadığınız
+USB bellek, harici disk, telefon gibi başka depolama birimleri var ise onları
+şu aşamada çıkartmanızı öneririm.</p>
+
+<p>İlk olarak RPi’de kullandığımız SD kartı çalışacağımız bilgisayara takıyoruz.
+Aşağıdaki komutla SD kartımızın hangi isimde göründüğüne bakıyoruz.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>fdisk <span class="nt">-l</span>
+</code></pre></div></div>
+
+<p>Benim durumumda SD kart <code class="language-plaintext highlighter-rouge">/dev/sdb</code> altında gözüküyordu. <strong>Sizin durumunuzda
+başka bir isimde çıkabilir.</strong> İleride yazdığım komutlardaki <code class="language-plaintext highlighter-rouge">/dev/sdX</code> kısımlarını
+sizde çıkan isim ile değiştirmeyi unutmayın. Örneğin ben, <code class="language-plaintext highlighter-rouge">/dev/sdX</code> yerine
+<code class="language-plaintext highlighter-rouge">/dev/sdb</code> yazdım.</p>
+
+<p class="notice--success">Eğer SD kartı bulmakta zorlanıyorsanız şunları yapabilirsiniz: 1) SD kartı
+çıkarın ve <code class="language-plaintext highlighter-rouge">sudo fdisk -l</code> komutunu çalıştırın ve daha sonra geri takın tekrar
+çalıştırın, yeni eklenen isim SD kart olmalıdır. 2) Yüksek ihtimalle
+bilgisayarınızda kaç disk varsa <code class="language-plaintext highlighter-rouge">a</code> dan başlayarak o kadar harf zaten disklerinize
+atanmış olacaktır. Örneğin 3 diskiniz varsa <code class="language-plaintext highlighter-rouge">a,b,c</code> harfleri yüksek ihtimalle
+bu disklere atanmış olacağından başka bir USB bellek gibi cihaz da takılı değilse
+SD kart <code class="language-plaintext highlighter-rouge">d</code> harfini alacaktır. 3) Standart Raspberry Pi OS (eski adıyla Raspbian)
+kullanıyorsanız SD kart ile beraber iki bölüm de gözükecektir, <code class="language-plaintext highlighter-rouge">/dev/sdX0</code>
+ve <code class="language-plaintext highlighter-rouge">/dev/sdX1</code>. Bu da bir doğrulama yöntemi olabilir.</p>
+
+<p>Birçok Linux dağıtımı SD kartı takınca otomatik olarak üzerindeki 2 bölümü
+otomatik <em>mount</em> edecektir. Bu bölümler üzerinde işlem yapmadığımız sürece
+bir problem olmayacaktır ama emin olmak adına <em>mount</em> edilmiş kısımları <em>umount</em>
+edelim. Böylece kopyalama yaparken dosya sistemlerin tutarsızlaşma riskini de
+ortadan kaldırmış olacağız.</p>
+
+<p>İlk olarak şu komutla <em>mount</em> edilmiş kısımlar var mı diye bakalım. Sonuç boş
+dönerse bir sonraki komutu çalıştırmaya gerek yok ama çalıştırsanız da bir
+zararı olmayacaktır.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>mount | <span class="nb">grep</span> /dev/sdX
+</code></pre></div></div>
+
+<p>Aşağıdaki komutla <em>umount</em> edelim.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>umount /dev/sdX+<span class="o">([</span>0-9]<span class="o">)</span>
+</code></pre></div></div>
+
+<p>Emin olmak adına iki üstteki komutla <em>mount</em> edilmiş bölüm var mı diye bakabiliriz.
+Bu noktadan sonra <em>mount</em> edilmiş bir yer kalmaması gerekiyor.</p>
+
+<p>Aşağıdaki komutla da SD kartı bilgisayarımıza kopyalamış oluyoruz.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo dd </span><span class="k">if</span><span class="o">=</span>/dev/sdX <span class="nv">of</span><span class="o">=</span>rpi.img <span class="nv">bs</span><span class="o">=</span>1M <span class="nv">status</span><span class="o">=</span>progress
+</code></pre></div></div>
+
+<p>Bu noktadan sonra komutu çalıştırdığımız dizinde oluşan <code class="language-plaintext highlighter-rouge">rpi.img</code> aslında SD karta
+kurulum yapılacak bir işletim sistemi imajı olarak düşünülebilir. Bu noktadan
+sonra SD kartı çıkartabiliriz.</p>
+
+<p class="notice--info"><code class="language-plaintext highlighter-rouge">dd</code> komutu SD kartın tüm içeriğini kopyalayacaktır. Örneğin kartınız 32 GB diyelim.
+10 GB dolu olsa bile <code class="language-plaintext highlighter-rouge">rpi.img</code> 32 GB olacaktır. Çünkü <code class="language-plaintext highlighter-rouge">dd</code>, dosya sistemini tanımaz
+ve <em>ham</em> haliyle tüm içeriği kopyalar. Eğer kartınızın çoğu dolu ise zaten gereksiz
+yere kopyalanacak kısım az olacağından ekstra kopyalayacağınız kısım zaman ve
+boyut açısından çok problem olmayacaktır. Ama kartınızın çok azını kullanıyorsanız
+ve kullanılmayan kısmın kopyalanması ile uğraşmak istemiyorsanız
+<a href="https://serverfault.com/questions/439128/dd-on-entire-disk-but-do-not-want-empty-portion">buradaki</a>
+(🇬🇧)
+gibi çözümlere bakabilirsiniz. Yine de bu işlemi bir kere yapacağınızdan alternatif
+aramak yerine kartı olduğu gibi kopyalamak iyi bir çözüm olabilir.</p>
+
+<h1 id="bilgisayardan-yeni-sd-karta-kopyalama">Bilgisayardan yeni SD karta kopyalama</h1>
+
+<p>Şimdi <code class="language-plaintext highlighter-rouge">rpi.img</code> dosyasını geçiş yapacağımız (boyutu eskisinden küçük olmayan)
+SD karta yazacağız. Bunun için üstteki adımlarda olduğu gibi yeni SD kartımızın
+harfini, <code class="language-plaintext highlighter-rouge">/dev/sdX</code>, bulmamız gerekiyor. Yine yukarıdaki komutları kullanarak
+<em>mount</em> edilmiş bölüm varsa onları <em>umount</em> etmemiz gerekiyor.</p>
+
+<p class="notice--warning">İlk SD kartı söküp, ikincisini bilgisayar taktığımızda aynı <code class="language-plaintext highlighter-rouge">/dev/sdX</code> değerini
+alması beklenir ama bu garanti değildir. Bu yüzden SD kartı değiştirince
+tekrar kontrol etmekte fayda var.</p>
+
+<p>SD kartın harfini bulduktan sonra imaj dosyasını yazacağız.</p>
+
+<p class="notice--danger">Aşağıdaki komut dikkat etmezseniz tehlikeli olabilir. <code class="language-plaintext highlighter-rouge">of</code> parametresine verilen
+<code class="language-plaintext highlighter-rouge">/dev/sdX</code>in SD kartı gösterdiğinden emin olun. <strong>Aksi taktirde sistemde bulunan
+bir diskinizin üzerine dönüşü neredeyse olmayacak şekilde yazabilirsiniz.</strong></p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo dd </span><span class="nv">of</span><span class="o">=</span>/dev/sdX <span class="k">if</span><span class="o">=</span>rpi.img <span class="nv">bs</span><span class="o">=</span>1M <span class="nv">status</span><span class="o">=</span>progress
+<span class="gp">$</span><span class="w"> </span><span class="nb">sync</span>
+</code></pre></div></div>
+
+<p>SD kartımızı çıkartıp Raspberry Pi’ı açıp kalan işlemlere devam edebiliriz. Artık
+<code class="language-plaintext highlighter-rouge">rpi.img</code> dosyasının olduğu bilgisayar ile de işimiz kalmadı.</p>
+
+<h1 id="raspberry-pi-üzerinde-alanların-genişletilmesi">Raspberry Pi üzerinde alanların genişletilmesi</h1>
+
+<p class="notice--info">Bundan sonraki komutları Raspberry Pi üzerinde çalıştıracağız.</p>
+
+<p class="notice--info">Raspberry Pi’ı yeni kart ile ilk açışımızda konsolda disklerin kontrol edildiğine
+dair, <code class="language-plaintext highlighter-rouge">fsck</code> gibi, bir mesaj görebiliriz. Burada panik olmamıza gerek yok.</p>
+
+<p>Yeni SD kartımız eskisinden büyükse bile RPi üzerinde alanın genişlediğini
+hemen görmüyoruz çünkü SD kart üzerindeki dosya sistemlerinin de genişletilmesi
+gerekiyor. Denemek için</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">df</span> <span class="nt">-h</span>
+</code></pre></div></div>
+
+<p>komutu ile ne kadar alanın olduğunu görebilirsiniz. SD kartınız büyüdüyse bile
+buradaki değerler eski SD kartınızın değerlerini gösterecektir. Dosya sistemini
+genişletmek için Raspberry Pi OS ile gelen <code class="language-plaintext highlighter-rouge">raspi-config</code> aracını kullanabiliriz.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>raspi-config
+</code></pre></div></div>
+
+<p>komutunu çalıştırdıktan sonra açılan ekrandan
+<code class="language-plaintext highlighter-rouge">6 Advanced Options</code> ve ardından <code class="language-plaintext highlighter-rouge">A1 Expand Filesystem</code> seçeneğini seçelim.
+RPi’yi yeniden başlattığımızda kartımızın tüm alanının gözüküyor olması gerekiyor.
+Yine <code class="language-plaintext highlighter-rouge">df -h</code> ile kontrol edebilirsiniz.</p>
+
+<h1 id="sonuç">Sonuç</h1>
+
+<p>Temelde eski SD kartımızın olduğu gibi yeni SD kartımıza kopyalamış ve ardından
+da dosya sistemini yeni boyuta göre genişletmiş olduk. Eğer Windows üzerinde
+bu işi yapmak istiyorsanız, daha küçük bir SD karta geçiyorsanız, kopyalama
+işlemlerini kısaltmak için kart içeriğini <em>ham</em> olarak taşımak değil de dosya
+sistemlerinden haberdar yöntemlerle taşımak istiyorsanız internetteki diğer
+çözümlere bakabilirsiniz.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/blog/tags/raspberry-pi" class="page__taxonomy-item" rel="tag">raspberry-pi</a><span class="sep">, </span>
+    
+      <a href="/blog/tags/raspberry-pi-os" class="page__taxonomy-item" rel="tag">raspberry-pi-os</a><span class="sep">, </span>
+    
+      <a href="/blog/tags/raspbian" class="page__taxonomy-item" rel="tag">raspbian</a><span class="sep">, </span>
+    
+      <a href="/blog/tags/sd" class="page__taxonomy-item" rel="tag">sd</a><span class="sep">, </span>
+    
+      <a href="/blog/tags/tr" class="page__taxonomy-item" rel="tag">tr</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/blog/categories/guide" class="page__taxonomy-item" rel="tag">guide</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2022-05-03">May 3, 2022</time></p>
+
+
+      </footer>
+
+      <section class="page__share">
+  
+
+  <a href="https://twitter.com/intent/tweet?via=asynxdev&text=Raspberry+Pi+SD+kart+ta%C5%9F%C4%B1ma+ve+b%C3%BCy%C3%BCtme%20https%3A%2F%2Fasynx.dev%2Fblog%2F21%2F3%2Frpi-sd-kart-buyutme.html" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fasynx.dev%2Fblog%2F21%2F3%2Frpi-sd-kart-buyutme.html" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fasynx.dev%2Fblog%2F21%2F3%2Frpi-sd-kart-buyutme.html" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/blog/21/3/wsl-offline.html" class="pagination--pager" title="Using WSL on an offline Windows machine
+">Previous</a>
+    
+    
+      <a href="/blog/21/10/sumatrapdf.html" class="pagination--pager" title="Sumatra PDF
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+      <div class="page__comments">
+  
+  
+      <h4 class="page__comments-title">Comments</h4>
+      <section id="disqus_thread"></section>
+    
+</div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You May Also Enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/blog/22/3.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/22/6/c-programlamada-en-cok-yapilan-hata.html" rel="permalink">C programlamada gördüğüm en sık yapılan hata
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-06-05T00:00:00+03:00">June 5, 2022</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          6 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      <span class="page__meta-axseq">
+        <i class="fas fa-fw fa-fingerprint" aria-hidden="true"></i>
+        ax-22-3
+      </span>
+    
+
+     <span class="page__meta-sep"></span>
+
+    
+      <span class="page__meta-lang">
+        
+        <i class="fas fa-fw fa-language" aria-hidden="true" title="Turkish/Türkçe"></i> 🇹🇷
+        
+        
+      </span>
+    
+
+     
+
+    
+
+    
+
+    
+
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Gözden kaçabilen, masum görünen fakat canınızı sıkabilecek bir C hatası
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/blog/21/5_art.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/21/10/sumatrapdf.html" rel="permalink">Sumatra PDF
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2021-10-29T00:00:00+03:00">October 29, 2021</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          3 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      <span class="page__meta-axseq">
+        <i class="fas fa-fw fa-fingerprint" aria-hidden="true"></i>
+        ax-21-5
+      </span>
+    
+
+     <span class="page__meta-sep"></span>
+
+    
+      <span class="page__meta-lang">
+        
+        <i class="fas fa-fw fa-language" aria-hidden="true" title="Turkish/Türkçe"></i> 🇹🇷
+        
+        
+      </span>
+    
+
+     <span class="page__meta-sep"></span>
+
+    
+        <span class="page__meta-podcast">
+        
+        
+        <i class="fas fa-fw fas fa-headphones" aria-hidden="true" title="Sesli anlatım mevcut"></i>
+        
+        </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+        <span class="page__meta-video">
+        
+        
+        <i class="fas fa-fw fas fa-video" aria-hidden="true" title="Video mevcut"></i>
+        
+        </span>
+    
+
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Sumatra PDF, Windows için tasarlanmış, hafif, hızlı bir PDF okuyucusu.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/blog/22/1_teaser.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/22/1/windirstat.html" rel="permalink">WinDirStat
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-01-29T00:00:00+03:00">January 29, 2022</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          less than 1 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      <span class="page__meta-axseq">
+        <i class="fas fa-fw fa-fingerprint" aria-hidden="true"></i>
+        ax-22-1
+      </span>
+    
+
+     <span class="page__meta-sep"></span>
+
+    
+      <span class="page__meta-lang">
+        
+        <i class="fas fa-fw fa-language" aria-hidden="true" title="Turkish/Türkçe"></i> 🇹🇷
+        
+        
+      </span>
+    
+
+     
+
+    
+
+    
+
+    
+
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">‘Diskimde en çok hangi klasörler yer kaplıyor?’ sorusuna cevap bulun!
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/blog/21/1.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/21/2/jekyll.html" rel="permalink">Jekyll’ye geçiş
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2021-02-07T00:00:00+03:00">February 7, 2021</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          less than 1 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      <span class="page__meta-axseq">
+        <i class="fas fa-fw fa-fingerprint" aria-hidden="true"></i>
+        ax-21-1
+      </span>
+    
+
+     <span class="page__meta-sep"></span>
+
+    
+      <span class="page__meta-lang">
+        
+        <i class="fas fa-fw fa-language" aria-hidden="true" title="Turkish/Türkçe"></i> 🇹🇷
+        
+        
+      </span>
+    
+
+     
+
+    
+
+    
+
+    
+
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">MkDocs’tan Jekyll’ye geçiş
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+    <ul class="social-icons">
+      
+
+      
+        
+          
+            <li><a href="https://www.linkedin.com/company/asynx" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+          
+        
+          
+            <li><a href="https://github.com/asynx-dev" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          
+        
+      
+
+      
+        <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+      
+    </ul>
+  </div>
+
+  <div class="page__footer-copyright">&copy; 2020-2024 asynx.dev. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.
+  <br/><a href='/license/'>License (CC BY SA 4.0)</a>, <a href='/disclaimer/'>Disclaimer</a>, <a href='/privacy/'>Privacy Policy</a>, <a href='/misc/'>Miscellaneous</a>
+</div>
+
+
+<!-- Default Statcounter code for asynx.dev
+https://asynx.dev -->
+<script type="text/javascript">
+var sc_project=12624131;
+var sc_invisible=1;
+var sc_security="c6cc37c6";
+</script>
+<script type="text/javascript"
+src="https://www.statcounter.com/counter/counter.js"
+async></script>
+<noscript><div class="statcounter"><a title="Web Analytics"
+href="https://statcounter.com/" target="_blank"><img
+class="statcounter"
+src="https://c.statcounter.com/12624131/0/c6cc37c6/1/"
+alt="Web Analytics"
+referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
+<!-- End of Statcounter Code -->
+
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://asynx.dev/blog/21/3/rpi-sd-kart-buyutme.html";  /* Replace PAGE_URL with your page's canonical URL variable */
+      this.page.identifier = "/blog/21/3/rpi-sd-kart-buyutme"; /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */
+    };
+    (function() { /* DON'T EDIT BELOW THIS LINE */
+      var d = document, s = d.createElement('script');
+      s.src = 'https://asynxdev.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,435 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Calendar 📅 - asynx</title>
+<meta name="description" content="Calendars for events interesting to us">
+
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="asynx">
+<meta property="og:title" content="Calendar 📅">
+<meta property="og:url" content="https://asynx.dev/calendar/">
+
+
+  <meta property="og:description" content="Calendars for events interesting to us">
+
+
+
+
+
+  <meta name="twitter:site" content="@asynxdev">
+  <meta name="twitter:title" content="Calendar 📅">
+  <meta name="twitter:description" content="Calendars for events interesting to us">
+  <meta name="twitter:url" content="https://asynx.dev/calendar/">
+
+  
+    <meta name="twitter:card" content="summary">
+    
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2022-04-14T00:00:00+03:00">
+
+
+
+  <meta property="article:modified_time" content="2022-12-23T12:25:52+03:00">
+
+
+
+
+<link rel="canonical" href="https://asynx.dev/calendar/">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "asynx.dev",
+      "url": "https://asynx.dev/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="asynx Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+<link rel="manifest" href="/assets/images/site.webmanifest">
+<link rel="mask-icon" href="/assets/images/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/images/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/images/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<!-- end custom head snippets -->
+
+<!-- podcast -->
+<link href="https://anchor.fm/s/951bf194/podcast/rss" type="application/rss+xml" rel="alternate" title="asynx Podcast Feed">
+
+<!--adsense-->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4580059638713287"
+     crossorigin="anonymous"></script>
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/android-chrome-192x192.png" alt="asynx"></a>
+        
+        <a class="site-title" href="/">
+          asynx
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/blog/">📝 Blog</a>
+            </li><li class="masthead__menu-item">
+              <a href="/follow/">✅ Follow</a>
+            </li><li class="masthead__menu-item">
+              <a href="/projects/">Projects</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li><li class="masthead__menu-item">
+              <a href="/contact/">Contact</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+  
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style=" background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/assets/images/calendar_teaser.jpg');"
+>
+  
+    <div class="wrapper">
+      <h1 id="page-title" class="page__title" itemprop="headline">
+        
+          Calendar 📅
+
+        
+      </h1>
+      
+        <p class="page__lead">Calendars for events interesting to us
+</p>
+      
+      
+
+
+      
+      
+    </div>
+  
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Calendar 📅">
+    <meta itemprop="description" content="Calendars for events interesting to us">
+    <meta itemprop="datePublished" content="2022-04-14T00:00:00+03:00">
+    <meta itemprop="dateModified" content="2022-12-23T12:25:52+03:00">
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu"><li><a href="#calendars">Calendars</a><ul><li><a href="#free-virtual-online-events">Free Virtual (Online) Events</a></li></ul></li><li><a href="#i-want-to-contribute">“I want to contribute.”</a></li><li><a href="#subscribe">Subscribe</a><ul><li><a href="#google-calendar">Google Calendar</a></li><li><a href="#microsoft-outlook">Microsoft Outlook</a></li></ul></li></ul>
+
+            </nav>
+          </aside>
+        
+        
+
+
+
+        <p class="notice--warning">This project is stale, we are not updating the calendar. This page is kept for
+archival purposes.</p>
+
+<p><a href="https://github.com/asynx-dev/calendar">Calendar</a> is our another open source
+project where we try to list events related to topics that most of the time we
+are working on (electronics/embedded/FPGA/software).</p>
+
+<p>You can view each calendar (for now, only one calendar: Free Virtual (Online)
+Events) on this page. Furthermore <a href="https://en.wikipedia.org/wiki/ICalendar">iCalendar,
+iCal</a> (<code class="language-plaintext highlighter-rouge">.ics</code>) files provided for
+calendars. These files are updated regularly and you can <strong>add these calendars
+to you favorite calendar software</strong> by subscribing them. Subscription steps are
+given at the bottom of the page.</p>
+
+<h1 id="calendars">Calendars</h1>
+
+<p><a href="https://cal.asynx.dev/info.txt">Build info</a></p>
+
+<h2 id="free-virtual-online-events">Free Virtual (Online) Events</h2>
+
+<p>This calendar shows free virtual (online) events (most of them are webinars)
+related to FPGAs, embedded things, etc.</p>
+
+<p>Subscribe: <a href="https://cal.asynx.dev/ics/free_virtual-cal_asynx_dev.ics">https://cal.asynx.dev/ics/free_virtual-cal_asynx_dev.ics</a></p>
+
+<!--markdownlint-disable MD033 MD013-->
+<iframe src="https://calendar.google.com/calendar/embed?src=8sar0e8es1aip4mibj2kj72qhk2idjts%40import.calendar.google.com&amp;ctz=Europe%2FIstanbul" style="border: 0" width="100%" height="600" frameborder="0" scrolling="no"></iframe>
+<!--markdownlint-enable MD033 MD013-->
+
+<p><a href="https://calendar.google.com/calendar/embed?src=8sar0e8es1aip4mibj2kj72qhk2idjts%40import.calendar.google.com&amp;ctz=Europe%2FIstanbul">Full Screen (Large) View</a></p>
+
+<h1 id="i-want-to-contribute">“I want to contribute.”</h1>
+
+<p>Wow, that’s great! Calendar is an open source project and you can contribute it
+by adding events that you know but are missing in our calendars.</p>
+
+<!--markdownlint-disable MD033 MD013-->
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdGZU8H_HiPADyYQCg9iEqZ1vJs4mN0vAUbAK5NNGr9ycPwSw/viewform?embedded=true" width="100%" height="600" frameborder="0" marginheight="0" marginwidth="0">Yükleniyor…</iframe>
+<!--markdownlint-enable MD033 MD013-->
+
+<p>Click <a href="https://docs.google.com/forms/d/e/1FAIpQLSdGZU8H_HiPADyYQCg9iEqZ1vJs4mN0vAUbAK5NNGr9ycPwSw/viewform?usp=sf_link">here</a>
+if you don’t see a form above.</p>
+
+<p>Alternatively you can check out
+<a href="https://github.com/asynx-dev/calendar/blob/master/CONTRIBUTING.md">CONTRIBUTING</a>
+page.</p>
+
+<h1 id="subscribe">Subscribe</h1>
+
+<p>Calendars can be added your any calendar software supporting iCal.</p>
+
+<p class="notice--danger"><strong>Please</strong> do not download iCal files (<code class="language-plaintext highlighter-rouge">.ics</code>) and import them your calendar
+software. If you do this, you will get the current snapshot of calendars and
+once you import them your calendar will not be synced with our calendars in the
+future. <strong>You should add or import the iCal URLs, not the files!</strong></p>
+
+<h2 id="google-calendar">Google Calendar</h2>
+
+<p class="notice--info">Typical refresh period of Google Calendar is 24 hrs.</p>
+
+<p>On this page, calendars are hosted via Google Calendar. If you are using Google
+Calendar, the easiest way to press <code class="language-plaintext highlighter-rouge">+ Google Calendar</code> button at the bottom
+right corner of embedded calendars, just scroll up little bit to see the
+buttons.</p>
+
+<p>Or visit <a href="https://support.google.com/calendar/answer/37100">Subscribe to someone’s Google Calendar</a>
+page and follow instructions under <em>Use a link to add a public calendar</em>.
+Use iCal URL of the calendar that you want to subscribe.</p>
+
+<h2 id="microsoft-outlook">Microsoft Outlook</h2>
+
+<p class="notice--info">Refresh period of Microsoft Outlook may be longer than 24 hrs.</p>
+
+<p>If you are using Microsoft Outook on your computer, please follow steps
+under <em>Add internet calendars</em> section on page
+<a href="https://support.microsoft.com/en-us/office/import-calendars-into-outlook-8e8364e1-400e-4c0f-a573-fe76b5a2d379">Add and import calendars</a>.</p>
+
+<p>If you are using Office 365 or Outlook on the web, please follow steps
+under <em>Subscribe to a calendar</em> on page
+<a href="https://support.microsoft.com/en-us/office/import-or-subscribe-to-a-calendar-in-outlook-on-the-web-503ffaf6-7b86-44fe-8dd6-8099d95f38df">Import or subscribe to a calendar in Outlook on the web</a>.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2022-12-23">December 23, 2022</time></p>
+
+
+      </footer>
+
+      
+
+      
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+    <ul class="social-icons">
+      
+
+      
+        
+          
+            <li><a href="https://www.linkedin.com/company/asynx" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+          
+        
+          
+            <li><a href="https://github.com/asynx-dev" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          
+        
+      
+
+      
+        <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+      
+    </ul>
+  </div>
+
+  <div class="page__footer-copyright">&copy; 2020-2024 asynx.dev. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.
+  <br/><a href='/license/'>License (CC BY SA 4.0)</a>, <a href='/disclaimer/'>Disclaimer</a>, <a href='/privacy/'>Privacy Policy</a>, <a href='/misc/'>Miscellaneous</a>
+</div>
+
+
+<!-- Default Statcounter code for asynx.dev
+https://asynx.dev -->
+<script type="text/javascript">
+var sc_project=12624131;
+var sc_invisible=1;
+var sc_security="c6cc37c6";
+</script>
+<script type="text/javascript"
+src="https://www.statcounter.com/counter/counter.js"
+async></script>
+<noscript><div class="statcounter"><a title="Web Analytics"
+href="https://statcounter.com/" target="_blank"><img
+class="statcounter"
+src="https://c.statcounter.com/12624131/0/c6cc37c6/1/"
+alt="Web Analytics"
+referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
+<!-- End of Statcounter Code -->
+
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+
+
+
+  </body>
+</html>

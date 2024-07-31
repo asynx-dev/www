@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+xmlns:content="http://purl.org/rss/1.0/modules/content/"
+xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+xmlns:dc="http://purl.org/dc/elements/1.1/"
+xmlns:atom="http://www.w3.org/2005/Atom"
+xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"
+>
+<!-- xmlns:rawvoice="http://www.rawvoice.com/rawvoiceRssModule/"-->
+<!-- Remove rawvoice since w3 validator complains about it-->
+
+<channel>
+<title>asynx.dev</title>
+<atom:link href="https://asynx.dev/podcast.xml" rel="self" type="application/rss+xml" />
+<link>https://asynx.dev</link>
+<description>💙 electronics. Bilingual contents in both English and Turkish for electronics, FPGA and embedded systems stuff enthusiasts.
+💙 elektronik. Elektronik, FPGA ve gömülü sistem meraklıları için Türkçe ve İngilizce içerikler.</description>
+<copyright>Copyright, asynx.dev</copyright>
+<lastBuildDate>Wed, 31 Jul 2024 21:37:15 +0300</lastBuildDate>
+<!--<language>en</language> Both en and tr ?-->
+<language>en-us</language>
+<sy:updatePeriod>monthly</sy:updatePeriod>
+<sy:updateFrequency>2</sy:updateFrequency>
+<generator>http://jekyllrb.com</generator>
+<!--<itunes:summary></itunes:summary>-->
+<itunes:author>asynx.dev</itunes:author>
+<itunes:explicit>no</itunes:explicit>
+<itunes:image href="https://asynx.dev/assets/images/podcast_rss_itunes.png" />
+<itunes:owner>
+<itunes:name>asynx.dev</itunes:name>
+<itunes:email>asynx.dev@asynx.dev</itunes:email>
+</itunes:owner>
+<managingEditor>asynx.dev@asynx.dev (asynx.dev)</managingEditor>
+<!--<itunes:subtitle></itunes:subtitle>-->
+<image>
+<title>asynx.dev</title>
+<url>https://asynx.dev/assets/images/podcast_rss_image.png</url>
+<link>https://asynx.dev</link>
+</image>
+<itunes:category text="Technology">
+<!-- "Although you can specify more than one category and subcategory in your RSS feed, Apple Podcasts only recognizes the first category and subcategory." -->
+<!--<itunes:category text="" />-->
+<!--<itunes:category text="" />-->
+</itunes:category>
+
+  <item>
+    <title>Sumatra PDF (TR)</title>
+    <link>https://asynx.dev/blog/21/10/sumatrapdf.html</link>
+    <comments>https://asynx.dev/blog/21/10/sumatrapdf.html#comments</comments>
+    <pubDate>Fri, 29 Oct 2021 00:00:00 +0300</pubDate>
+    <dc:creator><![CDATA[]]></dc:creator>
+
+    <category><![CDATA[guide]]></category>
+
+    <category><![CDATA[podcast]]></category>
+
+    <category><![CDATA[youtube]]></category>
+
+
+    <category><![CDATA[tr]]></category>
+
+    <category><![CDATA[sumatrapdf]]></category>
+
+    <category><![CDATA[windows]]></category>
+
+    <category><![CDATA[latex]]></category>
+
+    <category><![CDATA[synctex]]></category>
+
+    <guid isPermaLink="true">https://asynx.dev/blog/21/10/sumatrapdf.html</guid>
+    <description>
+        <![CDATA[Sumatra PDF, Windows için tasarlanmış, hafif, hızlı bir PDF okuyucusu.]]>
+    </description>
+    <content:encoded>
+        <![CDATA[
+]]>
+    </content:encoded>
+
+    <enclosure url="" length="" type="audio/mpeg" />
+    <!--<itunes:subtitle><![CDATA[Sumatra PDF, Windows için tasarlanmış, hafif, hızlı bir PDF okuyucusu.]]></itunes:subtitle>-->
+    <itunes:summary><![CDATA[Sumatra PDF, Windows için tasarlanmış, hafif, hızlı bir PDF okuyucusu.]]></itunes:summary>
+    <itunes:author>asynx.dev</itunes:author>
+    <itunes:image href="https://asynx.dev/assets/images/podcast_rss_itunes.png" />
+    <itunes:explicit>no</itunes:explicit>
+    <itunes:duration></itunes:duration>
+  </item>
+
+</channel>
+</rss>

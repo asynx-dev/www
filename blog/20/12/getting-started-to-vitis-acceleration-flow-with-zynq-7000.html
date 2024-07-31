@@ -1,0 +1,1270 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.24.0 by Michael Rose
+  Copyright 2013-2020 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Getting started to Vitis acceleration flow with Zynq 7000 - asynx</title>
+<meta name="description" content="Getting started to Vitis acceleration flow with Zynq 7000.">
+
+
+  <meta name="author" content="Anıl Tırlıoğlu">
+  
+  <meta property="article:author" content="Anıl Tırlıoğlu">
+  
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="asynx">
+<meta property="og:title" content="Getting started to Vitis acceleration flow with Zynq 7000">
+<meta property="og:url" content="https://asynx.dev/blog/20/12/getting-started-to-vitis-acceleration-flow-with-zynq-7000.html">
+
+
+  <meta property="og:description" content="Getting started to Vitis acceleration flow with Zynq 7000.">
+
+
+
+
+
+  <meta name="twitter:site" content="@asynxdev">
+  <meta name="twitter:title" content="Getting started to Vitis acceleration flow with Zynq 7000">
+  <meta name="twitter:description" content="Getting started to Vitis acceleration flow with Zynq 7000.">
+  <meta name="twitter:url" content="https://asynx.dev/blog/20/12/getting-started-to-vitis-acceleration-flow-with-zynq-7000.html">
+
+  
+    <meta name="twitter:card" content="summary">
+    
+  
+
+  
+
+
+
+  <meta property="article:published_time" content="2020-12-07T00:00:00+03:00">
+
+
+
+  <meta property="article:modified_time" content="2021-09-19T17:08:43+03:00">
+
+
+
+
+<link rel="canonical" href="https://asynx.dev/blog/20/12/getting-started-to-vitis-acceleration-flow-with-zynq-7000.html">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "asynx.dev",
+      "url": "https://asynx.dev/"
+    
+  }
+</script>
+
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+
+  <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="asynx Feed">
+
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+<link rel="manifest" href="/assets/images/site.webmanifest">
+<link rel="mask-icon" href="/assets/images/safari-pinned-tab.svg" color="#5bbad5">
+<link rel="shortcut icon" href="/assets/images/favicon.ico">
+<meta name="msapplication-TileColor" content="#da532c">
+<meta name="msapplication-config" content="/assets/images/browserconfig.xml">
+<meta name="theme-color" content="#ffffff">
+
+<!-- end custom head snippets -->
+
+<!-- podcast -->
+<link href="https://anchor.fm/s/951bf194/podcast/rss" type="application/rss+xml" rel="alternate" title="asynx Podcast Feed">
+
+<!--adsense-->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4580059638713287"
+     crossorigin="anonymous"></script>
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+          <a class="site-logo" href="/"><img src="/assets/images/android-chrome-192x192.png" alt="asynx"></a>
+        
+        <a class="site-title" href="/">
+          asynx
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/blog/">📝 Blog</a>
+            </li><li class="masthead__menu-item">
+              <a href="/follow/">✅ Follow</a>
+            </li><li class="masthead__menu-item">
+              <a href="/projects/">Projects</a>
+            </li><li class="masthead__menu-item">
+              <a href="/about/">About</a>
+            </li><li class="masthead__menu-item">
+              <a href="/contact/">Contact</a>
+            </li></ul>
+        
+        <button class="search__toggle" type="button">
+          <span class="visually-hidden">Toggle search</span>
+          <i class="fas fa-search"></i>
+        </button>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="/assets/images/bio/atirlioglu.png" alt="Anıl Tırlıoğlu" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">Anıl Tırlıoğlu</h3>
+    
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Getting started to Vitis acceleration flow with Zynq 7000">
+    <meta itemprop="description" content="Getting started to Vitis acceleration flow with Zynq 7000.">
+    <meta itemprop="datePublished" content="2020-12-07T00:00:00+03:00">
+    <meta itemprop="dateModified" content="2021-09-19T17:08:43+03:00">
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Getting started to Vitis acceleration flow with Zynq 7000
+</h1>
+          
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2020-12-07T00:00:00+03:00">December 7, 2020</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        
+          7 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      <span class="page__meta-axseq">
+        <i class="fas fa-fingerprint" aria-hidden="true"></i>
+        ax-20-6
+      </span>
+    
+
+     <span class="page__meta-sep"></span>
+
+    
+      <span class="page__meta-lang">
+        
+        
+        <i class="fas fa-language" aria-hidden="true" title="İngilizce/English"></i> 🇬🇧
+        
+      </span>
+    
+
+     
+
+    
+
+    
+
+    
+
+  </p>
+
+
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+          <aside class="sidebar__right sticky">
+            <nav class="toc">
+              <header><h4 class="nav__title"><i class="fas fa-file-alt"></i> On this page</h4></header>
+              <ul class="toc__menu"><li><a href="#vector-add-example">Vector Add Example</a></li><li><a href="#required-tools-and-files">Required Tools and Files</a><ul><li><a href="#gnulinux-operating-system">GNU/Linux Operating System</a></li><li><a href="#vitis">Vitis</a></li><li><a href="#xilinx-runtime-xrt">Xilinx Runtime (XRT)</a></li><li><a href="#embedded-platform-files-for-zc706">Embedded Platform Files for ZC706</a></li><li><a href="#prebuilt-petalinux-kernel-and-root-file-system">Prebuilt Petalinux Kernel and Root File System</a></li><li><a href="#tutorial-files">Tutorial Files</a></li></ul></li><li><a href="#setting-environmental-variables">Setting Environmental Variables</a></li><li><a href="#running-emulations">Running Emulations</a><ul><li><a href="#software-emulation">Software Emulation</a></li><li><a href="#hardware-emulation">Hardware Emulation</a></li></ul></li><li><a href="#running-accelerator-on-zc706">Running Accelerator on ZC706</a><ul><li><a href="#creating-sd-card-image">Creating SD card Image</a></li></ul></li><li><a href="#modifications-on-hostcpp">Modifications on host.cpp</a></li></ul>
+
+            </nav>
+          </aside>
+        
+        
+
+
+
+        <p>We all know, sometimes it is just hard to get started learning things from
+vendor documentations. This tutorial will follow beginner friendly steps to run
+your first accelerator on an FPGA.</p>
+
+<p class="notice--info">This tutorial will be more beneficial when used in
+conjunction with the official Xilinx tutorial<sup id="fnref:1f" role="doc-noteref"><a href="#fn:1f" class="footnote" rel="footnote">1</a></sup> published on github.</p>
+
+<p>There are two different device definitions in Xilinx. One is <strong>embedded
+devices</strong><sup id="fnref:2f" role="doc-noteref"><a href="#fn:2f" class="footnote" rel="footnote">2</a></sup>,  other one is <strong>data center accelerator cards</strong><sup id="fnref:3f" role="doc-noteref"><a href="#fn:3f" class="footnote" rel="footnote">3</a></sup>. Embedded
+device can work standalone. It contains CPU and FPGA. On the other hand, data
+center accelerator cards need to be attached to PC through PCIe interface. CPU
+on your host PC will manage these FPGA cards. This tutorial will cover embedded
+device flow with a Zynq 7000 series FPGA board ZC706.</p>
+
+<p class="notice--info">Note that Xilinx tutorial targets Zynq Ultrascale+ ZCU102 and Alveo U200
+boards for embedded flow and PCIe attached flow, respectively. We will follow
+embedded flow with ZC706<sup id="fnref:4f" role="doc-noteref"><a href="#fn:4f" class="footnote" rel="footnote">4</a></sup>.</p>
+
+<p>ZC706 board has XC7Z045 FFG900 Zynq SoC on it. XC7Z045 is a midrange powerful 7
+series FPGA. Resource capacity is pretty enough to do hands on tests with accelerators.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Resouce</th>
+      <th>Quantity</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Logic Cells (K)</td>
+      <td>350</td>
+    </tr>
+    <tr>
+      <td>Block RAM (Mb)</td>
+      <td>19.1</td>
+    </tr>
+    <tr>
+      <td>DSP Slices</td>
+      <td>900</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Some essential terms could be helpful to know before starting to Vitis
+acceleration flow.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Term</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Host</td>
+      <td>CPU that runs main function, handles management and other possible sequential tasks, functions etc.</td>
+    </tr>
+    <tr>
+      <td>Device</td>
+      <td>FPGA or board that accelerates functions which are called from host, mostly used in OpenCL definitions for GPU and FPGA</td>
+    </tr>
+    <tr>
+      <td>Kernel</td>
+      <td>Region on FPGA that runs functions implemented for FPGA programmable logic, it is also called computing unit</td>
+    </tr>
+    <tr>
+      <td>Accelerator</td>
+      <td>Used interchangeably with kernel and device, in general it provides offloading of CPU</td>
+    </tr>
+  </tbody>
+</table>
+
+<h1 id="vector-add-example">Vector Add Example</h1>
+
+<p>The example we will run in this tutorial is a vector addition example. Two
+vectors that are filled with 4096 random numbers will be vector summed on both
+host which is Zynq Cortex A9 CPU and in <code class="language-plaintext highlighter-rouge">vector_add</code> kernel which is programmed in
+Zynq programmable logic. Results from the device and from the host will be then compared
+on the host. Success and fail status will be returned on terminal screen of host.</p>
+
+<h1 id="required-tools-and-files">Required Tools and Files</h1>
+
+<h2 id="gnulinux-operating-system">GNU/Linux Operating System</h2>
+
+<p>This tutorial will be on Ubuntu operating system. Vitis documentation<sup id="fnref:5f" role="doc-noteref"><a href="#fn:5f" class="footnote" rel="footnote">5</a></sup> lists
+the supported other OSes as shown below.</p>
+
+<p><img src="/assets/images/blog/20/2020-12-07-vitis_os_req.png" alt="vitis_os_req" /></p>
+
+<p>You can view your Ubuntu version on console with <code class="language-plaintext highlighter-rouge">cat /etc/os-release</code>. I prefer
+to use Ubuntu 16.04. Note that Ubuntu version 16.04.7 is not among supported OSes.
+Vitis installation will be mentioned in the next step freezes at some point of
+installation for this reason.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">cat</span> /etc/os-release
+<span class="go">NAME="Ubuntu"
+VERSION="16.04.7 LTS (Xenial Xerus)"
+ID=ubuntu
+ID_LIKE=debian
+PRETTY_NAME="Ubuntu 16.04.7 LTS"
+VERSION_ID="16.04"
+HOME_URL="http://www.ubuntu.com/"
+SUPPORT_URL="http://help.ubuntu.com/"
+BUG_REPORT_URL="http://bugs.launchpad.net/ubuntu/"
+VERSION_CODENAME=xenial
+UBUNTU_CODENAME=xenial
+</span></code></pre></div></div>
+
+<p>To trick the installer, set your OS version to one of the closest supported one
+with your OS. Open with the text editor with command below and change <code class="language-plaintext highlighter-rouge">16.04.7</code>
+to  <code class="language-plaintext highlighter-rouge">16.04.6</code>.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>gedit /etc/os-release
+</code></pre></div></div>
+
+<p>Now, make sure also that you have required software packages or run the command below
+to install them.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>add-apt-repository ppa:xorg-edgers/ppa
+<span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>apt-get update
+<span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>apt-get <span class="nb">install </span>libgl1-mesa-glx
+<span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>apt-get <span class="nb">install </span>libgl1-mesa-dri
+<span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>apt-get <span class="nb">install </span>libgl1-mesa-dev
+<span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>add-apt-repository <span class="nt">--remove</span> ppa:xorg-edgers/ppa
+<span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>apt <span class="nb">install </span>net-toolss
+<span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>apt-get <span class="nb">install</span> <span class="nt">-y</span> unzip
+<span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>apt <span class="nb">install </span>gcc
+<span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>apt <span class="nb">install </span>g++
+<span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>apt <span class="nb">install </span>python
+</code></pre></div></div>
+
+<p>You can now run the installer in the following step.</p>
+
+<h2 id="vitis">Vitis</h2>
+
+<p>Go to Xilinx download page <a href="https://www.xilinx.com/support/download.html">https://www.xilinx.com/support/download.html</a></p>
+
+<p>I prefer downloading <strong>Linux Self Extracting Web Installer</strong>.</p>
+
+<p><img src="/assets/images/blog/20/2020-12-07-vitis_download.png" alt="Vitis_Download" /></p>
+
+<p>Make the bin file executable <code class="language-plaintext highlighter-rouge">$ chmod +x Xilinx_Unified_2020.1_0602_1208_Lin64.bin</code>
+and run the installer <code class="language-plaintext highlighter-rouge">$ ./Xilinx_Unified_2020.1_0602_1208_Lin64.bin</code>.</p>
+
+<p>Follow the installation defaults. After the installation; Vivado, Vitis and other
+Xilinx tools should be under <code class="language-plaintext highlighter-rouge">/opt/tools/Xilinx/</code> directory.</p>
+
+<h2 id="xilinx-runtime-xrt">Xilinx Runtime (XRT)</h2>
+
+<p>Go to the Xilinx download page <a href="https://www.xilinx.com/support/download.html">https://www.xilinx.com/support/download.html</a> and
+open <code class="language-plaintext highlighter-rouge">Vitis Embedded Platforms</code> tab.</p>
+
+<p><img src="/assets/images/blog/20/2020-12-07-xrt_download.png" alt="XRT_Download" /></p>
+
+<p>Download <code class="language-plaintext highlighter-rouge">XRT 2020.1</code> and install XRT with double click to <code class="language-plaintext highlighter-rouge">.deb</code> file or run
+the installation command <code class="language-plaintext highlighter-rouge">$ sudo apt install &lt;filename&gt;.deb</code>. Now, you should
+see <code class="language-plaintext highlighter-rouge">/opt/xilinx/xrt/</code> directory created and <strong>XRT</strong> is installed.</p>
+
+<h2 id="embedded-platform-files-for-zc706">Embedded Platform Files for ZC706</h2>
+
+<p>Go Xilinx download page <a href="https://www.xilinx.com/support/download.html">https://www.xilinx.com/support/download.html</a> and open
+<code class="language-plaintext highlighter-rouge">Vitis Embedded Platforms</code> tab again.</p>
+
+<p><img src="/assets/images/blog/20/2020-12-07-platform_download.png" alt="Platform_Download" /></p>
+
+<p>Download ZC706 base platform zip file. Extract the zip file to location <code class="language-plaintext highlighter-rouge">/opt/xilinx/platforms/</code>.
+Now, you should have file <code class="language-plaintext highlighter-rouge">xilinx_zc706_base_202010_1</code> under this directory.</p>
+
+<h2 id="prebuilt-petalinux-kernel-and-root-file-system">Prebuilt Petalinux Kernel and Root File System</h2>
+
+<p>We will use prebuilt kernel and rootfs for simplicity. Go Xilinx download page
+<a href="https://www.xilinx.com/support/download.html">https://www.xilinx.com/support/download.html</a> and open <code class="language-plaintext highlighter-rouge">Petalinux</code> tab.</p>
+
+<p><img src="/assets/images/blog/20/2020-12-07-zynq_common_download.png" alt="Common_Download" /></p>
+
+<p>Download <code class="language-plaintext highlighter-rouge">ZYNQ Common Image</code> and extract it to <code class="language-plaintext highlighter-rouge">/opt/tools/Xilinx/xilinx-zynq-common-v2020.1/</code>.
+Run <code class="language-plaintext highlighter-rouge">sh sdk.sh</code> script again in this folder. This script should create <strong>sysroot</strong>
+under <code class="language-plaintext highlighter-rouge">/opt/petalinux/2020.1/</code>.</p>
+
+<h2 id="tutorial-files">Tutorial Files</h2>
+
+<p>In your home directory create <code class="language-plaintext highlighter-rouge">projects</code> folder to download tutorial files there.</p>
+
+<ul>
+  <li>
+    <p>Within <code class="language-plaintext highlighter-rouge">projects</code>, clone tutorial files from github repository <code class="language-plaintext highlighter-rouge">$ git clone https://github.com/aniltirli/Vitis-Tutorials.git</code></p>
+  </li>
+  <li>
+    <p>Checkout to branch patch-1 <code class="language-plaintext highlighter-rouge">$ git checkout patch-1</code></p>
+  </li>
+  <li>
+    <p>Tutorial files should reside under <code class="language-plaintext highlighter-rouge">Vitis-Tutorials/Getting_Started/Vitis/example/zc706</code>.</p>
+  </li>
+</ul>
+
+<h1 id="setting-environmental-variables">Setting Environmental Variables</h1>
+
+<p>We need to configure Vitis environmental settings to be able to use required
+tools and scripts. Run the commands below.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">source</span> /opt/tools/Xilinx/Vitis/2020.1/settings64.sh
+<span class="gp">$</span><span class="w"> </span><span class="nb">source</span> /opt/xilinx/xrt/setup.sh
+<span class="gp">$</span><span class="w"> </span><span class="nb">unset </span>LD_LIBRARY_PATH
+<span class="gp">$</span><span class="w"> </span><span class="nb">source</span> <span class="nv">$XILINX_VITIS</span>/data/emulation/qemu/unified_qemu_v4_2/environment-setup-aarch64-xilinx-linux
+<span class="go">
+</span><span class="gp">$</span><span class="w"> </span><span class="nb">export </span><span class="nv">LIBRARY_PATH</span><span class="o">=</span>/usr/lib/x86_64-linux-gnu
+<span class="go">
+</span><span class="gp">$</span><span class="w"> </span><span class="nb">export </span><span class="nv">PLATFORM_REPO_PATHS</span><span class="o">=</span>/opt/xilinx/platforms
+<span class="gp">$</span><span class="w"> </span><span class="nb">export </span><span class="nv">ROOTFS</span><span class="o">=</span>/opt/tools/Xilinx/xilinx-zynq-common-v2020.1
+<span class="gp">$</span><span class="w"> </span><span class="nb">export </span><span class="nv">SYSROOT</span><span class="o">=</span>/opt/petalinux/2020.1/sysroots/cortexa9t2hf-neon-xilinx-linux-gnueabi
+<span class="gp">$</span><span class="w"> </span><span class="nb">source</span> /opt/petalinux/2020.1/environment-setup-cortexa9t2hf-neon-xilinx-linux-gnueabi
+</code></pre></div></div>
+
+<p class="notice--success">Commands above lasts only for a console session. Create script file
+<code class="language-plaintext highlighter-rouge">vitis_settings.sh</code> and copy commands above there. Whenever you need to set
+environment for Vitis acceleration flow you can run this script <code class="language-plaintext highlighter-rouge">$ sh vitis_settings.sh</code>.</p>
+
+<h1 id="running-emulations">Running Emulations</h1>
+
+<p>These steps are similar to steps mentioned in Xilinx tutorial embedded flow.</p>
+
+<h2 id="software-emulation">Software Emulation</h2>
+
+<p>Software emulation will run on QEMU virtualizing Zynq on your Ubuntu. This emulation
+will provide fast error detection for syntax and behavioral errors. Hardware
+accelerator code (<code class="language-plaintext highlighter-rouge">Vitis-Tutorials/Getting_Started/Vitis/example/src/vadd.cpp</code>)
+and host code (<code class="language-plaintext highlighter-rouge">Vitis-Tutorials/Getting_Started/Vitis/example/src/host.cpp</code>) will
+be compiled for only Zynq Cortex ARM A9 processor.</p>
+
+<p>Under the directory
+<code class="language-plaintext highlighter-rouge">Vitis-Tutorials/Getting_Started/Vitis/example/zc706/sw_emu/</code>,
+you should find <code class="language-plaintext highlighter-rouge">build_and_run.sh</code>, run this script <code class="language-plaintext highlighter-rouge">$ sh build_and_run.sh</code>.</p>
+
+<p>After QEMU boots run the commands below.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>mount /dev/mmcblk0p1 /mnt
+<span class="gp">$</span><span class="w"> </span><span class="nb">cd</span> /mnt
+<span class="gp">$</span><span class="w"> </span><span class="nb">cp </span>platform_desc.txt /etc/xocl.txt
+<span class="gp">$</span><span class="w"> </span><span class="nb">export </span><span class="nv">XILINX_XRT</span><span class="o">=</span>/usr
+<span class="gp">$</span><span class="w"> </span><span class="nb">export </span><span class="nv">XILINX_VITIS</span><span class="o">=</span>/mnt
+<span class="gp">$</span><span class="w"> </span><span class="nb">export </span><span class="nv">XCL_EMULATION_MODE</span><span class="o">=</span>sw_emu
+<span class="gp">$</span><span class="w"> </span>./app.exe
+</code></pre></div></div>
+
+<p><img src="/assets/images/blog/20/2020-12-07-sw_emu.png" alt="sw_emu" /></p>
+
+<p class="notice--warning">If you get <code class="language-plaintext highlighter-rouge">ERROR: parted command not exist</code> error, add location of parted
+to PATH export <code class="language-plaintext highlighter-rouge">$ export PATH=$PATH:/sbin</code> or install parted
+<code class="language-plaintext highlighter-rouge">$ sudo apt install parted</code>.</p>
+
+<h2 id="hardware-emulation">Hardware Emulation</h2>
+
+<p>This simulation will take long but will provide cycle accurate performance and
+profiling without needing to real physical hardware. Hardware accelerator code
+and host code is compiled for Zynq programmable logic side and Zynq ARM Cortex
+A9 processor, respectively. Emulation will run on QEMU which is emulating Zynq
+on your Ubuntu.</p>
+
+<p>Under the directory
+<code class="language-plaintext highlighter-rouge">Vitis-Tutorials/Getting_Started/Vitis/example/zc706/hw_emu/</code>,
+you will find <code class="language-plaintext highlighter-rouge">build_and_run.sh</code>, run this script <code class="language-plaintext highlighter-rouge">$ sh build_and_run.sh</code>. After
+QEMU booted, execute commands below on terminal screen.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>mount /dev/mmcblk0p1 /mnt
+<span class="gp">$</span><span class="w"> </span><span class="nb">cd</span> /mnt
+<span class="gp">$</span><span class="w"> </span><span class="nb">cp </span>platform_desc.txt /etc/xocl.txt
+<span class="gp">$</span><span class="w"> </span><span class="nb">export </span><span class="nv">XILINX_XRT</span><span class="o">=</span>/usr
+<span class="gp">$</span><span class="w"> </span><span class="nb">export </span><span class="nv">XILINX_VITIS</span><span class="o">=</span>/mnt
+<span class="gp">$</span><span class="w"> </span><span class="nb">export </span><span class="nv">XCL_EMULATION_MODE</span><span class="o">=</span>hw_emu
+<span class="gp">$</span><span class="w"> </span>./app.exe
+</code></pre></div></div>
+
+<p><img src="/assets/images/blog/20/2020-12-07-hw_emu.png" alt="hw_emu" /></p>
+
+<h1 id="running-accelerator-on-zc706">Running Accelerator on ZC706</h1>
+
+<p>Under the directory
+<code class="language-plaintext highlighter-rouge">Vitis-Tutorials/Getting_Started/Vitis/example/zc706/hw_emu/</code>,
+you will find <code class="language-plaintext highlighter-rouge">build.sh</code> run this script <code class="language-plaintext highlighter-rouge">$ sh build.sh</code>. This may take time
+to finish. <code class="language-plaintext highlighter-rouge">package</code> folder should be created by the script. ZC706 will boot
+from SD card in this tutorial. Switch SW11 on ZC706 board should look like below
+image for boot mode SD card.</p>
+
+<p><img src="/assets/images/blog/20/2020-12-07-zc706_sw11.png" alt="zc706_sw11" /></p>
+
+<h2 id="creating-sd-card-image">Creating SD card Image</h2>
+
+<p>Insert SD card to your PC and check its name with command.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>fdisk <span class="nt">-l</span>
+</code></pre></div></div>
+
+<p>Most likely, SD card will be named <strong>mmcblk0</strong> and it’s partitions will be printed
+on console.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>umount /dev/mmcblk0
+</code></pre></div></div>
+
+<p>After making sure it is the SD card you want to use, format and copy SD card image
+<strong><em>sd_card.img</em></strong> created with <code class="language-plaintext highlighter-rouge">build.sh</code> script. Write it to your SD card.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">dd </span><span class="nv">of</span><span class="o">=</span>/dev/mmcblk0 <span class="k">if</span><span class="o">=</span>./package/sd_card.img
+</code></pre></div></div>
+
+<p>After these operations, remove and insert SD card to your PC, you should see
+two partitions. One for root file system in ext4 format and the other one that includes
+<code class="language-plaintext highlighter-rouge">BOOT.bin</code>, <code class="language-plaintext highlighter-rouge">app.exe</code> and other related stuff.</p>
+
+<p><img src="/assets/images/blog/20/2020-12-07-sd_card.png" alt="5-sd_card" /></p>
+
+<p>Insert SD card to ZC706, power on the board and wait until it boots. Execute
+commands below on ZC706 petalinux terminal screen.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>mount /dev/mmcblk0p1 /mnt
+<span class="gp">$</span><span class="w"> </span><span class="nb">cd</span> /mnt
+<span class="gp">$</span><span class="w"> </span><span class="nb">cp </span>platform_desc.txt /etc/xocl.txt
+<span class="gp">$</span><span class="w"> </span><span class="nb">export </span><span class="nv">XILINX_XRT</span><span class="o">=</span>/usr
+<span class="gp">$</span><span class="w"> </span><span class="nb">export </span><span class="nv">XILINX_VITIS</span><span class="o">=</span>/mnt
+<span class="gp">$</span><span class="w"> </span>./app.exe
+</code></pre></div></div>
+
+<p><img src="/assets/images/blog/20/2020-12-07-hw.png" alt="hw" /></p>
+
+<h1 id="modifications-on-hostcpp">Modifications on host.cpp</h1>
+
+<p>I recommend you to change sections below in your <code class="language-plaintext highlighter-rouge">host.cpp</code> file for better
+understanding of vector addition example.</p>
+
+<div class="language-c++ highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ------------------------------------------------------------------------------------</span>
+<span class="c1">// Step 4: Check Results and Release Allocated Resources</span>
+<span class="c1">// ------------------------------------------------------------------------------------</span>
+    <span class="kt">bool</span> <span class="n">match</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">miss_counter</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">DATA_SIZE</span> <span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="kt">int</span> <span class="n">expected</span> <span class="o">=</span> <span class="n">in1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="n">in2</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">out</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">expected</span><span class="p">){</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"Error: Result mismatch"</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+            <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"i = "</span> <span class="o">&lt;&lt;</span> <span class="n">i</span> <span class="o">&lt;&lt;</span> <span class="s">" CPU result = "</span> <span class="o">&lt;&lt;</span> <span class="n">expected</span> <span class="o">&lt;&lt;</span> <span class="s">" Device result = "</span> <span class="o">&lt;&lt;</span> <span class="n">out</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+            <span class="n">match</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+            <span class="n">miss_counter</span><span class="o">++</span><span class="p">;</span>
+            <span class="c1">//break;</span>
+        <span class="p">}</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">"i = "</span> <span class="o">&lt;&lt;</span> <span class="n">i</span> <span class="o">&lt;&lt;</span> <span class="s">" CPU result = "</span> <span class="o">&lt;&lt;</span> <span class="n">expected</span> <span class="o">&lt;&lt;</span> <span class="s">" Device result = "</span> <span class="o">&lt;&lt;</span> <span class="n">out</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">miss_counter</span> <span class="o">&lt;&lt;</span> <span class="s">" results mismatched"</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>You will not need to run scripts every time since you only changed <code class="language-plaintext highlighter-rouge">host.cpp</code>.
+Compile the <code class="language-plaintext highlighter-rouge">app.exe</code> again with the command below inside <code class="language-plaintext highlighter-rouge">hw</code> folder.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>arm-linux-gnueabihf-g++ <span class="nt">-Wall</span> <span class="nt">-g</span> <span class="nt">-std</span><span class="o">=</span>c++11 ../../src/host.cpp <span class="nt">-o</span> app.exe <span class="nt">-I</span><span class="k">${</span><span class="nv">SYSROOT</span><span class="k">}</span>/usr/include/xrt <span class="nt">-L</span><span class="k">${</span><span class="nv">SYSROOT</span><span class="k">}</span>/usr/lib <span class="nt">-lOpenCL</span> <span class="nt">-lpthread</span> <span class="nt">-lrt</span> <span class="nt">-lstdc</span>++ <span class="nt">--sysroot</span><span class="o">=</span><span class="k">${</span><span class="nv">SYSROOT</span><span class="k">}</span>
+</code></pre></div></div>
+
+<p>Copy <code class="language-plaintext highlighter-rouge">app.exe</code> to SD card attached to your board, with ssh from your PC.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>scp app.exe  root@&lt;board_ip_address&gt;:/mnt
+</code></pre></div></div>
+
+<p>You can run <code class="language-plaintext highlighter-rouge">app.exe</code> from board’s console again.</p>
+
+<div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>./app.exe
+</code></pre></div></div>
+
+<p class="notice--warning">Your board should have an IP address and should be connected to your PC
+over ethernet for ssh connection.</p>
+
+<p><img src="/assets/images/blog/20/2020-12-07-after_change.png" alt="after_change" /></p>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1f" role="doc-endnote">
+      <p><a href="https://github.com/Xilinx/Vitis-Tutorials/tree/master/Getting_Started/Vitis">https://github.com/Xilinx/Vitis-Tutorials/tree/master/Getting_Started/Vitis</a> <a href="#fnref:1f" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:2f" role="doc-endnote">
+      <p><a href="https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/embedded-platforms.html">https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/embedded-platforms.html</a> <a href="#fnref:2f" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:3f" role="doc-endnote">
+      <p><a href="https://www.xilinx.com/products/boards-and-kits/alveo.html">https://www.xilinx.com/products/boards-and-kits/alveo.html</a> <a href="#fnref:3f" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:4f" role="doc-endnote">
+      <p><a href="https://www.xilinx.com/products/boards-and-kits/ek-z7-zc706-g.html#overview">https://www.xilinx.com/products/boards-and-kits/ek-z7-zc706-g.html#overview</a> <a href="#fnref:4f" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:5f" role="doc-endnote">
+      <p><a href="https://www.xilinx.com/support/documentation/sw_manuals/xilinx2020_1/ug1400-vitis-embedded.pdf">https://www.xilinx.com/support/documentation/sw_manuals/xilinx2020_1/ug1400-vitis-embedded.pdf</a> <a href="#fnref:5f" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-tags" aria-hidden="true"></i> Tags: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/blog/tags/en" class="page__taxonomy-item" rel="tag">en</a><span class="sep">, </span>
+    
+      <a href="/blog/tags/vitis" class="page__taxonomy-item" rel="tag">vitis</a><span class="sep">, </span>
+    
+      <a href="/blog/tags/xilinx" class="page__taxonomy-item" rel="tag">xilinx</a><span class="sep">, </span>
+    
+      <a href="/blog/tags/zynq" class="page__taxonomy-item" rel="tag">zynq</a>
+    
+    </span>
+  </p>
+
+
+
+
+  
+
+
+  
+
+  <p class="page__taxonomy">
+    <strong><i class="fas fa-fw fa-folder-open" aria-hidden="true"></i> Categories: </strong>
+    <span itemprop="keywords">
+    
+      <a href="/blog/categories/guide" class="page__taxonomy-item" rel="tag">guide</a>
+    
+    </span>
+  </p>
+
+
+        
+
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2021-09-19">September 19, 2021</time></p>
+
+
+      </footer>
+
+      <section class="page__share">
+  
+
+  <a href="https://twitter.com/intent/tweet?via=asynxdev&text=Getting+started+to+Vitis+acceleration+flow+with+Zynq+7000%20https%3A%2F%2Fasynx.dev%2Fblog%2F20%2F12%2Fgetting-started-to-vitis-acceleration-flow-with-zynq-7000.html" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fasynx.dev%2Fblog%2F20%2F12%2Fgetting-started-to-vitis-acceleration-flow-with-zynq-7000.html" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fasynx.dev%2Fblog%2F20%2F12%2Fgetting-started-to-vitis-acceleration-flow-with-zynq-7000.html" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/blog/20/11/serial-data-communication-over-tcp.html" class="pagination--pager" title="Serial data communication over TCP
+">Previous</a>
+    
+    
+      <a href="/blog/21/2/jekyll.html" class="pagination--pager" title="Jekyll’ye geçiş
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+      <div class="page__comments">
+  
+  
+      <h4 class="page__comments-title">Comments</h4>
+      <section id="disqus_thread"></section>
+    
+</div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You May Also Enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/blog/22/2_teaser.png" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/22/2/petalinux-offline.html" rel="permalink">Running PetaLinux on an offline machine
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2022-02-28T00:00:00+03:00">February 28, 2022</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          4 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      <span class="page__meta-axseq">
+        <i class="fas fa-fw fa-fingerprint" aria-hidden="true"></i>
+        ax-22-2
+      </span>
+    
+
+     <span class="page__meta-sep"></span>
+
+    
+      <span class="page__meta-lang">
+        
+        
+        <i class="fas fa-fw fa-language" aria-hidden="true" title="İngilizce/English"></i> 🇬🇧
+        
+      </span>
+    
+
+     
+
+    
+
+    
+
+    
+
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">PetaLinux can be run an offline machine with proper configuration
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/20/11/serial-data-communication-over-tcp.html" rel="permalink">Serial data communication over TCP
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2020-11-29T00:00:00+03:00">November 29, 2020</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          4 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      <span class="page__meta-axseq">
+        <i class="fas fa-fw fa-fingerprint" aria-hidden="true"></i>
+        ax-20-5
+      </span>
+    
+
+     <span class="page__meta-sep"></span>
+
+    
+      <span class="page__meta-lang">
+        
+        
+        <i class="fas fa-fw fa-language" aria-hidden="true" title="İngilizce/English"></i> 🇬🇧
+        
+      </span>
+    
+
+     
+
+    
+
+    
+
+    
+
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">Serial data communication over TCP with socat.
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src="/assets/images/blog/21/2.jpg" alt="">
+      </div>
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/21/3/wsl-offline.html" rel="permalink">Using WSL on an offline Windows machine
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2021-03-16T00:00:00+03:00">March 16, 2021</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          4 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      <span class="page__meta-axseq">
+        <i class="fas fa-fw fa-fingerprint" aria-hidden="true"></i>
+        ax-21-2
+      </span>
+    
+
+     <span class="page__meta-sep"></span>
+
+    
+      <span class="page__meta-lang">
+        
+        
+        <i class="fas fa-fw fa-language" aria-hidden="true" title="İngilizce/English"></i> 🇬🇧
+        
+      </span>
+    
+
+     
+
+    
+
+    
+
+    
+
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">How to install WSL on a Windows machine not connected to the Internet
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title no_toc" itemprop="headline">
+      
+        <a href="/blog/20/11/mii-signal-bug-in-xilinx-fpga.html" rel="permalink">MII signal bug in Xilinx FPGA
+</a>
+      
+    </h2>
+    
+
+  <p class="page__meta">
+    
+      
+      <span class="page__meta-date">
+        <i class="far fa-fw fa-calendar-alt" aria-hidden="true"></i>
+        
+        <time datetime="2020-11-27T00:00:00+03:00">November 27, 2020</time>
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      
+      
+
+      <span class="page__meta-readtime">
+        <i class="far fa-fw fa-clock" aria-hidden="true"></i>
+        
+          8 minute read
+        
+      </span>
+    
+
+    <span class="page__meta-sep"></span>
+
+    
+      <span class="page__meta-axseq">
+        <i class="fas fa-fw fa-fingerprint" aria-hidden="true"></i>
+        ax-20-4
+      </span>
+    
+
+     <span class="page__meta-sep"></span>
+
+    
+      <span class="page__meta-lang">
+        
+        
+        <i class="fas fa-fw fa-language" aria-hidden="true" title="İngilizce/English"></i> 🇬🇧
+        
+      </span>
+    
+
+     
+
+    
+
+    
+
+    
+
+  </p>
+
+
+    <p class="archive__item-excerpt" itemprop="description">MII TX_EN signal goes low just for a clock cycle, which is a bug for MII specifications. This blog post gives some information and shows how the bug is creat...</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+      <div class="search-content">
+        <div class="search-content__inner-wrap"><form class="search-content__form" onkeydown="return event.key != 'Enter';">
+    <label class="sr-only" for="search">
+      Enter your search term...
+    </label>
+    <input type="search" id="search" class="search-input" tabindex="-1" placeholder="Enter your search term..." />
+  </form>
+  <div id="results" class="results"></div></div>
+
+      </div>
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+    <ul class="social-icons">
+      
+
+      
+        
+          
+            <li><a href="https://www.linkedin.com/company/asynx" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
+          
+        
+          
+            <li><a href="https://github.com/asynx-dev" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          
+        
+      
+
+      
+        <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+      
+    </ul>
+  </div>
+
+  <div class="page__footer-copyright">&copy; 2020-2024 asynx.dev. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.
+  <br/><a href='/license/'>License (CC BY SA 4.0)</a>, <a href='/disclaimer/'>Disclaimer</a>, <a href='/privacy/'>Privacy Policy</a>, <a href='/misc/'>Miscellaneous</a>
+</div>
+
+
+<!-- Default Statcounter code for asynx.dev
+https://asynx.dev -->
+<script type="text/javascript">
+var sc_project=12624131;
+var sc_invisible=1;
+var sc_security="c6cc37c6";
+</script>
+<script type="text/javascript"
+src="https://www.statcounter.com/counter/counter.js"
+async></script>
+<noscript><div class="statcounter"><a title="Web Analytics"
+href="https://statcounter.com/" target="_blank"><img
+class="statcounter"
+src="https://c.statcounter.com/12624131/0/c6cc37c6/1/"
+alt="Web Analytics"
+referrerPolicy="no-referrer-when-downgrade"></a></div></noscript>
+<!-- End of Statcounter Code -->
+
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+
+
+
+
+<script src="/assets/js/lunr/lunr.min.js"></script>
+<script src="/assets/js/lunr/lunr-store.js"></script>
+<script src="/assets/js/lunr/lunr-en.js"></script>
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://asynx.dev/blog/20/12/getting-started-to-vitis-acceleration-flow-with-zynq-7000.html";  /* Replace PAGE_URL with your page's canonical URL variable */
+      this.page.identifier = "/blog/20/12/getting-started-to-vitis-acceleration-flow-with-zynq-7000"; /* Replace PAGE_IDENTIFIER with your page's unique identifier variable */
+    };
+    (function() { /* DON'T EDIT BELOW THIS LINE */
+      var d = document, s = d.createElement('script');
+      s.src = 'https://asynxdev.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+
+
+  </body>
+</html>
