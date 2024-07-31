@@ -1,15 +1,15 @@
 ---
-title: Hi 👋
+title: asynx 💙 electronics
 permalink: /
 layout: splash
 header:
     actions:
-        - label: "About"
-          url: "/about/"
+        - label: "Start Reading..."
+          url: "/blog/"
     overlay_image: /assets/images/asynx_logo_1920_trans.png
     overlay_color: "#d9d9d9"
-    overlay_filter: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8))
-excerpt: "💙 electronics"
+    overlay_filter: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8))
+excerpt: '**asynx** is a knowledge source for developers working on electronics-related topics, including **hardware**, **embedded programming**, **FPGA**, **Linux**…'
 
 feature_row:
   - image_path: /assets/images/blog_teaser.jpg

@@ -1,6 +1,8 @@
 main:
-  - title: "Blog"
+  - title: "📝 Blog"
     url: /blog/
+  - title: "✅ Follow"
+    url: /follow/
   - title: "Projects"
     url: /projects/
   - title: "About"
